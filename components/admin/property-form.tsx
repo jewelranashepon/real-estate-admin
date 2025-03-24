@@ -1073,7 +1073,7 @@ export function PropertyForm({ property, propertyTypes, propertyStatuses }: Prop
       setImageFiles((prev) => [...prev, ...newFiles])
     }
   }
-
+ 
   // Handle image upload to Supabase
   const uploadImages = async () => {
     if (imageFiles.length === 0) return []
@@ -1200,6 +1200,8 @@ export function PropertyForm({ property, propertyTypes, propertyStatuses }: Prop
       const allImageUrls = [...imageUrls, ...newImageUrls]
 
       console.log("All image URLs to be submitted:", allImageUrls)
+      console.log("Uploading files to Supabase:", imageFiles)
+
 
       // Create FormData object
       const submitFormData = new FormData()
@@ -1580,7 +1582,7 @@ export function PropertyForm({ property, propertyTypes, propertyStatuses }: Prop
                   </div>
                   <Input
                     type="file"
-                    accept="image/*"
+                    accept="/images/*"
                     multiple
                     className="hidden"
                     onChange={handleFileChange}
