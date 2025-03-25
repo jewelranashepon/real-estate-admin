@@ -1,145 +1,3 @@
-// "use client"
-
-// import {
-//   Building2,
-//   LayoutDashboard,
-//   Users,
-//   MessageSquare,
-//   CreditCard,
-//   BarChart,
-//   FileText,
-//   Settings,
-//   Bell,
-//   HelpCircle,
-// } from "lucide-react"
-// import {
-//   Sidebar,
-//   SidebarContent,
-//   SidebarHeader,
-//   SidebarMenu,
-//   SidebarMenuItem,
-//   SidebarMenuButton,
-//   SidebarFooter,
-//   SidebarTrigger,
-// } from "@/components/ui/sidebar"
-// import Link from "next/link"
-// import { usePathname } from "next/navigation"
-
-// export default function AdminSidebar() {
-//   const pathname = usePathname()
-
-//   const isActive = (path: string) => {
-//     return pathname === path || pathname.startsWith(`${path}/`)
-//   }
-
-//   return (
-//     <Sidebar>
-//       <SidebarHeader className="flex h-14 items-center border-b px-4">
-//         <Link href="/admin/dashboard" className="flex items-center gap-2 font-semibold">
-//           <Building2 className="h-6 w-6" />
-//           <span className="text-lg">Real Estate Admin</span>
-//         </Link>
-//       </SidebarHeader>
-//       <SidebarContent>
-//         <SidebarMenu>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/dashboard")} tooltip="Dashboard">
-//               <Link href="/admin/dashboard">
-//                 <LayoutDashboard />
-//                 <span>Dashboard</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/properties")} tooltip="Properties">
-//               <Link href="/admin/properties">
-//                 <Building2 />
-//                 <span>Properties</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/users")} tooltip="Users & Agents">
-//               <Link href="/admin/users">
-//                 <Users />
-//                 <span>Users & Agents</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/leads")} tooltip="Leads & Messages">
-//               <Link href="/admin/leads">
-//                 <MessageSquare />
-//                 <span>Leads & Messages</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/payments")} tooltip="Payments">
-//               <Link href="/admin/payments">
-//                 <CreditCard />
-//                 <span>Payments</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/analytics")} tooltip="Analytics">
-//               <Link href="/admin/analytics">
-//                 <BarChart />
-//                 <span>Analytics</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/content")} tooltip="Content">
-//               <Link href="/admin/content">
-//                 <FileText />
-//                 <span>Content</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/settings")} tooltip="Settings">
-//               <Link href="/admin/settings">
-//                 <Settings />
-//                 <span>Settings</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/notifications")} tooltip="Notifications">
-//               <Link href="/admin/notifications">
-//                 <Bell />
-//                 <span>Notifications</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//           <SidebarMenuItem>
-//             <SidebarMenuButton asChild isActive={isActive("/admin/support")} tooltip="Support">
-//               <Link href="/admin/support">
-//                 <HelpCircle />
-//                 <span>Support</span>
-//               </Link>
-//             </SidebarMenuButton>
-//           </SidebarMenuItem>
-//         </SidebarMenu>
-//       </SidebarContent>
-//       <SidebarFooter className="border-t p-4">
-//         <div className="flex items-center gap-2">
-//           <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-//             <span className="text-sm font-medium">AD</span>
-//           </div>
-//           <div className="flex flex-col">
-//             <span className="text-sm font-medium">Admin User</span>
-//             <span className="text-xs text-muted-foreground">admin@example.com</span>
-//           </div>
-//         </div>
-//       </SidebarFooter>
-//       <SidebarTrigger className="absolute right-4 top-3 md:hidden" />
-//     </Sidebar>
-//   )
-// }
-
 "use client";
 
 import {
@@ -172,11 +30,10 @@ export default function AdminSidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
-  const isActive = (path: string) =>
-    pathname === path || pathname.startsWith(`${path}/`);
+  const isActive = (path: string) => pathname === path;
 
   const menuItems = [
-    { label: "Dashboard", icon: LayoutDashboard, path: "/admin/dashboard" },
+    { label: "Dashboard", icon: LayoutDashboard, path: "/admin" },
     { label: "Properties", icon: Building2, path: "/admin/properties" },
     { label: "Users & Agents", icon: Users, path: "/admin/users" },
     { label: "Leads & Messages", icon: MessageSquare, path: "/admin/leads" },
@@ -203,7 +60,7 @@ export default function AdminSidebar() {
         <div className="flex items-center justify-between w-full">
           {!collapsed && (
             <Link
-              href="/admin/dashboard"
+              href="/admin"
               className="flex items-center gap-2 font-semibold"
             >
               <Building2 className="h-6 w-6 text-primary" />
@@ -242,7 +99,9 @@ export default function AdminSidebar() {
                       <Icon className="size-6 shrink-0" />
                     </div>
                     {!collapsed && (
-                      <span className="ml-3 text-base font-medium">{label}</span>
+                      <span className="ml-3 text-base font-medium">
+                        {label}
+                      </span>
                     )}
                     {badge && !collapsed && (
                       <span className="ml-auto bg-green-500 text-xs font-semibold px-2 py-0.5 rounded-full">

@@ -44,8 +44,7 @@ import { formatDate } from "@/lib/utils"
 
 interface User {
   id: string
-  firstName: string
-  lastName: string
+  name: string
   email: string
   avatarUrl?: string | null
   createdAt: Date
@@ -94,17 +93,17 @@ export function UsersTable({ users }: UsersTableProps) {
       header: "User",
       cell: ({ row }) => {
         const user = row.original
-        const fullName = `${user.firstName} ${user.lastName}`
-        const initials = `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`
+        const name = user.name
+        const initials = `${user.name.charAt(0)}${user.name.charAt(0)}`
 
         return (
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10">
-              <AvatarImage src={user.avatarUrl || ""} alt={fullName} />
+              <AvatarImage src={user.avatarUrl || ""} alt={name} />
               <AvatarFallback>{initials}</AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-medium">{fullName}</div>
+              <div className="font-medium">{name}</div>
               <div className="text-sm text-muted-foreground">{user.email}</div>
             </div>
           </div>

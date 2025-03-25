@@ -39,15 +39,10 @@ export const metadata: Metadata = {
 
 export default async function NewPropertyPage() {
   // Check if we have the required environment variables
-  const hasSupabaseEnvVars = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
   const [propertyTypes, propertyStatuses] = await Promise.all([getPropertyTypes(), getPropertyStatuses()])
 
   return (
     <>
-      {!hasSupabaseEnvVars && (
-        <AddEnvironmentVariables names={["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_ANON_KEY"]} />
-      )}
 
       <div className="flex flex-col gap-6">
         <h1 className="text-3xl font-bold tracking-tight">Add New Property</h1>

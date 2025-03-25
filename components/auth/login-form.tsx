@@ -10,9 +10,9 @@ import { Eye, EyeOff, Loader2 } from "lucide-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { signIn } from "next-auth/react"
 import { toast } from "@/components/ui/use-toast"
 import Link from "next/link"
+import { signIn } from "@/lib/auth-client"
 
 const loginFormSchema = z.object({
   email: z.string().email({
@@ -41,37 +41,26 @@ export function LoginForm() {
   })
 
   async function onSubmit(data: LoginFormValues) {
-    setIsLoading(true)
-
-    try {
-      const result = await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-      })
-
-      if (result?.error) {
-        toast({
-          title: "Login failed",
-          description: "Invalid email or password. Please try again.",
-          variant: "destructive",
-        })
-        setIsLoading(false)
-        return
-      }
-
-      // Successful login - redirect to dashboard
-      router.push("/admin/dashboard")
-      router.refresh()
-    } catch (error) {
-      console.error("Login error:", error)
-      toast({
-        title: "Login failed",
-        description: "An unexpected error occurred. Please try again.",
-        variant: "destructive",
-      })
-      setIsLoading(false)
-    }
+    await signIn.email(
+         {
+           email: data.email, // user email address
+           password: data.password, // user password -> min 8 characters by default
+         },
+         {
+           onRequest: (ctx) => {
+             setIsLoading(true);
+           },
+           onSuccess: (ctx) => {
+             toast({title: "Login Successful"})
+             router.push("/admin")
+           },
+           onError: (ctx) => {
+             // display the error message
+             alert(ctx.error.message);
+           },
+         }
+       );
+       setIsLoading(false);
   }
 
   return (
