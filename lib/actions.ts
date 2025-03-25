@@ -185,7 +185,7 @@ export async function createProperty(formData: FormData) {
         }
       }
 
-      revalidatePath("/admin/properties");
+      revalidatePath("/admin","layout");
       return { success: true, property };
     } catch (error) {
       console.error("Failed to create property:", error);
@@ -289,8 +289,7 @@ export async function updateProperty(id: number, formData: FormData) {
         }
       }
 
-      revalidatePath("/admin/properties");
-      revalidatePath(`/admin/properties/${id}`);
+      revalidatePath("/admin","layout");
       return { success: true, property };
     } catch (error) {
       console.error(`Failed to update property with ID ${id}:`, error);
