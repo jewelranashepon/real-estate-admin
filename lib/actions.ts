@@ -115,7 +115,7 @@ export async function createProperty(formData: FormData) {
     const hasBalcony = formData.get("hasBalcony") === "on";
 
     // Handle image URLs - Get all values with the same name
-    const imageUrls = formData.getAll("imageUrls").map((url) => url.toString());
+    const imageUrls = formData.getAll("images[]");
 
     console.log("Image URLs from form:", imageUrls); // Debug log
 
@@ -215,7 +215,7 @@ export async function updateProperty(id: number, formData: FormData) {
     const hasBalcony = formData.get("hasBalcony") === "on";
 
     // Handle image URLs - Get all values with the same name
-    const imageUrls = formData.getAll("imageUrls").map((url) => url.toString());
+    const imageUrls = formData.getAll("images[]");
 
     console.log("Image URLs from form (update):", imageUrls); // Debug log
 

@@ -54,7 +54,6 @@ interface PropertyFormProps {
   propertyStatuses: { id: number; value: string }[];
 }
 
-
 export function PropertyForm({
   property,
   propertyTypes,
@@ -90,6 +89,9 @@ export function PropertyForm({
     region: property?.location?.region || "",
     landmark: property?.location?.landmark || "",
 
+    // Media Upload
+    images: property?.images || [], // assuming it's an array of image URLs
+
     // Contact
     contactName: property?.contact?.name || "",
     contactPhone: property?.contact?.phone || "",
@@ -97,6 +99,8 @@ export function PropertyForm({
   };
 
   const [formData, setFormData] = useState(initialFormData);
+
+  console.log("Form DataImage Link", formData.images);
 
   // Steps configuration
   const steps = [
@@ -142,6 +146,10 @@ export function PropertyForm({
         } else {
           submitFormData.append(key, value.toString());
         }
+      });
+
+      formData.images.forEach((url) => {
+        submitFormData.append("images[]", url);
       });
 
       // Submit the form
@@ -520,7 +528,7 @@ export function PropertyForm({
       case 3:
         return (
           <div className="space-y-6">
-            <UploadButton
+            {/* <UploadButton
               endpoint="imageUploader"
               onClientUploadComplete={(res) => {
                 // Do something with the response
@@ -531,7 +539,50 @@ export function PropertyForm({
                 // Do something with the error.
                 alert(`ERROR! ${error.message}`);
               }}
-            />
+            /> */}
+            <div className="space-y-4">
+              <UploadButton
+                endpoint="imageUploader"
+                onClientUploadComplete={(res) => {
+                  if (res && res.length > 0) {
+                    const newImageUrl = res[0].ufsUrl; // based on your uploadthing config
+                    setFormData((prev) => ({
+                      ...prev,
+                      images: [...prev.images, newImageUrl],
+                    }));
+                    console.log("Image Url::", newImageUrl);
+                  }
+                }}
+                onUploadError={(error: Error) => {
+                  alert(`ERROR! ${error.message}`);
+                }}
+              />
+
+              {/* Image preview grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {formData.images.map((url, index) => (
+                  <div key={index} className="relative group">
+                    <img
+                      src={url}
+                      alt={`Uploaded ${index}`}
+                      className="w-full h-40 object-cover rounded"
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          images: prev.images.filter((_, i) => i !== index),
+                        }))
+                      }
+                      className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-80 group-hover:opacity-100"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         );
 
