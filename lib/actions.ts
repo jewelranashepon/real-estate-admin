@@ -446,3 +446,226 @@ export async function getRecentProperties(limit = 5) {
     return [];
   }
 }
+
+// Get all agents
+export async function getAgents() {
+  try {
+    const agents = await prisma.agent.findMany({
+      include: {
+        languages: true,
+        badges: true,
+        socialMedia: true,
+      },
+    });
+    return agents;
+  } catch (error) {
+    console.error("Failed to fetch agents:", error);
+    return [];
+  }
+}
+
+// Get agent by ID
+export async function getAgentById(id: string) {
+  try {
+    const agent = await prisma.agent.findUnique({
+      where: { id },
+      include: {
+        languages: true,
+        badges: true,
+        socialMedia: true,
+      },
+    });
+    return agent;
+  } catch (error) {
+    console.error(`Failed to fetch agent with ID ${id}:`, error);
+    return null;
+  }
+}
+
+// Create agent
+export async function createAgent(formData: FormData) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user) {
+      return { success: false, error: "Authentication required" };
+    }
+
+    // Extract form data
+    const firstName = formData.get("firstName") as string;
+    const lastName = formData.get("lastName") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const companyName = formData.get("companyName") as string;
+    const title = formData.get("title") as string;
+    const bio = formData.get("bio") as string;
+    const website = formData.get("website") as string;
+    const profileImageUrl = formData.get("profileImageUrl") as string;
+    const yearsOfExperience = parseInt(formData.get("yearsOfExperience") as string || "0");
+    const propertiesListed = parseInt(formData.get("propertiesListed") as string || "0");
+    const propertiesSold = parseInt(formData.get("propertiesSold") as string || "0");
+    const propertiesChecked = parseInt(formData.get("propertiesChecked") as string || "0");
+
+    // Social media
+    const facebook = formData.get("facebook") as string;
+    const twitter = formData.get("twitter") as string;
+    const instagram = formData.get("instagram") as string;
+    const linkedin = formData.get("linkedin") as string;
+    const youtube = formData.get("youtube") as string;
+
+    const languages = formData.getAll("languages[]").map((lang) => lang.toString());
+    const badges = formData.getAll("badges[]").map((badge) => badge.toString());
+
+    const agent = await prisma.agent.create({
+      data: {
+        firstName,
+        lastName,
+        email,
+        phone,
+        companyName,
+        title,
+        bio,
+        website: website || null,
+        profileImageUrl: profileImageUrl || null,
+        yearsOfExperience,
+        propertiesListed,
+        propertiesSold,
+        propertiesChecked,
+        languages: {
+          create: languages.map((language) => ({ language })),
+        },
+        badges: {
+          create: badges.map((name) => ({ name })),
+        },
+        socialMedia: {
+          create: {
+            facebook: facebook || null,
+            twitter: twitter || null,
+            instagram: instagram || null,
+            linkedin: linkedin || null,
+            youtube: youtube || null,
+          },
+        },
+      },
+    });
+
+    revalidatePath("/admin/users");
+    return { success: true, agent };
+  } catch (error) {
+    console.error("Failed to create agent:", error);
+    return { success: false, error: (error as Error).message };
+  }
+}
+
+// Update agent
+export async function updateAgent(formData: FormData) {
+  try {
+    const session = await auth();
+    if (!session?.user) {
+      return { success: false, error: "Authentication required" };
+    }
+
+    const id = formData.get("id") as string;
+    const firstName = formData.get("firstName") as string;
+    const lastName = formData.get("lastName") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const companyName = formData.get("companyName") as string;
+    const title = formData.get("title") as string;
+    const bio = formData.get("bio") as string;
+    const website = formData.get("website") as string;
+    const profileImageUrl = formData.get("profileImageUrl") as string;
+    const yearsOfExperience = parseInt(formData.get("yearsOfExperience") as string || "0");
+    const propertiesListed = parseInt(formData.get("propertiesListed") as string || "0");
+    const propertiesSold = parseInt(formData.get("propertiesSold") as string || "0");
+    const propertiesChecked = parseInt(formData.get("propertiesChecked") as string || "0");
+
+    const facebook = formData.get("facebook") as string;
+    const twitter = formData.get("twitter") as string;
+    const instagram = formData.get("instagram") as string;
+    const linkedin = formData.get("linkedin") as string;
+    const youtube = formData.get("youtube") as string;
+
+    const languages = formData.getAll("languages[]").map((lang) => lang.toString());
+    const badges = formData.getAll("badges[]").map((badge) => badge.toString());
+
+    const agent = await prisma.agent.update({
+      where: { id },
+      data: {
+        firstName,
+        lastName,
+        email,
+        phone,
+        companyName,
+        title,
+        bio,
+        website: website || null,
+        profileImageUrl: profileImageUrl || null,
+        yearsOfExperience,
+        propertiesListed,
+        propertiesSold,
+        propertiesChecked,
+        socialMedia: {
+          upsert: {
+            update: {
+              facebook: facebook || null,
+              twitter: twitter || null,
+              instagram: instagram || null,
+              linkedin: linkedin || null,
+              youtube: youtube || null,
+            },
+            create: {
+              facebook: facebook || null,
+              twitter: twitter || null,
+              instagram: instagram || null,
+              linkedin: linkedin || null,
+              youtube: youtube || null,
+            },
+          },
+        },
+      },
+    });
+
+    await prisma.agentLanguage.deleteMany({ where: { agentId: id } });
+    if (languages.length > 0) {
+      await prisma.agentLanguage.createMany({
+        data: languages.map((language) => ({ language, agentId: id })),
+      });
+    }
+
+    await prisma.agentBadge.deleteMany({ where: { agentId: id } });
+    if (badges.length > 0) {
+      await prisma.agentBadge.createMany({
+        data: badges.map((name) => ({ name, agentId: id })),
+      });
+    }
+
+    revalidatePath("/admin/users");
+    return { success: true, agent };
+  } catch (error) {
+    console.error(`Failed to update agent with ID ${formData.get("id")}:`, error);
+    return { success: false, error: (error as Error).message };
+  }
+}
+
+// Delete agent
+export async function deleteAgent(id: string) {
+  try {
+    const session = await auth();
+    if (!session?.user) {
+      return { success: false, error: "Authentication required" };
+    }
+
+    await prisma.agent.delete({
+      where: { id },
+    });
+
+    revalidatePath("/admin/users");
+    return { success: true };
+  } catch (error) {
+    console.error(`Failed to delete agent with ID ${id}:`, error);
+    return { success: false, error: (error as Error).message };
+  }
+}

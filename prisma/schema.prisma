@@ -87,6 +87,8 @@ model Property {
   feature     PropertyFeature?
   images      PropertyImage[]
   contact     Contact?
+  agentId     String?           // ✅ Now just a foreign key to agent
+  agent       Agent?            @relation("AgentProperties", fields: [agentId], references: [id])
 }
 
 model Contact {
@@ -161,5 +163,65 @@ model Subscriptions {
   palnId    Int
   userId    String
   user      User             @relation(fields: [userId], references: [id])
+}
+
+
+
+// New models for agents
+model Agent {
+  id                String             @id @default(cuid())
+  firstName         String
+  lastName          String
+  email             String             @unique
+  phone             String
+  companyName       String
+  title             String             @default("Real Estate Agent")
+  bio               String?
+  website           String?
+  profileImageUrl   String?
+  properties        Property[]         @relation("AgentProperties")
+  languages         AgentLanguage[]
+  badges            AgentBadge[]
+  socialMedia       AgentSocialMedia?
+  propertiesSold    Int                @default(0)
+  propertiesListed  Int                @default(0)
+  propertiesChecked Int                @default(0)
+  yearsOfExperience Int                @default(0)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+}
+
+
+model AgentLanguage {
+  id        Int      @id @default(autoincrement())
+  language  String
+  agentId   String
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([agentId, language])
+}
+
+model AgentBadge {
+  id        Int      @id @default(autoincrement())
+  name      String
+  agentId   String
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([agentId, name])
+}
+
+model AgentSocialMedia {
+  id        Int      @id @default(autoincrement())
+  facebook  String?
+  twitter   String?
+  instagram String?
+  linkedin  String?
+  youtube   String?
+  agentId   String   @unique
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
