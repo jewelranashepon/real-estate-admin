@@ -24,7 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signIn, useSession } from "@/lib/auth-client";
-import { FormError } from "@/components/FormError";
+import { FormError } from "../../../../components/FormError";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Link, useRouter } from "@/i18n/navigation";

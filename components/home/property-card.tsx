@@ -15,6 +15,20 @@ interface PropertyCardProps {
 
 export default function PropertyCard({ property, layout = "list" }: PropertyCardProps) {
   const t = useTranslations("app.property")
+  
+  const handleSaveProperty = async (property: PropertyType) => {
+    try {
+      await fetch("/api/save-property", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ propertyId: property.id }),
+      })
+      // Optionally show a toast or update UI
+    } catch (error) {
+      console.error("Failed to save property:", error)
+    }
+    console.log("Saved property")
+  }
 
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow">
@@ -26,7 +40,7 @@ export default function PropertyCard({ property, layout = "list" }: PropertyCard
           height={300}
           className="w-full h-48 object-cover"
         />
-        <Button variant="ghost" size="icon" className="absolute top-2 right-2 bg-white/80 hover:bg-white rounded-full">
+        <Button variant="ghost" size="icon" className="absolute top-2 right-2 bg-white/80 hover:bg-white rounded-full"  onClick={() => handleSaveProperty(property)}>
           <Heart className="h-5 w-5" />
         </Button>
         <Badge className="absolute bottom-2 left-2 bg-white text-black hover:bg-white">
