@@ -32,7 +32,6 @@ import {
   ImageIcon,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { createClient } from "@supabase/supabase-js";
 
 // Stepper component
 import {

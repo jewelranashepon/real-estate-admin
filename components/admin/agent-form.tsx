@@ -1,28 +1,47 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Loader2, Plus, X } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { toast } from "@/components/ui/use-toast"
-import { createAgent, updateAgent } from "@/lib/actions"
-import { createClient } from "@supabase/supabase-js"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Loader2, Plus, X } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { toast } from "@/components/ui/use-toast";
+import { createAgent, updateAgent } from "@/lib/actions";
+import { createClient } from "@supabase/supabase-js";
+import { UploadButton } from "./uploadthing";
 
 // Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey)
+    : null;
 
 // Form schema
 const agentFormSchema = z.object({
@@ -34,33 +53,61 @@ const agentFormSchema = z.object({
   companyName: z.string().min(2, "Company name is required"),
   title: z.string().min(2, "Job title is required"),
   bio: z.string().optional(),
-  website: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
+  website: z
+    .string()
+    .url("Please enter a valid URL")
+    .optional()
+    .or(z.literal("")),
   yearsOfExperience: z.coerce.number().int().min(0),
   propertiesListed: z.coerce.number().int().min(0),
   propertiesSold: z.coerce.number().int().min(0),
   propertiesChecked: z.coerce.number().int().min(0),
-  facebook: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
-  twitter: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
-  instagram: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
-  linkedin: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
-  youtube: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
-})
+  facebook: z
+    .string()
+    .url("Please enter a valid URL")
+    .optional()
+    .or(z.literal("")),
+  twitter: z
+    .string()
+    .url("Please enter a valid URL")
+    .optional()
+    .or(z.literal("")),
+  instagram: z
+    .string()
+    .url("Please enter a valid URL")
+    .optional()
+    .or(z.literal("")),
+  linkedin: z
+    .string()
+    .url("Please enter a valid URL")
+    .optional()
+    .or(z.literal("")),
+  youtube: z
+    .string()
+    .url("Please enter a valid URL")
+    .optional()
+    .or(z.literal("")),
+});
 
-type AgentFormValues = z.infer<typeof agentFormSchema>
+type AgentFormValues = z.infer<typeof agentFormSchema>;
 
 interface AgentFormProps {
-  agent?: any
-  users?: any[]
+  agent?: any;
+  users?: any[];
 }
 
 export function AgentForm({ agent, users = [] }: AgentFormProps) {
-  const router = useRouter()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [profileImage, setProfileImage] = useState<File | null>(null)
-  const [languages, setLanguages] = useState<string[]>(agent?.languages?.map((l: any) => l.language) || [])
-  const [newLanguage, setNewLanguage] = useState("")
-  const [badges, setBadges] = useState<string[]>(agent?.badges?.map((b: any) => b.name) || [])
-  const [newBadge, setNewBadge] = useState("")
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [languages, setLanguages] = useState<string[]>(
+    agent?.languages?.map((l: any) => l.language) || []
+  );
+  const [newLanguage, setNewLanguage] = useState("");
+  const [badges, setBadges] = useState<string[]>(
+    agent?.badges?.map((b: any) => b.name) || []
+  );
+  const [newBadge, setNewBadge] = useState("");
 
   // Default form values
   const defaultValues: Partial<AgentFormValues> = {
@@ -82,146 +129,156 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
     instagram: agent?.socialMedia?.instagram || "",
     linkedin: agent?.socialMedia?.linkedin || "",
     youtube: agent?.socialMedia?.youtube || "",
-  }
+  };
 
   // Initialize form
   const form = useForm<AgentFormValues>({
     resolver: zodResolver(agentFormSchema),
     defaultValues,
-  })
+  });
 
   // Handle profile image upload
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setProfileImage(e.target.files[0])
+      setProfileImage(e.target.files[0]);
     }
-  }
+  };
 
   // Upload image to Supabase
   const uploadProfileImage = async () => {
-    if (!profileImage || !supabase) return null
+    if (!profileImage || !supabase) return null;
 
     try {
-      const fileExt = profileImage.name.split(".").pop()
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`
-      const filePath = `agents/${fileName}`
+      const fileExt = profileImage.name.split(".").pop();
+      const fileName = `${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(2, 15)}.${fileExt}`;
+      const filePath = `agents/${fileName}`;
 
       // Upload file to Supabase Storage
-      const { data, error } = await supabase.storage.from("property-images").upload(filePath, profileImage, {
-        cacheControl: "3600",
-        upsert: false,
-      })
+      const { data, error } = await supabase.storage
+        .from("property-images")
+        .upload(filePath, profileImage, {
+          cacheControl: "3600",
+          upsert: false,
+        });
 
       if (error) {
-        console.error("Supabase upload error:", error.message)
-        throw new Error(error.message)
+        console.error("Supabase upload error:", error.message);
+        throw new Error(error.message);
       }
 
       // Get public URL
-      const { data: urlData } = supabase.storage.from("property-images").getPublicUrl(filePath)
+      const { data: urlData } = supabase.storage
+        .from("property-images")
+        .getPublicUrl(filePath);
 
-      return urlData.publicUrl
+      return urlData.publicUrl;
     } catch (error) {
-      console.error("Error uploading image:", error)
-      return null
+      console.error("Error uploading image:", error);
+      return null;
     }
-  }
+  };
 
   // Add language
   const addLanguage = () => {
     if (newLanguage && !languages.includes(newLanguage)) {
-      setLanguages([...languages, newLanguage])
-      setNewLanguage("")
+      setLanguages([...languages, newLanguage]);
+      setNewLanguage("");
     }
-  }
+  };
 
   // Remove language
   const removeLanguage = (language: string) => {
-    setLanguages(languages.filter((l) => l !== language))
-  }
+    setLanguages(languages.filter((l) => l !== language));
+  };
 
   // Add badge
   const addBadge = () => {
     if (newBadge && !badges.includes(newBadge)) {
-      setBadges([...badges, newBadge])
-      setNewBadge("")
+      setBadges([...badges, newBadge]);
+      setNewBadge("");
     }
-  }
+  };
 
   // Remove badge
   const removeBadge = (badge: string) => {
-    setBadges(badges.filter((b) => b !== badge))
-  }
+    setBadges(badges.filter((b) => b !== badge));
+  };
 
   // Form submission
   const onSubmit = async (data: AgentFormValues) => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
     try {
       // Upload profile image if selected
-      let profileImageUrl = null
+      let profileImageUrl = null;
       if (profileImage) {
-        profileImageUrl = await uploadProfileImage()
+        profileImageUrl = await uploadProfileImage();
       }
 
       // Prepare form data
-      const formData = new FormData()
+      const formData = new FormData();
 
       // Add all form fields to FormData
       Object.entries(data).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
-          formData.append(key, value.toString())
+          formData.append(key, value.toString());
         }
-      })
+      });
 
       // Add languages and badges
       languages.forEach((language) => {
-        formData.append("languages[]", language)
-      })
+        formData.append("languages[]", language);
+      });
 
       badges.forEach((badge) => {
-        formData.append("badges[]", badge)
-      })
+        formData.append("badges[]", badge);
+      });
 
       // Add profile image URL if uploaded
       if (profileImageUrl) {
-        formData.append("profileImageUrl", profileImageUrl)
+        formData.append("profileImageUrl", profileImageUrl);
       }
 
       // Submit the form
-      let result
+      let result;
       if (agent) {
-        formData.append("id", agent.id)
-        result = await updateAgent(formData)
+        formData.append("id", agent.id);
+        result = await updateAgent(formData);
       } else {
-        result = await createAgent(formData)
+        result = await createAgent(formData);
       }
 
       if (result.success) {
         toast({
           title: agent ? "Agent updated" : "Agent created",
-          description: agent ? "The agent has been successfully updated." : "The agent has been successfully created.",
-        })
-        router.push("/admin/users")
-        router.refresh()
+          description: agent
+            ? "The agent has been successfully updated."
+            : "The agent has been successfully created.",
+        });
+        router.push("/admin/users");
+        router.refresh();
       } else {
         toast({
           title: "Error",
-          description: `Failed to ${agent ? "update" : "create"} agent. ${result.error || "Please try again."}`,
+          description: `Failed to ${agent ? "update" : "create"} agent. ${
+            result.error || "Please try again."
+          }`,
           variant: "destructive",
-        })
+        });
       }
     } catch (error) {
-      console.error("Form submission error:", error)
+      console.error("Form submission error:", error);
       toast({
         title: "Error",
         description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <Form {...form}>
@@ -237,7 +294,9 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
             <Card>
               <CardHeader>
                 <CardTitle>Basic Information</CardTitle>
-                <CardDescription>Enter the basic information about the agent</CardDescription>
+                <CardDescription>
+                  Enter the basic information about the agent
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -276,7 +335,11 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="john.doe@example.com" {...field} />
+                        <Input
+                          type="email"
+                          placeholder="john.doe@example.com"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -326,9 +389,58 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                 />
 
                 <div>
-                  <FormLabel>Profile Image</FormLabel>
+                  {/* <FormLabel>Profile Image</FormLabel>
                   <Input type="file" accept="image/*" onChange={handleImageChange} className="mt-1" />
-                  <FormDescription>Upload a professional profile image (recommended size: 300x300px)</FormDescription>
+                  <FormDescription>Upload a professional profile image (recommended size: 300x300px)</FormDescription> */}
+
+                  <div className="space-y-6">
+                
+                    <div className="space-y-4">
+                      <UploadButton
+                        endpoint="imageUploader"
+                        onClientUploadComplete={(res) => {
+                          if (res && res.length > 0) {
+                            const newImageUrl = res[0].ufsUrl; // based on your uploadthing config
+                            setFormData((prev) => ({
+                              ...prev,
+                              images: [...prev.images, newImageUrl],
+                            }));
+                            console.log("Image Url::", newImageUrl);
+                          }
+                        }}
+                        onUploadError={(error: Error) => {
+                          alert(`ERROR! ${error.message}`);
+                        }}
+                      />
+
+                      {/* Image preview grid */}
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        {formData.images.map((url, index) => (
+                          <div key={index} className="relative group">
+                            <img
+                              src={url}
+                              alt={`Uploaded ${index}`}
+                              className="w-full h-40 object-cover rounded"
+                            />
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  images: prev.images.filter(
+                                    (_, i) => i !== index
+                                  ),
+                                }))
+                              }
+                              className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-80 group-hover:opacity-100"
+                            >
+                              <X size={16} />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <FormField
@@ -356,7 +468,9 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
             <Card>
               <CardHeader>
                 <CardTitle>Agent Details</CardTitle>
-                <CardDescription>Enter additional details about the agent</CardDescription>
+                <CardDescription>
+                  Enter additional details about the agent
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <FormField
@@ -445,7 +559,11 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                   </div>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {languages.map((language, index) => (
-                      <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                      <Badge
+                        key={index}
+                        variant="secondary"
+                        className="flex items-center gap-1"
+                      >
                         {language}
                         <Button
                           type="button"
@@ -473,7 +591,9 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                       <Plus className="h-4 w-4" />
                     </Button>
                   </div>
-                  <FormDescription>Examples: TruBroker™, Quality Lister, Responsive Broker</FormDescription>
+                  <FormDescription>
+                    Examples: TruBroker™, Quality Lister, Responsive Broker
+                  </FormDescription>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {badges.map((badge, index) => (
                       <Badge key={index} className="flex items-center gap-1">
@@ -499,7 +619,9 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
             <Card>
               <CardHeader>
                 <CardTitle>Social Media</CardTitle>
-                <CardDescription>Add social media profiles for the agent</CardDescription>
+                <CardDescription>
+                  Add social media profiles for the agent
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <FormField
@@ -509,7 +631,10 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>Facebook</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://facebook.com/username" {...field} />
+                        <Input
+                          placeholder="https://facebook.com/username"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -523,7 +648,10 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>Twitter</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://twitter.com/username" {...field} />
+                        <Input
+                          placeholder="https://twitter.com/username"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -537,7 +665,10 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>Instagram</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://instagram.com/username" {...field} />
+                        <Input
+                          placeholder="https://instagram.com/username"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -551,7 +682,10 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>LinkedIn</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://linkedin.com/in/username" {...field} />
+                        <Input
+                          placeholder="https://linkedin.com/in/username"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -565,7 +699,10 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>YouTube</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://youtube.com/channel/id" {...field} />
+                        <Input
+                          placeholder="https://youtube.com/channel/id"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -577,7 +714,11 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
         </Tabs>
 
         <CardFooter className="flex justify-between px-0">
-          <Button type="button" variant="outline" onClick={() => router.push("/admin/users")}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => router.push("/admin/users")}
+          >
             Cancel
           </Button>
           <Button type="submit" disabled={isSubmitting}>
@@ -595,6 +736,5 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
         </CardFooter>
       </form>
     </Form>
-  )
+  );
 }
-
