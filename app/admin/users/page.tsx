@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { UsersTable } from "@/components/admin/users-table"
 import { getUsers, getAgents } from "@/lib/actions"
 import { AgentGrid } from "@/components/admin/agent-grid"
+import { AgentCard } from "@/components/admin/agent-card"
 
 export const metadata: Metadata = {
   title: "Users & Agents | Real Estate Admin",
@@ -42,6 +43,7 @@ export default async function UsersPage() {
         </TabsList>
         <TabsContent value="agents" className="pt-4">
           <AgentGrid agents={agents} />
+          {/* <AgentCard agent={agents}/> */}
         </TabsContent>
         <TabsContent value="users" className="pt-4">
           <UsersTable users={users} />

@@ -527,18 +527,6 @@ export function PropertyForm({
       case 3:
         return (
           <div className="space-y-6">
-            {/* <UploadButton
-              endpoint="imageUploader"
-              onClientUploadComplete={(res) => {
-                // Do something with the response
-                console.log("Files: ", res[0].ufsUrl);
-                alert("Upload Completed");
-              }}
-              onUploadError={(error: Error) => {
-                // Do something with the error.
-                alert(`ERROR! ${error.message}`);
-              }}
-            /> */}
             <div className="space-y-4">
               <UploadButton
                 endpoint="imageUploader"
