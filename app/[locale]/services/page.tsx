@@ -6,10 +6,10 @@ import { useLocale, useTranslations } from "next-intl"
 import { ChevronLeft, Globe, ChevronRight,CirclePlus, Search,User, MessageSquare, Grip, Headset, HandHelping, Podcast, ShieldMinus, FolderCode,UserIcon, MessageCircle, Briefcase } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useIsMobile } from "@/hooks/use-mobile"
-import LanguageSelector from "@/components/language-selector"
 import { Link } from "@/i18n/navigation"
 import { signOut, useSession } from "@/lib/auth-client"
 import { Button } from "@/components/ui/button";
+import LanguageSelector from "@/components/home/language-selector"
 
 export default function ServicesPage() {
   const locale = useLocale()

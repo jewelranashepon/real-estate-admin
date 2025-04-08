@@ -1,6 +1,6 @@
 // pages/profile.tsx
+import Profile from '@/components/home/profile';
 import { NextPage } from 'next';
-import Profile from '../../../components/profile';
 
 const ProfilePage: NextPage = () => {
   return (
