@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { PropertyCard } from "./property-card"
+import { useTranslations } from "next-intl"
 
 interface PropertyWithRelations {
   id: number
@@ -27,16 +28,17 @@ interface FeaturedPropertiesProps {
 }
 
 export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
+  const t = useTranslations("dashboard")
   // Only show up to 4 properties
   const displayProperties = properties.slice(0, 4)
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Featured Properties</h2>
+        <h2 className="text-xl font-semibold">{t('Featured Properties')}</h2>
         <Button asChild variant="ghost" size="sm">
           <Link href="/admin/properties">
-            View All <ArrowRight className="ml-2 h-4 w-4" />
+           {t('View All')} <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
       </div>
@@ -44,8 +46,8 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
       {displayProperties.length === 0 ? (
         <div className="flex h-[200px] items-center justify-center rounded-md border border-dashed">
           <div className="text-center">
-            <h3 className="mt-2 text-sm font-medium">No properties found</h3>
-            <p className="mt-1 text-xs text-muted-foreground">Get started by adding a new property</p>
+            <h3 className="mt-2 text-sm font-medium">{t("noPropertiesFound")}</h3>
+            <p className="mt-1 text-xs text-muted-foreground">{t('getStartedByAddingProperty')}</p>
           </div>
         </div>
       ) : (

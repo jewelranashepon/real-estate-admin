@@ -6,8 +6,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 export default function DashboardPage() {
+  const t = useTranslations("dashboard");
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-10 border-b bg-background">
@@ -40,7 +42,7 @@ export default function DashboardPage() {
             <Button variant="ghost" className="justify-start gap-2" asChild>
               <Link href="#">
                 <Home className="h-4 w-4" />
-                Dashboard
+                {t('db')}
               </Link>
             </Button>
             <Button variant="ghost" className="justify-start gap-2" asChild>

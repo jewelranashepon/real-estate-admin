@@ -1,7 +1,7 @@
 
 // app/(auth)/register/page.tsx
 import type { Metadata } from "next"
-import { RegisterForm } from "@/components/auth/register-form"
+import { RegisterForm } from "@/app/[locale]/auth/register-form"
 import {
   Card,
   CardHeader,

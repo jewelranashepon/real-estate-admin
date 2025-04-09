@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
+import { Toaster } from "../components/ui/sonner";
 import './globals.css'
+import { SearchProvider } from '@/lib/search-context';
 
 export const metadata: Metadata = {
-  title: 'Real-Estate',
-  description: 'Real-Estate-Admin',
-  generator: 'Birds Of Eden',
+  title: 'real-estate-app',
+  description: 'Real Estate',
+  
 }
 
 export default function RootLayout({
@@ -14,7 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+      <SearchProvider>
+      {children}
+      </SearchProvider>
+      <Toaster />
+      </body>
+      
     </html>
   )
 }

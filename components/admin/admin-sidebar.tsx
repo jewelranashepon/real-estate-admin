@@ -25,29 +25,32 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { useState } from "react";
+import {  useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function AdminSidebar() {
+  const t = useTranslations("dashboard");
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
   const isActive = (path: string) => pathname === path;
 
   const menuItems = [
-    { label: "Dashboard", icon: LayoutDashboard, path: "/admin" },
-    { label: "Properties", icon: Building2, path: "/admin/properties" },
-    { label: "Users & Agents", icon: Users, path: "/admin/users" },
-    { label: "Leads & Messages", icon: MessageSquare, path: "/admin/leads" },
-    { label: "Payments", icon: CreditCard, path: "/admin/payments" },
-    { label: "Analytics", icon: BarChart, path: "/admin/analytics" },
-    { label: "Content", icon: FileText, path: "/admin/content" },
-    { label: "Settings", icon: Settings, path: "/admin/settings" },
+    { label: t("db"), icon: LayoutDashboard, path: "/admin" },
+    { label: t("properties"), icon: Building2, path: `/admin/properties` },
+    { label: t("usersAndAgents"), icon: Users, path: "/admin/users" },
+    { label: t("leadsAndMessages"), icon: MessageSquare, path: "/admin/leads" },
+    { label: t("payments"), icon: CreditCard, path: "/admin/payments" },
+    { label: t("analytics"), icon: BarChart, path: "/admin/analytics" },
+    { label: t("content"), icon: FileText, path: "/admin/content" },
+    { label: t("settings"), icon: Settings, path: "/admin/settings" },
     {
-      label: "Notifications",
+      label: t("notifications"),
       icon: Bell,
       path: "/admin/notifications",
       badge: 5,
     },
-    { label: "Support", icon: HelpCircle, path: "/admin/support" },
+    { label: t("support"), icon: HelpCircle, path: "/admin/support" },
   ];
 
   return (
@@ -65,8 +68,14 @@ export default function AdminSidebar() {
             >
               <Building2 className="h-6 w-6 text-primary" />
               <div>
-                <p className="text-xl leading-tight">Real Estate</p>
+                <p className="text-md leading-tight">Birds of Eden Real Estate</p>
                 <p className="text-sm text-muted-foreground">Admin Panel</p>
+                {/* <Image
+                src='/boedlogo.png'
+                alt ="Birds of Eden "
+                width={100}
+                height={100}
+                /> */}
               </div>
             </Link>
           )}

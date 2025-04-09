@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { LoginForm } from "@/components/auth/login-form"
+import { LoginForm } from "@/app/[locale]/auth/login-form"
 import {
   Card,
   CardHeader,

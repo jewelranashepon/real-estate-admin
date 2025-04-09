@@ -14,6 +14,8 @@ import { toast } from "@/components/ui/use-toast"
 import Link from "next/link"
 import { signIn } from "@/lib/auth-client"
 
+
+
 const loginFormSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
@@ -28,6 +30,8 @@ type LoginFormValues = z.infer<typeof loginFormSchema>
 
 export function LoginForm() {
   const router = useRouter()
+
+ 
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
@@ -39,6 +43,7 @@ export function LoginForm() {
       rememberMe: false,
     },
   })
+ 
 
   async function onSubmit(data: LoginFormValues) {
     await signIn.email(
@@ -52,7 +57,7 @@ export function LoginForm() {
            },
            onSuccess: (ctx) => {
              toast({title: "Login Successful"})
-             router.push("/admin")
+             router.push(`/admin`);
            },
            onError: (ctx) => {
              // display the error message

@@ -3,6 +3,7 @@
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "@/components/ui/chart"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { PieChart, Pie, Cell } from "@/components/ui/chart"
+import { useTranslations } from "next-intl"
 
 interface OverviewProps {
   stats: {
@@ -22,14 +23,15 @@ interface OverviewProps {
 }
 
 export function Overview({ stats }: OverviewProps) {
+  const t = useTranslations('dashboard')
   // Colors for the pie chart
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8", "#82ca9d"]
 
   return (
     <Tabs defaultValue="types">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="types">Property Types</TabsTrigger>
-        <TabsTrigger value="status">Property Status</TabsTrigger>
+        <TabsTrigger value="types">{t('propertyTypes')}</TabsTrigger>
+        <TabsTrigger value="status">{t('propertyStatus')}</TabsTrigger>
       </TabsList>
 
       <TabsContent value="types" className="pt-4">

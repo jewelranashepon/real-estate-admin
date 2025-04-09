@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 
 interface PropertyWithRelations {
@@ -20,6 +21,7 @@ interface RecentPropertiesProps {
 }
 
 export function RecentProperties({ properties }: RecentPropertiesProps) {
+  const t = useTranslations("dashboard")
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -32,7 +34,7 @@ export function RecentProperties({ properties }: RecentPropertiesProps) {
   return (
     <div className="space-y-4">
       {properties.length === 0 ? (
-        <p className="text-center text-muted-foreground">No properties found.</p>
+        <p className="text-center text-muted-foreground">{t('recentlyAddedOrUpdated')}</p>
       ) : (
         properties.map((property) => {
           const imageUrl = property.images.length > 0 ? property.images[0].url : "/placeholder.svg?height=40&width=40"

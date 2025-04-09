@@ -43,19 +43,19 @@ import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 
 import "../globals.css";
-import { SearchProvider } from "@/lib/search-context"; // ✅ Import your provider
-import { locales } from "@/next-intl.config"; // ✅ Assuming this exports the list of supported locales
+import { SearchProvider } from "@/lib/search-context"; 
+import { locales } from "@/next-intl.config"; 
 
 export default async function MainLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string }; // ❌ No need for `Promise` here
+  params: { locale: string }; 
 }) {
   const { locale } = params;
 
-  // ✅ Ensure the incoming locale is supported
+ 
   if (!locales.includes(locale)) {
     notFound();
   }

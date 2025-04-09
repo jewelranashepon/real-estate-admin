@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
 import { formatCurrency } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 
 interface Invoice {
   id: string
@@ -91,20 +92,21 @@ const mockInvoices: Invoice[] = [
 ]
 
 export function InvoicesTable() {
+  const t = useTranslations('dashboard')
   const [data, setData] = useState<Invoice[]>(mockInvoices)
   const [searchQuery, setSearchQuery] = useState("")
 
   const columns: ColumnDef<Invoice>[] = [
     {
       accessorKey: "invoiceNumber",
-      header: "Invoice #",
+      header: t("invoices"),
       cell: ({ row }) => <div className="font-medium">{row.getValue("invoiceNumber")}</div>,
     },
     {
       accessorKey: "customer",
       header: ({ column }) => (
         <div className="flex items-center">
-          Customer
+         {t('customer')}
           <Button
             variant="ghost"
             size="sm"
@@ -126,7 +128,7 @@ export function InvoicesTable() {
       accessorKey: "amount",
       header: ({ column }) => (
         <div className="flex items-center">
-          Amount
+          {t('amount')}
           <Button
             variant="ghost"
             size="sm"
@@ -141,7 +143,7 @@ export function InvoicesTable() {
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("status"),
       cell: ({ row }) => {
         const status = row.getValue("status") as string
         return (
@@ -165,7 +167,7 @@ export function InvoicesTable() {
       accessorKey: "dueDate",
       header: ({ column }) => (
         <div className="flex items-center">
-          Due Date
+          {t('dueDate')}
           <Button
             variant="ghost"
             size="sm"
@@ -183,7 +185,7 @@ export function InvoicesTable() {
     },
     {
       accessorKey: "issuedDate",
-      header: "Issued Date",
+      header: t('issuedDate'),
       cell: ({ row }) => {
         const date = new Date(row.getValue("issuedDate"))
         return <div>{date.toLocaleDateString()}</div>

@@ -19,6 +19,7 @@ import {
 import { deleteAgent } from "@/lib/actions"
 import { useRouter } from "next/navigation"
 import { toast } from "@/components/ui/use-toast"
+import { useTranslations } from "next-intl"
 
 interface AgentWithRelations {
   id: string
@@ -58,6 +59,7 @@ interface AgentGridProps {
 
 export function AgentGrid({ agents }: AgentGridProps) {
   const router = useRouter()
+  const t = useTranslations('dashboard')
   const [searchQuery, setSearchQuery] = useState("")
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [agentToDelete, setAgentToDelete] = useState<string | null>(null)
@@ -127,7 +129,7 @@ export function AgentGrid({ agents }: AgentGridProps) {
         <Button asChild>
           <Link href="/admin/users/new-agent">
             <PlusCircle className="mr-2 h-4 w-4" />
-            Add Agent
+           {t('addAgent')}
           </Link>
         </Button>
       </div>
@@ -135,15 +137,15 @@ export function AgentGrid({ agents }: AgentGridProps) {
       {filteredAgents.length === 0 ? (
         <div className="flex h-[400px] items-center justify-center rounded-md border border-dashed">
           <div className="text-center">
-            <h3 className="mt-2 text-lg font-semibold">No agents found</h3>
+            <h3 className="mt-2 text-lg font-semibold">{t('noAgentsFound')}</h3>
             <p className="mb-4 mt-1 text-sm text-muted-foreground">
-              {searchQuery ? "Try a different search term" : "Get started by adding a new agent"}
+              {searchQuery ? "Try a different search term" : t("getStartedByAddingAgent")}
             </p>
             {!searchQuery && (
               <Button asChild>
                 <Link href="/admin/users/new-agent">
                   <PlusCircle className="mr-2 h-4 w-4" />
-                  Add Agent
+                 {t('addAgent')}
                 </Link>
               </Button>
             )}

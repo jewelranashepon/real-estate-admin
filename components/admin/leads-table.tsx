@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
+import { useTranslations } from "next-intl"
 
 interface Lead {
   id: string
@@ -90,6 +91,7 @@ const mockLeads: Lead[] = [
 ]
 
 export function LeadsTable() {
+  const t = useTranslations('dashboard')
   const [data] = useState<Lead[]>(mockLeads)
   const [searchQuery, setSearchQuery] = useState("")
 
@@ -98,7 +100,7 @@ export function LeadsTable() {
       accessorKey: "name",
       header: ({ column }) => (
         <div className="flex items-center">
-          Name
+          {t('name')}
           <Button
             variant="ghost"
             size="sm"
@@ -113,22 +115,22 @@ export function LeadsTable() {
     },
     {
       accessorKey: "email",
-      header: "Email",
+      header: t("email"),
       cell: ({ row }) => <div>{row.getValue("email")}</div>,
     },
     {
       accessorKey: "phone",
-      header: "Phone",
+      header: t("phone"),
       cell: ({ row }) => <div>{row.getValue("phone")}</div>,
     },
     {
       accessorKey: "propertyInterest",
-      header: "Property Interest",
+      header: t("propertyInterest"),
       cell: ({ row }) => <div className="max-w-[200px] truncate">{row.getValue("propertyInterest")}</div>,
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("status"),
       cell: ({ row }) => {
         const status = row.getValue("status") as string
         return (
@@ -152,14 +154,14 @@ export function LeadsTable() {
     },
     {
       accessorKey: "source",
-      header: "Source",
+      header: t("source"),
       cell: ({ row }) => <div>{row.getValue("source")}</div>,
     },
     {
       accessorKey: "createdAt",
       header: ({ column }) => (
         <div className="flex items-center">
-          Date
+          {t('date')}
           <Button
             variant="ghost"
             size="sm"

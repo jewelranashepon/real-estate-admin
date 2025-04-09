@@ -19,6 +19,7 @@ import {
 import { deleteProperty } from "@/lib/actions"
 import { useRouter } from "next/navigation"
 import { toast } from "@/components/ui/use-toast"
+import { useTranslations } from "next-intl"
 
 interface PropertyWithRelations {
   id: number
@@ -45,6 +46,7 @@ interface PropertyGridProps {
 
 export function PropertyGrid({ properties }: PropertyGridProps) {
   const router = useRouter()
+  const t = useTranslations('dashboard')
   const [searchQuery, setSearchQuery] = useState("")
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [propertyToDelete, setPropertyToDelete] = useState<number | null>(null)
@@ -112,15 +114,15 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
       {filteredProperties.length === 0 ? (
         <div className="flex h-[400px] items-center justify-center rounded-md border border-dashed">
           <div className="text-center">
-            <h3 className="mt-2 text-lg font-semibold">No properties found</h3>
+            <h3 className="mt-2 text-lg font-semibold">{t('noPropertiesFound')}</h3>
             <p className="mb-4 mt-1 text-sm text-muted-foreground">
-              {searchQuery ? "Try a different search term" : "Get started by adding a new property"}
+              {searchQuery ? "Try a different search term" : t("getStartedByAddingProperty")}
             </p>
             {!searchQuery && (
               <Button asChild>
                 <Link href="/admin/properties/new">
                   <PlusCircle className="mr-2 h-4 w-4" />
-                  Add Property
+                  {t('addProperty')}
                 </Link>
               </Button>
             )}

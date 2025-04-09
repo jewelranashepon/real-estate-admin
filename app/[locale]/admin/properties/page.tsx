@@ -45,6 +45,7 @@ import { PropertyGrid } from "@/components/admin/property-grid"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { PlusCircle } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
 export const metadata: Metadata = {
   title: "Properties | Real Estate Admin",
@@ -52,6 +53,7 @@ export const metadata: Metadata = {
 }
 
 export default async function PropertiesPage() {
+  const t =await getTranslations('dashboard')
   const [properties, propertyTypes, propertyStatuses] = await Promise.all([
     getProperties(),
     getPropertyTypes(),
@@ -61,19 +63,19 @@ export default async function PropertiesPage() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Properties</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t('properties')}</h1>
         <Button asChild>
           <Link href="/admin/properties/new">
             <PlusCircle className="mr-2 h-4 w-4" />
-            Add Property
+          {t('addProperty')}
           </Link>
         </Button>
       </div>
 
       <Tabs defaultValue="grid" className="w-full">
         <TabsList className="grid w-full max-w-[200px] grid-cols-2">
-          <TabsTrigger value="grid">Grid</TabsTrigger>
-          <TabsTrigger value="table">Table</TabsTrigger>
+          <TabsTrigger value="grid">{t('grid')}</TabsTrigger>
+          <TabsTrigger value="table">{t('table')}</TabsTrigger>
         </TabsList>
         <TabsContent value="grid" className="pt-4">
           <PropertyGrid properties={properties} />

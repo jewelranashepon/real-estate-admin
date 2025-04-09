@@ -33,6 +33,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
+import { useTranslations } from "next-intl"
 
 interface Message {
   id: string
@@ -116,6 +117,7 @@ const mockMessages: Message[] = [
 ]
 
 export function MessagesTable() {
+  const t = useTranslations('dashboard')
   const [data, setData] = useState<Message[]>(mockMessages)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null)
@@ -151,7 +153,7 @@ export function MessagesTable() {
       accessorKey: "sender",
       header: ({ column }) => (
         <div className="flex items-center">
-          Sender
+          {t('sender')}
           <Button
             variant="ghost"
             size="sm"
@@ -171,17 +173,17 @@ export function MessagesTable() {
     },
     {
       accessorKey: "subject",
-      header: "Subject",
+      header: t("subject"),
       cell: ({ row }) => <div className="font-medium">{row.getValue("subject")}</div>,
     },
     {
       accessorKey: "propertyName",
-      header: "Property",
+      header: t("property"),
       cell: ({ row }) => <div>{row.original.propertyName || "N/A"}</div>,
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("status"),
       cell: ({ row }) => {
         const status = row.getValue("status") as string
         return (
@@ -205,7 +207,7 @@ export function MessagesTable() {
       accessorKey: "createdAt",
       header: ({ column }) => (
         <div className="flex items-center">
-          Date
+         {t('date')}
           <Button
             variant="ghost"
             size="sm"

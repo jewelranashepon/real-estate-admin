@@ -1,5 +1,6 @@
 import { Building2, Users, MessageSquare, DollarSign } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { useTranslations } from "next-intl"
 
 interface DashboardStatsProps {
   stats: {
@@ -24,6 +25,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
 
   // Find the count of properties with "Sold" status
   const soldCount = stats.statusStats.find((stat) => stat.statusName === "Sold")?.count || 0
+  const t = useTranslations('dashboard')
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -33,10 +35,10 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
             <Building2 className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Total Properties</p>
+            <p className="text-sm font-medium text-muted-foreground">{t('totalProperties')}</p>
             <h3 className="text-2xl font-bold">{stats.propertyCount}</h3>
             <p className="text-xs text-muted-foreground">
-              <span className="text-emerald-500">{publishedCount} published</span>
+              <span className="text-emerald-500">{publishedCount} {t('published')}</span>
             </p>
           </div>
         </CardContent>
@@ -48,10 +50,10 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
             <Users className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Active Users</p>
+            <p className="text-sm font-medium text-muted-foreground">{t('activeUsers')}</p>
             <h3 className="text-2xl font-bold">{stats.userCount}</h3>
             <p className="text-xs text-muted-foreground">
-              <span className="text-emerald-500">Active platform users</span>
+              <span className="text-emerald-500">{t('activePlatformUsers')}</span>
             </p>
           </div>
         </CardContent>
@@ -63,10 +65,10 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
             <MessageSquare className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Property Types</p>
+            <p className="text-sm font-medium text-muted-foreground">{t('propertyTypes')}</p>
             <h3 className="text-2xl font-bold">{stats.typeStats.length}</h3>
             <p className="text-xs text-muted-foreground">
-              <span className="text-emerald-500">{stats.typeStats[0]?.typeName || "None"} is most common</span>
+              <span className="text-emerald-500">{stats.typeStats[0]?.typeName || "None"} {t('noneIsMostCommon')}</span>
             </p>
           </div>
         </CardContent>
@@ -78,11 +80,11 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
             <DollarSign className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Properties Sold</p>
+            <p className="text-sm font-medium text-muted-foreground">{t('propertiesSold')}</p>
             <h3 className="text-2xl font-bold">{soldCount}</h3>
             <p className="text-xs text-muted-foreground">
               <span className="text-emerald-500">
-                {Math.round((soldCount / stats.propertyCount) * 100) || 0}% conversion rate
+                {Math.round((soldCount / stats.propertyCount) * 100) || 0}% {t('conversionRate')}
               </span>
             </p>
           </div>

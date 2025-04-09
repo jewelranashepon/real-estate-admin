@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
 import { formatCurrency } from "@/lib/utils"
+import { useTranslations } from 'next-intl';
 
 interface Payment {
   id: string
@@ -91,20 +92,21 @@ const mockPayments: Payment[] = [
 ]
 
 export function PaymentsTable() {
+  const t = useTranslations('dashboard')
   const [data] = useState<Payment[]>(mockPayments)
   const [searchQuery, setSearchQuery] = useState("")
 
   const columns: ColumnDef<Payment>[] = [
     {
       accessorKey: "transactionId",
-      header: "Transaction ID",
+      header: t("transactionId"),
       cell: ({ row }) => <div className="font-medium">{row.getValue("transactionId")}</div>,
     },
     {
       accessorKey: "customer",
       header: ({ column }) => (
         <div className="flex items-center">
-          Customer
+          {t('customer')}
           <Button
             variant="ghost"
             size="sm"
@@ -126,7 +128,7 @@ export function PaymentsTable() {
       accessorKey: "amount",
       header: ({ column }) => (
         <div className="flex items-center">
-          Amount
+          {t('amount')}
           <Button
             variant="ghost"
             size="sm"
@@ -141,7 +143,7 @@ export function PaymentsTable() {
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("status"),
       cell: ({ row }) => {
         const status = row.getValue("status") as string
         return (
@@ -163,14 +165,14 @@ export function PaymentsTable() {
     },
     {
       accessorKey: "method",
-      header: "Payment Method",
+      header: t("paymentMethod"),
       cell: ({ row }) => <div>{row.getValue("method")}</div>,
     },
     {
       accessorKey: "date",
       header: ({ column }) => (
         <div className="flex items-center">
-          Date
+          {t('date')}
           <Button
             variant="ghost"
             size="sm"
