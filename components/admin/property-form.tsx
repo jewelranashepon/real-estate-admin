@@ -1,7 +1,10 @@
 "use client";
 
+import { useForm } from "react-hook-form";
+import { Form } from "@/components/ui/form";
+
 import type React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -26,10 +29,8 @@ import {
   Loader2,
   ArrowLeft,
   ArrowRight,
-  Upload,
   X,
   Check,
-  ImageIcon,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -98,6 +99,9 @@ export function PropertyForm({
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const form = useForm({
+    defaultValues: initialFormData,
+  });
 
   console.log("Form DataImage Link", formData.images);
 
@@ -632,63 +636,65 @@ export function PropertyForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      {/* Stepper */}
-      <Stepper value={currentStep} className="mx-auto max-w-3xl">
-        {steps.map((step, index) => (
-          <StepperItem key={index} value={index}>
-            <StepperTrigger
-              onClick={() => setCurrentStep(index)}
-              disabled={index > currentStep}
-            >
-              <StepperIcon>
-                <StepperStatus complete={<Check className="h-4 w-4" />} />
-              </StepperIcon>
-              <StepperLabel>{step.title}</StepperLabel>
-            </StepperTrigger>
-            <StepperContent>
-              <StepperDescription>{step.description}</StepperDescription>
-              <StepperMessage />
-            </StepperContent>
-          </StepperItem>
-        ))}
-      </Stepper>
+    <Form {...form}>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        {/* Stepper */}
+        <Stepper value={currentStep} className="mx-auto max-w-3xl">
+          {steps.map((step, index) => (
+            <StepperItem key={index} value={index}>
+              <StepperTrigger
+                onClick={() => setCurrentStep(index)}
+                disabled={index > currentStep}
+              >
+                <StepperIcon>
+                  <StepperStatus complete={<Check className="h-4 w-4" />} />
+                </StepperIcon>
+                <StepperLabel>{step.title}</StepperLabel>
+              </StepperTrigger>
+              <StepperContent>
+                <StepperDescription>{step.description}</StepperDescription>
+                <StepperMessage />
+              </StepperContent>
+            </StepperItem>
+          ))}
+        </Stepper>
 
-      {/* Step content */}
-      <Card>
-        <CardContent className="pt-6">{renderStepContent()}</CardContent>
-      </Card>
+        {/* Step content */}
+        <Card>
+          <CardContent className="pt-6">{renderStepContent()}</CardContent>
+        </Card>
 
-      {/* Navigation buttons */}
-      <div className="flex justify-between">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={prevStep}
-          disabled={currentStep === 0}
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" /> Previous
-        </Button>
-
-        {currentStep < steps.length - 1 ? (
-          <Button type="button" onClick={nextStep}>
-            Next <ArrowRight className="ml-2 h-4 w-4" />
+        {/* Navigation buttons */}
+        <div className="flex justify-between">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={prevStep}
+            disabled={currentStep === 0}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" /> Previous
           </Button>
-        ) : (
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {property ? "Updating..." : "Creating..."}
-              </>
-            ) : property ? (
-              "Update Property"
-            ) : (
-              "Create Property"
-            )}
-          </Button>
-        )}
-      </div>
-    </form>
+
+          {currentStep < steps.length - 1 ? (
+            <Button type="button" onClick={nextStep}>
+              Next <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          ) : (
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  {property ? "Updating..." : "Creating..."}
+                </>
+              ) : property ? (
+                "Update Property"
+              ) : (
+                "Create Property"
+              )}
+            </Button>
+          )}
+        </div>
+      </form>
+    </Form>
   );
 }
