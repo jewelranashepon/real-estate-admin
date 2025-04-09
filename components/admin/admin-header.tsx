@@ -15,6 +15,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
 import { signOut } from "@/lib/auth-client";
+import LanguageSelector from "../home/language-selector";
 
 export default function AdminHeader() {
   const router = useRouter();
@@ -35,6 +36,7 @@ export default function AdminHeader() {
 
       {/* Right side */}
       <div className="ml-auto flex items-center gap-4">
+        <LanguageSelector/>
         {/* Notifications */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
