@@ -83,28 +83,26 @@ import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 
 import "../globals.css";
-<<<<<<< HEAD
-import { SearchProvider } from "@/lib/search-context"; 
-import { locales } from "@/next-intl.config"; 
-=======
+
+
+
 import { SearchProvider } from "@/lib/search-context";
 import { locales } from "@/next-intl.config";
->>>>>>> jewel
+
 
 export default async function MainLayout(props: {
   children: React.ReactNode;
-<<<<<<< HEAD
+
   params: { locale: string }; 
-=======
-  params: { locale: string };
->>>>>>> jewel
+
+
+
 }) {
   const locale = props.params.locale; // ✅ Safe access inside body
 
-<<<<<<< HEAD
+
  
-=======
->>>>>>> jewel
+
   if (!locales.includes(locale)) {
     notFound();
   }
