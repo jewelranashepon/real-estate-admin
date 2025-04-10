@@ -41,7 +41,7 @@ export function PropertyCard({ property, onDelete }: PropertyCardProps) {
   const mainImage = property.images.length > 0 ? property.images[0].url : "/placeholder.svg?height=200&width=300"
 
   return (
-    <Card className="overflow-hidden flex flex-col h-full transition-all hover:shadow-md">
+    <Card className="overflow-hidden flex flex-col h-full transition-all shadow-lg hover:shadow-xl">
       {/* Property Image (clickable) */}
       <div className="relative aspect-video cursor-pointer overflow-hidden" onClick={() => setImageDialogOpen(true)}>
         <div className="absolute inset-0 bg-black/5 transition-opacity hover:bg-black/10 z-10" />
@@ -72,15 +72,15 @@ export function PropertyCard({ property, onDelete }: PropertyCardProps) {
       <CardContent className="flex-grow p-4">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Badge variant="outline">{property.type.value}</Badge>
-            <span className="font-bold text-lg">{formatCurrency(property.price)}</span>
+            <Badge variant="outline" className="bg-emerald-600 text-white px-2 py-1">{property.type.value}</Badge>
+            <span className="font-bold text-xl text-emerald-700">{formatCurrency(property.price)}</span>
           </div>
 
           <h3 className="font-semibold text-lg line-clamp-1">{property.name}</h3>
 
-          <p className="text-sm text-muted-foreground line-clamp-2">{property.description}</p>
+          <p className="text-sm text-slate-700 line-clamp-2">{property.description}</p>
 
-          <div className="flex items-center text-sm text-muted-foreground">
+          <div className="flex items-center text-sm text-slate-700">
             <span>{property.location ? `${property.location.city}, ${property.location.state}` : "Location N/A"}</span>
           </div>
 
@@ -88,15 +88,15 @@ export function PropertyCard({ property, onDelete }: PropertyCardProps) {
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-1">
                 <span className="font-medium">{property.feature.bedrooms}</span>
-                <span className="text-muted-foreground">Beds</span>
+                <span className="text-slate-700">Beds</span>
               </div>
               <div className="flex items-center gap-1">
                 <span className="font-medium">{property.feature.bathrooms}</span>
-                <span className="text-muted-foreground">Baths</span>
+                <span className="text-slate-700">Baths</span>
               </div>
               <div className="flex items-center gap-1">
                 <span className="font-medium">{property.feature.area}</span>
-                <span className="text-muted-foreground">Sq Ft</span>
+                <span className="text-slate-700">Sq Ft</span>
               </div>
             </div>
           )}
@@ -104,13 +104,13 @@ export function PropertyCard({ property, onDelete }: PropertyCardProps) {
       </CardContent>
 
       <CardFooter className="p-4 pt-0 flex justify-between gap-2">
-        <Button asChild variant="outline" size="sm" className="flex-1">
+        <Button asChild variant="outline" size="sm" className="flex-1 text-emerald-700 font-semibold hover:text-emerald-800">
           <Link href={`/admin/properties/${property.id}`}>
             <Eye className="mr-2 h-4 w-4" />
             View
           </Link>
         </Button>
-        <Button asChild variant="outline" size="sm" className="flex-1">
+        <Button asChild variant="outline" size="sm" className="flex-1 text-sky-700 font-semibold hover:text-sky-800">
           <Link href={`/admin/properties/${property.id}/edit`}>
             <Edit className="mr-2 h-4 w-4" />
             Edit
@@ -120,7 +120,7 @@ export function PropertyCard({ property, onDelete }: PropertyCardProps) {
           <Button
             variant="outline"
             size="sm"
-            className="flex-1 text-destructive hover:text-destructive"
+            className="flex-1 font-semibold text-destructive hover:text-destructive"
             onClick={() => onDelete(property.id)}
           >
             <Trash2 className="mr-2 h-4 w-4" />
