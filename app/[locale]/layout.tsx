@@ -37,25 +37,74 @@
 
 
 
+// import type React from "react";
+// import { NextIntlClientProvider } from "next-intl";
+// import { notFound } from "next/navigation";
+// import { getMessages } from "next-intl/server";
+
+// import "../globals.css";
+// import { SearchProvider } from "@/lib/search-context"; // ✅ Import your provider
+// import { locales } from "@/next-intl.config"; // ✅ Assuming this exports the list of supported locales
+
+// export default async function MainLayout({
+//   children,
+//   params,
+// }: {
+//   children: React.ReactNode;
+//   params: { locale: string }; // ❌ No need for `Promise` here
+// }) {
+//   const { locale } = params;
+
+//   // ✅ Ensure the incoming locale is supported
+//   if (!locales.includes(locale)) {
+//     notFound();
+//   }
+
+//   const messages = await getMessages({ locale });
+
+//   return (
+//     <html lang={locale}>
+//       <body>
+//         <NextIntlClientProvider locale={locale} messages={messages}>
+//           <SearchProvider>
+//             <main className="grow shrink-0 overflow-y-auto">{children}</main>
+//             {/* Footer */}
+//           </SearchProvider>
+//         </NextIntlClientProvider>
+//       </body>
+//     </html>
+//   );
+// }
+
+
 import type React from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 
 import "../globals.css";
+<<<<<<< HEAD
 import { SearchProvider } from "@/lib/search-context"; 
 import { locales } from "@/next-intl.config"; 
+=======
+import { SearchProvider } from "@/lib/search-context";
+import { locales } from "@/next-intl.config";
+>>>>>>> jewel
 
-export default async function MainLayout({
-  children,
-  params,
-}: {
+export default async function MainLayout(props: {
   children: React.ReactNode;
+<<<<<<< HEAD
   params: { locale: string }; 
+=======
+  params: { locale: string };
+>>>>>>> jewel
 }) {
-  const { locale } = params;
+  const locale = props.params.locale; // ✅ Safe access inside body
 
+<<<<<<< HEAD
  
+=======
+>>>>>>> jewel
   if (!locales.includes(locale)) {
     notFound();
   }
@@ -67,8 +116,7 @@ export default async function MainLayout({
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SearchProvider>
-            <main className="grow shrink-0 overflow-y-auto">{children}</main>
-            {/* Footer */}
+            <main className="grow shrink-0 overflow-y-auto">{props.children}</main>
           </SearchProvider>
         </NextIntlClientProvider>
       </body>
