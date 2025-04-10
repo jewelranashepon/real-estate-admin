@@ -39,10 +39,10 @@ export default function AdminSidebar() {
     { label: t("db"), icon: LayoutDashboard, path: "/admin" },
     { label: t("properties"), icon: Building2, path: `/admin/properties` },
     { label: t("usersAndAgents"), icon: Users, path: "/admin/users" },
+    { label: t("content"), icon: FileText, path: "/admin/content" },
     { label: t("leadsAndMessages"), icon: MessageSquare, path: "/admin/leads" },
     { label: t("payments"), icon: CreditCard, path: "/admin/payments" },
     { label: t("analytics"), icon: BarChart, path: "/admin/analytics" },
-    { label: t("content"), icon: FileText, path: "/admin/content" },
     { label: t("settings"), icon: Settings, path: "/admin/settings" },
     {
       label: t("notifications"),
