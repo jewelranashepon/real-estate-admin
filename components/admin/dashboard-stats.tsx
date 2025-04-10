@@ -1,5 +1,7 @@
+"use client"
 import { Building2, Users, MessageSquare, DollarSign } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { useEffect, useState } from "react"
 
 interface DashboardStatsProps {
   stats: {
@@ -19,21 +21,36 @@ interface DashboardStatsProps {
 }
 
 export function DashboardStats({ stats }: DashboardStatsProps) {
+  const [blogCount, setBlogCount] = useState<number | null>(null);
   // Find the count of properties with "Published" status
   const publishedCount = stats.statusStats.find((stat) => stat.statusName === "Published")?.count || 0
 
   // Find the count of properties with "Sold" status
   const soldCount = stats.statusStats.find((stat) => stat.statusName === "Sold")?.count || 0
 
+  useEffect(() => {
+    async function fetchBlogCount() {
+      try {
+        const res = await fetch("/api/blogfetch");
+        const data = await res.json();
+        setBlogCount(data.length);
+      } catch (error) {
+        console.error("Failed to fetch blog count:", error);
+      }
+    }
+
+    fetchBlogCount();
+  }, []);
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <Card>
+      <Card className="shadow-md transition-shadow hover:shadow-lg">
         <CardContent className="flex items-center gap-4 p-6">
-          <div className="rounded-full bg-primary/10 p-3">
+          <div className="rounded-full bg-cyan-100 p-3">
             <Building2 className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Total Properties</p>
+            <p className="text-base font-medium text-slate-800">Total Properties</p>
             <h3 className="text-2xl font-bold">{stats.propertyCount}</h3>
             <p className="text-xs text-muted-foreground">
               <span className="text-emerald-500">{publishedCount} published</span>
@@ -42,13 +59,13 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="shadow-md transition-shadow hover:shadow-lg">
         <CardContent className="flex items-center gap-4 p-6">
-          <div className="rounded-full bg-primary/10 p-3">
+          <div className="rounded-full bg-cyan-100 p-3">
             <Users className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Active Users</p>
+            <p className="text-base font-medium text-slate-800">Active Users</p>
             <h3 className="text-2xl font-bold">{stats.userCount}</h3>
             <p className="text-xs text-muted-foreground">
               <span className="text-emerald-500">Active platform users</span>
@@ -57,28 +74,28 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="shadow-md transition-shadow hover:shadow-lg">
         <CardContent className="flex items-center gap-4 p-6">
-          <div className="rounded-full bg-primary/10 p-3">
+          <div className="rounded-full bg-cyan-100 p-3">
             <MessageSquare className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Property Types</p>
-            <h3 className="text-2xl font-bold">{stats.typeStats.length}</h3>
+            <p className="text-base font-medium text-slate-800">Blogs Count</p>
+            <h3 className="text-2xl font-bold"> {blogCount !== null ? blogCount : "Loading..."}</h3>
             <p className="text-xs text-muted-foreground">
-              <span className="text-emerald-500">{stats.typeStats[0]?.typeName || "None"} is most common</span>
+              <span className="text-emerald-500">Total Blogs uploaded</span>
             </p>
           </div>
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="shadow-md transition-shadow hover:shadow-lg">
         <CardContent className="flex items-center gap-4 p-6">
-          <div className="rounded-full bg-primary/10 p-3">
+          <div className="rounded-full bg-cyan-100 p-3">
             <DollarSign className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-medium text-muted-foreground">Properties Sold</p>
+            <p className="text-base font-medium text-slate-800">Properties Sold</p>
             <h3 className="text-2xl font-bold">{soldCount}</h3>
             <p className="text-xs text-muted-foreground">
               <span className="text-emerald-500">

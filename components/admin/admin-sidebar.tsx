@@ -36,10 +36,10 @@ export default function AdminSidebar() {
     { label: "Dashboard", icon: LayoutDashboard, path: "/admin" },
     { label: "Properties", icon: Building2, path: "/admin/properties" },
     { label: "Users & Agents", icon: Users, path: "/admin/users" },
+    { label: "Content", icon: FileText, path: "/admin/content" },
     { label: "Leads & Messages", icon: MessageSquare, path: "/admin/leads" },
     { label: "Payments", icon: CreditCard, path: "/admin/payments" },
     { label: "Analytics", icon: BarChart, path: "/admin/analytics" },
-    { label: "Content", icon: FileText, path: "/admin/content" },
     { label: "Settings", icon: Settings, path: "/admin/settings" },
     {
       label: "Notifications",
