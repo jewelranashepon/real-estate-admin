@@ -84,25 +84,17 @@ import { getMessages } from "next-intl/server";
 
 import "../globals.css";
 
-
-
 import { SearchProvider } from "@/lib/search-context";
 import { locales } from "@/next-intl.config";
-
 
 export default async function MainLayout(props: {
   children: React.ReactNode;
 
-  params: { locale: string }; 
-
-
-
+  params: { locale: string };
 }) {
   const locale = props.params.locale; // ✅ Safe access inside body
 
-
  
-
   if (!locales.includes(locale)) {
     notFound();
   }
