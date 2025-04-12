@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   type ColumnDef,
   flexRender,
@@ -48,81 +48,153 @@ interface Message {
   createdAt: string
 }
 
-const mockMessages: Message[] = [
-  {
-    id: "1",
-    sender: "John Smith",
-    email: "john.smith@example.com",
-    subject: "Inquiry about Modern Apartment",
-    message:
-      "Hello, I'm interested in the Modern Apartment in Downtown. Is it still available? I would like to schedule a viewing this weekend if possible. Thank you.",
-    propertyId: "1",
-    propertyName: "Modern Apartment in Downtown",
-    status: "Unread",
-    isStarred: false,
-    createdAt: "2023-11-15T10:30:00Z",
-  },
-  {
-    id: "2",
-    sender: "Sarah Johnson",
-    email: "sarah.j@example.com",
-    subject: "Question about Luxury Villa",
-    message:
-      "Hi there, I have a few questions about the Luxury Villa with Pool. What's the size of the pool? Is the property fully furnished? Looking forward to your response.",
-    propertyId: "2",
-    propertyName: "Luxury Villa with Pool",
-    status: "Read",
-    isStarred: true,
-    createdAt: "2023-11-14T14:20:00Z",
-  },
-  {
-    id: "3",
-    sender: "Michael Brown",
-    email: "michael.b@example.com",
-    subject: "Offer for Cozy Studio",
-    message:
-      "I would like to make an offer for the Cozy Studio in Historic District. I'm willing to pay the asking price but would like to negotiate the closing costs. Please let me know if this is acceptable.",
-    propertyId: "3",
-    propertyName: "Cozy Studio in Historic District",
-    status: "Replied",
-    isStarred: false,
-    createdAt: "2023-11-13T11:45:00Z",
-  },
-  {
-    id: "4",
-    sender: "Emily Davis",
-    email: "emily.d@example.com",
-    subject: "Viewing request for Family Home",
-    message:
-      "Hello, I'm interested in viewing the Spacious Family Home. Would it be possible to arrange a viewing for next Tuesday around 5 PM? Thank you in advance.",
-    propertyId: "4",
-    propertyName: "Spacious Family Home",
-    status: "Archived",
-    isStarred: false,
-    createdAt: "2023-11-12T09:00:00Z",
-  },
-  {
-    id: "5",
-    sender: "David Wilson",
-    email: "david.w@example.com",
-    subject: "Price negotiation for Waterfront Condo",
-    message:
-      "I'm interested in the Waterfront Condo but I find the price a bit high. Would the owner be open to a 5% reduction? I can close quickly with a cash offer if we can reach an agreement on the price.",
-    propertyId: "5",
-    propertyName: "Waterfront Condo",
-    status: "Unread",
-    isStarred: false,
-    createdAt: "2023-11-11T13:15:00Z",
-  },
-]
-
 export function MessagesTable() {
-  const t = useTranslations('dashboard')
-  const [data, setData] = useState<Message[]>(mockMessages)
+  const t = useTranslations("dashboard")
+  const [data, setData] = useState<Message[]>([])
+  const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null)
   const [replyDialogOpen, setReplyDialogOpen] = useState(false)
   const [replyText, setReplyText] = useState("")
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const response = await fetch("/api/messages")
+        if (!response.ok) {
+          throw new Error("Failed to fetch messages")
+        }
+        const messages = await response.json()
+        setData(messages)
+      } catch (error) {
+        console.error("Error fetching messages:", error)
+        toast({
+          title: "Error",
+          description: "Failed to load messages. Please try again.",
+          variant: "destructive",
+        })
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchMessages()
+  }, [])
+
+  const updateMessageStatus = async (id: string, status: string) => {
+    try {
+      const response = await fetch(`/api/messages/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to update message status")
+      }
+
+      // Update the local state
+      setData((prevData) =>
+        prevData.map((message) => (message.id === id ? { ...message, status: status as any } : message)),
+      )
+
+      return true
+    } catch (error) {
+      console.error("Error updating message status:", error)
+      toast({
+        title: "Error",
+        description: "Failed to update message status. Please try again.",
+        variant: "destructive",
+      })
+      return false
+    }
+  }
+
+  const toggleStarred = async (id: string, isStarred: boolean) => {
+    try {
+      const response = await fetch(`/api/messages/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isStarred }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to update starred status")
+      }
+
+      // Update the local state
+      setData((prevData) => prevData.map((message) => (message.id === id ? { ...message, isStarred } : message)))
+
+      return true
+    } catch (error) {
+      console.error("Error updating starred status:", error)
+      toast({
+        title: "Error",
+        description: "Failed to update starred status. Please try again.",
+        variant: "destructive",
+      })
+      return false
+    }
+  }
+
+  const deleteMessage = async (id: string) => {
+    try {
+      const response = await fetch(`/api/messages/${id}`, {
+        method: "DELETE",
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to delete message")
+      }
+
+      // Remove from local state
+      setData((prevData) => prevData.filter((message) => message.id !== id))
+      return true
+    } catch (error) {
+      console.error("Error deleting message:", error)
+      toast({
+        title: "Error",
+        description: "Failed to delete message. Please try again.",
+        variant: "destructive",
+      })
+      return false
+    }
+  }
+
+  const sendReply = async (messageId: string, replyText: string) => {
+    try {
+      const response = await fetch("/api/messages/reply", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ messageId, replyText }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to send reply")
+      }
+
+      // Update the message status in local state
+      setData((prevData) =>
+        prevData.map((message) => (message.id === messageId ? { ...message, status: "Replied" as const } : message)),
+      )
+
+      return true
+    } catch (error) {
+      console.error("Error sending reply:", error)
+      toast({
+        title: "Error",
+        description: "Failed to send reply. Please try again.",
+        variant: "destructive",
+      })
+      return false
+    }
+  }
 
   const columns: ColumnDef<Message>[] = [
     {
@@ -134,11 +206,8 @@ export function MessagesTable() {
             variant="ghost"
             size="icon"
             className="h-8 w-8"
-            onClick={() => {
-              const updatedData = data.map((item) =>
-                item.id === message.id ? { ...item, isStarred: !item.isStarred } : item,
-              )
-              setData(updatedData)
+            onClick={async () => {
+              await toggleStarred(message.id, !message.isStarred)
             }}
           >
             <Star
@@ -153,7 +222,7 @@ export function MessagesTable() {
       accessorKey: "sender",
       header: ({ column }) => (
         <div className="flex items-center">
-          {t('sender')}
+          {t("sender")}
           <Button
             variant="ghost"
             size="sm"
@@ -207,7 +276,7 @@ export function MessagesTable() {
       accessorKey: "createdAt",
       header: ({ column }) => (
         <div className="flex items-center">
-         {t('date')}
+          {t("date")}
           <Button
             variant="ghost"
             size="sm"
@@ -248,15 +317,14 @@ export function MessagesTable() {
                 Reply
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => {
-                  const updatedData = data.map((item) =>
-                    item.id === message.id ? { ...item, status: "Archived" as const } : item,
-                  )
-                  setData(updatedData)
-                  toast({
-                    title: "Message archived",
-                    description: "The message has been archived.",
-                  })
+                onClick={async () => {
+                  const success = await updateMessageStatus(message.id, "Archived")
+                  if (success) {
+                    toast({
+                      title: "Message archived",
+                      description: "The message has been archived.",
+                    })
+                  }
                 }}
               >
                 <Archive className="mr-2 h-4 w-4" />
@@ -265,13 +333,14 @@ export function MessagesTable() {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="text-destructive focus:text-destructive"
-                onClick={() => {
-                  const updatedData = data.filter((item) => item.id !== message.id)
-                  setData(updatedData)
-                  toast({
-                    title: "Message deleted",
-                    description: "The message has been deleted.",
-                  })
+                onClick={async () => {
+                  const success = await deleteMessage(message.id)
+                  if (success) {
+                    toast({
+                      title: "Message deleted",
+                      description: "The message has been deleted.",
+                    })
+                  }
                 }}
               >
                 <Trash2 className="mr-2 h-4 w-4" />
@@ -297,21 +366,30 @@ export function MessagesTable() {
     onGlobalFilterChange: setSearchQuery,
   })
 
-  const handleSendReply = () => {
+  const handleSendReply = async () => {
     if (!selectedMessage || !replyText.trim()) return
 
-    const updatedData = data.map((item) =>
-      item.id === selectedMessage.id ? { ...item, status: "Replied" as const } : item,
+    const success = await sendReply(selectedMessage.id, replyText)
+
+    if (success) {
+      toast({
+        title: "Reply sent",
+        description: `Your reply to ${selectedMessage.sender} has been sent.`,
+      })
+      setReplyDialogOpen(false)
+      setReplyText("")
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading messages...</p>
+        </div>
+      </div>
     )
-    setData(updatedData)
-
-    toast({
-      title: "Reply sent",
-      description: `Your reply to ${selectedMessage.sender} has been sent.`,
-    })
-
-    setReplyDialogOpen(false)
-    setReplyText("")
   }
 
   return (
@@ -343,12 +421,9 @@ export function MessagesTable() {
                 <TableRow
                   key={row.id}
                   className={row.original.status === "Unread" ? "font-medium bg-muted/30" : ""}
-                  onClick={() => {
+                  onClick={async () => {
                     if (row.original.status === "Unread") {
-                      const updatedData = data.map((item) =>
-                        item.id === row.original.id ? { ...item, status: "Read" as const } : item,
-                      )
-                      setData(updatedData)
+                      await updateMessageStatus(row.original.id, "Read")
                     }
                     setSelectedMessage(row.original)
                   }}
@@ -406,4 +481,3 @@ export function MessagesTable() {
     </div>
   )
 }
-
