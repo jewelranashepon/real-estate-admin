@@ -3,8 +3,10 @@
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "@/components/ui/chart"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useTranslations } from "next-intl"
 
 export function AnalyticsOverview() {
+  const t = useTranslations('dashboard')
   // Mock data for the charts
   const monthlyData = [
     { name: "Jan", listings: 65, views: 240, inquiries: 24 },
@@ -34,14 +36,14 @@ export function AnalyticsOverview() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Overview</CardTitle>
-        <CardDescription>View your real estate performance metrics</CardDescription>
+        <CardTitle>{t('overview')}</CardTitle>
+        <CardDescription>{t('viewRealEstateMetrics')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="monthly">
           <TabsList className="grid w-full max-w-[400px] grid-cols-2">
-            <TabsTrigger value="monthly">Monthly</TabsTrigger>
-            <TabsTrigger value="weekly">Weekly</TabsTrigger>
+            <TabsTrigger value="monthly">{t('monthly')}</TabsTrigger>
+            <TabsTrigger value="weekly">{t('weekly')}</TabsTrigger>
           </TabsList>
           <TabsContent value="monthly" className="pt-4">
             <ResponsiveContainer width="100%" height={350}>
@@ -69,7 +71,7 @@ export function AnalyticsOverview() {
                 <Bar dataKey="views" name="Property Views" fill="hsl(var(--secondary))" />
                 <Bar dataKey="inquiries" name="Inquiries" fill="hsl(var(--accent))" />
               </BarChart>
-            </ResponsiveContainer>
+            </ResponsiveContainer> 
           </TabsContent>
         </Tabs>
       </CardContent>

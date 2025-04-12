@@ -15,9 +15,11 @@ import {
 } from "@/components/ui/chart"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
+import { useTranslations } from "next-intl"
 
 export function PropertyPerformance() {
   const [propertyType, setPropertyType] = useState("all")
+  const t = useTranslations('dashboard');
 
   // Mock data for the charts
   const viewsData = [
@@ -45,20 +47,20 @@ export function PropertyPerformance() {
       <Card className="md:col-span-2">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
-            <CardTitle>Property Views by Type</CardTitle>
-            <CardDescription>Weekly property views breakdown by property type</CardDescription>
+            <CardTitle>{t('propertyViewsByType')}</CardTitle>
+            <CardDescription>{t('weeklyViewsBreakdown')}</CardDescription>
           </div>
           <Select value={propertyType} onValueChange={setPropertyType}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select property type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="apartments">Apartments</SelectItem>
-              <SelectItem value="houses">Houses</SelectItem>
-              <SelectItem value="condos">Condos</SelectItem>
-              <SelectItem value="villas">Villas</SelectItem>
-              <SelectItem value="townhouses">Townhouses</SelectItem>
+              <SelectItem value="all">{t('allTypes')}</SelectItem>
+              <SelectItem value="apartments">{t('apartments')}</SelectItem>
+              <SelectItem value="houses">{t('houses')}</SelectItem>
+              <SelectItem value="condos">{t('condos')}</SelectItem>
+              <SelectItem value="villas">{t('villas')}</SelectItem>
+              <SelectItem value="townhouses">{t('townhouses')}</SelectItem>
             </SelectContent>
           </Select>
         </CardHeader>
@@ -92,18 +94,18 @@ export function PropertyPerformance() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Top Performing Properties</CardTitle>
-          <CardDescription>Properties with the highest views and inquiries</CardDescription>
+          <CardTitle>{t('topPerformingProperties')}</CardTitle>
+          <CardDescription>{t('topPerformingDescription')}</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Property</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead className="text-right">Views</TableHead>
-                <TableHead className="text-right">Inquiries</TableHead>
-                <TableHead className="text-right">Conversion</TableHead>
+                <TableHead>{t('property')}</TableHead>
+                <TableHead>{t('type')}</TableHead>
+                <TableHead className="text-right">{t('views')}</TableHead>
+                <TableHead className="text-right">{t('inquiries')}</TableHead>
+                <TableHead className="text-right">{t('conversion')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -125,14 +127,14 @@ export function PropertyPerformance() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Conversion Metrics</CardTitle>
-          <CardDescription>View to inquiry conversion rates</CardDescription>
+          <CardTitle>{t('conversionMetrics')}</CardTitle>
+          <CardDescription>{t('conversionRates')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">Apartments</div>
+                <div className="text-sm font-medium">{t('apartments')}</div>
                 <div className="text-sm text-muted-foreground">3.6%</div>
               </div>
               <div className="h-2 w-full rounded-full bg-secondary">
@@ -141,7 +143,7 @@ export function PropertyPerformance() {
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">Houses</div>
+                <div className="text-sm font-medium">{t('houses')}</div>
                 <div className="text-sm text-muted-foreground">3.9%</div>
               </div>
               <div className="h-2 w-full rounded-full bg-secondary">
@@ -150,7 +152,7 @@ export function PropertyPerformance() {
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">Condos</div>
+                <div className="text-sm font-medium">{t('condos')}</div>
                 <div className="text-sm text-muted-foreground">3.8%</div>
               </div>
               <div className="h-2 w-full rounded-full bg-secondary">
@@ -159,7 +161,7 @@ export function PropertyPerformance() {
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">Villas</div>
+                <div className="text-sm font-medium">{t('villas')}</div>
                 <div className="text-sm text-muted-foreground">4.1%</div>
               </div>
               <div className="h-2 w-full rounded-full bg-secondary">
@@ -168,7 +170,7 @@ export function PropertyPerformance() {
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">Townhouses</div>
+                <div className="text-sm font-medium">{t('townhouses')}</div>
                 <div className="text-sm text-muted-foreground">3.7%</div>
               </div>
               <div className="h-2 w-full rounded-full bg-secondary">
