@@ -14,9 +14,11 @@ import {
   Bar,
 } from "@/components/ui/chart"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 export function MarketTrends() {
+  const t = useTranslations('dashboard')
   const [timeframe, setTimeframe] = useState("1year")
   const [region, setRegion] = useState("all")
 
@@ -64,8 +66,8 @@ export function MarketTrends() {
       <Card className="md:col-span-2">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
-            <CardTitle>Price Trends</CardTitle>
-            <CardDescription>Average property prices over time</CardDescription>
+            <CardTitle>{t('priceTrends')}</CardTitle>
+            <CardDescription>{t('averagePricesOverTime')}</CardDescription>
           </div>
           <div className="flex gap-2">
             <Select value={timeframe} onValueChange={setTimeframe}>
@@ -73,9 +75,9 @@ export function MarketTrends() {
                 <SelectValue placeholder="Select timeframe" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="1year">Last 12 Months</SelectItem>
-                <SelectItem value="6months">Last 6 Months</SelectItem>
-                <SelectItem value="3months">Last 3 Months</SelectItem>
+                <SelectItem value="1year">{t('last12Months')}</SelectItem>
+                <SelectItem value="6months">{t('last6Months')}</SelectItem>
+                <SelectItem value="3months">{t('last3Months')}</SelectItem>
               </SelectContent>
             </Select>
             <Select value={region} onValueChange={setRegion}>
@@ -83,10 +85,10 @@ export function MarketTrends() {
                 <SelectValue placeholder="Select region" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Regions</SelectItem>
-                <SelectItem value="downtown">Downtown</SelectItem>
-                <SelectItem value="suburbs">Suburbs</SelectItem>
-                <SelectItem value="waterfront">Waterfront</SelectItem>
+                <SelectItem value="all">{t('allRegions')}</SelectItem>
+                <SelectItem value="downtown">{t('downtown')}</SelectItem>
+                <SelectItem value="suburbs">{t('suburbs')}</SelectItem>
+                <SelectItem value="waterfront">{t('waterfront')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -111,8 +113,8 @@ export function MarketTrends() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Supply vs Demand</CardTitle>
-          <CardDescription>Market demand and supply by region</CardDescription>
+          <CardTitle>{t('supplyVsDemand')}</CardTitle>
+          <CardDescription>{t('marketDemandSupply')}</CardDescription>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={350}>
@@ -131,41 +133,41 @@ export function MarketTrends() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Market Insights</CardTitle>
-          <CardDescription>Current real estate market trends</CardDescription>
+          <CardTitle>{t('marketInsights')}</CardTitle>
+          <CardDescription>{t('currentTrends')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-medium">Price Growth</h3>
+              <h3 className="text-lg font-medium">{t('priceGrowth')}</h3>
               <p className="text-sm text-muted-foreground">
                 Property prices have increased by an average of 8.5% over the past year, with the highest growth in the
                 waterfront area at 12.3%.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-medium">Inventory Levels</h3>
+              <h3 className="text-lg font-medium">{t('inventoryLevels')}</h3>
               <p className="text-sm text-muted-foreground">
                 Current inventory is down 15% compared to the same period last year, creating a seller's market in most
                 regions.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-medium">Days on Market</h3>
+              <h3 className="text-lg font-medium">{t('daysOnMarket')}</h3>
               <p className="text-sm text-muted-foreground">
                 Properties are selling 20% faster than last year, with an average of 28 days on market before going
                 under contract.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-medium">Interest Rates</h3>
+              <h3 className="text-lg font-medium">{t('interestRates')}</h3>
               <p className="text-sm text-muted-foreground">
                 Mortgage interest rates have stabilized at around 6.5%, which is affecting affordability for first-time
                 buyers.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-medium">Forecast</h3>
+              <h3 className="text-lg font-medium">{t('forecast')}</h3>
               <p className="text-sm text-muted-foreground">
                 Experts predict continued but slower price growth of 4-6% over the next 12 months, with potential
                 cooling in the luxury segment.
