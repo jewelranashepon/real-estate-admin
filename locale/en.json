@@ -347,7 +347,8 @@
   "highContrastMode": "High Contrast Mode",
   "reducedMotion": "Reduced Motion",
   "highContrastModeDescription": "Increase contrast for better visibility",
-  "reducedMotionDescription": "Reduce or eliminate motion effects"
+  "reducedMotionDescription": "Reduce or eliminate motion effects",
+  "propertyTypes": "Property Types"
   
     
   },
