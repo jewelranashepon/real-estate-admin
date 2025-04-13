@@ -13,64 +13,120 @@ import LanguageSelector from "./language-selector";
 import { propertyListings } from "@/lib/property-data";
 import type { PropertyData } from "@/lib/property-data";
 import { signOut, useSession } from "@/lib/auth-client";
+import SearchBar from "./search-bar";
+import Typography from "@mui/material/Typography";
+import Chat from "./chat";
+import { useRouter } from "next/navigation";
 
+const languageOptions = [
+  { code: "en", label: "English", flag: "https://flagcdn.com/w40/us.png" },
+  { code: "ar", label: "العربية", flag: "https://flagcdn.com/w40/sa.png" },
+];
 export default function DesktopListingsView() {
+   const router = useRouter();
   const t = useTranslations("app");
   const locale = useLocale();
   const isRtl = locale === "ar";
   const [activeTab, setActiveTab] = useState("latest");
   const session = useSession();
+  const changeLanguage = (lang: string) => {
+    router.push(`/${lang}/listings`);
+  };
+  
+// State to manage chat visibility
+const [isChatOpen, setIsChatOpen] = useState(false);
 
+// Toggle chat visibility
+const toggleChat = () => {
+  setIsChatOpen((prev) => !prev);
+};
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-white shadow-md">
-        <div className="container mx-auto flex items-center px-6 py-4">
-          <Link href={`/${locale}`} className="text-2xl font-bold text-green-600">
-            {t("title")}
-          </Link>
-          <div className="ml-6 flex-1 max-w-md">
-            <div className="relative">
-              <Input type="text" placeholder={t("search.placeholder")} className="pl-10 pr-4 h-10 rounded-md border" />
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-            </div>
-          </div>
-          <nav className="ml-auto flex items-center gap-6">
-            <Link href="/services" className="flex items-center gap-1 text-gray-700 hover:text-gray-900">
-              <Briefcase className="h-5 w-5" /> Service
-            </Link>
-            <Link href="/chat" className="flex items-center gap-1 text-gray-700 hover:text-gray-900">
-              <MessageCircle className="h-5 w-5" />Chat
-            </Link>
-            {session?.data ? (
-              <Link href="/profile" className="flex items-center gap-1 text-gray-700 hover:text-gray-900">
-                <UserIcon className="h-5 w-5" /> Profile
-              </Link>
-            ) : null}
-          </nav>
-          <div className="ml-auto flex items-center gap-3">
-            <LanguageSelector />
-            {session?.data ? (
-              <Button variant="outline" size="sm" onClick={() => signOut()} className="px-4">
-                Log Out
-              </Button>
-            ) : (
-              <>
-                <Link href="/sign-in">
-                  <Button variant="outline" size="sm" className="px-4">
-                    {t("auth.signIn")}
-                  </Button>
-                </Link>
-                <Link href="/sign-up">
-                  <Button size="sm" className="bg-green-600 hover:bg-green-500 px-4">
-                    {t("auth.signUp")}
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </header>
+      <header className="sticky top-0 z-10 bg-white shadow-sm">
+              <div className="container mx-auto px-4 py-4 flex items-center">
+                <img src="/Boed Logo.png" width={120} height={120} />
+                <nav className="ml-auto flex items-center gap-6">
+                  {/* Service Link */}
+                  <Link
+                    href="/services"
+                    className="flex items-center gap-1 font-bold text-gray-700 hover:text-gray-900"
+                  >
+                    <Briefcase className="h-5 w-5 font-bold" /> Service
+                  </Link>
+      
+                  {/* Profile Link, only visible if the session exists */}
+                  {session?.data ? (
+                    <Link
+                      href="/profile"
+                      className="flex items-center gap-1 font-bold text-gray-700 hover:text-gray-900"
+                    >
+                      <UserIcon className="h-5 w-5 " /> Profile
+                    </Link>
+                  ) : null}
+      
+             
+                 {/* Navbar Chat Button */}
+                 <button
+                    onClick={toggleChat}
+                    className="flex items-center gap-1 font-bold text-gray-700 hover:text-gray-900"
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                    Chat
+                  </button>
+                </nav>
+      
+                {/* Language Selector */}
+                <div className="ml-6 flex items-center gap-4">
+                  <div className="hidden md:flex items-center">
+                    <Typography
+                      variant="subtitle2"
+                      className="text-black font-semibold uppercase text-xs mb-1 p-4"
+                    >
+                      Choose Language :
+                    </Typography>
+                    <div className="flex items-center space-x-2">
+                      {languageOptions.map(({ code, label, flag }) => (
+                        <button
+                          key={code}
+                          onClick={() => changeLanguage(code)}
+                          className="flex flex-col items-center hover:opacity-75 transition duration-200"
+                        >
+                          <img
+                            src={flag}
+                            alt={label}
+                            width={40}
+                            height={40}
+                            className="shadow-md"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  {session?.data ? (
+                    <Button variant="outline" size="sm" onClick={() => signOut()}>
+                      Log Out
+                    </Button>
+                  ) : (
+                    <>
+                      <Link href="/sign-in">
+                        <Button variant="outline" size="sm">
+                          {t("auth.signIn")}
+                        </Button>
+                      </Link>
+                      <Link href="/sign-up">
+                        <Button size="sm" className="bg-green-600 hover:bg-green-500">
+                          {t("auth.signUp")}
+                        </Button>
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+              {/* Conditionally render the Chat component at the bottom of the screen */}
+          {/* Conditionally render the Chat component */}
+          {isChatOpen && <Chat isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />}
+            </header>
 
       <div className="container mx-auto px-6 py-6">
         <div className="flex items-center justify-between mb-5">
