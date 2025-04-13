@@ -10,8 +10,10 @@ import { toast } from "@/components/ui/use-toast"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2 } from "lucide-react"
 import { useForm, FormProvider } from "react-hook-form"
+import { useTranslations } from 'next-intl';
 
 export function SettingsGeneral() {
+  const t = useTranslations('dashboard')
   const [isLoading, setIsLoading] = useState(false)
   const methods = useForm({
     defaultValues: {
@@ -45,16 +47,16 @@ export function SettingsGeneral() {
         <div className="grid gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Site Information</CardTitle>
+              <CardTitle>{t('siteInformation')}</CardTitle>
               <CardDescription>Basic information about your real estate website</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-2">
-                <Label htmlFor="siteName">Site Name</Label>
+                <Label htmlFor="siteName">{t('siteName')}</Label>
                 <Input id="siteName" {...methods.register("siteName")} />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="siteDescription">Site Description</Label>
+                <Label htmlFor="siteDescription">{t('siteDescription')}</Label>
                 <Textarea id="siteDescription" {...methods.register("siteDescription")} />
               </div>
             </CardContent>
@@ -62,20 +64,20 @@ export function SettingsGeneral() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Contact Information</CardTitle>
-              <CardDescription>Contact details displayed on your website</CardDescription>
+              <CardTitle>{t('contactInformation')}</CardTitle>
+              <CardDescription>{t('contactInfoDescription')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-2">
-                <Label htmlFor="contactEmail">Contact Email</Label>
+                <Label htmlFor="contactEmail">{t('email')}</Label>
                 <Input id="contactEmail" type="email" {...methods.register("contactEmail")} />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="contactPhone">Contact Phone</Label>
+                <Label htmlFor="contactPhone">{t('contactPhone')}</Label>
                 <Input id="contactPhone" {...methods.register("contactPhone")} />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="address">Address</Label>
+                <Label htmlFor="address">{t('address')}</Label>
                 <Textarea id="address" {...methods.register("address")} />
               </div>
             </CardContent>
@@ -83,12 +85,12 @@ export function SettingsGeneral() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Regional Settings</CardTitle>
-              <CardDescription>Localization and regional preferences</CardDescription>
+              <CardTitle>{t('regionalSettings')}</CardTitle>
+              <CardDescription>{t('regionalSettingsDescription')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-2">
-                <Label htmlFor="timezone">Timezone</Label>
+                <Label htmlFor="timezone">{t('timezone')}</Label>
                 <Select
                   {...methods.register("timezone")}
                   onValueChange={(value) => methods.setValue("timezone", value)}
@@ -107,7 +109,7 @@ export function SettingsGeneral() {
                 </Select>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="dateFormat">Date Format</Label>
+                <Label htmlFor="dateFormat">{t('dateFormat')}</Label>
                 <Select
                   {...methods.register("dateFormat")}
                   onValueChange={(value) => methods.setValue("dateFormat", value)}
@@ -124,7 +126,7 @@ export function SettingsGeneral() {
                 </Select>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="currency">Currency</Label>
+                <Label htmlFor="currency">{t('currency')}</Label>
                 <Select
                   {...methods.register("currency")}
                   onValueChange={(value) => methods.setValue("currency", value)}

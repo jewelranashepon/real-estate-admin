@@ -50,7 +50,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <Card>
+     <Card className="bg-white rounded-md shadow-md hover:shadow-lg transition-shadow duration-300 border border-muted">
         <CardContent className="flex items-center gap-4 p-6">
           <div className="rounded-full bg-cyan-100 p-3">
             <Building2 className="h-6 w-6 text-primary" />
@@ -69,7 +69,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="bg-white rounded-md shadow-md hover:shadow-lg transition-shadow duration-300 border border-muted">
         <CardContent className="flex items-center gap-4 p-6">
           <div className="rounded-full bg-cyan-100 p-3">
             <Users className="h-6 w-6 text-primary" />
@@ -88,14 +88,14 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="bg-white rounded-md shadow-md hover:shadow-lg transition-shadow duration-300 border border-muted">
         <CardContent className="flex items-center gap-4 p-6">
           <div className="rounded-full bg-cyan-100 p-3">
             <MessageSquare className="h-6 w-6 text-primary" />
           </div>
           <div>
             <p className="text-md font-medium text-slate-800">
-              {t("propertyTypes")}
+              {t("blogCount")}
             </p>
             <h3 className="text-2xl font-bold">
               {blogCount !== null ? blogCount : "Loading..."}
@@ -103,14 +103,14 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
             <p className="text-xs text-muted-foreground">
               <span className="text-emerald-500">
                 {blogCount !== null ? blogCount : "Loading..."}{" "}
-                {t("noneIsMostCommon")}
+                {t("totalBlogUpload")}
               </span>
             </p>
           </div>
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="bg-white rounded-md shadow-md hover:shadow-lg transition-shadow duration-300 border border-muted">
         <CardContent className="flex items-center gap-4 p-6">
           <div className="rounded-full bg-cyan-100 p-3">
             <DollarSign className="h-6 w-6 text-primary" />

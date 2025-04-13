@@ -16,8 +16,10 @@ import {
 } from "@/components/ui/chart"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useTranslations } from "next-intl"
 
 export function UserActivity() {
+  const t =useTranslations('dashboard')
   // Mock data for the charts
   const activityData = [
     { name: "Mon", users: 120, sessions: 180, pageViews: 450 },
@@ -94,8 +96,8 @@ export function UserActivity() {
     <div className="grid gap-6 md:grid-cols-2">
       <Card className="md:col-span-2">
         <CardHeader>
-          <CardTitle>User Activity</CardTitle>
-          <CardDescription>Daily user activity metrics</CardDescription>
+          <CardTitle>{t('userActivity')}</CardTitle>
+          <CardDescription>{t('dailyUserActivityMetrics')}</CardDescription>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={350}>
@@ -115,8 +117,8 @@ export function UserActivity() {
 
       <Card>
         <CardHeader>
-          <CardTitle>User Sources</CardTitle>
-          <CardDescription>Where your users are coming from</CardDescription>
+          <CardTitle>{t('userSources')}</CardTitle>
+          <CardDescription>{t('userSourcesDescription')}</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col items-center">
           <ResponsiveContainer width="100%" height={250}>
@@ -153,17 +155,17 @@ export function UserActivity() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Most Active Users</CardTitle>
-          <CardDescription>Users with the highest activity</CardDescription>
+          <CardTitle>{t('mostActiveUsers')}</CardTitle>
+          <CardDescription>{t('mostActiveUsersDescription')}</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>User</TableHead>
-                <TableHead>Last Active</TableHead>
-                <TableHead className="text-right">Sessions</TableHead>
-                <TableHead className="text-right">Avg. Duration</TableHead>
+                <TableHead>{t('user')}</TableHead>
+                <TableHead>{t('lastActive')}</TableHead>
+                <TableHead className="text-right">{t('sessions')}</TableHead>
+                <TableHead className="text-right">{t('avgDuration')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
