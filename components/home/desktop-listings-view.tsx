@@ -58,7 +58,7 @@ const toggleChat = () => {
                   {/* Profile Link, only visible if the session exists */}
                   {session?.data ? (
                     <Link
-                      href="/profile"
+                    href={`/${locale}/profile`}
                       className="flex items-center gap-1 font-bold text-gray-700 hover:text-gray-900"
                     >
                       <UserIcon className="h-5 w-5 " /> Profile
