@@ -257,3 +257,35 @@ model BlogPost {
   createdAt             DateTime? @default(now())
 }
 
+
+model Lead {
+  id               String   @id @default(cuid())
+  name             String
+  email            String
+  phone            String
+  propertyInterest String?
+  status           String   // "New", "Contacted", "Qualified", "Converted", "Lost"
+  source           String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("leads")
+}
+
+model Message {
+  id           String   @id @default(cuid())
+  sender       String
+  email        String
+  subject      String
+  message      String   @db.Text
+  propertyId   String?
+  propertyName String?
+  status       String   // "Unread", "Read", "Replied", "Archived"
+  isStarred    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("messages")
+}
+
+
