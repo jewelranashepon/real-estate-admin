@@ -17,23 +17,8 @@ type BlogCardProps = {
   onDelete: () => void;
 };
 
-// Function to extract the first image from HTML content
-// const extractFirstImage = (htmlContent: string): string | null => {
-//   if (typeof window !== "undefined") {
-//     const imgElement = new DOMParser()
-//       .parseFromString(htmlContent, "text/html")
-//       .querySelector("img");
-//     return imgElement?.getAttribute("src") || null; // Return null if no image is found
-//   }
-//   return null; // Fallback for SSR
-// };
 
 const BlogCardAdmin: React.FC<BlogCardProps> = ({ blog, onEdit, onDelete }) => {
-  // const [imageUrl, setImageUrl] = useState<string | null>(null); // Initialize as null
-
-  // useEffect(() => {
-  //   setImageUrl(extractFirstImage(blog.post_content));
-  // }, [blog]);
 
   return (
     <div className="bg-white h-80 shadow-md rounded-xl border border-gray-200 flex flex-col justify-between">
