@@ -1,123 +1,210 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
-  Line,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import {
   LineChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
+  Line,
   XAxis,
   YAxis,
-} from "@/components/ui/chart"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import { useTranslations } from "next-intl"
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from "recharts";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
 export function PropertyPerformance() {
-  const [propertyType, setPropertyType] = useState("all")
-  const t = useTranslations('dashboard');
+  const t = useTranslations("dashboard");
+  const [filter, setFilter] = useState("all");
 
-  // Mock data for the charts
-  const viewsData = [
-    { name: "Week 1", apartments: 120, houses: 90, condos: 70, villas: 40, townhouses: 60 },
-    { name: "Week 2", apartments: 132, houses: 85, condos: 75, villas: 45, townhouses: 65 },
-    { name: "Week 3", apartments: 145, houses: 95, condos: 80, villas: 50, townhouses: 70 },
-    { name: "Week 4", apartments: 160, houses: 100, condos: 85, villas: 55, townhouses: 75 },
-    { name: "Week 5", apartments: 175, houses: 110, condos: 90, villas: 60, townhouses: 80 },
-    { name: "Week 6", apartments: 190, houses: 120, condos: 95, villas: 65, townhouses: 85 },
-    { name: "Week 7", apartments: 205, houses: 130, condos: 100, villas: 70, townhouses: 90 },
-    { name: "Week 8", apartments: 220, houses: 140, condos: 105, villas: 75, townhouses: 95 },
-  ]
+  const trendData = [
+    { label: "Week 1", apt: 120, house: 90, condo: 70, villa: 40, town: 60 },
+    { label: "Week 2", apt: 130, house: 85, condo: 75, villa: 45, town: 65 },
+    { label: "Week 3", apt: 145, house: 95, condo: 80, villa: 50, town: 70 },
+    { label: "Week 4", apt: 160, house: 100, condo: 85, villa: 55, town: 75 },
+    { label: "Week 5", apt: 175, house: 110, condo: 90, villa: 60, town: 80 },
+    { label: "Week 6", apt: 190, house: 120, condo: 95, villa: 65, town: 85 },
+    { label: "Week 7", apt: 205, house: 130, condo: 100, villa: 70, town: 90 },
+    { label: "Week 8", apt: 220, house: 140, condo: 105, villa: 75, town: 95 },
+  ];
 
-  // Mock data for top performing properties
-  const topProperties = [
-    { id: 1, name: "Modern Apartment in Downtown", type: "Apartment", views: 1250, inquiries: 45, conversion: "3.6%" },
-    { id: 2, name: "Luxury Villa with Pool", type: "Villa", views: 980, inquiries: 38, conversion: "3.9%" },
-    { id: 3, name: "Spacious Family Home", type: "House", views: 870, inquiries: 32, conversion: "3.7%" },
-    { id: 4, name: "Waterfront Condo", type: "Condo", views: 760, inquiries: 29, conversion: "3.8%" },
-    { id: 5, name: "Urban Townhouse", type: "Townhouse", views: 650, inquiries: 24, conversion: "3.7%" },
-  ]
+  const topList = [
+    {
+      id: 1,
+      title: "Urban Apartment View",
+      category: "Apartment",
+      views: 1250,
+      inquiries: 45,
+      rate: "3.6%",
+    },
+    {
+      id: 2,
+      title: "Seaside Villa Luxe",
+      category: "Villa",
+      views: 980,
+      inquiries: 38,
+      rate: "3.9%",
+    },
+    {
+      id: 3,
+      title: "Suburban Family Home",
+      category: "House",
+      views: 870,
+      inquiries: 32,
+      rate: "3.7%",
+    },
+    {
+      id: 4,
+      title: "Modern Waterfront Condo",
+      category: "Condo",
+      views: 760,
+      inquiries: 29,
+      rate: "3.8%",
+    },
+    {
+      id: 5,
+      title: "Downtown Townhouse",
+      category: "Townhouse",
+      views: 650,
+      inquiries: 24,
+      rate: "3.7%",
+    },
+  ];
+
+  const conversion = [
+    { label: t("apartments"), percent: "3.6%", width: "72%" },
+    { label: t("houses"), percent: "3.9%", width: "78%" },
+    { label: t("condos"), percent: "3.8%", width: "76%" },
+    { label: t("villas"), percent: "4.1%", width: "82%" },
+    { label: t("townhouses"), percent: "3.7%", width: "74%" },
+  ];
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
+      {/* Line Chart */}
       <Card className="md:col-span-2">
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <CardTitle>{t('propertyViewsByType')}</CardTitle>
-            <CardDescription>{t('weeklyViewsBreakdown')}</CardDescription>
+            <CardTitle>{t("propertyViewsByType")}</CardTitle>
+            <CardDescription>{t("weeklyViewsBreakdown")}</CardDescription>
           </div>
-          <Select value={propertyType} onValueChange={setPropertyType}>
+          <Select value={filter} onValueChange={setFilter}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select property type" />
+              <SelectValue placeholder="Type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">{t('allTypes')}</SelectItem>
-              <SelectItem value="apartments">{t('apartments')}</SelectItem>
-              <SelectItem value="houses">{t('houses')}</SelectItem>
-              <SelectItem value="condos">{t('condos')}</SelectItem>
-              <SelectItem value="villas">{t('villas')}</SelectItem>
-              <SelectItem value="townhouses">{t('townhouses')}</SelectItem>
+              <SelectItem value="all">{t("allTypes")}</SelectItem>
+              <SelectItem value="apt">{t("apartments")}</SelectItem>
+              <SelectItem value="house">{t("houses")}</SelectItem>
+              <SelectItem value="condo">{t("condos")}</SelectItem>
+              <SelectItem value="villa">{t("villas")}</SelectItem>
+              <SelectItem value="town">{t("townhouses")}</SelectItem>
             </SelectContent>
           </Select>
         </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={350}>
-            <LineChart data={viewsData}>
+        <CardContent className="pt-4">
+          <ResponsiveContainer width="100%" height={360}>
+            <LineChart data={trendData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="label" />
               <YAxis />
               <Tooltip />
               <Legend />
-              {(propertyType === "all" || propertyType === "apartments") && (
-                <Line type="monotone" dataKey="apartments" name="Apartments" stroke="#8884d8" activeDot={{ r: 8 }} />
+              {(filter === "all" || filter === "apt") && (
+                <Line
+                  type="monotone"
+                  dataKey="apt"
+                  name={t("apartments")}
+                  stroke="#6366f1"
+                />
               )}
-              {(propertyType === "all" || propertyType === "houses") && (
-                <Line type="monotone" dataKey="houses" name="Houses" stroke="#82ca9d" />
+              {(filter === "all" || filter === "house") && (
+                <Line
+                  type="monotone"
+                  dataKey="house"
+                  name={t("houses")}
+                  stroke="#22c55e"
+                />
               )}
-              {(propertyType === "all" || propertyType === "condos") && (
-                <Line type="monotone" dataKey="condos" name="Condos" stroke="#ffc658" />
+              {(filter === "all" || filter === "condo") && (
+                <Line
+                  type="monotone"
+                  dataKey="condo"
+                  name={t("condos")}
+                  stroke="#facc15"
+                />
               )}
-              {(propertyType === "all" || propertyType === "villas") && (
-                <Line type="monotone" dataKey="villas" name="Villas" stroke="#ff8042" />
+              {(filter === "all" || filter === "villa") && (
+                <Line
+                  type="monotone"
+                  dataKey="villa"
+                  name={t("villas")}
+                  stroke="#f97316"
+                />
               )}
-              {(propertyType === "all" || propertyType === "townhouses") && (
-                <Line type="monotone" dataKey="townhouses" name="Townhouses" stroke="#0088fe" />
+              {(filter === "all" || filter === "town") && (
+                <Line
+                  type="monotone"
+                  dataKey="town"
+                  name={t("townhouses")}
+                  stroke="#0ea5e9"
+                />
               )}
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
 
+      {/* Top Properties Table */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('topPerformingProperties')}</CardTitle>
-          <CardDescription>{t('topPerformingDescription')}</CardDescription>
+          <CardTitle>{t("topPerformingProperties")}</CardTitle>
+          <CardDescription>{t("topPerformingDescription")}</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>{t('property')}</TableHead>
-                <TableHead>{t('type')}</TableHead>
-                <TableHead className="text-right">{t('views')}</TableHead>
-                <TableHead className="text-right">{t('inquiries')}</TableHead>
-                <TableHead className="text-right">{t('conversion')}</TableHead>
+                <TableHead>{t("property")}</TableHead>
+                <TableHead>{t("type")}</TableHead>
+                <TableHead className="text-right">{t("views")}</TableHead>
+                <TableHead className="text-right">{t("inquiries")}</TableHead>
+                <TableHead className="text-right">{t("conversion")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {topProperties.map((property) => (
-                <TableRow key={property.id}>
-                  <TableCell className="font-medium">{property.name}</TableCell>
+              {topList.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell className="font-medium">{item.title}</TableCell>
                   <TableCell>
-                    <Badge variant="outline">{property.type}</Badge>
+                    <Badge variant="outline">{item.category}</Badge>
                   </TableCell>
-                  <TableCell className="text-right">{property.views}</TableCell>
-                  <TableCell className="text-right">{property.inquiries}</TableCell>
-                  <TableCell className="text-right">{property.conversion}</TableCell>
+                  <TableCell className="text-right">{item.views}</TableCell>
+                  <TableCell className="text-right">{item.inquiries}</TableCell>
+                  <TableCell className="text-right">{item.rate}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -125,62 +212,29 @@ export function PropertyPerformance() {
         </CardContent>
       </Card>
 
+      {/* Conversion Metrics */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('conversionMetrics')}</CardTitle>
-          <CardDescription>{t('conversionRates')}</CardDescription>
+          <CardTitle>{t("conversionMetrics")}</CardTitle>
+          <CardDescription>{t("conversionRates")}</CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-8">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">{t('apartments')}</div>
-                <div className="text-sm text-muted-foreground">3.6%</div>
+        <CardContent className="space-y-6">
+          {conversion.map((item, idx) => (
+            <div className="space-y-2" key={idx}>
+              <div className="flex justify-between text-sm font-medium">
+                <span>{item.label}</span>
+                <span className="text-muted-foreground">{item.percent}</span>
               </div>
               <div className="h-2 w-full rounded-full bg-secondary">
-                <div className="h-2 rounded-full bg-primary" style={{ width: "72%" }}></div>
+                <div
+                  className="h-2 rounded-full bg-primary"
+                  style={{ width: item.width }}
+                />
               </div>
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">{t('houses')}</div>
-                <div className="text-sm text-muted-foreground">3.9%</div>
-              </div>
-              <div className="h-2 w-full rounded-full bg-secondary">
-                <div className="h-2 rounded-full bg-primary" style={{ width: "78%" }}></div>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">{t('condos')}</div>
-                <div className="text-sm text-muted-foreground">3.8%</div>
-              </div>
-              <div className="h-2 w-full rounded-full bg-secondary">
-                <div className="h-2 rounded-full bg-primary" style={{ width: "76%" }}></div>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">{t('villas')}</div>
-                <div className="text-sm text-muted-foreground">4.1%</div>
-              </div>
-              <div className="h-2 w-full rounded-full bg-secondary">
-                <div className="h-2 rounded-full bg-primary" style={{ width: "82%" }}></div>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="text-sm font-medium">{t('townhouses')}</div>
-                <div className="text-sm text-muted-foreground">3.7%</div>
-              </div>
-              <div className="h-2 w-full rounded-full bg-secondary">
-                <div className="h-2 rounded-full bg-primary" style={{ width: "74%" }}></div>
-              </div>
-            </div>
-          </div>
+          ))}
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
-
