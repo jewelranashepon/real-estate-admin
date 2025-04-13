@@ -346,5 +346,36 @@
   "reducedMotionDescription": "تقليل أو إزالة تأثيرات الحركة"
   
     
+  },
+  "service": {
+  "home": "الرئيسية",
+  "service": "الخدمة",
+  "ourServices": "خدماتنا",
+  "ourServicesDescription": "استكشف مجموعتنا الشاملة من خدمات العقارات المصممة لتلبية احتياجاتك العقارية.",
+  "customerService": "خدمة العملاء",
+  "serviceCategories": "فئات الخدمة",
+  "subscriptions": "الاشتراكات",
+  "subscriptionsDescription": "إدارة خطط الاشتراك الخاصة بك",
+  "sellingAndLeasing": "البيع والتأجير",
+  "sellingAndLeasingDescription": "خدمات بيع وتأجير العقارات",
+  "developerServices": "خدمات المطورين",
+  "developerServicesDescription": "حلول لمطوري العقارات",
+  "professionalServices": "الخدمات المهنية",
+  "professionalServicesDescription": "استشارات عقارية احترافية",
+  "availableServices": "الخدمات المتاحة",
+  "todayAds": "إعلانات اليوم",
+  "todayAdsDescription": "عرض وإدارة الإعلانات الحالية الخاصة بك",
+  "leaseContracts": "عقود الإيجار",
+  "leaseContractsDescription": "إدارة ومراجعة عقود إيجار العقارات",
+  "searchRequests": "طلبات البحث",
+  "searchRequestsDescription": "تتبع وإدارة معايير البحث عن العقارات",
+  "exclusiveMarketing": "خدمات التسويق الحصرية",
+  "exclusiveMarketingDescription": "حلول تسويقية متميزة لعقاراتك",
+  "birdsOfEden": "بيردز أوف إيدن للعقارات",
+  "birdsOfEdenDescription": "حلول متكاملة لوكالة عقارية شاملة",
+  "needAssistance": "هل تحتاج إلى مساعدة في خدماتنا؟",
+  "supportHelpText": "فريق الخبراء لدينا جاهز لمساعدتك في العثور على الحل الأمثل.",
+  "contactSupport": "اتصل بالدعم",
+  "contactUs": "اتصل بنا"
   }
 }

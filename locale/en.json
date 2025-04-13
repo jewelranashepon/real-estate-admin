@@ -350,6 +350,37 @@
   "reducedMotionDescription": "Reduce or eliminate motion effects"
   
     
+  },
+  "service": {
+    "home": "Home",
+    "service": "Service",
+    "ourServices": "Our Services",
+    "ourServicesDescription": "Explore our comprehensive range of real estate services designed to meet your property needs.",
+    "customerService": "Customer Service",
+    "serviceCategories": "Service Categories",
+    "subscriptions": "Subscriptions",
+    "subscriptionsDescription": "Manage your subscription plans",
+    "sellingAndLeasing": "Selling and Leasing",
+    "sellingAndLeasingDescription": "Property sales and rental services",
+    "developerServices": "Developer Services",
+    "developerServicesDescription": "Solutions for property developers",
+    "professionalServices": "Professional Services",
+    "professionalServicesDescription": "Expert real estate consulting",
+    "availableServices": "Available Services",
+    "todayAds": "Today Ads",
+    "todayAdsDescription": "View and manage your current advertisements",
+    "leaseContracts": "Lease Contracts",
+    "leaseContractsDescription": "Manage and review your property lease agreements",
+    "searchRequests": "Search Requests",
+    "searchRequestsDescription": "Track and manage your property search criteria",
+    "exclusiveMarketing": "Exclusive Marketing Services",
+    "exclusiveMarketingDescription": "Premium marketing solutions for your properties",
+    "birdsOfEden": "Birds of Eden Real Estate",
+    "birdsOfEdenDescription": "Full-service real estate agency solutions",
+    "needAssistance": "Need assistance with our services?",
+    "supportHelpText": "Our team of experts is ready to help you find the perfect solution.",
+    "contactSupport": "Contact Support",
+    "contactUs": "Contact Us"
   }
   
   

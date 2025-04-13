@@ -134,6 +134,7 @@ function MobileView({ locale }: { locale: string }) {
 
 // Replace the entire DesktopView function with this more professional version
 function DesktopView({ locale }: { locale: string }) {
+  const t = useTranslations('service');
   const session = useSession();
   return (
     <div className="min-h-screen bg-gray-50">
@@ -141,21 +142,23 @@ function DesktopView({ locale }: { locale: string }) {
       <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
           <div className="flex items-center">
-            <div className="relative h-8 w-8 mr-3">
-              <Image src="/Boed Logo.png" alt="Birds Of Eden" width={250} height={250}  className="object-contain" />
+            <div className="relative mr-3">
+             <Link href="/">
+             <Image src="/Boed Logo.png" alt="Birds Of Eden" width={95} height={95}  className="object-contain" />
+             </Link>
             </div>
             
           </div>
           <div className="flex items-center space-x-4">
           <nav className="ml-auto flex items-center gap-6">
-            <Link href="/services" className="flex items-center gap-1 text-gray-700 hover:text-gray-900">
+            <Link href="/services" className="flex items-center gap-1 text-bold hover:text-gray-900">
               <Briefcase className="h-5 w-5" /> Service
             </Link>
-            <Link href="/chat" className="flex items-center gap-1 text-gray-700 hover:text-gray-900">
+            <Link href="/chat" className="flex items-center gap-1 text-bold hover:text-gray-900">
               <MessageCircle className="h-5 w-5" />Chat
             </Link>
             {session?.data ? (
-              <Link href="/profile" className="flex items-center gap-1 text-gray-700 hover:text-gray-900">
+              <Link href="/profile" className="flex items-center gap-1 text-bold hover:text-gray-900">
                 <UserIcon className="h-5 w-5" /> Profile
               </Link>
             ) : null}
@@ -163,7 +166,7 @@ function DesktopView({ locale }: { locale: string }) {
              <LanguageSelector/>
            
             <button className="flex items-center space-x-2 bg-green-50 text-green-600 px-4 py-2 rounded-md hover:bg-green-100 transition-colors">
-              <span className="font-medium">Contact Us</span>
+              <span className="font-medium">{t('contactUs')}</span>
             </button>
           </div>
         </div>
@@ -173,17 +176,17 @@ function DesktopView({ locale }: { locale: string }) {
         {/* Breadcrumb */}
         <div className="flex items-center text-sm text-gray-500 mb-8">
           <a href="#" className="hover:text-green-600 transition-colors">
-            Home
+            {t('home')}
           </a>
           <ChevronRight className="h-4 w-4 mx-2" />
-          <span className="font-medium text-gray-700">Services</span>
+          <span className="font-medium text-gray-700">{t('service')}</span>
         </div>
 
         {/* Page title */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Our Services</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">{t('ourServices')}</h2>
           <p className="text-gray-600 max-w-3xl">
-            Explore our comprehensive range of real estate services designed to meet your property needs.
+            {t('ourServicesDescription')}
           </p>
         </div>
 
@@ -208,13 +211,13 @@ function DesktopView({ locale }: { locale: string }) {
                 />
               </svg>
             </div>
-            <span className="text-base text-gray-500">Customer Service</span>
+            <span className="text-base text-gray-500">{t('customerService')}</span>
           </div>
         </div>
 
         {/* Service categories */}
         <div className="mb-12">
-          <h3 className="text-lg font-semibold text-gray-800 mb-6">Service Categories</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-6">{t('serviceCategories')}</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <ProfessionalServiceCategory
               icon={
@@ -249,8 +252,8 @@ function DesktopView({ locale }: { locale: string }) {
                   />
                 </svg>
               }
-              title="Subscriptions"
-              description="Manage your subscription plans"
+              title={t("subscriptions")}
+              description={t("subscriptionsDescription")}
             />
             <ProfessionalServiceCategory
               icon={
@@ -271,8 +274,8 @@ function DesktopView({ locale }: { locale: string }) {
                   />
                 </svg>
               }
-              title="Selling and Leasing"
-              description="Property sales and rental services"
+              title={t('sellingAndLeasing')}
+              description={t('sellingAndLeasingDescription')}
             />
             <ProfessionalServiceCategory
               icon={
@@ -300,8 +303,8 @@ function DesktopView({ locale }: { locale: string }) {
                   />
                 </svg>
               }
-              title="Developer Services"
-              description="Solutions for property developers"
+              title={t('developerServices')}
+              description={t('developerServicesDescription')}
             />
             <ProfessionalServiceCategory
               icon={
@@ -336,19 +339,19 @@ function DesktopView({ locale }: { locale: string }) {
                   />
                 </svg>
               }
-              title="Professional Services"
-              description="Expert real estate consulting"
+              title={t('professionalServices')}
+              description={t('professionalServicesDescription')}
             />
           </div>
         </div>
 
         {/* Service list */}
         <div className="mb-12">
-          <h3 className="text-lg font-semibold text-gray-800 mb-6">Available Services</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-6">{t('availableServices')}</h3>
           <div className="overflow-hidden rounded-xl bg-white shadow border border-gray-200 divide-y divide-gray-100">
             <ProfessionalServiceItem
-              title="Today Ads"
-              description="View and manage your current advertisements"
+              title={t('todayAds')}
+              description={t('todayAdsDescription')}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -381,8 +384,8 @@ function DesktopView({ locale }: { locale: string }) {
               }
             />
             <ProfessionalServiceItem
-              title="Lease Contracts"
-              description="Manage and review your property lease agreements"
+              title={t('leaseContracts')}
+              description={t('leaseContractsDescription')}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -429,8 +432,8 @@ function DesktopView({ locale }: { locale: string }) {
               }
             />
             <ProfessionalServiceItem
-              title="Search Requests"
-              description="Track and manage your property search criteria"
+              title={t('searchRequests')}
+              description={t('searchRequestsDescription')}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -456,8 +459,8 @@ function DesktopView({ locale }: { locale: string }) {
               }
             />
             <ProfessionalServiceItem
-              title="Exclusive Marketing Services"
-              description="Premium marketing solutions for your properties"
+              title={t('exclusiveMarketing')}
+              description={t('exclusiveMarketingDescription')}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -490,8 +493,8 @@ function DesktopView({ locale }: { locale: string }) {
               }
             />
             <ProfessionalServiceItem
-              title="Birds of Eden Real Estate"
-              description="Full-service real estate agency solutions"
+              title={t('birdsOfEden')}
+              description={t('birdsOfEdenDescription')}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -523,13 +526,13 @@ function DesktopView({ locale }: { locale: string }) {
         <div className="bg-white rounded-xl shadow border border-gray-200 p-6 mb-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Need assistance with our services?</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">{t('needAssistance')}</h3>
               <p className="text-gray-600 mb-4 md:mb-0">
-                Our team of experts is ready to help you find the perfect solution.
+                {t('supportHelpText')}
               </p>
             </div>
             <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md font-medium transition-colors">
-              Contact Support
+              {t('contactSupport')}
             </button>
           </div>
         </div>
