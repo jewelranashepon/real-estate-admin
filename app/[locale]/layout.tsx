@@ -77,6 +77,46 @@
 // }
 
 
+// import type React from "react";
+// import { NextIntlClientProvider } from "next-intl";
+// import { notFound } from "next/navigation";
+// import { getMessages } from "next-intl/server";
+
+// import "../globals.css";
+
+// import { SearchProvider } from "@/lib/search-context";
+// import { locales } from "@/next-intl.config";
+
+// export default async function MainLayout(props: {
+//   children: React.ReactNode;
+
+//   params: { locale: string };
+// }) {
+//   const locale = props.params.locale; // ✅ Safe access inside body
+
+ 
+//   if (!locales.includes(locale)) {
+//     notFound();
+//   }
+
+//   const messages = await getMessages({ locale });
+
+//   return (
+//     <html lang={locale}>
+//       <body>
+//         <NextIntlClientProvider locale={locale} messages={messages}>
+//           <SearchProvider>
+//             <main className="grow shrink-0 overflow-y-auto">{props.children}</main>
+//           </SearchProvider>
+//         </NextIntlClientProvider>
+//       </body>
+//     </html>
+//   );
+// }
+
+
+
+
 import type React from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
@@ -89,12 +129,11 @@ import { locales } from "@/next-intl.config";
 
 export default async function MainLayout(props: {
   children: React.ReactNode;
-
   params: { locale: string };
 }) {
-  const locale = props.params.locale; // ✅ Safe access inside body
+  const { children, params } = props;
+  const locale = params.locale; // ✅ now safely inside the body
 
- 
   if (!locales.includes(locale)) {
     notFound();
   }
@@ -106,7 +145,9 @@ export default async function MainLayout(props: {
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SearchProvider>
-            <main className="grow shrink-0 overflow-y-auto">{props.children}</main>
+            <main className="grow shrink-0 overflow-y-auto">
+              {children}
+            </main>
           </SearchProvider>
         </NextIntlClientProvider>
       </body>

@@ -36,7 +36,6 @@ export default async function DashboardPage() {
       getRecentBlogs(4),
     ]);
 
-    console.log("Recent Blogs:", recentBlogs);
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-3xl font-bold tracking-tight">{t("db")}</h1>
