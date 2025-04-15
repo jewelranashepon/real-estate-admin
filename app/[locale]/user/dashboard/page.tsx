@@ -22,7 +22,7 @@ export default function DashboardPage() {
            width={100}
           />
             {/* <Home className="h-6 w-6" /> */}
-            {/* <span>Birds of Eden</span> */}
+            <span className="mt-5 ml-5 text-bold">User Dashboard</span>
           </Link>
           <div className="ml-auto flex items-center gap-4">
             <Button variant="outline" size="icon" className="rounded-full">
@@ -39,10 +39,11 @@ export default function DashboardPage() {
       <div className="grid flex-1 md:grid-cols-[240px_1fr]">
         <div className="hidden border-r bg-muted/40 md:block">
           <div className="flex h-full flex-col gap-2 p-4">
+           
             <Button variant="ghost" className="justify-start gap-2" asChild>
               <Link href="#">
                 <Home className="h-4 w-4" />
-                {t('db')}
+                Dashboard
               </Link>
             </Button>
             <Button variant="ghost" className="justify-start gap-2" asChild>
@@ -64,7 +65,7 @@ export default function DashboardPage() {
               </Link>
             </Button>
             <Button variant="ghost" className="justify-start gap-2" asChild>
-              <Link href="#">
+              <Link href="/user/dashboard/settings">
                 <Settings className="h-4 w-4" />
                 Settings
               </Link>
