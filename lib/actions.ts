@@ -74,14 +74,12 @@ const PropertyFormSchema = z.object({
   price: z.coerce.number().positive("Price must be a positive number"),
   typeId: z.coerce.number(),
   statusId: z.coerce.number(),
-  // Location
   streetAddress: z.string().min(1, "Street address is required"),
   city: z.string().min(1, "City is required"),
   state: z.string().min(1, "State is required"),
   zip: z.string().min(1, "ZIP code is required"),
   region: z.string().min(1, "Region is required"),
   landmark: z.string().optional(),
-  // Features
   bedrooms: z.coerce.number().int().min(0),
   bathrooms: z.coerce.number().int().min(0),
   parkingSpots: z.coerce.number().int().min(0),
@@ -89,11 +87,9 @@ const PropertyFormSchema = z.object({
   hasSwimmingPool: z.boolean().default(false),
   hasGardenYard: z.boolean().default(false),
   hasBalcony: z.boolean().default(false),
-  // Contact
   contactName: z.string().min(1, "Contact name is required"),
   contactPhone: z.string().min(1, "Contact phone is required"),
   contactEmail: z.string().email("Invalid email address"),
-  // Images
   imageUrls: z.array(z.string()).optional(),
 });
 
@@ -108,6 +104,8 @@ export async function createProperty(formData: FormData) {
     }
 
     const rawData = Object.fromEntries(formData.entries());
+
+    // console.log("Raw form data:", rawData); // Debug log
 
     // Handle checkboxes
     const hasSwimmingPool = formData.get("hasSwimmingPool") === "on";
@@ -128,54 +126,60 @@ export async function createProperty(formData: FormData) {
     };
 
     try {
-      const validatedData = PropertyFormSchema.parse(data);
+      const validatedData = PropertyFormSchema.safeParse(data);
+
+      console.log("Validated data:", validatedData); // Debug log
+
+      if (!validatedData.success) {
+        return { success: false, error: "Validation error" };
+      }
 
       // Create the property with all related data
       const property = await prisma.property.create({
         data: {
-          name: validatedData.name,
-          description: validatedData.description,
-          price: validatedData.price,
-          typeId: validatedData.typeId,
-          statusId: validatedData.statusId,
+          name: validatedData.data?.name,
+          description: validatedData.data?.description,
+          price: validatedData.data?.price,
+          typeId: validatedData.data?.typeId,
+          statusId: validatedData.data?.statusId,
           userId: session.user.id,
           location: {
             create: {
-              streetAddress: validatedData.streetAddress,
-              city: validatedData.city,
-              state: validatedData.state,
-              zip: validatedData.zip,
-              region: validatedData.region,
-              landmark: validatedData.landmark || "",
+              streetAddress: validatedData.data?.streetAddress,
+              city: validatedData.data?.city,
+              state: validatedData.data?.state,
+              zip: validatedData.data?.zip,
+              region: validatedData.data?.region,
+              landmark: validatedData.data?.landmark || "",
             },
           },
           feature: {
             create: {
-              bedrooms: validatedData.bedrooms,
-              bathrooms: validatedData.bathrooms,
-              parkingSpots: validatedData.parkingSpots,
-              area: validatedData.area,
-              hasSwimmingPool: validatedData.hasSwimmingPool,
-              hasGardenYard: validatedData.hasGardenYard,
-              hasBalcony: validatedData.hasBalcony,
+              bedrooms: validatedData.data?.bedrooms,
+              bathrooms: validatedData.data?.bathrooms,
+              parkingSpots: validatedData.data?.parkingSpots,
+              area: validatedData.data?.area,
+              hasSwimmingPool: validatedData.data?.hasSwimmingPool,
+              hasGardenYard: validatedData.data?.hasGardenYard,
+              hasBalcony: validatedData.data?.hasBalcony,
             },
           },
           contact: {
             create: {
-              name: validatedData.contactName,
-              phone: validatedData.contactPhone,
-              email: validatedData.contactEmail,
+              name: validatedData.data?.contactName,
+              phone: validatedData.data?.contactPhone,
+              email: validatedData.data?.contactEmail,
             },
           },
         },
       });
 
       // Create image records separately if there are any image URLs
-      if (validatedData.imageUrls && validatedData.imageUrls.length > 0) {
+      if (validatedData.data?.imageUrls && validatedData.data?.imageUrls.length > 0) {
         console.log("Creating image records for property ID:", property.id);
 
         // Create each image record individually to ensure they're all created
-        for (const url of validatedData.imageUrls) {
+        for (const url of validatedData.data?.imageUrls) {
           await prisma.propertyImage.create({
             data: {
               url: url,
@@ -185,7 +189,7 @@ export async function createProperty(formData: FormData) {
         }
       }
 
-      revalidatePath("/admin","layout");
+      revalidatePath("/admin", "layout");
       return { success: true, property };
     } catch (error) {
       console.error("Failed to create property:", error);
@@ -289,7 +293,7 @@ export async function updateProperty(id: number, formData: FormData) {
         }
       }
 
-      revalidatePath("/admin","layout");
+      revalidatePath("/admin", "layout");
       return { success: true, property };
     } catch (error) {
       console.error(`Failed to update property with ID ${id}:`, error);
@@ -503,10 +507,18 @@ export async function createAgent(formData: FormData) {
     const bio = formData.get("bio") as string;
     const website = formData.get("website") as string;
     const profileImageUrl = formData.get("profileImageUrl") as string;
-    const yearsOfExperience = parseInt(formData.get("yearsOfExperience") as string || "0");
-    const propertiesListed = parseInt(formData.get("propertiesListed") as string || "0");
-    const propertiesSold = parseInt(formData.get("propertiesSold") as string || "0");
-    const propertiesChecked = parseInt(formData.get("propertiesChecked") as string || "0");
+    const yearsOfExperience = parseInt(
+      (formData.get("yearsOfExperience") as string) || "0"
+    );
+    const propertiesListed = parseInt(
+      (formData.get("propertiesListed") as string) || "0"
+    );
+    const propertiesSold = parseInt(
+      (formData.get("propertiesSold") as string) || "0"
+    );
+    const propertiesChecked = parseInt(
+      (formData.get("propertiesChecked") as string) || "0"
+    );
 
     // Social media
     const facebook = formData.get("facebook") as string;
@@ -515,7 +527,9 @@ export async function createAgent(formData: FormData) {
     const linkedin = formData.get("linkedin") as string;
     const youtube = formData.get("youtube") as string;
 
-    const languages = formData.getAll("languages[]").map((lang) => lang.toString());
+    const languages = formData
+      .getAll("languages[]")
+      .map((lang) => lang.toString());
     const badges = formData.getAll("badges[]").map((badge) => badge.toString());
 
     const agent = await prisma.agent.create({
@@ -577,10 +591,18 @@ export async function updateAgent(formData: FormData) {
     const bio = formData.get("bio") as string;
     const website = formData.get("website") as string;
     const profileImageUrl = formData.get("profileImageUrl") as string;
-    const yearsOfExperience = parseInt(formData.get("yearsOfExperience") as string || "0");
-    const propertiesListed = parseInt(formData.get("propertiesListed") as string || "0");
-    const propertiesSold = parseInt(formData.get("propertiesSold") as string || "0");
-    const propertiesChecked = parseInt(formData.get("propertiesChecked") as string || "0");
+    const yearsOfExperience = parseInt(
+      (formData.get("yearsOfExperience") as string) || "0"
+    );
+    const propertiesListed = parseInt(
+      (formData.get("propertiesListed") as string) || "0"
+    );
+    const propertiesSold = parseInt(
+      (formData.get("propertiesSold") as string) || "0"
+    );
+    const propertiesChecked = parseInt(
+      (formData.get("propertiesChecked") as string) || "0"
+    );
 
     const facebook = formData.get("facebook") as string;
     const twitter = formData.get("twitter") as string;
@@ -588,7 +610,9 @@ export async function updateAgent(formData: FormData) {
     const linkedin = formData.get("linkedin") as string;
     const youtube = formData.get("youtube") as string;
 
-    const languages = formData.getAll("languages[]").map((lang) => lang.toString());
+    const languages = formData
+      .getAll("languages[]")
+      .map((lang) => lang.toString());
     const badges = formData.getAll("badges[]").map((badge) => badge.toString());
 
     const agent = await prisma.agent.update({
@@ -645,7 +669,10 @@ export async function updateAgent(formData: FormData) {
     revalidatePath("/admin/users");
     return { success: true, agent };
   } catch (error) {
-    console.error(`Failed to update agent with ID ${formData.get("id")}:`, error);
+    console.error(
+      `Failed to update agent with ID ${formData.get("id")}:`,
+      error
+    );
     return { success: false, error: (error as Error).message };
   }
 }
@@ -669,7 +696,6 @@ export async function deleteAgent(id: string) {
     return { success: false, error: (error as Error).message };
   }
 }
-
 
 // Recent Blogs count for dashboard
 export async function getRecentBlogs(limit: number = 4) {
