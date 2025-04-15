@@ -44,7 +44,7 @@ export default async function DashboardPage() {
 
       <FeaturedProperties properties={allProperties} />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7 w-full">
         <Card className="col-span-4">
           <CardHeader>
             <CardTitle>{t("propertyOverview")}</CardTitle>
@@ -54,7 +54,7 @@ export default async function DashboardPage() {
             <Overview stats={stats} />
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="col-span-4 md:col-span-3">
           <CardHeader>
             <CardTitle>{t("propertyStatus")}</CardTitle>
             <CardDescription>{t("recentlyAddedOrUpdated")}</CardDescription>

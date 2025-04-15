@@ -23,7 +23,7 @@ function stripHtml(html: string): string {
 
 export const RecentBlogs = ({ blogs }: { blogs: Blog[] }) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {blogs.map((blog) => (
         <Card
           key={blog.id}
