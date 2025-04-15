@@ -24,7 +24,7 @@ export default async function UsersPage() {
         <h1 className="text-3xl font-bold tracking-tight">{t('usersAndAgents')}</h1>
         <div className="flex gap-2">
           <Button asChild variant="outline">
-            <Link href="/admin/users/new">
+            <Link href="/admin/users/new-user">
               <PlusCircle className="mr-2 h-4 w-4" />
              {t('addUser')}
             </Link>

@@ -915,7 +915,7 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                       <FormItem>
                         <FormLabel>First Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="John" {...field} />
+                          <Input placeholder="Enter first name" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -928,7 +928,7 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                       <FormItem>
                         <FormLabel>Last Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Doe" {...field} />
+                          <Input placeholder="Enter last name" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -943,7 +943,7 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="john.doe@example.com" {...field} />
+                        <Input type="email" placeholder="Enter your email" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -957,7 +957,7 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>Phone</FormLabel>
                       <FormControl>
-                        <Input placeholder="+1 (555) 123-4567" {...field} />
+                        <Input placeholder="Enter your phone number" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -971,7 +971,7 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>Company Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Real Estate Company" {...field} />
+                        <Input placeholder="Enter your company name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -985,7 +985,7 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
                     <FormItem>
                       <FormLabel>Job Title</FormLabel>
                       <FormControl>
-                        <Input placeholder="Real Estate Agent" {...field} />
+                        <Input placeholder="Enter your job title" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
