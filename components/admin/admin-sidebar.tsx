@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -11,6 +12,8 @@ import {
   Settings,
   Bell,
   HelpCircle,
+  Menu,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -22,18 +25,35 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { useState } from "react";
-import {  useTranslations } from "next-intl";
-import Image from "next/image";
+import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function AdminSidebar() {
   const t = useTranslations("dashboard");
   const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(false);
 
-  const isActive = (path: string) => pathname === path;
+  const removeLocalePrefix = (path: string) => {
+    const parts = path.split("/");
+    if (parts.length > 2 && /^[a-z]{2}$/.test(parts[1])) {
+      return "/" + parts.slice(2).join("/");
+    }
+    return path;
+  };
+
+  const isActive = (menuPath: string) => {
+    const cleanedPath = removeLocalePrefix(pathname);
+  
+    // Exact match for /admin
+    if (menuPath === "/admin") return cleanedPath === "/admin";
+  
+    // startsWith for sub-paths
+    return cleanedPath.startsWith(menuPath);
+  };
+  
+
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const menuItems = [
     { label: t("db"), icon: LayoutDashboard, path: "/admin" },
@@ -53,42 +73,57 @@ export default function AdminSidebar() {
     { label: t("support"), icon: HelpCircle, path: "/admin/support" },
   ];
 
-  return (
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "auto";
+  }, [mobileOpen]);
+
+  const SidebarBody = () => (
     <div
-      className={`flex flex-col max-h-screen overflow-hidden transition-all duration-300 ${
+      className={`flex flex-col h-screen transition-all duration-300 ${
         collapsed ? "w-20" : "w-72"
-      } bg-zinc-900 text-white shadow-lg rounded-r-xl`}
+      } bg-zinc-900 text-white shadow-2xl md:rounded-r-xl`}
     >
-      <SidebarHeader className="flex h-16 items-center px-4 border-b border-zinc-800">
+      {/* Header */}
+      <SidebarHeader
+        className={`h-16 border-b border-zinc-800 ${
+          collapsed
+            ? "flex items-center justify-center px-6"
+            : "flex items-center pl-0 pr-4"
+        }`}
+      >
         <div className="flex items-center justify-between w-full">
           {!collapsed && (
-            <Link
-              href="/admin"
-              className="flex items-center gap-2 font-semibold"
-            >
+            <Link href="/admin" className="flex items-center gap-3">
               <Building2 className="h-6 w-6 text-primary" />
-              <div>
-                <p className="text-md leading-tight">Birds of Eden Real Estate</p>
-                <p className="text-sm text-muted-foreground">Admin Panel</p>
-                {/* <Image
-                src='/boedlogo.png'
-                alt ="Birds of Eden "
-                width={100}
-                height={100}
-                /> */}
+              <div className="hidden md:flex flex-col leading-tight">
+                <span className="text-base font-semibold text-white">
+                  Birds of Eden
+                </span>
+                <span className="text-sm text-zinc-400 font-medium tracking-wide">
+                  Admin Panel
+                </span>
               </div>
             </Link>
           )}
-          <SidebarTrigger
-            className="text-zinc-400 hover:text-white"
+          <button
+            className="text-zinc-400 hover:text-white md:hidden"
+            onClick={() => setMobileOpen(false)}
+          >
+            <X className="h-6 w-6" />
+          </button>
+          <button
+            className={`text-zinc-400 hover:text-white ${
+              collapsed ? "" : "hidden md:block"
+            }`}
             onClick={() => setCollapsed((prev) => !prev)}
           >
             ☰
-          </SidebarTrigger>
+          </button>
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="py-4 px-2">
+      {/* Menu */}
+      <SidebarContent className="py-4 px-2 overflow-y-auto">
         <SidebarMenu className="space-y-3">
           {menuItems.map(({ label, icon: Icon, path, badge }) => {
             const active = isActive(path);
@@ -99,16 +134,28 @@ export default function AdminSidebar() {
                   isActive={active}
                   className={`group relative flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all ${
                     active
-                      ? "bg-primary/90 text-white shadow-md"
+                      ? "bg-primary/90 text-white shadow-md border-l-4 "
                       : "hover:bg-zinc-800 hover:text-white text-zinc-400"
                   }`}
                 >
                   <Link href={path} className="flex items-center w-full">
-                    <div>
-                      <Icon className="size-6 shrink-0" />
-                    </div>
+                    {/* Active bar (optional) */}
+                    <Icon
+                      className={`h-5 w-5 shrink-0 transition-colors ${
+                        active
+                          ? "text-black"
+                          : "text-zinc-400 group-hover:text-white"
+                      }`}
+                    />
+
                     {!collapsed && (
-                      <span className="ml-3 text-base font-medium">
+                      <span
+                        className={`ml-3 text-base font-medium transition-colors ${
+                          active
+                            ? "text-black"
+                            : "text-zinc-400 group-hover:text-white"
+                        }`}
+                      >
                         {label}
                       </span>
                     )}
@@ -130,6 +177,7 @@ export default function AdminSidebar() {
         </SidebarMenu>
       </SidebarContent>
 
+      {/* Footer */}
       <SidebarFooter className="mt-auto border-t border-zinc-800 px-4 py-3 bg-zinc-950">
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-primary/20 text-white flex items-center justify-center font-bold shadow-inner">
@@ -144,5 +192,35 @@ export default function AdminSidebar() {
         </div>
       </SidebarFooter>
     </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Sidebar */}
+      <div className="hidden md:block">{SidebarBody()}</div>
+
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setMobileOpen(true)}
+        className="md:hidden fixed z-50 top-3 left-4 bg-zinc-900 text-white p-2 rounded-md shadow-md"
+      >
+        <Menu className="h-6 w-6" />
+      </button>
+
+      {/* Mobile Overlay */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 md:hidden flex"
+          onClick={() => setMobileOpen(false)}
+        >
+          <div
+            className="bg-zinc-900 shadow-2xl w-72 h-full animate-slide-in-left"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {SidebarBody()}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
