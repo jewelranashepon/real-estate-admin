@@ -56,7 +56,7 @@ const LoginPage = () => {
         },
         onSuccess: () => {
           toast.success("Login Successful");
-          router.push("/");
+          router.push("/user/dashboard");
         },
         onError: (ctx) => {
           setFormError(ctx.error.message);
