@@ -1,149 +1,184 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useTranslations } from "next-intl";
 import {
-  Line,
-  LineChart,
-  CartesianGrid,
-  Legend,
   ResponsiveContainer,
-  Tooltip,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
   PieChart,
   Pie,
   Cell,
-} from "@/components/ui/chart"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useTranslations } from "next-intl"
+} from "recharts";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Table,
+  TableHeader,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
 
 export function UserActivity() {
-  const t =useTranslations('dashboard')
-  // Mock data for the charts
-  const activityData = [
-    { name: "Mon", users: 120, sessions: 180, pageViews: 450 },
-    { name: "Tue", users: 132, sessions: 195, pageViews: 480 },
-    { name: "Wed", users: 145, sessions: 210, pageViews: 520 },
-    { name: "Thu", users: 160, sessions: 230, pageViews: 550 },
-    { name: "Fri", users: 175, sessions: 245, pageViews: 580 },
-    { name: "Sat", users: 190, sessions: 260, pageViews: 610 },
-    { name: "Sun", users: 205, sessions: 275, pageViews: 640 },
-  ]
+  const t = useTranslations("dashboard");
 
-  // Mock data for user sources
-  const sourceData = [
-    { name: "Direct", value: 35 },
-    { name: "Organic Search", value: 25 },
-    { name: "Social Media", value: 20 },
-    { name: "Referral", value: 15 },
-    { name: "Email", value: 5 },
-  ]
+  const activityStats = [
+    { day: "Mon", users: 120, sessions: 180, views: 450 },
+    { day: "Tue", users: 135, sessions: 190, views: 480 },
+    { day: "Wed", users: 150, sessions: 205, views: 520 },
+    { day: "Thu", users: 165, sessions: 225, views: 550 },
+    { day: "Fri", users: 180, sessions: 240, views: 580 },
+    { day: "Sat", users: 195, sessions: 260, views: 610 },
+    { day: "Sun", users: 210, sessions: 275, views: 640 },
+  ];
 
-  // Mock data for active users
-  const activeUsers = [
+  const trafficSources = [
+    { name: "Direct", value: 34 },
+    { name: "Organic", value: 26 },
+    { name: "Social", value: 20 },
+    { name: "Referral", value: 14 },
+    { name: "Email", value: 6 },
+  ];
+
+  const activeList = [
     {
       id: 1,
-      name: "John Smith",
-      email: "john.smith@example.com",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastActive: "2 minutes ago",
+      name: "Emma Walker",
+      email: "emma@domain.com",
+      avatar: "/avatar1.png",
+      lastSeen: "3m ago",
       sessions: 28,
-      avgDuration: "12m 30s",
+      duration: "11m 50s",
     },
     {
       id: 2,
-      name: "Sarah Johnson",
-      email: "sarah.j@example.com",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastActive: "15 minutes ago",
+      name: "James Lee",
+      email: "james@domain.com",
+      avatar: "/avatar2.png",
+      lastSeen: "18m ago",
       sessions: 24,
-      avgDuration: "10m 45s",
+      duration: "10m 30s",
     },
     {
       id: 3,
-      name: "Michael Brown",
-      email: "michael.b@example.com",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastActive: "32 minutes ago",
-      sessions: 22,
-      avgDuration: "9m 20s",
+      name: "Sophia King",
+      email: "sophia@domain.com",
+      avatar: "/avatar3.png",
+      lastSeen: "35m ago",
+      sessions: 21,
+      duration: "9m 10s",
     },
     {
       id: 4,
-      name: "Emily Davis",
-      email: "emily.d@example.com",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastActive: "1 hour ago",
+      name: "Liam Scott",
+      email: "liam@domain.com",
+      avatar: "/avatar4.png",
+      lastSeen: "1h ago",
       sessions: 20,
-      avgDuration: "8m 15s",
+      duration: "8m 25s",
     },
     {
       id: 5,
-      name: "David Wilson",
-      email: "david.w@example.com",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastActive: "2 hours ago",
-      sessions: 18,
-      avgDuration: "7m 50s",
+      name: "Ava Brooks",
+      email: "ava@domain.com",
+      avatar: "/avatar5.png",
+      lastSeen: "2h ago",
+      sessions: 17,
+      duration: "7m 45s",
     },
-  ]
+  ];
 
-  // Colors for the pie chart
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"]
+  const chartColors = ["#3b82f6", "#10b981", "#facc15", "#f97316", "#8b5cf6"];
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
+      {/* Activity Chart */}
       <Card className="md:col-span-2">
         <CardHeader>
-          <CardTitle>{t('userActivity')}</CardTitle>
-          <CardDescription>{t('dailyUserActivityMetrics')}</CardDescription>
+          <CardTitle>{t("userActivity")}</CardTitle>
+          <CardDescription>{t("dailyUserActivityMetrics")}</CardDescription>
         </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={350}>
-            <LineChart data={activityData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+        <CardContent className="pt-4">
+          <ResponsiveContainer width="100%" height={360}>
+            <LineChart data={activityStats}>
+              <CartesianGrid strokeDasharray="4 4" />
+              <XAxis dataKey="day" />
               <YAxis />
               <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="users" name="Active Users" stroke="#8884d8" activeDot={{ r: 8 }} />
-              <Line type="monotone" dataKey="sessions" name="Sessions" stroke="#82ca9d" />
-              <Line type="monotone" dataKey="pageViews" name="Page Views" stroke="#ffc658" />
+              <Legend verticalAlign="top" height={36} />
+              <Line
+                type="monotone"
+                dataKey="users"
+                stroke="#6366f1"
+                name={t("activeUsers")}
+              />
+              <Line
+                type="monotone"
+                dataKey="sessions"
+                stroke="#22c55e"
+                name={t("sessions")}
+              />
+              <Line
+                type="monotone"
+                dataKey="views"
+                stroke="#f59e0b"
+                name={t("pageViews")}
+              />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
 
+      {/* Source Pie Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('userSources')}</CardTitle>
-          <CardDescription>{t('userSourcesDescription')}</CardDescription>
+          <CardTitle>{t("userSources")}</CardTitle>
+          <CardDescription>{t("userSourcesDescription")}</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col items-center">
-          <ResponsiveContainer width="100%" height={250}>
+          <ResponsiveContainer width="100%" height={280}>
             <PieChart>
               <Pie
-                data={sourceData}
+                data={trafficSources}
                 cx="50%"
                 cy="50%"
-                labelLine={false}
                 outerRadius={80}
-                fill="#8884d8"
                 dataKey="value"
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }) =>
+                  `${name}: ${(percent * 100).toFixed(0)}%`
+                }
               >
-                {sourceData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                {trafficSources.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={chartColors[index % chartColors.length]}
+                  />
                 ))}
               </Pie>
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
-          <div className="mt-4 flex flex-wrap justify-center gap-4">
-            {sourceData.map((entry, index) => (
-              <div key={`legend-${index}`} className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+          <div className="flex flex-wrap justify-center gap-4 mt-4">
+            {trafficSources.map((entry, index) => (
+              <div key={entry.name} className="flex items-center gap-2">
+                <div
+                  className="h-3 w-3 rounded-full"
+                  style={{
+                    backgroundColor: chartColors[index % chartColors.length],
+                  }}
+                />
                 <span className="text-sm">
                   {entry.name}: {entry.value}%
                 </span>
@@ -153,39 +188,42 @@ export function UserActivity() {
         </CardContent>
       </Card>
 
+      {/* Active Users Table */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('mostActiveUsers')}</CardTitle>
-          <CardDescription>{t('mostActiveUsersDescription')}</CardDescription>
+          <CardTitle>{t("mostActiveUsers")}</CardTitle>
+          <CardDescription>{t("mostActiveUsersDescription")}</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>{t('user')}</TableHead>
-                <TableHead>{t('lastActive')}</TableHead>
-                <TableHead className="text-right">{t('sessions')}</TableHead>
-                <TableHead className="text-right">{t('avgDuration')}</TableHead>
+                <TableHead>{t("user")}</TableHead>
+                <TableHead>{t("lastActive")}</TableHead>
+                <TableHead className="text-right">{t("sessions")}</TableHead>
+                <TableHead className="text-right">{t("avgDuration")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {activeUsers.map((user) => (
+              {activeList.map((user) => (
                 <TableRow key={user.id}>
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <Avatar className="h-8 w-8">
                         <AvatarImage src={user.avatar} alt={user.name} />
-                        <AvatarFallback>{user.name.substring(0, 2)}</AvatarFallback>
+                        <AvatarFallback>{user.name.slice(0, 2)}</AvatarFallback>
                       </Avatar>
                       <div>
                         <div className="font-medium">{user.name}</div>
-                        <div className="text-xs text-muted-foreground">{user.email}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {user.email}
+                        </div>
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell>{user.lastActive}</TableCell>
+                  <TableCell>{user.lastSeen}</TableCell>
                   <TableCell className="text-right">{user.sessions}</TableCell>
-                  <TableCell className="text-right">{user.avgDuration}</TableCell>
+                  <TableCell className="text-right">{user.duration}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -193,6 +231,5 @@ export function UserActivity() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
-

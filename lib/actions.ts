@@ -669,3 +669,12 @@ export async function deleteAgent(id: string) {
     return { success: false, error: (error as Error).message };
   }
 }
+
+
+// Recent Blogs count for dashboard
+export async function getRecentBlogs(limit: number = 4) {
+  return await prisma.blogPost.findMany({
+    orderBy: { createdAt: "desc" },
+    take: limit,
+  });
+}
