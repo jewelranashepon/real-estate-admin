@@ -136,7 +136,7 @@ const SignupForm = () => {
           </Form>
           <div className="mt-5 space-x-1 text-center text-sm">
             <Link
-              href="/auth/login"
+              href="/sign-in"
               className="text-sm text-muted-foreground hover:underline"
             >
               {t("auth.alreadyHaveAccount")}
