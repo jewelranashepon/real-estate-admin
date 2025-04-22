@@ -1,12 +1,27 @@
-import { Bell, Heart, Home, MessageSquare, Search, Settings, User } from "lucide-react"
-import Link from "next/link"
+import {
+  Bell,
+  Heart,
+  Home,
+  MessageSquare,
+  Search,
+  Settings,
+  User,
+} from "lucide-react";
+import Link from "next/link";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Image from "next/image"
-import { useTranslations } from "next-intl"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function DashboardPage() {
   const t = useTranslations("dashboard");
@@ -15,12 +30,12 @@ export default function DashboardPage() {
       <header className="sticky top-0 z-10 border-b bg-background">
         <div className="flex h-[100px] items-center px-4 md:px-6">
           <Link href="#" className="flex items-center gap-2 font-semibold">
-          <Image
-           src="/boedlogo.png"
-           alt="Birds of Eden Logo"
-           height={100}
-           width={100}
-          />
+            <Image
+              src="/boedlogo.png"
+              alt="Birds of Eden Logo"
+              height={100}
+              width={100}
+            />
             {/* <Home className="h-6 w-6" /> */}
             <span className="mt-5 ml-5 text-bold">User Dashboard</span>
           </Link>
@@ -39,7 +54,6 @@ export default function DashboardPage() {
       <div className="grid flex-1 md:grid-cols-[240px_1fr]">
         <div className="hidden border-r bg-muted/40 md:block">
           <div className="flex h-full flex-col gap-2 p-4">
-           
             <Button variant="ghost" className="justify-start gap-2" asChild>
               <Link href="#">
                 <Home className="h-4 w-4" />
@@ -77,27 +91,37 @@ export default function DashboardPage() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Saved Properties</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Saved Properties
+                  </CardTitle>
                   <Heart className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">12</div>
-                  <p className="text-xs text-muted-foreground">+2 from last month</p>
+                  <p className="text-xs text-muted-foreground">
+                    +2 from last month
+                  </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Recent Searches</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Recent Searches
+                  </CardTitle>
                   <Search className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">8</div>
-                  <p className="text-xs text-muted-foreground">+3 from last week</p>
+                  <p className="text-xs text-muted-foreground">
+                    +3 from last week
+                  </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Unread Messages</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Unread Messages
+                  </CardTitle>
                   <MessageSquare className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
@@ -107,7 +131,9 @@ export default function DashboardPage() {
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Profile Completion</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Profile Completion
+                  </CardTitle>
                   <User className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
@@ -202,7 +228,12 @@ export default function DashboardPage() {
                     date="3 days ago"
                     results={18}
                   />
-                  <SearchCard location="Queens, NY" filters="3+ beds, $2500-$4000/mo" date="1 week ago" results={12} />
+                  <SearchCard
+                    location="Queens, NY"
+                    filters="3+ beds, $2500-$4000/mo"
+                    date="1 week ago"
+                    results={12}
+                  />
                   <SearchCard
                     location="Upper East Side, NY"
                     filters="1+ beds, $2000-$3000/mo"
@@ -261,7 +292,7 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function PropertyCard({
@@ -273,18 +304,22 @@ function PropertyCard({
   sqft,
   image,
 }: {
-  title: string
-  address: string
-  price: string
-  beds: number
-  baths: number
-  sqft: number
-  image: string
+  title: string;
+  address: string;
+  price: string;
+  beds: number;
+  baths: number;
+  sqft: number;
+  image: string;
 }) {
   return (
     <Card className="overflow-hidden">
       <div className="aspect-video w-full overflow-hidden">
-        <img src={image || "/placeholder.svg"} alt={title} className="h-full w-full object-cover" />
+        <img
+          src={image || "/placeholder.svg"}
+          alt={title}
+          className="h-full w-full object-cover"
+        />
       </div>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
@@ -308,7 +343,7 @@ function PropertyCard({
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }
 
 function SearchCard({
@@ -317,10 +352,10 @@ function SearchCard({
   date,
   results,
 }: {
-  location: string
-  filters: string
-  date: string
-  results: number
+  location: string;
+  filters: string;
+  date: string;
+  results: number;
 }) {
   return (
     <Card>
@@ -330,7 +365,9 @@ function SearchCard({
       </CardHeader>
       <CardContent>
         <div className="text-sm text-muted-foreground">Searched {date}</div>
-        <div className="mt-2 text-lg font-semibold">{results} properties found</div>
+        <div className="mt-2 text-lg font-semibold">
+          {results} properties found
+        </div>
       </CardContent>
       <CardFooter>
         <Button variant="outline" size="sm" className="w-full">
@@ -339,7 +376,7 @@ function SearchCard({
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }
 
 function MessageCard({
@@ -349,11 +386,11 @@ function MessageCard({
   message,
   unread,
 }: {
-  sender: string
-  property: string
-  date: string
-  message: string
-  unread: boolean
+  sender: string;
+  property: string;
+  date: string;
+  message: string;
+  unread: boolean;
 }) {
   return (
     <Card className={unread ? "border-primary/50 bg-primary/5" : ""}>
@@ -374,5 +411,5 @@ function MessageCard({
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }

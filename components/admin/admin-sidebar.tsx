@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -16,9 +15,8 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import {
-  Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarMenu,
@@ -32,25 +30,6 @@ import { useTranslations } from "next-intl";
 export default function AdminSidebar() {
   const t = useTranslations("dashboard");
   const pathname = usePathname();
-
-  const removeLocalePrefix = (path: string) => {
-    const parts = path.split("/");
-    if (parts.length > 2 && /^[a-z]{2}$/.test(parts[1])) {
-      return "/" + parts.slice(2).join("/");
-    }
-    return path;
-  };
-
-  const isActive = (menuPath: string) => {
-    const cleanedPath = removeLocalePrefix(pathname);
-  
-    // Exact match for /admin
-    if (menuPath === "/admin") return cleanedPath === "/admin";
-  
-    // startsWith for sub-paths
-    return cleanedPath.startsWith(menuPath);
-  };
-  
 
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -126,7 +105,7 @@ export default function AdminSidebar() {
       <SidebarContent className="py-4 px-2 overflow-y-auto">
         <SidebarMenu className="space-y-3">
           {menuItems.map(({ label, icon: Icon, path, badge }) => {
-            const active = isActive(path);
+            const active = pathname === path;
             return (
               <SidebarMenuItem key={label}>
                 <SidebarMenuButton
