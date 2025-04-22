@@ -1,13 +1,24 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Badge } from "@/components/ui/badge"
-import { Edit, MoreHorizontal, Trash2, Eye } from "lucide-react"
-import { toast } from "@/components/ui/use-toast"
+import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Edit, MoreHorizontal, Trash2, Eye } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 // Mock property data
 const properties = [
@@ -19,7 +30,7 @@ const properties = [
     district: "Al Olaya",
     status: "approved",
     createdAt: "2023-10-15",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    thumbnail: "/sa1.jpg",
   },
   {
     id: 2,
@@ -29,7 +40,7 @@ const properties = [
     district: "Al Malaz",
     status: "pending",
     createdAt: "2023-11-02",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    thumbnail: "/sa2.jpg",
   },
   {
     id: 3,
@@ -39,7 +50,7 @@ const properties = [
     district: "Al Naseem",
     status: "rejected",
     createdAt: "2023-11-10",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    thumbnail: "/sa3.webp",
   },
   {
     id: 4,
@@ -49,7 +60,7 @@ const properties = [
     district: "Qurtubah",
     status: "approved",
     createdAt: "2023-09-28",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    thumbnail: "/sa4.jpeg",
   },
   {
     id: 5,
@@ -59,7 +70,7 @@ const properties = [
     district: "Al Wurud",
     status: "pending",
     createdAt: "2023-10-30",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    thumbnail: "/sa5.jpg",
   },
   {
     id: 6,
@@ -69,59 +80,74 @@ const properties = [
     district: "Hittin",
     status: "approved",
     createdAt: "2023-09-15",
-    thumbnail: "/placeholder.svg?height=200&width=300",
+    thumbnail: "/pj6.jpg",
   },
-]
+];
 
 export default function PropertyList() {
-  const [view, setView] = useState<"grid" | "table">("grid")
-  const [filter, setFilter] = useState<"all" | "approved" | "pending" | "rejected">("all")
+  const [view, setView] = useState<"grid" | "table">("grid");
+  const [filter, setFilter] = useState<
+    "all" | "approved" | "pending" | "rejected"
+  >("all");
 
-  const filteredProperties = filter === "all" ? properties : properties.filter((property) => property.status === filter)
+  const filteredProperties =
+    filter === "all"
+      ? properties
+      : properties.filter((property) => property.status === filter);
 
   const handleEdit = (id: number) => {
     toast({
       title: "Edit Property",
       description: `Editing property ID: ${id}`,
-    })
-  }
+    });
+  };
 
   const handleDelete = (id: number) => {
     toast({
       title: "Delete Property",
       description: `Property ID: ${id} has been deleted.`,
-    })
-  }
+    });
+  };
 
   const handleView = (id: number) => {
     toast({
       title: "View Property",
       description: `Viewing property ID: ${id}`,
-    })
-  }
+    });
+  };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "approved":
-        return <Badge className="bg-green-500 hover:bg-green-600">Approved</Badge>
+        return (
+          <Badge className="bg-green-500 hover:bg-green-600">Approved</Badge>
+        );
       case "pending":
-        return <Badge className="bg-yellow-500 hover:bg-yellow-600">Pending</Badge>
+        return (
+          <Badge className="bg-yellow-500 hover:bg-yellow-600">Pending</Badge>
+        );
       case "rejected":
-        return <Badge className="bg-red-500 hover:bg-red-600">Rejected</Badge>
+        return <Badge className="bg-red-500 hover:bg-red-600">Rejected</Badge>;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">My Properties</h2>
-          <p className="text-muted-foreground">Manage your property listings and their status.</p>
+          <p className="text-muted-foreground">
+            Manage your property listings and their status.
+          </p>
         </div>
         <div className="flex items-center gap-2">
-          <Tabs value={filter} onValueChange={(value: any) => setFilter(value)} className="w-[400px]">
+          <Tabs
+            value={filter}
+            onValueChange={(value: any) => setFilter(value)}
+            className="w-[400px]"
+          >
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="approved">Approved</TabsTrigger>
@@ -190,7 +216,9 @@ export default function PropertyList() {
                   alt={property.title}
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute top-2 right-2">{getStatusBadge(property.status)}</div>
+                <div className="absolute top-2 right-2">
+                  {getStatusBadge(property.status)}
+                </div>
               </div>
               <CardHeader className="p-4">
                 <CardTitle className="line-clamp-1">{property.title}</CardTitle>
@@ -200,17 +228,31 @@ export default function PropertyList() {
               </CardHeader>
               <CardContent className="p-4 pt-0">
                 <div className="flex justify-between items-center">
-                  <div className="font-bold text-lg">{property.price.toLocaleString()} SAR</div>
+                  <div className="font-bold text-lg">
+                    {property.price.toLocaleString()} SAR
+                  </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="icon" onClick={() => handleView(property.id)}>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => handleView(property.id)}
+                    >
                       <Eye className="h-4 w-4" />
                     </Button>
                     {property.status !== "approved" && (
                       <>
-                        <Button variant="outline" size="icon" onClick={() => handleEdit(property.id)}>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => handleEdit(property.id)}
+                        >
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button variant="outline" size="icon" onClick={() => handleDelete(property.id)}>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => handleDelete(property.id)}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </>
@@ -230,20 +272,30 @@ export default function PropertyList() {
                   <th className="h-12 px-4 text-left font-medium">Title</th>
                   <th className="h-12 px-4 text-left font-medium">Type</th>
                   <th className="h-12 px-4 text-left font-medium">District</th>
-                  <th className="h-12 px-4 text-left font-medium">Price (SAR)</th>
+                  <th className="h-12 px-4 text-left font-medium">
+                    Price (SAR)
+                  </th>
                   <th className="h-12 px-4 text-left font-medium">Status</th>
-                  <th className="h-12 px-4 text-left font-medium">Date Added</th>
+                  <th className="h-12 px-4 text-left font-medium">
+                    Date Added
+                  </th>
                   <th className="h-12 px-4 text-left font-medium">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredProperties.map((property) => (
                   <tr key={property.id} className="border-b">
-                    <td className="p-4 align-middle font-medium">{property.title}</td>
+                    <td className="p-4 align-middle font-medium">
+                      {property.title}
+                    </td>
                     <td className="p-4 align-middle">{property.type}</td>
                     <td className="p-4 align-middle">{property.district}</td>
-                    <td className="p-4 align-middle">{property.price.toLocaleString()}</td>
-                    <td className="p-4 align-middle">{getStatusBadge(property.status)}</td>
+                    <td className="p-4 align-middle">
+                      {property.price.toLocaleString()}
+                    </td>
+                    <td className="p-4 align-middle">
+                      {getStatusBadge(property.status)}
+                    </td>
                     <td className="p-4 align-middle">{property.createdAt}</td>
                     <td className="p-4 align-middle">
                       <DropdownMenu>
@@ -253,17 +305,23 @@ export default function PropertyList() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                          <DropdownMenuItem onClick={() => handleView(property.id)}>
+                          <DropdownMenuItem
+                            onClick={() => handleView(property.id)}
+                          >
                             <Eye className="mr-2 h-4 w-4" />
                             View
                           </DropdownMenuItem>
                           {property.status !== "approved" && (
                             <>
-                              <DropdownMenuItem onClick={() => handleEdit(property.id)}>
+                              <DropdownMenuItem
+                                onClick={() => handleEdit(property.id)}
+                              >
                                 <Edit className="mr-2 h-4 w-4" />
                                 Edit
                               </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handleDelete(property.id)}>
+                              <DropdownMenuItem
+                                onClick={() => handleDelete(property.id)}
+                              >
                                 <Trash2 className="mr-2 h-4 w-4" />
                                 Delete
                               </DropdownMenuItem>
@@ -280,5 +338,5 @@ export default function PropertyList() {
         </div>
       )}
     </div>
-  )
+  );
 }
