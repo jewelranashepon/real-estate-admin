@@ -19,7 +19,7 @@ const properties = [
     district: "Al Olaya",
     status: "approved",
     lat: 24.7136,
-    lng: 46.6753,
+    lng: 40.6753,
   },
   {
     id: 2,
@@ -27,8 +27,8 @@ const properties = [
     type: "Apartment",
     district: "Al Malaz",
     status: "pending",
-    lat: 24.6911,
-    lng: 46.7081,
+    lat: 26.7867,
+    lng: 44.7184,
   },
   {
     id: 3,
@@ -54,17 +54,8 @@ const properties = [
     type: "Retail",
     district: "Al Wurud",
     status: "pending",
-    lat: 24.7142,
-    lng: 46.6883,
-  },
-  {
-    id: 6,
-    title: "Spacious Villa in Hittin",
-    type: "Villa",
-    district: "Hittin",
-    status: "approved",
-    lat: 24.7742,
-    lng: 46.6298,
+    lat: 20.7867,
+    lng: 40.7184,
   },
 ];
 
@@ -132,7 +123,7 @@ export default function PropertyMap() {
               ) : (
                 <>
                   {/* Placeholder for the actual map */}
-                  <div className="absolute inset-0 bg-[url('/map.png')] bg-cover bg-center">
+                  <div className="absolute inset-0 bg-[url('/map.png')] bg-cover bg-left">
                     {/* Simulated map with property pins */}
                     {properties.map((property) => (
                       <button
