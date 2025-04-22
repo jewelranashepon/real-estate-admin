@@ -1,5 +1,5 @@
 import { Link } from "@/i18n/navigation";
-import { SignupForm } from "@/components/auth/register-form";
+import { SignupForm } from "@/components/auth/signup-form";
 
 export default async function SignupPage() {
   return (

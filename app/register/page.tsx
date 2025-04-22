@@ -1,21 +1,20 @@
-
 // app/(auth)/register/page.tsx
-import type { Metadata } from "next"
-import { RegisterForm } from "@/components/auth/register-form"
+import type { Metadata } from "next";
+import { RegisterForm } from "@/components/auth/register-form";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Building2 } from "lucide-react"
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Building2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Register | Real Estate Admin",
   description: "Create a new admin account",
-}
+};
 
 export default function RegisterPage() {
   return (
@@ -25,7 +24,9 @@ export default function RegisterPage() {
           <div className="flex justify-center">
             <Building2 className="h-10 w-10 text-primary" />
           </div>
-          <CardTitle className="text-2xl font-bold">Create Admin Account</CardTitle>
+          <CardTitle className="text-2xl font-bold">
+            Create Admin Account
+          </CardTitle>
           <CardDescription className="text-sm text-muted-foreground">
             Fill in the details to register a new admin user.
           </CardDescription>
@@ -36,5 +37,5 @@ export default function RegisterPage() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
