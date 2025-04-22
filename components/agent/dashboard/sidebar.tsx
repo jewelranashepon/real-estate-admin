@@ -1,7 +1,17 @@
-"use client"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { BarChart3, Building2, Calendar, Home, LogOut, Settings, Users, DollarSign, UserPlus } from "lucide-react"
+"use client";
+import Link from "next/link";
+import { usePathname } from "@/i18n/navigation";
+import {
+  BarChart3,
+  Building2,
+  Calendar,
+  Home,
+  LogOut,
+  Settings,
+  Users,
+  DollarSign,
+  UserPlus,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -11,13 +21,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 export function DashboardSidebar() {
-  const pathname = usePathname()
-  const isAdmin = pathname.includes("/admin")
+  const pathname = usePathname();
+  const isAdmin = pathname.includes("/admin");
 
   const agentNavItems = [
     { name: "Dashboard", href: "/", icon: Home },
@@ -27,23 +37,25 @@ export function DashboardSidebar() {
     { name: "Analytics", href: "/analytics", icon: BarChart3 },
     { name: "Transactions", href: "/transactions", icon: DollarSign },
     { name: "Settings", href: "/settings", icon: Settings },
-  ]
+  ];
 
   const adminNavItems = [
     { name: "Dashboard", href: "/admin", icon: Home },
     { name: "Agents", href: "/admin/agents", icon: UserPlus },
     { name: "Properties", href: "/admin/properties", icon: Building2 },
     { name: "Settings", href: "/admin/settings", icon: Settings },
-  ]
+  ];
 
-  const navItems = isAdmin ? adminNavItems : agentNavItems
+  const navItems = isAdmin ? adminNavItems : agentNavItems;
 
   return (
     <Sidebar>
       <SidebarHeader className="border-b border-border p-4">
         <div className="flex items-center gap-2">
           <Building2 className="h-6 w-6" />
-          <div className="font-semibold text-lg">{isAdmin ? "Admin Portal" : "Agent Portal"}</div>
+          <div className="font-semibold text-lg">
+            {isAdmin ? "Admin Portal" : "Agent Portal"}
+          </div>
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -51,7 +63,11 @@ export function DashboardSidebar() {
           <SidebarMenu>
             {navItems.map((item) => (
               <SidebarMenuItem key={item.name}>
-                <SidebarMenuButton asChild isActive={pathname === item.href} tooltip={item.name}>
+                <SidebarMenuButton
+                  asChild
+                  isActive={pathname === item.href}
+                  tooltip={item.name}
+                >
                   <Link href={item.href}>
                     <item.icon className="h-4 w-4" />
                     <span>{item.name}</span>
@@ -84,6 +100,5 @@ export function DashboardSidebar() {
       </SidebarFooter>
       <SidebarTrigger className="absolute right-4 top-4 md:hidden" />
     </Sidebar>
-  )
+  );
 }
-
