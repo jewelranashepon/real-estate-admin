@@ -36,11 +36,11 @@ export default async function AdminLayout({
     redirect({ href: "/sign-in", locale });
   }
 
-  if (role !== "admin" && role === "user") {
+  if ((role !== "admin" || "support") && role === "user") {
     redirect({ href: "/user/dashboard", locale });
   }
 
-  if (role !== "admin" && role === "agent") {
+  if ((role !== "admin" || "support") && role === "agent") {
     redirect({ href: "/agent/dashboard", locale });
   }
 
