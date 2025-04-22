@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { PlusCircle } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { useEffect, useState } from "react";
+import { getSession } from "@/lib/getSession";
 
 export const metadata: Metadata = {
   title: "Properties | Real Estate Admin",
@@ -25,16 +27,21 @@ export default async function PropertiesPage() {
     getPropertyStatuses(),
   ]);
 
+  const session = await getSession();
+  const userRole = session?.user?.role || null;
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">{t("properties")}</h1>
+       {userRole === "admin" && (
         <Button asChild>
           <Link href="/admin/properties/new">
             <PlusCircle className="mr-2 h-4 w-4" />
             {t("addProperty")}
           </Link>
         </Button>
+        )}
       </div>
 
       <Tabs defaultValue="grid" className="w-full">
