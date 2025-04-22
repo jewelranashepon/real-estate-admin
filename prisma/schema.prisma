@@ -11,36 +11,36 @@ datasource db {
 }
 
 model User {
-  id             String          @id @default(cuid())
-  name           String
-  email          String          @unique
-  emailVerified  Boolean
-  image          String?
-  role           String?
-  banned         Boolean?
-  banReason      String?
-  banExpires     Int?
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime
-  Property       Property[]
-  subscriptions  Subscriptions[]
-  sessions       Session[]
-  accounts       Account[]
+  id            String          @id @default(cuid())
+  name          String
+  email         String          @unique
+  emailVerified Boolean
+  image         String?
+  role          String?
+  banned        Boolean?
+  banReason     String?
+  banExpires    Int?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  Property      Property[]
+  subscriptions Subscriptions[]
+  sessions      Session[]
+  accounts      Account[]
 
   @@map("user")
 }
 
 model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  createdAt DateTime
-  updatedAt DateTime
-  ipAddress String?
-  userAgent String?
-  userId    String
+  id             String   @id
+  expiresAt      DateTime
+  token          String
+  createdAt      DateTime
+  updatedAt      DateTime
+  ipAddress      String?
+  userAgent      String?
+  userId         String
   impersonatedBy String?
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([token])
   @@map("session")
@@ -76,7 +76,6 @@ model Verification {
   @@map("verification")
 }
 
-
 model Property {
   id          Int               @id @default(autoincrement())
   name        String
@@ -92,7 +91,7 @@ model Property {
   feature     PropertyFeature?
   images      PropertyImage[]
   contact     Contact?
-  agentId     String?           // ✅ Now just a foreign key to agent
+  agentId     String? // ✅ Now just a foreign key to agent
   agent       Agent?            @relation("AgentProperties", fields: [agentId], references: [id])
 }
 
@@ -170,32 +169,30 @@ model Subscriptions {
   user      User             @relation(fields: [userId], references: [id])
 }
 
-
-
 // New models for agents
 model Agent {
-  id                String             @id @default(cuid())
+  id                String            @id @default(cuid())
   firstName         String
   lastName          String
-  email             String             @unique
+  email             String            @unique
   phone             String
   companyName       String
-  title             String             @default("Real Estate Agent")
+  title             String            @default("Real Estate Agent")
   bio               String?
   website           String?
+  licenseNumber     String?
   profileImageUrl   String?
-  properties        Property[]         @relation("AgentProperties")
+  properties        Property[]        @relation("AgentProperties")
   languages         AgentLanguage[]
   badges            AgentBadge[]
   socialMedia       AgentSocialMedia?
-  propertiesSold    Int                @default(0)
-  propertiesListed  Int                @default(0)
-  propertiesChecked Int                @default(0)
-  yearsOfExperience Int                @default(0)
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
+  propertiesSold    Int               @default(0)
+  propertiesListed  Int               @default(0)
+  propertiesChecked Int               @default(0)
+  yearsOfExperience Int               @default(0)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 }
-
 
 model AgentLanguage {
   id        Int      @id @default(autoincrement())
@@ -230,7 +227,6 @@ model AgentSocialMedia {
   updatedAt DateTime @updatedAt
 }
 
-
 model BlogPost {
   id                    Int       @id @default(autoincrement())
   post_author           Int?
@@ -262,14 +258,13 @@ model BlogPost {
   createdAt             DateTime? @default(now())
 }
 
-
 model Lead {
   id               String   @id @default(cuid())
   name             String
   email            String
   phone            String
   propertyInterest String?
-  status           String   // "New", "Contacted", "Qualified", "Converted", "Lost"
+  status           String // "New", "Contacted", "Qualified", "Converted", "Lost"
   source           String?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
@@ -285,12 +280,10 @@ model Message {
   message      String   @db.Text
   propertyId   String?
   propertyName String?
-  status       String   // "Unread", "Read", "Replied", "Archived"
+  status       String // "Unread", "Read", "Replied", "Archived"
   isStarred    Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   @@map("messages")
 }
-
-

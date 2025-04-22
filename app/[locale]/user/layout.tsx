@@ -1,5 +1,7 @@
 import { redirect } from "@/i18n/navigation";
 import { getSession } from "@/lib/getSession";
+import UserHeader from "@/components/user/header";
+import UserSidebar from "@/components/user/sidebar";
 
 const UserDashboardLayout = async ({
   children,
@@ -17,7 +19,7 @@ const UserDashboardLayout = async ({
     redirect({ href: "/", locale });
   }
 
-  if (role === "admin" || role==="support") {
+  if (role === "admin" || role === "support") {
     redirect({ href: "/admin", locale });
   }
 
@@ -25,8 +27,16 @@ const UserDashboardLayout = async ({
     redirect({ href: "/agent/dashboard", locale });
   }
 
-  return children;
+  return (
+    <div className="flex flex-col w-full">
+      <UserHeader />
 
+      <div className="flex">
+        <UserSidebar />
+        <main className="w-full">{children}</main>
+      </div>
+    </div>
+  );
 };
 
 export default UserDashboardLayout;
