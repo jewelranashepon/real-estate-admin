@@ -1,81 +1,114 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useTranslations } from "next-intl"
-import { useLocale } from "next-intl"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Search, Home, Plus, MessageSquare, Settings, User, CirclePlus, Grip } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { ChevronLeft } from "lucide-react"
-import { propertyListings } from "@/lib/property-data"
-import type { PropertyData } from "@/lib/property-data"
-import Link from "next/link"
-import LanguageSelector from "./language-selector"
-import { signOut, useSession } from "@/lib/auth-client"
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  Search,
+  Home,
+  Plus,
+  MessageSquare,
+  Settings,
+  User,
+  CirclePlus,
+  Grip,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ChevronLeft } from "lucide-react";
+import { propertyListings } from "@/lib/property-data";
+import type { PropertyData } from "@/lib/property-data";
+import { Link, useRouter } from "@/i18n/navigation";
+import LanguageSelector from "./language-selector";
+import { signOut, useSession } from "@/lib/auth-client";
 
 export default function MobileListingsView() {
-  const t = useTranslations("app")
-  const locale = useLocale()
-  const isRtl = locale === "ar"
-  const [activeTab, setActiveTab] = useState("latest")
+  const t = useTranslations("app");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
+  const [activeTab, setActiveTab] = useState("latest");
   const session = useSession();
+  const router = useRouter();
 
   return (
     <main className="h-screen flex flex-col bg-white">
       {/* Header */}
       <div className="px-4 py-3 flex items-center justify-between border-b">
         <div className="flex items-center">
-          <Link href="/"><ChevronLeft className="h-5 w-5 mr-2" /> </Link>
+          <Link href="/">
+            <ChevronLeft className="h-5 w-5 mr-2" />{" "}
+          </Link>
           <span className="font-medium">{t("listings.title")}</span>
         </div>
         {/* <Button variant="ghost" size="icon" className="rounded-full">
           <Search className="h-5 w-5" />
         </Button> */}
-          <div className="ml-auto flex items-center gap-4">
-            <LanguageSelector />
-            {session?.data ? (
-              <Button variant="outline" size="sm" onClick={() => signOut()}>
-                Log Out
-              </Button>
-            ) : (
-              <>
-                <Link href="/sign-in">
-                  <Button variant="outline" size="sm">
-                    {t("auth.signIn")}
-                  </Button>
-                </Link>
-                <Link href="/sign-up">
-                  <Button size="sm" className="bg-green-600 hover:bg-green-500">
-                    {t("auth.signUp")}
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
+        <div className="ml-auto flex items-center gap-4">
+          <LanguageSelector />
+          {session?.data ? (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      router.refresh();
+                    },
+                  },
+                });
+              }}
+            >
+              Log Out
+            </Button>
+          ) : (
+            <>
+              <Link href="/sign-in">
+                <Button variant="outline" size="sm">
+                  {t("auth.signIn")}
+                </Button>
+              </Link>
+              <Link href="/sign-up">
+                <Button size="sm" className="bg-green-600 hover:bg-green-500">
+                  {t("auth.signUp")}
+                </Button>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Filter Tabs */}
       <div className="grid grid-cols-3 border-b">
         <Button
           variant="ghost"
-          className={cn("rounded-none h-12", activeTab === "latest" ? "bg-green-500 text-white font-medium" : "")}
+          className={cn(
+            "rounded-none h-12",
+            activeTab === "latest" ? "bg-green-500 text-white font-medium" : ""
+          )}
           onClick={() => setActiveTab("latest")}
         >
           {t("listings.filters.latest")}
         </Button>
         <Button
           variant="ghost"
-          className={cn("rounded-none h-12", activeTab === "price" ? "bg-green-500 text-white font-medium" : "")}
+          className={cn(
+            "rounded-none h-12",
+            activeTab === "price" ? "bg-green-500 text-white font-medium" : ""
+          )}
           onClick={() => setActiveTab("price")}
         >
           {t("listings.filters.price")}
         </Button>
         <Button
           variant="ghost"
-          className={cn("rounded-none h-12", activeTab === "nearest" ? "bg-green-500 text-white font-medium" : "")}
+          className={cn(
+            "rounded-none h-12",
+            activeTab === "nearest" ? "bg-green-500 text-white font-medium" : ""
+          )}
           onClick={() => setActiveTab("nearest")}
         >
           {t("listings.filters.nearest")}
@@ -97,7 +130,10 @@ export default function MobileListingsView() {
         <div className="divide-y">
           {propertyListings.map((property) => (
             <Link href={`/${locale}/property/${property.id}`} key={property.id}>
-              <PropertyListing property={property} locale={locale as "en" | "ar"} />
+              <PropertyListing
+                property={property}
+                locale={locale as "en" | "ar"}
+              />
             </Link>
           ))}
         </div>
@@ -117,35 +153,57 @@ export default function MobileListingsView() {
       {/* Bottom Navigation */}
       <div className="border-t py-2 px-4 bg-white">
         <div className="flex justify-between items-center">
-          <NavItem icon={<User size={20} />} label={t("mobile.nav.profile")} active />
+          <NavItem
+            icon={<User size={20} />}
+            label={t("mobile.nav.profile")}
+            active
+          />
           <NavItem icon={<Search size={20} />} label={t("mobile.nav.search")} />
-          <NavItem icon={<CirclePlus size={20} />} label={t("mobile.nav.add")} />
-          <NavItem icon={<MessageSquare size={20} />} label={t("mobile.nav.chat")} />
-          <Link href="/services"><NavItem icon={<Grip size={20} />} label={t("mobile.nav.service")} /></Link>
+          <NavItem
+            icon={<CirclePlus size={20} />}
+            label={t("mobile.nav.add")}
+          />
+          <NavItem
+            icon={<MessageSquare size={20} />}
+            label={t("mobile.nav.chat")}
+          />
+          <Link href="/services">
+            <NavItem
+              icon={<Grip size={20} />}
+              label={t("mobile.nav.service")}
+            />
+          </Link>
         </div>
       </div>
     </main>
-  )
+  );
 }
 
 interface PropertyListingProps {
-  property: PropertyData
-  locale: "en" | "ar"
+  property: PropertyData;
+  locale: "en" | "ar";
 }
 
 function PropertyListing({ property, locale }: PropertyListingProps) {
-  const isRtl = locale === "ar"
-  const textDirection = isRtl ? "rtl" : "ltr"
+  const isRtl = locale === "ar";
+  const textDirection = isRtl ? "rtl" : "ltr";
 
   return (
     <div className="flex p-4">
-      <div className={`flex-1 ${isRtl ? "pl-3 order-2" : "pr-3 order-1"}`} dir={textDirection}>
+      <div
+        className={`flex-1 ${isRtl ? "pl-3 order-2" : "pr-3 order-1"}`}
+        dir={textDirection}
+      >
         <h3 className="font-medium text-sm">{property.title[locale]}</h3>
         {property.showPrice !== false && (
-          <p className="text-green-600 font-bold text-sm mt-1">{property.price.toLocaleString()} SAR</p>
+          <p className="text-green-600 font-bold text-sm mt-1">
+            {property.price.toLocaleString()} SAR
+          </p>
         )}
         <div className="flex items-center mt-1">
-          <div className="bg-gray-100 text-xs px-2 py-0.5 rounded-sm">{property.area} m²</div>
+          <div className="bg-gray-100 text-xs px-2 py-0.5 rounded-sm">
+            {property.area} m²
+          </div>
         </div>
         <div className="flex items-center mt-1">
           <div className="text-gray-500 text-xs flex items-center">
@@ -158,7 +216,11 @@ function PropertyListing({ property, locale }: PropertyListingProps) {
           {property.address[locale]}
         </p>
       </div>
-      <div className={`w-[120px] h-[100px] relative rounded-md overflow-hidden ${isRtl ? "order-1" : "order-2"}`}>
+      <div
+        className={`w-[120px] h-[100px] relative rounded-md overflow-hidden ${
+          isRtl ? "order-1" : "order-2"
+        }`}
+      >
         <Image
           src={property.imageUrl || "/placeholder.svg"}
           alt={property.title[locale]}
@@ -168,21 +230,34 @@ function PropertyListing({ property, locale }: PropertyListingProps) {
         />
       </div>
     </div>
-  )
+  );
 }
 
 interface NavItemProps {
-  icon: React.ReactNode
-  label: string
-  active?: boolean
+  icon: React.ReactNode;
+  label: string;
+  active?: boolean;
 }
 
 function NavItem({ icon, label, active }: NavItemProps) {
   return (
     <div className="flex flex-col items-center">
-      <div className={cn("p-1 rounded-full", active ? "text-red-500" : "text-gray-500")}>{icon}</div>
-      <span className={cn("text-xs mt-1", active ? "text-red-500 font-medium" : "text-gray-500")}>{label}</span>
+      <div
+        className={cn(
+          "p-1 rounded-full",
+          active ? "text-red-500" : "text-gray-500"
+        )}
+      >
+        {icon}
+      </div>
+      <span
+        className={cn(
+          "text-xs mt-1",
+          active ? "text-red-500 font-medium" : "text-gray-500"
+        )}
+      >
+        {label}
+      </span>
     </div>
-  )
+  );
 }
-

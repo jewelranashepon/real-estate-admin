@@ -15,10 +15,8 @@ import {
 } from "lucide-react";
 
 import { useTranslations } from "next-intl";
-// import { useSearch } from "./lib/search-context";
-import { Link } from "@/i18n/navigation";
 import { signOut, useSession } from "@/lib/auth-client";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter, Link } from "@/i18n/navigation";
 import Typography from "@mui/material/Typography";
 import { useState } from "react"; // Importing useState to manage chat visibility
 import { useSearch } from "@/lib/search-context";
@@ -107,7 +105,19 @@ export default function DesktopView() {
               </div>
             </div>
             {session?.data ? (
-              <Button variant="outline" size="sm" onClick={() => signOut()}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  signOut({
+                    fetchOptions: {
+                      onSuccess: () => {
+                        router.refresh();
+                      },
+                    },
+                  });
+                }}
+              >
                 Log Out
               </Button>
             ) : (
