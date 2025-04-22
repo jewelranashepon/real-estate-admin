@@ -1,35 +1,38 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { useLocale } from "next-intl"
-import MobileView from "./mobile-view"
-import DesktopView from "./desktop-view"
+import { useState, useEffect } from "react";
+import { useLocale } from "next-intl";
+import MobileView from "./mobile-view";
+import DesktopView from "./desktop-view";
 
 export default function ClientHomePage() {
-  const locale = useLocale()
-  const [isMobile, setIsMobile] = useState(false)
+  const locale = useLocale();
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Check if we're on the client side
     if (typeof window !== "undefined") {
       const checkIfMobile = () => {
-        setIsMobile(window.innerWidth < 768)
-      }
+        setIsMobile(window.innerWidth < 768);
+      };
 
       // Initial check
-      checkIfMobile()
+      checkIfMobile();
 
       // Add event listener for window resize
-      window.addEventListener("resize", checkIfMobile)
+      window.addEventListener("resize", checkIfMobile);
 
       // Clean up
       return () => {
-        window.removeEventListener("resize", checkIfMobile)
-      }
+        window.removeEventListener("resize", checkIfMobile);
+      };
     }
-  }, [])
+  }, []);
 
   // Default to desktop view during SSR to avoid hydration issues
-  return <div className="min-h-screen bg-gray-50">{isMobile ? <MobileView /> : <DesktopView locale={locale} />}</div>
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {isMobile ? <MobileView /> : <DesktopView locale={locale} />}
+    </div>
+  );
 }
-
