@@ -13,12 +13,14 @@ export const metadata: Metadata = {
   description: "Admin panel for managing real estate properties",
 };
 
-export default async function AdminLayout(props: {
+export default async function AdminLayout({
+  children,
+  params,
+}: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const { children, params } = props;
-  const locale = params.locale;
+  const { locale } = await params;
 
   let messages;
   try {
@@ -30,7 +32,7 @@ export default async function AdminLayout(props: {
   const session = await getSession();
   const role = session?.user?.role;
 
-  if(!session){
+  if (!session) {
     redirect({ href: "/sign-in", locale });
   }
 

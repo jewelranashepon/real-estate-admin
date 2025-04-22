@@ -6,14 +6,14 @@ const UserDashboardLayout = async ({
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) => {
-  const locale = params.locale;
+  const { locale } = await params;
 
   const session = await getSession();
   const role = session?.user?.role;
 
-  if(!session){
+  if (!session) {
     redirect({ href: "/", locale });
   }
 
