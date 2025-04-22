@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Bell,
   Heart,
@@ -6,7 +8,18 @@ import {
   Search,
   Settings,
   User,
+  LogOut,
+  UserCircle
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "@/i18n/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -22,9 +35,15 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
+import { signOut, useSession } from "@/lib/auth-client";
 
 export default function DashboardPage() {
   const t = useTranslations("dashboard");
+  const router = useRouter();
+  const session = useSession();
+  const user = session?.data?.user;
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-10 border-b bg-background">
@@ -44,10 +63,43 @@ export default function DashboardPage() {
               <Bell className="h-4 w-4" />
               <span className="sr-only">Notifications</span>
             </Button>
-            <Button variant="outline" size="icon" className="rounded-full">
-              <User className="h-4 w-4" />
-              <span className="sr-only">Account</span>
+            <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Avatar className="h-10 w-10">
+                <AvatarImage src="/avatar.png" alt="Admin" />
+                <AvatarFallback>{user?.name}</AvatarFallback>
+              </Avatar>
             </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <UserCircle className="mr-2 h-4 w-4" />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Settings className="mr-2 h-4 w-4" />
+              Settings
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={async () => {
+                await signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      router.push("/");
+                      router.refresh();
+                    },
+                  },
+                });
+              }}
+            >
+              Log out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
           </div>
         </div>
       </header>
@@ -159,58 +211,85 @@ export default function DashboardPage() {
               <TabsContent value="saved" className="border-none p-0">
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   <PropertyCard
-                    title="Modern Apartment"
-                    address="123 Main St, New York, NY"
-                    price="$2,500/mo"
-                    beds={2}
-                    baths={2}
-                    sqft={1200}
-                    image="/downtown1.webp"
+                    title="Villa on King Fahd Road"
+                    address="King Fahd Road, Riyadh"
+                    price="SAR 1,200,000"
+                    beds={4}
+                    baths={3}
+                    sqft={2500}
+                    image="/sa1.jpg"
                   />
                   <PropertyCard
-                    title="Luxury Condo"
-                    address="456 Park Ave, New York, NY"
-                    price="$3,800/mo"
+                    title="Modern Apartment on Tahlia"
+                    address="Tahlia Street, Jeddah"
+                    price="SAR 950,000"
                     beds={3}
                     baths={2}
                     sqft={1800}
-                    image="/downtown2.webp"
+                    image="/sa2.jpg"
                   />
                   <PropertyCard
-                    title="Downtown Loft"
-                    address="789 Broadway, New York, NY"
-                    price="$4,200/mo"
-                    beds={1}
-                    baths={1}
-                    sqft={950}
+                    title="Sea View at Al Khobar Corniche"
+                    address="Al Khobar Corniche, Dammam"
+                    price="SAR 1,500,000"
+                    beds={5}
+                    baths={4}
+                    sqft={3200}
+                    image="/sa3.webp"
+                  />
+                  <PropertyCard
+                    title="Home on Prince Sultan Road"
+                    address="Prince Sultan Road, Mecca"
+                    price="SAR 850,000"
+                    beds={3}
+                    baths={2}
+                    sqft={1600}
+                    image="/sa4.jpeg"
+                  />
+                  <PropertyCard
+                    title="Flat on King Abdullah Road"
+                    address="King Abdullah Road, Medina"
+                    price="SAR 780,000"
+                    beds={2}
+                    baths={2}
+                    sqft={1400}
+                    image="/sa5.jpg"
+                  />
+                  <PropertyCard
+                    title="Luxury Home in Al Olaya"
+                    address="Al Olaya District, Riyadh"
+                    price="SAR 2,200,000"
+                    beds={6}
+                    baths={5}
+                    sqft={4500}
                     image="/dt3.jpg"
                   />
                   <PropertyCard
-                    title="Garden Apartment"
-                    address="101 Greene St, New York, NY"
-                    price="$3,100/mo"
-                    beds={2}
-                    baths={1}
-                    sqft={1100}
+                    title="Family House in Al Hamra"
+                    address="Al Hamra District, Jeddah"
+                    price="SAR 1,100,000"
+                    beds={4}
+                    baths={3}
+                    sqft={2200}
                     image="/dt4.jpg"
                   />
                   <PropertyCard
-                    title="Penthouse Suite"
-                    address="222 Fifth Ave, New York, NY"
-                    price="$8,500/mo"
+                    title="Quiet Spot in Al Rawdah"
+                    address="Al Rawdah, Dammam"
+                    price="SAR 920,000"
                     beds={3}
-                    baths={3}
-                    sqft={2200}
+                    baths={2}
+                    sqft={1900}
                     image="/dt5.webp"
                   />
                   <PropertyCard
-                    title="Brownstone Duplex"
-                    address="333 West Village, New York, NY"
-                    price="$5,200/mo"
+                    title="Affordable Home in Al Khaledia"
+                    address="Al Khaledia, Bisha"
+                    price="SAR 720,000"
                     beds={3}
-                    baths={2.5}
-                    sqft={1950}
-                    image="/pj1.jpg"
+                    baths={2}
+                    sqft={1900}
+                    image="/pj6.jpg"
                   />
                 </div>
               </TabsContent>
