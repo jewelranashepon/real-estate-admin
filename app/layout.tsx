@@ -22,7 +22,6 @@ export default function RootLayout({
       </SearchProvider>
       <Toaster />
       </body>
-      
     </html>
   )
 }

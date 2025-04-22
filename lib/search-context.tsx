@@ -27,7 +27,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
       (property) =>
         property.address.toLowerCase().includes(query) ||
         property.city.toLowerCase().includes(query) ||
-        property.zipCode.toLowerCase().includes(query) ||
+        property.zipcode.toLowerCase().includes(query) ||
         property.state.toLowerCase().includes(query),
     )
   }, [searchQuery])

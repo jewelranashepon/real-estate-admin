@@ -1,8 +1,11 @@
-export function getSaudiProperties(): PropertyType[] {
+export function getSaudiProperties() {
   return [
     {
       id: "sa1",
       address: "King Fahd Road, Riyadh",
+      city: "Riyadh",
+      zipcode: "12271",
+      state: "Riyadh Region",
       price: 1200000,
       bedrooms: 4,
       bathrooms: 3,
@@ -14,6 +17,9 @@ export function getSaudiProperties(): PropertyType[] {
     {
       id: "sa2",
       address: "Tahlia Street, Jeddah",
+      city: "Jeddah",
+      zipcode: "23431",
+      state: "Makkah Region",
       price: 950000,
       bedrooms: 3,
       bathrooms: 2,
@@ -25,6 +31,9 @@ export function getSaudiProperties(): PropertyType[] {
     {
       id: "sa3",
       address: "Al Khobar Corniche, Dammam",
+      city: "Dammam",
+      zipcode: "34223",
+      state: "Eastern Province",
       price: 1500000,
       bedrooms: 5,
       bathrooms: 4,
@@ -36,6 +45,9 @@ export function getSaudiProperties(): PropertyType[] {
     {
       id: "sa4",
       address: "Prince Sultan Road, Mecca",
+      city: "Mecca",
+      zipcode: "24243",
+      state: "Makkah Region",
       price: 850000,
       bedrooms: 3,
       bathrooms: 2,
@@ -47,6 +59,9 @@ export function getSaudiProperties(): PropertyType[] {
     {
       id: "sa5",
       address: "King Abdullah Road, Medina",
+      city: "Medina",
+      zipcode: "42361",
+      state: "Al Madinah Region",
       price: 780000,
       bedrooms: 2,
       bathrooms: 2,
@@ -58,6 +73,9 @@ export function getSaudiProperties(): PropertyType[] {
     {
       id: "sa6",
       address: "Al Olaya District, Riyadh",
+      city: "Riyadh",
+      zipcode: "12333",
+      state: "Riyadh Region",
       price: 2200000,
       bedrooms: 6,
       bathrooms: 5,
@@ -69,6 +87,9 @@ export function getSaudiProperties(): PropertyType[] {
     {
       id: "sa7",
       address: "Al Hamra District, Jeddah",
+      city: "Jeddah",
+      zipcode: "23324",
+      state: "Makkah Region",
       price: 1100000,
       bedrooms: 4,
       bathrooms: 3,
@@ -80,6 +101,9 @@ export function getSaudiProperties(): PropertyType[] {
     {
       id: "sa8",
       address: "Al Rawdah, Dammam",
+      city: "Dammam",
+      zipcode: "32241",
+      state: "Eastern Province",
       price: 920000,
       bedrooms: 3,
       bathrooms: 2,
@@ -91,6 +115,9 @@ export function getSaudiProperties(): PropertyType[] {
     {
       id: "sa9",
       address: "Al Khaledia, Bisha",
+      city: "Bisha",
+      zipcode: "67712",
+      state: "Asir Region",
       price: 720000,
       bedrooms: 3,
       bathrooms: 2,
@@ -99,5 +126,5 @@ export function getSaudiProperties(): PropertyType[] {
       lat: 19.9764,
       lng: 42.5902,
     },
-  ]
+  ];
 }

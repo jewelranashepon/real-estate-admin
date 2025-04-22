@@ -24,14 +24,11 @@ export default async function MainLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale}>
-      <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SearchProvider>
             <main className="grow shrink-0 overflow-y-auto">{children}</main>
           </SearchProvider>
         </NextIntlClientProvider>
-      </body>
-    </html>
+    
   );
 }
