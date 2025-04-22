@@ -5,13 +5,20 @@ import PropertyList from "./property-list";
 import SearchBar from "./search-bar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapIcon, ListIcon, SlidersHorizontal, UserIcon, MessageCircle, Briefcase } from "lucide-react";
+import {
+  MapIcon,
+  ListIcon,
+  SlidersHorizontal,
+  UserIcon,
+  MessageCircle,
+  Briefcase,
+} from "lucide-react";
 
 import { useTranslations } from "next-intl";
 // import { useSearch } from "./lib/search-context";
 import { Link } from "@/i18n/navigation";
 import { signOut, useSession } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import Typography from "@mui/material/Typography";
 import { useState } from "react"; // Importing useState to manage chat visibility
 import { useSearch } from "@/lib/search-context";
@@ -62,9 +69,8 @@ export default function DesktopView() {
               </Link>
             ) : null}
 
-       
-           {/* Navbar Chat Button */}
-           <button
+            {/* Navbar Chat Button */}
+            <button
               onClick={toggleChat}
               className="flex items-center gap-1 font-bold text-gray-700 hover:text-gray-900"
             >
@@ -130,9 +136,10 @@ export default function DesktopView() {
       </div>
 
       {/* Conditionally render the Chat component at the bottom of the screen */}
-          {/* Conditionally render the Chat component */}
-          {isChatOpen && <Chat isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />}
-
+      {/* Conditionally render the Chat component */}
+      {isChatOpen && (
+        <Chat isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />
+      )}
     </main>
   );
 }
@@ -189,7 +196,6 @@ function SearchResults() {
           </div>
         </TabsContent>
       </Tabs>
-      
     </>
   );
 }

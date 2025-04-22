@@ -1,6 +1,5 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname, Link } from "@/i18n/navigation";
 import {
   BarChart3,
   Building2,

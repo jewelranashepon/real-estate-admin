@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { signOut, useSession } from "@/lib/auth-client";
 import LanguageSelector from "../home/language-selector";
 
@@ -38,7 +38,7 @@ export default function AdminHeader() {
 
       {/* Right side */}
       <div className="ml-auto flex items-center gap-4">
-        <LanguageSelector/>
+        <LanguageSelector />
         {/* Notifications */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

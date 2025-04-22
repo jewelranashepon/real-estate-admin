@@ -25,7 +25,7 @@
 // import { FormError } from "@/components/FormError";
 // import { useState } from "react";
 // import { toast } from "sonner";
-// import { useRouter } from "next/navigation";
+// import { useRouter } from "@/i18n/navigation";
 // import { signUpSchema } from "@/validators/authValidators";
 // import { signUp } from "@/lib/auth-client";
 
@@ -51,8 +51,6 @@
 //     },
 //   });
 
- 
-
 //    const onSubmit = async (values: yup.InferType<typeof signUpSchema>) => {
 //       await signUp.email(
 //         {
@@ -76,7 +74,6 @@
 //         }
 //       );
 //     };
-  
 
 //   return (
 //     <div className="flex min-h-screen items-center justify-center px-4 py-12">
@@ -187,16 +184,6 @@
 
 // export default CreateUserForm;
 
-
-
-
-
-
-
-
-
-
-
 "use client";
 
 import * as yup from "yup";
@@ -224,7 +211,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/FormError";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { signUpSchema } from "@/validators/authValidators";
 import { signUp } from "@/lib/auth-client";
 
@@ -232,7 +219,10 @@ import { signUp } from "@/lib/auth-client";
 const createUserSchema = yup.object().shape({
   name: yup.string().required("Full name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  password: yup.string().min(6, "Minimum 6 characters").required("Password is required"),
+  password: yup
+    .string()
+    .min(6, "Minimum 6 characters")
+    .required("Password is required"),
 });
 
 type CreateUserFormData = yup.InferType<typeof createUserSchema>;
@@ -288,7 +278,9 @@ const CreateUserForm = () => {
             height={64}
             className="mx-auto"
           />
-          <CardTitle className="text-2xl font-semibold">Create New User</CardTitle>
+          <CardTitle className="text-2xl font-semibold">
+            Create New User
+          </CardTitle>
           <CardDescription className="text-gray-500">
             Fill out the form below to add a new user to the system.
           </CardDescription>
@@ -360,7 +352,10 @@ const CreateUserForm = () => {
 
               {/* Server Error */}
               {formError && (
-                <FormError className="mt-4 text-sm text-red-600" message={formError} />
+                <FormError
+                  className="mt-4 text-sm text-red-600"
+                  message={formError}
+                />
               )}
 
               {/* Submit */}

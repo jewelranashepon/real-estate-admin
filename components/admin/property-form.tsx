@@ -22,16 +22,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { createProperty, updateProperty } from "@/lib/actions";
 import { toast } from "@/components/ui/use-toast";
-import {
-  Loader2,
-  ArrowLeft,
-  ArrowRight,
-  X,
-  Check,
-} from "lucide-react";
+import { Loader2, ArrowLeft, ArrowRight, X, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 // Stepper component
@@ -60,7 +54,7 @@ export function PropertyForm({
   propertyTypes,
   propertyStatuses,
 }: PropertyFormProps) {
-  const t = useTranslations('dashboard')
+  const t = useTranslations("dashboard");
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -224,7 +218,7 @@ export function PropertyForm({
           <div className="space-y-4">
             <div className="grid gap-6 md:grid-cols-2">
               <FormItem>
-                <FormLabel>{t('propertyName')}</FormLabel>
+                <FormLabel>{t("propertyName")}</FormLabel>
                 <FormControl>
                   <Input
                     name="name"
@@ -235,12 +229,12 @@ export function PropertyForm({
                   />
                 </FormControl>
                 <FormDescription>
-                  {t('propertyNamePlaceholder')}
+                  {t("propertyNamePlaceholder")}
                 </FormDescription>
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('price')}</FormLabel>
+                <FormLabel>{t("price")}</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -252,12 +246,12 @@ export function PropertyForm({
                   />
                 </FormControl>
                 <FormDescription>
-                 {t('propertyPricePlaceholder')}
+                  {t("propertyPricePlaceholder")}
                 </FormDescription>
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('propertyType')}</FormLabel>
+                <FormLabel>{t("propertyType")}</FormLabel>
                 <Select
                   name="typeId"
                   value={formData.typeId}
@@ -277,11 +271,13 @@ export function PropertyForm({
                     ))}
                   </SelectContent>
                 </Select>
-                <FormDescription>{t('propertyTypePlaceholder')}</FormDescription>
+                <FormDescription>
+                  {t("propertyTypePlaceholder")}
+                </FormDescription>
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('status')}</FormLabel>
+                <FormLabel>{t("status")}</FormLabel>
                 <Select
                   name="statusId"
                   value={formData.statusId}
@@ -290,7 +286,7 @@ export function PropertyForm({
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder={t('selectStatus')} />
+                      <SelectValue placeholder={t("selectStatus")} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -302,13 +298,13 @@ export function PropertyForm({
                   </SelectContent>
                 </Select>
                 <FormDescription>
-                 {t('propertyStatusPlaceholder')}
+                  {t("propertyStatusPlaceholder")}
                 </FormDescription>
               </FormItem>
             </div>
 
             <FormItem>
-              <FormLabel>{t('description')}</FormLabel>
+              <FormLabel>{t("description")}</FormLabel>
               <FormControl>
                 <Textarea
                   name="description"
@@ -319,9 +315,7 @@ export function PropertyForm({
                   required
                 />
               </FormControl>
-              <FormDescription>
-                {t('descriptionPlaceholder')}
-              </FormDescription>
+              <FormDescription>{t("descriptionPlaceholder")}</FormDescription>
             </FormItem>
           </div>
         );
@@ -331,7 +325,7 @@ export function PropertyForm({
           <div className="space-y-4">
             <div className="grid gap-6 md:grid-cols-3">
               <FormItem>
-                <FormLabel>{t('bedrooms')}</FormLabel>
+                <FormLabel>{t("bedrooms")}</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -344,7 +338,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('bathrooms')}</FormLabel>
+                <FormLabel>{t("bathrooms")}</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -357,7 +351,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('parkingSpots')}</FormLabel>
+                <FormLabel>{t("parkingSpots")}</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -372,7 +366,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('area')} (sq ft)</FormLabel>
+                <FormLabel>{t("area")} (sq ft)</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -397,10 +391,8 @@ export function PropertyForm({
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>{t('swimmingPool')}</FormLabel>
-                  <FormDescription>
-                    {t('hasSwimmingPool')}
-                  </FormDescription>
+                  <FormLabel>{t("swimmingPool")}</FormLabel>
+                  <FormDescription>{t("hasSwimmingPool")}</FormDescription>
                 </div>
               </FormItem>
 
@@ -415,10 +407,8 @@ export function PropertyForm({
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>{t('gardenYard')}</FormLabel>
-                  <FormDescription>
-                   {t('hasGardenYard')}
-                  </FormDescription>
+                  <FormLabel>{t("gardenYard")}</FormLabel>
+                  <FormDescription>{t("hasGardenYard")}</FormDescription>
                 </div>
               </FormItem>
 
@@ -433,8 +423,8 @@ export function PropertyForm({
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>{t('balcony')}</FormLabel>
-                  <FormDescription>{t('hasBalcony')}</FormDescription>
+                  <FormLabel>{t("balcony")}</FormLabel>
+                  <FormDescription>{t("hasBalcony")}</FormDescription>
                 </div>
               </FormItem>
             </div>
@@ -446,7 +436,7 @@ export function PropertyForm({
           <div className="space-y-4">
             <div className="grid gap-6 md:grid-cols-2">
               <FormItem>
-                <FormLabel>{t('streetAddress')}</FormLabel>
+                <FormLabel>{t("streetAddress")}</FormLabel>
                 <FormControl>
                   <Input
                     name="streetAddress"
@@ -461,7 +451,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('city')}</FormLabel>
+                <FormLabel>{t("city")}</FormLabel>
                 <FormControl>
                   <Input
                     name="city"
@@ -474,7 +464,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('state')}</FormLabel>
+                <FormLabel>{t("state")}</FormLabel>
                 <FormControl>
                   <Input
                     name="state"
@@ -487,7 +477,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('zipCode')}</FormLabel>
+                <FormLabel>{t("zipCode")}</FormLabel>
                 <FormControl>
                   <Input
                     name="zip"
@@ -500,7 +490,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('region')}</FormLabel>
+                <FormLabel>{t("region")}</FormLabel>
                 <FormControl>
                   <Input
                     name="region"
@@ -513,7 +503,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('landmark')}</FormLabel>
+                <FormLabel>{t("landmark")}</FormLabel>
                 <FormControl>
                   <Input
                     name="landmark"
@@ -584,7 +574,7 @@ export function PropertyForm({
           <div className="space-y-4">
             <div className="grid gap-6 md:grid-cols-2">
               <FormItem>
-                <FormLabel>{t('contactName')}</FormLabel>
+                <FormLabel>{t("contactName")}</FormLabel>
                 <FormControl>
                   <Input
                     name="contactName"
@@ -599,7 +589,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem>
-                <FormLabel>{t('contactPhone')}</FormLabel>
+                <FormLabel>{t("contactPhone")}</FormLabel>
                 <FormControl>
                   <Input
                     name="contactPhone"
@@ -614,7 +604,7 @@ export function PropertyForm({
               </FormItem>
 
               <FormItem className="md:col-span-2">
-                <FormLabel>{t('contactEmail')}</FormLabel>
+                <FormLabel>{t("contactEmail")}</FormLabel>
                 <FormControl>
                   <Input
                     name="contactEmail"
@@ -674,12 +664,12 @@ export function PropertyForm({
             onClick={prevStep}
             disabled={currentStep === 0}
           >
-            <ArrowLeft className="mr-2 h-4 w-4" /> {t('previous')}
+            <ArrowLeft className="mr-2 h-4 w-4" /> {t("previous")}
           </Button>
 
           {currentStep < steps.length - 1 ? (
             <Button type="button" onClick={nextStep}>
-              {t('next')} <ArrowRight className="ml-2 h-4 w-4" />
+              {t("next")} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           ) : (
             <Button type="submit" disabled={isSubmitting}>
