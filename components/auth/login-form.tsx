@@ -155,7 +155,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -171,7 +171,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { Locale } from "@/i18n/routing";
+import { useLocale } from "next-intl";
 
 // Updated regex for Bangladeshi phone numbers (starts with +880 or 01)
 const phoneRegex = /^(?:\+?880|0)1[3-9]\d{8}$/;
@@ -184,9 +184,10 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export function LoginForm({ locale }: { locale: Locale }) {
+export function LoginForm() {
   const [step, setStep] = useState<"phone" | "verification">("phone");
   const router = useRouter();
+  const locale = useLocale();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -195,11 +196,7 @@ export function LoginForm({ locale }: { locale: Locale }) {
     },
   });
 
-  const onSubmit = async (data: LoginFormValues) => {
-    // In a real app, this would call an API to send OTP
-    console.log("Form data:", data);
-    setStep("verification");
-  };
+  const onSubmit = async (data: LoginFormValues) => {};
 
   const isArabic = locale === "ar";
   const dir = isArabic ? "rtl" : "ltr";
@@ -302,10 +299,7 @@ export function LoginForm({ locale }: { locale: Locale }) {
               </p>
             </div>
 
-            <Button
-              className="w-full"
-              onClick={() => router.push("/dashboard")}
-            >
+            <Button className="w-full" onClick={() => router.push("/admin")}>
               {isArabic ? "تسجيل الدخول" : "Login"}
             </Button>
           </div>

@@ -8,6 +8,7 @@ import { getUsers, getAgents } from "@/lib/actions";
 import { AgentGrid } from "@/components/admin/agent-grid";
 import { AgentCard } from "@/components/admin/agent-card";
 import { getTranslations } from "next-intl/server";
+import { getSession } from "@/lib/getSession";
 
 export const metadata: Metadata = {
   title: "Users & Agents | Real Estate Admin",
@@ -18,12 +19,18 @@ export default async function UsersPage() {
   const [users, agents] = await Promise.all([getUsers(), getAgents()]);
   const t = await getTranslations("dashboard");
 
+  const session = await getSession();
+  const userRole = session?.user?.role || null;
+  
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">
           {t("usersAndAgents")}
         </h1>
+
+        {userRole === "admin" && (
         <div className="flex gap-2">
           <Button asChild variant="outline">
             <Link href="/admin/users/new-user">
@@ -38,6 +45,7 @@ export default async function UsersPage() {
             </Link>
           </Button>
         </div>
+        )}
       </div>
 
       <Tabs defaultValue="agents" className="w-full">

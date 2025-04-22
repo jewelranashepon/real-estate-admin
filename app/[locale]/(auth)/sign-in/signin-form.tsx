@@ -123,12 +123,15 @@ const LoginPage = () => {
             </form>
           </Form>
           <div className="mt-5 text-center text-sm">
-            <Link
-              href="/auth/forgot-password"
-              className="text-green-500 hover:underline"
-            >
-              {t("auth.forgotPassword")}
-            </Link>
+            <p>
+              Do not have an account?{" "}
+              <Link
+                href="/sign-up"
+                className="font-medium text-primary hover:underline underline-offset-4"
+              >
+                Sign Up
+              </Link>
+            </p>
           </div>
         </CardContent>
       </Card>
