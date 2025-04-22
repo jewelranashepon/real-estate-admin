@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { getProperties } from "@/lib/data"
+// import { getSaudiProperties } from "@/lib/data"
+import { getSaudiProperties as fetchSaudiProperties } from "@/lib/data"
 import type { PropertyType } from "@/lib/types"
 import { AlertCircle, MapPin } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -75,8 +76,8 @@ export default function PropertyMap() {
     try {
       // Initialize map
       const newMap = new window.google.maps.Map(mapRef.current, {
-        center: { lat: 40.7128, lng: -74.006 }, // New York coordinates
-        zoom: 12,
+        center: { lat: 23.8859, lng: 45.0792 }, // Saudi Arabia coordinates
+        zoom: 5, // Zoomed out to show the whole country
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
@@ -104,14 +105,14 @@ export default function PropertyMap() {
     setMarkers([])
 
     // Add property markers
-    const properties = getProperties()
+    const properties = fetchSaudiProperties()
     try {
       const newMarkers = properties.map((property) => {
         const marker = new window.google.maps.Marker({
           position: { lat: property.lat, lng: property.lng },
           map,
           label: {
-            text: `$${Math.floor(property.price / 1000)}k`,
+            text: `${Math.floor(property.price / 1000)}k`,
             color: "white",
           },
           icon: {
@@ -142,7 +143,7 @@ export default function PropertyMap() {
     return `
       <div style="width: 200px; padding: 5px;">
         <img src="${property.imageUrl}" alt="${property.address}" style="width: 100%; height: 120px; object-fit: cover; margin-bottom: 8px;" />
-        <div style="font-weight: bold; font-size: 16px;">$${property.price.toLocaleString()}</div>
+        <div style="font-weight: bold; font-size: 16px;">${property.price.toLocaleString()} SAR</div>
         <div style="font-size: 14px;">${property.bedrooms} bd • ${property.bathrooms} ba • ${property.sqft.toLocaleString()} sqft</div>
         <div style="font-size: 14px; color: #666;">${property.address}</div>
       </div>
@@ -189,13 +190,13 @@ export default function PropertyMap() {
         <div className="mt-6 w-full">
           <h3 className="text-lg font-semibold mb-4">Property Locations:</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {getProperties().map((property) => (
+            {fetchSaudiProperties().map((property) => (
               <div key={property.id} className="bg-white p-4 rounded-lg shadow-sm flex items-center">
                 <div className="bg-red-100 p-2 rounded-full mr-3">
                   <MapPin className="h-5 w-5 text-red-500" />
                 </div>
                 <div>
-                  <p className="font-medium">${property.price.toLocaleString()}</p>
+                  <p className="font-medium">${property.price.toLocaleString()} SAR</p>
                   <p className="text-sm text-gray-600">{property.address}</p>
                 </div>
               </div>
@@ -217,4 +218,3 @@ export default function PropertyMap() {
 
   return <div ref={mapRef} className="w-full h-full" />
 }
-
