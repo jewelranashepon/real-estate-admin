@@ -59,11 +59,11 @@ export default function AdminSidebar() {
     <div
       className={`flex flex-col h-screen transition-all duration-300 ${
         collapsed ? "w-20" : "w-72"
-      } bg-zinc-900 text-white shadow-2xl md:rounded-r-xl`}
+      } bg-gradient-to-b from-emerald-700 via-emerald-800 to-emerald-900 text-white shadow-2xl md:rounded-r-xl`}
     >
       {/* Header */}
       <SidebarHeader
-        className={`h-16 border-b border-zinc-800 ${
+        className={`h-16 border-b border-green-800 ${
           collapsed
             ? "flex items-center justify-center px-6"
             : "flex items-center pl-0 pr-4"
@@ -71,26 +71,26 @@ export default function AdminSidebar() {
       >
         <div className="flex items-center justify-between w-full">
           {!collapsed && (
-            <Link href="/admin" className="flex items-center gap-3">
-              <Building2 className="h-6 w-6 text-primary" />
+            <Link href="/admin" className="flex items-center gap-3 ml-4">
+              <Building2 className="h-6 w-6 text-white" />
               <div className="hidden md:flex flex-col leading-tight">
                 <span className="text-base font-semibold text-white">
                   Birds of Eden
                 </span>
-                <span className="text-sm text-zinc-400 font-medium tracking-wide">
+                <span className="text-sm text-white font-medium tracking-wide">
                   Admin Panel
                 </span>
               </div>
             </Link>
           )}
           <button
-            className="text-zinc-400 hover:text-white md:hidden"
+            className="text-white hover:text-white md:hidden"
             onClick={() => setMobileOpen(false)}
           >
             <X className="h-6 w-6" />
           </button>
           <button
-            className={`text-zinc-400 hover:text-white ${
+            className={`text-white hover:text-white ${
               collapsed ? "" : "hidden md:block"
             }`}
             onClick={() => setCollapsed((prev) => !prev)}
@@ -113,7 +113,7 @@ export default function AdminSidebar() {
                   className={`group relative flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all ${
                     active
                       ? "bg-primary/90 text-white shadow-md border-l-4 "
-                      : "hover:bg-zinc-800 hover:text-white text-zinc-400"
+                      : "hover:bg-green-950 text-white"
                   }`}
                 >
                   <Link href={path} className="flex items-center w-full">
@@ -122,7 +122,7 @@ export default function AdminSidebar() {
                       className={`h-5 w-5 shrink-0 transition-colors ${
                         active
                           ? "text-black"
-                          : "text-zinc-400 group-hover:text-white"
+                          : "text-white group-hover:text-white"
                       }`}
                     />
 
@@ -131,7 +131,7 @@ export default function AdminSidebar() {
                         className={`ml-3 text-base font-medium transition-colors ${
                           active
                             ? "text-black"
-                            : "text-zinc-400 group-hover:text-white"
+                            : "text-white group-hover:text-white"
                         }`}
                       >
                         {label}
@@ -156,7 +156,7 @@ export default function AdminSidebar() {
       </SidebarContent>
 
       {/* Footer */}
-      <SidebarFooter className="mt-auto border-t border-zinc-800 px-4 py-3 bg-zinc-950">
+      <SidebarFooter className="mt-auto border-t border-green-800 px-4 py-3 ">
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-primary/20 text-white flex items-center justify-center font-bold shadow-inner">
             AD
@@ -164,7 +164,7 @@ export default function AdminSidebar() {
           {!collapsed && (
             <div className="flex flex-col">
               <span className="text-sm font-medium text-white">Admin User</span>
-              <span className="text-xs text-zinc-400">admin@example.com</span>
+              <span className="text-xs text-white">admin@example.com</span>
             </div>
           )}
         </div>
