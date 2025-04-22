@@ -88,5 +88,16 @@ export function getSaudiProperties(): PropertyType[] {
       lat: 26.4207,
       lng: 50.0887,
     },
+    {
+      id: "sa9",
+      address: "Al Khaledia, Bisha",
+      price: 720000,
+      bedrooms: 3,
+      bathrooms: 2,
+      sqft: 1900,
+      imageUrl: "/pj6.jpg",
+      lat: 19.9764,
+      lng: 42.5902,
+    },
   ]
 }

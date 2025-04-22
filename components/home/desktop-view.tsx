@@ -32,7 +32,7 @@ export default function DesktopView() {
   const t = useTranslations("app");
   const session = useSession();
   const changeLanguage = (lang: string) => {
-    router.push(`/${lang}`);
+    router.push(`/`, { locale: lang });
   };
 
   // State to manage chat visibility
