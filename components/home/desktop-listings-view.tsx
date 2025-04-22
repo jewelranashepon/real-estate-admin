@@ -189,7 +189,7 @@ export default function DesktopListingsView() {
         <div className="bg-white rounded-lg shadow-md mt-5 divide-y">
           {propertyListings.map((property, index) => (
             <Link
-              href={`/${locale}/property/${property.id}`}
+              href={`/property/${property.id}`}
               key={property.id}
               className="block"
             >
