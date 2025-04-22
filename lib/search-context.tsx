@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, type ReactNode } from "react"
 import type { PropertyType } from "./types"
-import { getProperties } from "./data"
+import { getSaudiProperties } from "./data"
 
 interface SearchContextType {
   searchQuery: string
@@ -19,7 +19,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
 
   // Filter properties based on search query
   const filteredProperties = React.useMemo(() => {
-    const properties = getProperties()
+    const properties = getSaudiProperties()
     if (!searchQuery.trim()) return properties
 
     const query = searchQuery.toLowerCase().trim()
@@ -45,7 +45,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         setSearchLocation(query)
       }
     } else {
-      setSearchLocation("New York")
+      setSearchLocation("Saudi Arabia")
     }
   }, [searchQuery])
 

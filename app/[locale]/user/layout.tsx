@@ -17,7 +17,7 @@ const UserDashboardLayout = async ({
     redirect({ href: "/", locale });
   }
 
-  if (role === "admin" || "support") {
+  if (role === "admin" || role==="support") {
     redirect({ href: "/admin", locale });
   }
 
@@ -26,6 +26,7 @@ const UserDashboardLayout = async ({
   }
 
   return children;
+
 };
 
 export default UserDashboardLayout;
