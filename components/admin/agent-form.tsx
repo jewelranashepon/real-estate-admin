@@ -925,7 +925,7 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <Tabs defaultValue="basic" className="w-full">
+        <Tabs defaultValue="basic" className="w-full ">
           <TabsList className="grid w-full max-w-md grid-cols-3">
             <TabsTrigger value="basic">Basic Info</TabsTrigger>
             <TabsTrigger value="details">Details</TabsTrigger>
@@ -1377,15 +1377,20 @@ export function AgentForm({ agent, users = [] }: AgentFormProps) {
           </TabsContent>
         </Tabs>
 
-        <CardFooter className="flex justify-between px-0">
+        <CardFooter className="flex gap-5 px-0 justify-end">
           <Button
             type="button"
             variant="outline"
             onClick={() => router.push("/admin/users")}
+            className="bg-red-500 text-white hover:bg-red-400"
           >
             Cancel
           </Button>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button
+            className="bg-green-700 text-white hover:bg-green-500"
+            type="submit"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
