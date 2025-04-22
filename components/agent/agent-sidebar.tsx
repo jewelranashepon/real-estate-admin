@@ -49,7 +49,7 @@ export default function AgentSidebar() {
   };
 
   return (
-    <Sidebar variant="floating" className="border-r bg-green-700">
+    <Sidebar variant="floating" className="border-r w-64">
       <SidebarHeader className="bg-green-600 text-white flex flex-col items-center justify-center py-6">
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-2">
@@ -68,10 +68,7 @@ export default function AgentSidebar() {
         <div className="mb-4 px-4 ">
           <div className="flex items-center gap-3 rounded-lg bg-muted p-3">
             <Avatar className="h-10 w-10 border-2 border-primary">
-              <AvatarImage
-                src="/placeholder.svg?height=40&width=40"
-                alt="Agent"
-              />
+              <AvatarImage src="/avatar.png" alt="Agent" />
               <AvatarFallback>AR</AvatarFallback>
             </Avatar>
             <div className="space-y-1">
@@ -206,12 +203,6 @@ export default function AgentSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-        <div className="mt-4 text-center">
-          <p className="text-xs text-muted-foreground">PropManage v1.0.0</p>
-          <p className="text-xs text-muted-foreground">
-            © 2023 PropManage Inc.
-          </p>
-        </div>
       </SidebarFooter>
     </Sidebar>
   );
