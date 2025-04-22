@@ -11,6 +11,7 @@ import {
   LogOut,
   Menu,
   X,
+  UserCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,9 +30,14 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
+import { signOut, useSession } from "@/lib/auth-client";
+import { useRouter } from "@/i18n/navigation";
 
 export default function AgentHeader() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const router = useRouter();
+  const session = useSession();
+  const user = session?.data?.user;
 
   return (
     <header className="sticky top-0 z-30 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -298,45 +304,40 @@ export default function AgentHeader() {
           {/* User profile dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-full h-8 w-8 hidden md:flex"
-              >
+              <Button variant="ghost" size="icon">
                 <Avatar className="h-10 w-10">
                   <AvatarImage src="/avatar.png" alt="Agent" />
-                  <AvatarFallback>AR</AvatarFallback>
+                  <AvatarFallback>
+                    {user?.name?.charAt(0) || "AG"}
+                  </AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Ahmed Rashid
-                  </p>
-                  <p className="text-xs leading-none text-muted-foreground">
-                    ahmed.rashid@example.com
-                  </p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem asChild>
-                  <Link href="/agent/profile">
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings className="mr-2 h-4 w-4" />
-                  <span>Settings</span>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
+                <UserCircle className="mr-2 h-4 w-4" />
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings className="mr-2 h-4 w-4" />
+                Settings
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={async () => {
+                  try {
+                    await signOut();
+                    router.push("/");
+                    router.refresh();
+                  } catch (error) {
+                    console.error("Logout failed", error);
+                  }
+                }}
+              >
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
+                Log out
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
