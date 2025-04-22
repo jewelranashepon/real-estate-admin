@@ -175,7 +175,10 @@ export async function createProperty(formData: FormData) {
       });
 
       // Create image records separately if there are any image URLs
-      if (validatedData.data?.imageUrls && validatedData.data?.imageUrls.length > 0) {
+      if (
+        validatedData.data?.imageUrls &&
+        validatedData.data?.imageUrls.length > 0
+      ) {
         console.log("Creating image records for property ID:", property.id);
 
         // Create each image record individually to ensure they're all created
