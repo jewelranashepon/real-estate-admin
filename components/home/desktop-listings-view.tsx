@@ -6,7 +6,6 @@ import { useLocale } from "next-intl";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
-  Search,
   Filter,
   MapPin,
   UserIcon,
@@ -14,16 +13,12 @@ import {
   Briefcase,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Link } from "@/i18n/navigation";
-import { Input } from "@/components/ui/input";
-import LanguageSelector from "./language-selector";
+import { Link, useRouter } from "@/i18n/navigation";
 import { propertyListings } from "@/lib/property-data";
 import type { PropertyData } from "@/lib/property-data";
 import { signOut, useSession } from "@/lib/auth-client";
-import SearchBar from "./search-bar";
 import Typography from "@mui/material/Typography";
 import Chat from "./chat";
-import { useRouter } from "@/i18n/navigation";
 
 const languageOptions = [
   { code: "en", label: "English", flag: "https://flagcdn.com/w40/us.png" },
@@ -110,7 +105,19 @@ export default function DesktopListingsView() {
               </div>
             </div>
             {session?.data ? (
-              <Button variant="outline" size="sm" onClick={() => signOut()}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  signOut({
+                    fetchOptions: {
+                      onSuccess: () => {
+                        router.refresh();
+                      },
+                    },
+                  });
+                }}
+              >
                 Log Out
               </Button>
             ) : (

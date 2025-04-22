@@ -1,69 +1,103 @@
-"use client"
+"use client";
 
-import type React from "react"
-import Image from "next/image"
-import { useLocale, useTranslations } from "next-intl"
-import { ChevronLeft, Globe, ChevronRight,CirclePlus, Search,User, MessageSquare, Grip, Headset, HandHelping, Podcast, ShieldMinus, FolderCode,UserIcon, MessageCircle, Briefcase } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { useIsMobile } from "@/hooks/use-mobile"
-import { Link } from "@/i18n/navigation"
-import { signOut, useSession } from "@/lib/auth-client"
+import type React from "react";
+import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
+import {
+  ChevronLeft,
+  ChevronRight,
+  CirclePlus,
+  Search,
+  User,
+  MessageSquare,
+  Grip,
+  Headset,
+  HandHelping,
+  Podcast,
+  ShieldMinus,
+  FolderCode,
+  UserIcon,
+  MessageCircle,
+  Briefcase,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Link, useRouter } from "@/i18n/navigation";
+import { signOut, useSession } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
-import LanguageSelector from "@/components/home/language-selector"
+import LanguageSelector from "@/components/home/language-selector";
 
 export default function ServicesPage() {
-  const locale = useLocale()
-  const isMobile = useIsMobile()
-  
- 
+  const locale = useLocale();
+  const isMobile = useIsMobile();
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {isMobile ? <MobileView locale={locale} /> : <DesktopView locale={locale} />}
+      {isMobile ? (
+        <MobileView locale={locale} />
+      ) : (
+        <DesktopView locale={locale} />
+      )}
     </div>
-  )
+  );
 }
 
 function MobileView({ locale }: { locale: string }) {
-  const t = useTranslations("app")
-  const session = useSession()
+  const t = useTranslations("app");
+  const session = useSession();
+  const router = useRouter();
   return (
     <div className="mx-auto h-screen max-w-md overflow-hidden bg-white">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
         <div className="flex items-center">
           <ChevronLeft className="mr-1 h-5 w-5" />
-         <Link href="/"> <span className="text-sm font-medium">{t("listings.title")}</span></Link>
+          <Link href="/">
+            {" "}
+            <span className="text-sm font-medium">{t("listings.title")}</span>
+          </Link>
         </div>
-        
+
         <div className="ml-auto flex items-center gap-4">
-            <LanguageSelector />
-            {session?.data ? (
-              <Button variant="outline" size="sm" onClick={() => signOut()}>
-                Log Out
-              </Button>
-            ) : (
-              <>
-                <Link href="/sign-in">
-                  <Button variant="outline" size="sm">
-                    {t("auth.signIn")}
-                  </Button>
-                </Link>
-                <Link href="/sign-up">
-                  <Button size="sm" className="bg-green-600 hover:bg-green-500">
-                    {t("auth.signUp")}
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
+          <LanguageSelector />
+          {session?.data ? (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      router.refresh();
+                    },
+                  },
+                });
+              }}
+            >
+              Log Out
+            </Button>
+          ) : (
+            <>
+              <Link href="/sign-in">
+                <Button variant="outline" size="sm">
+                  {t("auth.signIn")}
+                </Button>
+              </Link>
+              <Link href="/sign-up">
+                <Button size="sm" className="bg-green-600 hover:bg-green-500">
+                  {t("auth.signUp")}
+                </Button>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Search bar */}
       <div className="px-4 py-3  ">
         <div className=" flex items-center justify-center rounded-md border border-green-600 px-3 py-2.5">
           <div className="mr-2 text-green-500">
-          <Headset />
+            <Headset />
           </div>
           <span className="text-sm text-green-500">{t("service.cs")}</span>
         </div>
@@ -71,22 +105,26 @@ function MobileView({ locale }: { locale: string }) {
 
       {/* Service categories */}
       <div className="grid grid-cols-3 gap-4 px-4 py-3">
-  {[
-    { icon: <Podcast />, title: t("service.subscription") },
-    { icon: <ShieldMinus />, title: t("service.PS") },
-    { icon: <FolderCode />, title: t("service.DS") },
-  ].map((item, index) => (
-    <div key={index} className="flex flex-col items-center justify-center border rounded-lg p-4 shadow-sm">
-      <div className="text-black text-2xl">{item.icon}</div>
-      <span className="mt-2 text-sm font-medium text-black text-center">{item.title}</span>
-    </div>
-  ))}
-</div>
-      
-      
+        {[
+          { icon: <Podcast />, title: t("service.subscription") },
+          { icon: <ShieldMinus />, title: t("service.PS") },
+          { icon: <FolderCode />, title: t("service.DS") },
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center border rounded-lg p-4 shadow-sm"
+          >
+            <div className="text-black text-2xl">{item.icon}</div>
+            <span className="mt-2 text-sm font-medium text-black text-center">
+              {item.title}
+            </span>
+          </div>
+        ))}
+      </div>
+
       <div className="flex ml-5">
-      <HandHelping />
-      <p className="ml-2">{t("service.services")}</p>
+        <HandHelping />
+        <p className="ml-2">{t("service.services")}</p>
       </div>
       {/* Service list */}
       <div className="mt-2 flex-1 px-4 py-3">
@@ -99,11 +137,11 @@ function MobileView({ locale }: { locale: string }) {
         </div>
       </div>
 
-      <div className = "flex ml-5">
-        <img src="/Boed2.png " width={75} height={75}/>
+      <div className="flex ml-5">
+        <img src="/Boed2.png " width={75} height={75} />
         <p className="mt-5 ml-3">Birds of Eden App</p>
-        </div>
-        <div className="mt-2 flex-1 px-4 py-3">
+      </div>
+      <div className="mt-2 flex-1 px-4 py-3">
         <div className="overflow-hidden rounded-xl bg-white shadow-sm border border-gray-200">
           <ServiceItem title={t("service.BREB")} />
           <ServiceItem title={t("service.LD")} isLast />
@@ -112,29 +150,18 @@ function MobileView({ locale }: { locale: string }) {
       {/* Bottom navigation */}
       <div className="fixed bottom-0 left-0 right-0 flex h-16 items-center justify-between border-t border-gray-200 bg-white px-6">
         <NavItem icon={<User className="h-6 w-6" />} label="Profile" active />
-        <NavItem
-          icon=
-            {<Search size={20} />}
-          
-          label="Search"
-        />
-        <NavItem
-          icon={<CirclePlus size={20} />}
-          label="Add"
-        />
+        <NavItem icon={<Search size={20} />} label="Search" />
+        <NavItem icon={<CirclePlus size={20} />} label="Add" />
         <NavItem icon={<MessageSquare className="h-6 w-6" />} label="Chat" />
-        <NavItem
-         icon={<Grip size={20} />}
-          label="Service"
-        />
+        <NavItem icon={<Grip size={20} />} label="Service" />
       </div>
     </div>
-  )
+  );
 }
 
 // Replace the entire DesktopView function with this more professional version
 function DesktopView({ locale }: { locale: string }) {
-  const t = useTranslations('service');
+  const t = useTranslations("service");
   const session = useSession();
   return (
     <div className="min-h-screen bg-gray-50">
@@ -143,30 +170,45 @@ function DesktopView({ locale }: { locale: string }) {
         <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
           <div className="flex items-center">
             <div className="relative mr-3">
-             <Link href="/">
-             <Image src="/Boed Logo.png" alt="Birds Of Eden" width={95} height={95}  className="object-contain" />
-             </Link>
+              <Link href="/">
+                <Image
+                  src="/Boed Logo.png"
+                  alt="Birds Of Eden"
+                  width={95}
+                  height={95}
+                  className="object-contain"
+                />
+              </Link>
             </div>
-            
           </div>
           <div className="flex items-center space-x-4">
-          <nav className="ml-auto flex items-center gap-6">
-            <Link href="/services" className="flex items-center gap-1 text-bold hover:text-gray-900">
-              <Briefcase className="h-5 w-5" /> Service
-            </Link>
-            <Link href="/chat" className="flex items-center gap-1 text-bold hover:text-gray-900">
-              <MessageCircle className="h-5 w-5" />Chat
-            </Link>
-            {session?.data ? (
-              <Link href="/profile" className="flex items-center gap-1 text-bold hover:text-gray-900">
-                <UserIcon className="h-5 w-5" /> Profile
+            <nav className="ml-auto flex items-center gap-6">
+              <Link
+                href="/services"
+                className="flex items-center gap-1 text-bold hover:text-gray-900"
+              >
+                <Briefcase className="h-5 w-5" /> Service
               </Link>
-            ) : null}
-          </nav>
-             <LanguageSelector/>
-           
+              <Link
+                href="/chat"
+                className="flex items-center gap-1 text-bold hover:text-gray-900"
+              >
+                <MessageCircle className="h-5 w-5" />
+                Chat
+              </Link>
+              {session?.data ? (
+                <Link
+                  href="/profile"
+                  className="flex items-center gap-1 text-bold hover:text-gray-900"
+                >
+                  <UserIcon className="h-5 w-5" /> Profile
+                </Link>
+              ) : null}
+            </nav>
+            <LanguageSelector />
+
             <button className="flex items-center space-x-2 bg-green-50 text-green-600 px-4 py-2 rounded-md hover:bg-green-100 transition-colors">
-              <span className="font-medium">{t('contactUs')}</span>
+              <span className="font-medium">{t("contactUs")}</span>
             </button>
           </div>
         </div>
@@ -176,17 +218,19 @@ function DesktopView({ locale }: { locale: string }) {
         {/* Breadcrumb */}
         <div className="flex items-center text-sm text-gray-500 mb-8">
           <a href="#" className="hover:text-green-600 transition-colors">
-            {t('home')}
+            {t("home")}
           </a>
           <ChevronRight className="h-4 w-4 mx-2" />
-          <span className="font-medium text-gray-700">{t('service')}</span>
+          <span className="font-medium text-gray-700">{t("service")}</span>
         </div>
 
         {/* Page title */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">{t('ourServices')}</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+            {t("ourServices")}
+          </h2>
           <p className="text-gray-600 max-w-3xl">
-            {t('ourServicesDescription')}
+            {t("ourServicesDescription")}
           </p>
         </div>
 
@@ -194,7 +238,13 @@ function DesktopView({ locale }: { locale: string }) {
         <div className="mb-10">
           <div className="flex items-center rounded-lg border border-gray-300 px-4 py-3 max-w-xl bg-white shadow-sm hover:shadow transition-shadow">
             <div className="mr-3 text-green-500">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
                   stroke="currentColor"
@@ -211,17 +261,27 @@ function DesktopView({ locale }: { locale: string }) {
                 />
               </svg>
             </div>
-            <span className="text-base text-gray-500">{t('customerService')}</span>
+            <span className="text-base text-gray-500">
+              {t("customerService")}
+            </span>
           </div>
         </div>
 
         {/* Service categories */}
         <div className="mb-12">
-          <h3 className="text-lg font-semibold text-gray-800 mb-6">{t('serviceCategories')}</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-6">
+            {t("serviceCategories")}
+          </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <ProfessionalServiceCategory
               icon={
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M11 4H4V11H11V4Z"
                     stroke="currentColor"
@@ -257,7 +317,13 @@ function DesktopView({ locale }: { locale: string }) {
             />
             <ProfessionalServiceCategory
               icon={
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
                     stroke="currentColor"
@@ -274,12 +340,18 @@ function DesktopView({ locale }: { locale: string }) {
                   />
                 </svg>
               }
-              title={t('sellingAndLeasing')}
-              description={t('sellingAndLeasingDescription')}
+              title={t("sellingAndLeasing")}
+              description={t("sellingAndLeasingDescription")}
             />
             <ProfessionalServiceCategory
               icon={
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
                     stroke="currentColor"
@@ -303,12 +375,18 @@ function DesktopView({ locale }: { locale: string }) {
                   />
                 </svg>
               }
-              title={t('developerServices')}
-              description={t('developerServicesDescription')}
+              title={t("developerServices")}
+              description={t("developerServicesDescription")}
             />
             <ProfessionalServiceCategory
               icon={
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
                     stroke="currentColor"
@@ -339,19 +417,21 @@ function DesktopView({ locale }: { locale: string }) {
                   />
                 </svg>
               }
-              title={t('professionalServices')}
-              description={t('professionalServicesDescription')}
+              title={t("professionalServices")}
+              description={t("professionalServicesDescription")}
             />
           </div>
         </div>
 
         {/* Service list */}
         <div className="mb-12">
-          <h3 className="text-lg font-semibold text-gray-800 mb-6">{t('availableServices')}</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-6">
+            {t("availableServices")}
+          </h3>
           <div className="overflow-hidden rounded-xl bg-white shadow border border-gray-200 divide-y divide-gray-100">
             <ProfessionalServiceItem
-              title={t('todayAds')}
-              description={t('todayAdsDescription')}
+              title={t("todayAds")}
+              description={t("todayAdsDescription")}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -384,8 +464,8 @@ function DesktopView({ locale }: { locale: string }) {
               }
             />
             <ProfessionalServiceItem
-              title={t('leaseContracts')}
-              description={t('leaseContractsDescription')}
+              title={t("leaseContracts")}
+              description={t("leaseContractsDescription")}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -432,8 +512,8 @@ function DesktopView({ locale }: { locale: string }) {
               }
             />
             <ProfessionalServiceItem
-              title={t('searchRequests')}
-              description={t('searchRequestsDescription')}
+              title={t("searchRequests")}
+              description={t("searchRequestsDescription")}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -459,8 +539,8 @@ function DesktopView({ locale }: { locale: string }) {
               }
             />
             <ProfessionalServiceItem
-              title={t('exclusiveMarketing')}
-              description={t('exclusiveMarketingDescription')}
+              title={t("exclusiveMarketing")}
+              description={t("exclusiveMarketingDescription")}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -493,8 +573,8 @@ function DesktopView({ locale }: { locale: string }) {
               }
             />
             <ProfessionalServiceItem
-              title={t('birdsOfEden')}
-              description={t('birdsOfEdenDescription')}
+              title={t("birdsOfEden")}
+              description={t("birdsOfEdenDescription")}
               icon={
                 <svg
                   className="h-5 w-5 text-green-500"
@@ -526,13 +606,15 @@ function DesktopView({ locale }: { locale: string }) {
         <div className="bg-white rounded-xl shadow border border-gray-200 p-6 mb-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">{t('needAssistance')}</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                {t("needAssistance")}
+              </h3>
               <p className="text-gray-600 mb-4 md:mb-0">
-                {t('supportHelpText')}
+                {t("supportHelpText")}
               </p>
             </div>
             <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md font-medium transition-colors">
-              {t('contactSupport')}
+              {t("contactSupport")}
             </button>
           </div>
         </div>
@@ -544,18 +626,34 @@ function DesktopView({ locale }: { locale: string }) {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-4 md:mb-0">
               <div className="relative h-8 w-8 mr-3">
-                <Image src="/Boed Logo.png" alt="Birds Of Eden" fill className="object-contain" />
+                <Image
+                  src="/Boed Logo.png"
+                  alt="Birds Of Eden"
+                  fill
+                  className="object-contain"
+                />
               </div>
-              <span className="text-gray-600">© 2025 Birds of Eden Real Estate. All rights reserved.</span>
+              <span className="text-gray-600">
+                © 2025 Birds of Eden Real Estate. All rights reserved.
+              </span>
             </div>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-500 hover:text-green-600 transition-colors">
+              <a
+                href="#"
+                className="text-gray-500 hover:text-green-600 transition-colors"
+              >
                 Terms
               </a>
-              <a href="#" className="text-gray-500 hover:text-green-600 transition-colors">
+              <a
+                href="#"
+                className="text-gray-500 hover:text-green-600 transition-colors"
+              >
                 Privacy
               </a>
-              <a href="#" className="text-gray-500 hover:text-green-600 transition-colors">
+              <a
+                href="#"
+                className="text-gray-500 hover:text-green-600 transition-colors"
+              >
                 Contact
               </a>
             </div>
@@ -563,17 +661,21 @@ function DesktopView({ locale }: { locale: string }) {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
 // Add these new professional components
 interface ProfessionalServiceCategoryProps {
-  icon: React.ReactNode
-  title: string
-  description: string
+  icon: React.ReactNode;
+  title: string;
+  description: string;
 }
 
-function ProfessionalServiceCategory({ icon, title, description }: ProfessionalServiceCategoryProps) {
+function ProfessionalServiceCategory({
+  icon,
+  title,
+  description,
+}: ProfessionalServiceCategoryProps) {
   return (
     <div className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-green-200">
       <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-50 text-green-600">
@@ -582,16 +684,20 @@ function ProfessionalServiceCategory({ icon, title, description }: ProfessionalS
       <h4 className="mb-2 font-semibold text-gray-800">{title}</h4>
       <p className="text-sm text-gray-600">{description}</p>
     </div>
-  )
+  );
 }
 
 interface ProfessionalServiceItemProps {
-  title: string
-  description: string
-  icon: React.ReactNode
+  title: string;
+  description: string;
+  icon: React.ReactNode;
 }
 
-function ProfessionalServiceItem({ title, description, icon }: ProfessionalServiceItemProps) {
+function ProfessionalServiceItem({
+  title,
+  description,
+  icon,
+}: ProfessionalServiceItemProps) {
   return (
     <div className="flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors cursor-pointer">
       <div className="flex items-center">
@@ -603,12 +709,12 @@ function ProfessionalServiceItem({ title, description, icon }: ProfessionalServi
       </div>
       <ChevronRight className="h-5 w-5 text-gray-400" />
     </div>
-  )
+  );
 }
 
 interface ServiceCategoryProps {
-  icon: React.ReactNode
-  title: string
+  icon: React.ReactNode;
+  title: string;
 }
 
 function ServiceCategory({ icon, title }: ServiceCategoryProps) {
@@ -619,7 +725,7 @@ function ServiceCategory({ icon, title }: ServiceCategoryProps) {
       </div>
       <span className="text-center text-xs">{title}</span>
     </div>
-  )
+  );
 }
 
 function DesktopServiceCategory({ icon, title }: ServiceCategoryProps) {
@@ -630,51 +736,67 @@ function DesktopServiceCategory({ icon, title }: ServiceCategoryProps) {
       </div>
       <span className="text-center text-sm font-medium">{title}</span>
     </div>
-  )
+  );
 }
 
 interface ServiceItemProps {
-  title: string
-  isLast?: boolean
+  title: string;
+  isLast?: boolean;
 }
 
 function ServiceItem({ title, isLast = false }: ServiceItemProps) {
   return (
-    <div className={cn("flex items-center justify-between px-4 py-3", !isLast && "border-b border-gray-100")}>
+    <div
+      className={cn(
+        "flex items-center justify-between px-4 py-3",
+        !isLast && "border-b border-gray-100"
+      )}
+    >
       <span className="text-sm font-medium">{title}</span>
       <ChevronRight className="h-5 w-5 text-gray-400" />
     </div>
-  )
+  );
 }
 
 function DesktopServiceItem({ title, isLast = false }: ServiceItemProps) {
   return (
-    <div className={cn("flex items-center justify-between px-6 py-4", !isLast && "border-b border-gray-100")}>
+    <div
+      className={cn(
+        "flex items-center justify-between px-6 py-4",
+        !isLast && "border-b border-gray-100"
+      )}
+    >
       <span className="text-base font-medium">{title}</span>
       <ChevronRight className="h-5 w-5 text-gray-400" />
     </div>
-  )
+  );
 }
 
 interface NavItemProps {
-  icon: React.ReactNode
-  label: string
-  active?: boolean
+  icon: React.ReactNode;
+  label: string;
+  active?: boolean;
 }
 
 function NavItem({ icon, label, active = false }: NavItemProps) {
   return (
     <div className="flex flex-col items-center">
-      <div className={cn("text-gray-500", active && "text-green-500")}>{icon}</div>
-      <span className={cn("mt-1 text-xs text-gray-500", active && "text-green-500")}>{label}</span>
+      <div className={cn("text-gray-500", active && "text-green-500")}>
+        {icon}
+      </div>
+      <span
+        className={cn("mt-1 text-xs text-gray-500", active && "text-green-500")}
+      >
+        {label}
+      </span>
     </div>
-  )
+  );
 }
 
 interface SidebarNavItemProps {
-  icon: React.ReactNode
-  title: string
-  active?: boolean
+  icon: React.ReactNode;
+  title: string;
+  active?: boolean;
 }
 
 function SidebarNavItem({ icon, title, active = false }: SidebarNavItemProps) {
@@ -683,12 +805,13 @@ function SidebarNavItem({ icon, title, active = false }: SidebarNavItemProps) {
       href="#"
       className={cn(
         "flex items-center rounded-md px-3 py-2 text-sm font-medium",
-        active ? "bg-green-50 text-green-600" : "text-gray-700 hover:bg-gray-100",
+        active
+          ? "bg-green-50 text-green-600"
+          : "text-gray-700 hover:bg-gray-100"
       )}
     >
       <span className="mr-3">{icon}</span>
       {title}
     </a>
-  )
+  );
 }
-

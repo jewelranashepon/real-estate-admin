@@ -59,6 +59,7 @@ const SignupForm = () => {
         onSuccess: () => {
           toast.success("Account Creation Successful");
           router.push("/");
+          router.refresh();
         },
         onError: (ctx) => {
           setFormError(ctx.error.message);
@@ -129,7 +130,10 @@ const SignupForm = () => {
                 />
               </FormFieldset>
               <FormError message={formError} />
-              <Button type="submit" className="mt-4 w-full bg-green-600 hover:bg-green-500">
+              <Button
+                type="submit"
+                className="mt-4 w-full bg-green-600 hover:bg-green-500"
+              >
                 {t("auth.signUpButton")}
               </Button>
             </form>

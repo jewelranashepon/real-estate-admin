@@ -169,7 +169,6 @@ export function PropertyForm({
           property: {
             id: property?.id || Math.floor(Math.random() * 1000),
             name: formData.name,
-            // Other properties would be here in a real implementation
           },
         };
 

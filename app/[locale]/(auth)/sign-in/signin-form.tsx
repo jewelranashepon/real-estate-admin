@@ -28,7 +28,7 @@ import { FormError } from "../../../../components/FormError";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Link, useRouter } from "@/i18n/navigation";
-import { useTranslations } from "next-intl"
+import { useTranslations } from "next-intl";
 
 const LoginPage = () => {
   const [formError, setFormError] = useState("");
@@ -57,6 +57,7 @@ const LoginPage = () => {
         onSuccess: () => {
           toast.success("Login Successful");
           router.push("/user/dashboard");
+          router.refresh();
         },
         onError: (ctx) => {
           setFormError(ctx.error.message);
@@ -69,7 +70,7 @@ const LoginPage = () => {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
       <Card className="w-full max-w-md p-6">
         <CardHeader className="items-center">
-          <img src="/Boed Logo.png" width={100} height={100}/>
+          <img src="/Boed Logo.png" width={100} height={100} />
           <CardTitle className="text-2xl">{t("auth.login")}</CardTitle>
           <CardDescription>{t("auth.enterEmail&Password")}</CardDescription>
         </CardHeader>
@@ -113,8 +114,11 @@ const LoginPage = () => {
                 />
               </FormFieldset>
               <FormError message={formError} />
-              <Button type="submit" className="mt-4 w-full bg-green-600 hover:bg-green-500">
-              {t("auth.loginButton")}
+              <Button
+                type="submit"
+                className="mt-4 w-full bg-green-600 hover:bg-green-500"
+              >
+                {t("auth.loginButton")}
               </Button>
             </form>
           </Form>
@@ -123,7 +127,7 @@ const LoginPage = () => {
               href="/auth/forgot-password"
               className="text-green-500 hover:underline"
             >
-               {t("auth.forgotPassword")}
+              {t("auth.forgotPassword")}
             </Link>
           </div>
         </CardContent>

@@ -113,6 +113,7 @@ export default function AdminHeader() {
                   fetchOptions: {
                     onSuccess: () => {
                       router.push("/");
+                      router.refresh();
                     },
                   },
                 });
