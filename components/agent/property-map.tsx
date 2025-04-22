@@ -1,8 +1,14 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { useEffect, useRef, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 // Mock property data with coordinates
 const properties = [
@@ -60,12 +66,12 @@ const properties = [
     lat: 24.7742,
     lng: 46.6298,
   },
-]
+];
 
 export default function PropertyMap() {
-  const mapRef = useRef<HTMLDivElement>(null)
-  const [selectedProperty, setSelectedProperty] = useState<any>(null)
-  const [mapLoaded, setMapLoaded] = useState(false)
+  const mapRef = useRef<HTMLDivElement>(null);
+  const [selectedProperty, setSelectedProperty] = useState<any>(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
     // This is a placeholder for actual map integration
@@ -73,41 +79,52 @@ export default function PropertyMap() {
     if (mapRef.current) {
       // Simulate map loading
       const timer = setTimeout(() => {
-        setMapLoaded(true)
-      }, 1000)
+        setMapLoaded(true);
+      }, 1000);
 
-      return () => clearTimeout(timer)
+      return () => clearTimeout(timer);
     }
-  }, [])
+  }, []);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "approved":
-        return <Badge className="bg-green-500 hover:bg-green-600">Approved</Badge>
+        return (
+          <Badge className="bg-green-500 hover:bg-green-600">Approved</Badge>
+        );
       case "pending":
-        return <Badge className="bg-yellow-500 hover:bg-yellow-600">Pending</Badge>
+        return (
+          <Badge className="bg-yellow-500 hover:bg-yellow-600">Pending</Badge>
+        );
       case "rejected":
-        return <Badge className="bg-red-500 hover:bg-red-600">Rejected</Badge>
+        return <Badge className="bg-red-500 hover:bg-red-600">Rejected</Badge>;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
       <div>
         <h2 className="text-3xl font-bold tracking-tight">Property Map</h2>
-        <p className="text-muted-foreground">View your properties on the map of Riyadh.</p>
+        <p className="text-muted-foreground">
+          View your properties on the map of Riyadh.
+        </p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle>Map View</CardTitle>
-            <CardDescription>Interactive map showing your property locations in Riyadh.</CardDescription>
+            <CardDescription>
+              Interactive map showing your property locations in Riyadh.
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div ref={mapRef} className="relative h-[500px] w-full rounded-md bg-muted overflow-hidden">
+            <div
+              ref={mapRef}
+              className="relative h-[500px] w-full rounded-md overflow-hidden "
+            >
               {!mapLoaded ? (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
@@ -115,7 +132,7 @@ export default function PropertyMap() {
               ) : (
                 <>
                   {/* Placeholder for the actual map */}
-                  <div className="absolute inset-0 bg-[#e5e3df]">
+                  <div className="absolute inset-0 bg-[url('/map.png')] bg-cover bg-center">
                     {/* Simulated map with property pins */}
                     {properties.map((property) => (
                       <button
@@ -124,8 +141,8 @@ export default function PropertyMap() {
                           property.status === "approved"
                             ? "bg-green-500"
                             : property.status === "pending"
-                              ? "bg-yellow-500"
-                              : "bg-red-500"
+                            ? "bg-yellow-500"
+                            : "bg-red-500"
                         }`}
                         style={{
                           left: `${((property.lng - 46.6) / 0.3) * 100}%`,
@@ -133,7 +150,9 @@ export default function PropertyMap() {
                         }}
                         onClick={() => setSelectedProperty(property)}
                       >
-                        <span className="text-white text-xs font-bold">{property.id}</span>
+                        <span className="text-white text-xs font-bold">
+                          {property.id}
+                        </span>
                       </button>
                     ))}
 
@@ -159,14 +178,20 @@ export default function PropertyMap() {
         <Card>
           <CardHeader>
             <CardTitle>Property Details</CardTitle>
-            <CardDescription>Select a property on the map to view details.</CardDescription>
+            <CardDescription>
+              Select a property on the map to view details.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             {selectedProperty ? (
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-lg font-semibold">{selectedProperty.title}</h3>
-                  <div className="flex items-center gap-2 mt-1">{getStatusBadge(selectedProperty.status)}</div>
+                  <h3 className="text-lg font-semibold">
+                    {selectedProperty.title}
+                  </h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    {getStatusBadge(selectedProperty.status)}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-sm">
@@ -178,7 +203,8 @@ export default function PropertyMap() {
 
                   <div className="font-medium">Coordinates:</div>
                   <div>
-                    {selectedProperty.lat.toFixed(4)}, {selectedProperty.lng.toFixed(4)}
+                    {selectedProperty.lat.toFixed(4)},{" "}
+                    {selectedProperty.lng.toFixed(4)}
                   </div>
                 </div>
 
@@ -189,7 +215,9 @@ export default function PropertyMap() {
                       View Details
                     </button>
                     {selectedProperty.status !== "approved" && (
-                      <button className="text-sm px-3 py-1 bg-muted text-muted-foreground rounded-md">Edit</button>
+                      <button className="text-sm px-3 py-1 bg-muted text-muted-foreground rounded-md">
+                        Edit
+                      </button>
                     )}
                   </div>
                 </div>
@@ -219,7 +247,9 @@ export default function PropertyMap() {
       <Card>
         <CardHeader>
           <CardTitle>Property List</CardTitle>
-          <CardDescription>All your properties shown on the map.</CardDescription>
+          <CardDescription>
+            All your properties shown on the map.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="rounded-md border">
@@ -230,7 +260,9 @@ export default function PropertyMap() {
                     <th className="h-12 px-4 text-left font-medium">ID</th>
                     <th className="h-12 px-4 text-left font-medium">Title</th>
                     <th className="h-12 px-4 text-left font-medium">Type</th>
-                    <th className="h-12 px-4 text-left font-medium">District</th>
+                    <th className="h-12 px-4 text-left font-medium">
+                      District
+                    </th>
                     <th className="h-12 px-4 text-left font-medium">Status</th>
                     <th className="h-12 px-4 text-left font-medium">Actions</th>
                   </tr>
@@ -239,13 +271,21 @@ export default function PropertyMap() {
                   {properties.map((property) => (
                     <tr
                       key={property.id}
-                      className={`border-b ${selectedProperty?.id === property.id ? "bg-muted/50" : ""}`}
+                      className={`border-b ${
+                        selectedProperty?.id === property.id
+                          ? "bg-muted/50"
+                          : ""
+                      }`}
                     >
-                      <td className="p-4 align-middle font-medium">{property.id}</td>
+                      <td className="p-4 align-middle font-medium">
+                        {property.id}
+                      </td>
                       <td className="p-4 align-middle">{property.title}</td>
                       <td className="p-4 align-middle">{property.type}</td>
                       <td className="p-4 align-middle">{property.district}</td>
-                      <td className="p-4 align-middle">{getStatusBadge(property.status)}</td>
+                      <td className="p-4 align-middle">
+                        {getStatusBadge(property.status)}
+                      </td>
                       <td className="p-4 align-middle">
                         <button
                           className="text-sm px-3 py-1 bg-primary text-primary-foreground rounded-md"
@@ -263,5 +303,5 @@ export default function PropertyMap() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
