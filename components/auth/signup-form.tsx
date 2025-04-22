@@ -1,225 +1,7 @@
-// "use client";
-
-// import { useState } from "react";
-// import { Button } from "@/components/ui/button";
-// import {
-//   Form,
-//   FormControl,
-//   FormField,
-//   FormItem,
-//   FormLabel,
-//   FormMessage,
-// } from "@/components/ui/form";
-// import { Input } from "@/components/ui/input";
-// import { useRouter } from "@/i18n/navigation";
-// import { Eye, EyeOff, Loader2 } from "lucide-react";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import { useForm } from "react-hook-form";
-// import { z } from "zod";
-// import { toast } from "@/components/ui/use-toast";
-// import { Link } from "@/i18n/navigation";
-// import { signUp } from "@/lib/auth-client";
-
-// const registerFormSchema = z
-//   .object({
-//     name: z.string().min(2, {
-//       message: "Name must be at least 2 characters.",
-//     }),
-//     email: z.string().email({
-//       message: "Please enter a valid email address.",
-//     }),
-//     password: z.string().min(8, {
-//       message: "Password must be at least 8 characters.",
-//     }),
-//     confirmPassword: z.string(),
-//   })
-//   .refine((data) => data.password === data.confirmPassword, {
-//     message: "Passwords do not match",
-//     path: ["confirmPassword"],
-//   });
-
-// type RegisterFormValues = z.infer<typeof registerFormSchema>;
-
-// export function RegisterForm() {
-//   const router = useRouter();
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-//   const form = useForm<RegisterFormValues>({
-//     resolver: zodResolver(registerFormSchema),
-//     defaultValues: {
-//       name: "",
-//       email: "",
-//       password: "",
-//       confirmPassword: "",
-//     },
-//   });
-
-//   async function onSubmit(data: RegisterFormValues) {
-//     await signUp.email(
-//       {
-//         name: data.name, // user display name
-//         email: data.email, // user email address
-//         password: data.password, // user password -> min 8 characters by default
-//       },
-//       {
-//         onRequest: (ctx) => {
-//           setIsLoading(true);
-//         },
-//         onSuccess: (ctx) => {
-//           toast({ title: "Registration Successful" });
-//           router.push("/admin");
-//         },
-//         onError: (ctx) => {
-//           // display the error message
-//           alert(ctx.error.message);
-//         },
-//       }
-//     );
-//     setIsLoading(false);
-//   }
-
-//   return (
-//     <div className="space-y-6">
-//       <Form {...form}>
-//         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-//           <FormField
-//             control={form.control}
-//             name="name"
-//             render={({ field }) => (
-//               <FormItem>
-//                 <FormLabel>Name</FormLabel>
-//                 <FormControl>
-//                   <Input placeholder="John" {...field} />
-//                 </FormControl>
-//                 <FormMessage />
-//               </FormItem>
-//             )}
-//           />
-
-//           <FormField
-//             control={form.control}
-//             name="email"
-//             render={({ field }) => (
-//               <FormItem>
-//                 <FormLabel>Email</FormLabel>
-//                 <FormControl>
-//                   <Input placeholder="john.doe@example.com" {...field} />
-//                 </FormControl>
-//                 <FormMessage />
-//               </FormItem>
-//             )}
-//           />
-
-//           <FormField
-//             control={form.control}
-//             name="password"
-//             render={({ field }) => (
-//               <FormItem>
-//                 <FormLabel>Password</FormLabel>
-//                 <FormControl>
-//                   <div className="relative">
-//                     <Input
-//                       type={showPassword ? "text" : "password"}
-//                       placeholder="••••••••"
-//                       {...field}
-//                     />
-//                     <Button
-//                       type="button"
-//                       variant="ghost"
-//                       size="icon"
-//                       className="absolute right-0 top-0 h-full px-3 py-2 text-muted-foreground"
-//                       onClick={() => setShowPassword(!showPassword)}
-//                     >
-//                       {showPassword ? (
-//                         <EyeOff className="h-4 w-4" />
-//                       ) : (
-//                         <Eye className="h-4 w-4" />
-//                       )}
-//                       <span className="sr-only">
-//                         {showPassword ? "Hide password" : "Show password"}
-//                       </span>
-//                     </Button>
-//                   </div>
-//                 </FormControl>
-//                 <FormMessage />
-//               </FormItem>
-//             )}
-//           />
-
-//           <FormField
-//             control={form.control}
-//             name="confirmPassword"
-//             render={({ field }) => (
-//               <FormItem>
-//                 <FormLabel>Confirm Password</FormLabel>
-//                 <FormControl>
-//                   <div className="relative">
-//                     <Input
-//                       type={showConfirmPassword ? "text" : "password"}
-//                       placeholder="••••••••"
-//                       {...field}
-//                     />
-//                     <Button
-//                       type="button"
-//                       variant="ghost"
-//                       size="icon"
-//                       className="absolute right-0 top-0 h-full px-3 py-2 text-muted-foreground"
-//                       onClick={() =>
-//                         setShowConfirmPassword(!showConfirmPassword)
-//                       }
-//                     >
-//                       {showConfirmPassword ? (
-//                         <EyeOff className="h-4 w-4" />
-//                       ) : (
-//                         <Eye className="h-4 w-4" />
-//                       )}
-//                       <span className="sr-only">
-//                         {showConfirmPassword
-//                           ? "Hide password"
-//                           : "Show password"}
-//                       </span>
-//                     </Button>
-//                   </div>
-//                 </FormControl>
-//                 <FormMessage />
-//               </FormItem>
-//             )}
-//           />
-
-//           <Button type="submit" className="w-full" disabled={isLoading}>
-//             {isLoading ? (
-//               <>
-//                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-//                 Creating account...
-//               </>
-//             ) : (
-//               "Create Account"
-//             )}
-//           </Button>
-//         </form>
-//       </Form>
-
-//       <div className="text-center text-sm">
-//         <p className="text-muted-foreground">
-//           Already have an account?{" "}
-//           <Link
-//             href="/login"
-//             className="text-primary underline-offset-4 hover:underline"
-//           >
-//             Sign in
-//           </Link>
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -228,7 +10,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { QrCode, Upload, Phone, Info } from "lucide-react";
+import {
+  QrCode,
+  Upload,
+  Phone,
+  Info,
+  CheckCircle,
+  Loader2,
+} from "lucide-react";
 import { QrScanner } from "./qr-scanner";
 import { FileUpload } from "@/components/auth/file-upload";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -239,15 +28,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useLocale } from "next-intl";
+import { motion } from "framer-motion";
 
-// Updated regex for Bangladeshi phone numbers (starts with +880 or 01)
-const phoneRegex = /^(?:\+?880|0)1[3-9]\d{8}$/;
+// Update the phone regex for Saudi Arabian numbers (starts with +966 or 05)
+const phoneRegex = /^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/;
 
 const signupSchema = z.object({
   licenseNumber: z.string().min(1, "License number is required"),
-  phone: z
-    .string()
-    .regex(phoneRegex, "Invalid Bangladeshi phone number format"),
+  phone: z.string().regex(phoneRegex, "Invalid Saudi phone number format"),
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
 });
@@ -260,6 +48,9 @@ export function SignupForm() {
     "qr" | "manual" | "upload"
   >("manual");
   const [scannedLicense, setScannedLicense] = useState<string | null>(null);
+  const [verificationStatus, setVerificationStatus] = useState<
+    "idle" | "verifying" | "success"
+  >("idle");
   const router = useRouter();
   const locale = useLocale();
 
@@ -274,9 +65,18 @@ export function SignupForm() {
   });
 
   const onSubmit = async (data: SignupFormValues) => {
-    // In a real app, this would call an API to verify the license and phone
-    console.log("Form data:", data);
-    setStep("verification");
+    // Start verification process
+    setVerificationStatus("verifying");
+
+    // Simulate verification delay
+    setTimeout(() => {
+      setVerificationStatus("success");
+
+      // Navigate after showing success state
+      setTimeout(() => {
+        router.push("/sign-in");
+      }, 1500);
+    }, 2000);
   };
 
   const handleQrSuccess = (result: string) => {
@@ -415,8 +215,8 @@ export function SignupForm() {
                           <TooltipContent>
                             <p className="max-w-xs">
                               {isArabic
-                                ? "أدخل رقم هاتفك البنغلاديشي (مثال: 01XXXXXXXXX)"
-                                : "Enter your Bangladeshi phone number (e.g., 01XXXXXXXXX)"}
+                                ? "أدخل رقم هاتفك السعودي (مثال: 05XXXXXXXX)"
+                                : "Enter your Saudi phone number (e.g., 05XXXXXXXX)"}
                             </p>
                           </TooltipContent>
                         </Tooltip>
@@ -425,7 +225,7 @@ export function SignupForm() {
                     <Input
                       id="phone"
                       {...form.register("phone")}
-                      placeholder={isArabic ? "01XXXXXXXXX" : "01XXXXXXXXX"}
+                      placeholder={isArabic ? "05XXXXXXXX" : "05XXXXXXXX"}
                       className={
                         form.formState.errors.phone ? "border-destructive" : ""
                       }
@@ -437,21 +237,59 @@ export function SignupForm() {
                     )}
                     <p className="text-xs text-muted-foreground">
                       {isArabic
-                        ? "أدخل رقم هاتفك البنغلاديشي بتنسيق 01XXXXXXXXX"
-                        : "Enter your Bangladeshi phone number in the format 01XXXXXXXXX"}
+                        ? "أدخل رقم هاتفك السعودي بتنسيق 05XXXXXXXX"
+                        : "Enter your Saudi phone number in the format 05XXXXXXXX"}
                     </p>
                   </div>
 
                   <Alert className="bg-blue-500/10 border-primary/20 text-black">
                     <AlertDescription>
                       {isArabic
-                        ? "سيتم إرسال رمز التحقق إلى رقم هاتفك البنغلاديشي للتحقق من هويتك"
-                        : "A verification code will be sent to your Bangladeshi phone number to verify your identity"}
+                        ? "سيتم إرسال رمز التحقق إلى رقم هاتفك السعودي للتحقق من هويتك"
+                        : "A verification code will be sent to your Saudi phone number to verify your identity"}
                     </AlertDescription>
                   </Alert>
 
-                  <Button type="submit" className="w-full">
-                    {isArabic ? "التحقق" : "Verify"}
+                  <Button
+                    type="submit"
+                    className={`w-full ${
+                      verificationStatus !== "idle" ? "opacity-100" : ""
+                    }`}
+                    disabled={verificationStatus !== "idle"}
+                    style={{
+                      opacity: verificationStatus !== "idle" ? 1 : undefined,
+                    }}
+                  >
+                    {verificationStatus === "idle" ? (
+                      isArabic ? (
+                        "التحقق"
+                      ) : (
+                        "Verify"
+                      )
+                    ) : verificationStatus === "verifying" ? (
+                      <motion.div className="flex items-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span>
+                          {isArabic ? "جاري التحقق..." : "Verifying..."}
+                        </span>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        className="flex items-center gap-2"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 10,
+                        }}
+                      >
+                        <CheckCircle className="h-4 w-4 text-white" />
+                        <span>
+                          {isArabic ? "تم التحقق" : "Verification done"}
+                        </span>
+                      </motion.div>
+                    )}
                   </Button>
                 </form>
               </TabsContent>
@@ -525,8 +363,8 @@ export function SignupForm() {
                           <TooltipContent>
                             <p className="max-w-xs">
                               {isArabic
-                                ? "أدخل رقم هاتفك البنغلاديشي (مثال: 01XXXXXXXXX)"
-                                : "Enter your Bangladeshi phone number (e.g., 01XXXXXXXXX)"}
+                                ? "أدخل رقم هاتفك السعودي (مثال: 05XXXXXXXX)"
+                                : "Enter your Saudi phone number (e.g., 05XXXXXXXX)"}
                             </p>
                           </TooltipContent>
                         </Tooltip>
@@ -535,7 +373,7 @@ export function SignupForm() {
                     <Input
                       id="phone"
                       {...form.register("phone")}
-                      placeholder={isArabic ? "01XXXXXXXXX" : "01XXXXXXXXX"}
+                      placeholder={isArabic ? "05XXXXXXXX" : "05XXXXXXXX"}
                       className={
                         form.formState.errors.phone ? "border-destructive" : ""
                       }
@@ -547,17 +385,51 @@ export function SignupForm() {
                     )}
                     <p className="text-xs text-muted-foreground">
                       {isArabic
-                        ? "أدخل رقم هاتفك البنغلاديشي بتنسيق 01XXXXXXXXX"
-                        : "Enter your Bangladeshi phone number in the format 01XXXXXXXXX"}
+                        ? "أدخل رقم هاتفك السعودي بتنسيق 05XXXXXXXX"
+                        : "Enter your Saudi phone number in the format 05XXXXXXXX"}
                     </p>
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full"
-                    disabled={!scannedLicense}
+                    className={`w-full ${
+                      verificationStatus !== "idle" ? "opacity-100" : ""
+                    }`}
+                    disabled={!scannedLicense || verificationStatus !== "idle"}
+                    style={{
+                      opacity: verificationStatus !== "idle" ? 1 : undefined,
+                    }}
                   >
-                    {isArabic ? "التحقق" : "Verify"}
+                    {verificationStatus === "idle" ? (
+                      isArabic ? (
+                        "التحقق"
+                      ) : (
+                        "Verify"
+                      )
+                    ) : verificationStatus === "verifying" ? (
+                      <motion.div className="flex items-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span>
+                          {isArabic ? "جاري التحقق..." : "Verifying..."}
+                        </span>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        className="flex items-center gap-2"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 10,
+                        }}
+                      >
+                        <CheckCircle className="h-4 w-4 text-white" />
+                        <span>
+                          {isArabic ? "تم التحقق" : "Verification done"}
+                        </span>
+                      </motion.div>
+                    )}
                   </Button>
                 </form>
               </TabsContent>
@@ -623,8 +495,8 @@ export function SignupForm() {
                           <TooltipContent>
                             <p className="max-w-xs">
                               {isArabic
-                                ? "أدخل رقم هاتفك البنغلاديشي (مثال: 01XXXXXXXXX)"
-                                : "Enter your Bangladeshi phone number (e.g., 01XXXXXXXXX)"}
+                                ? "أدخل رقم هاتفك السعودي (مثال: 05XXXXXXXX)"
+                                : "Enter your Saudi phone number (e.g., 05XXXXXXXX)"}
                             </p>
                           </TooltipContent>
                         </Tooltip>
@@ -633,7 +505,7 @@ export function SignupForm() {
                     <Input
                       id="phone"
                       {...form.register("phone")}
-                      placeholder={isArabic ? "01XXXXXXXXX" : "01XXXXXXXXX"}
+                      placeholder={isArabic ? "05XXXXXXXX" : "05XXXXXXXX"}
                       className={
                         form.formState.errors.phone ? "border-destructive" : ""
                       }
@@ -645,17 +517,54 @@ export function SignupForm() {
                     )}
                     <p className="text-xs text-muted-foreground">
                       {isArabic
-                        ? "أدخل رقم هاتفك البنغلاديشي بتنسيق 01XXXXXXXXX"
-                        : "Enter your Bangladeshi phone number in the format 01XXXXXXXXX"}
+                        ? "أدخل رقم هاتفك السعودي بتنسيق 05XXXXXXXX"
+                        : "Enter your Saudi phone number in the format 05XXXXXXXX"}
                     </p>
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full"
-                    disabled={!form.getValues("licenseNumber")}
+                    className={`w-full ${
+                      verificationStatus !== "idle" ? "opacity-100" : ""
+                    }`}
+                    disabled={
+                      !form.getValues("licenseNumber") ||
+                      verificationStatus !== "idle"
+                    }
+                    style={{
+                      opacity: verificationStatus !== "idle" ? 1 : undefined,
+                    }}
                   >
-                    {isArabic ? "التحقق" : "Verify"}
+                    {verificationStatus === "idle" ? (
+                      isArabic ? (
+                        "التحقق"
+                      ) : (
+                        "Verify"
+                      )
+                    ) : verificationStatus === "verifying" ? (
+                      <motion.div className="flex items-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span>
+                          {isArabic ? "جاري التحقق..." : "Verifying..."}
+                        </span>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        className="flex items-center gap-2"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 10,
+                        }}
+                      >
+                        <CheckCircle className="h-4 w-4 text-white" />
+                        <span>
+                          {isArabic ? "تم التحقق" : "Verification done"}
+                        </span>
+                      </motion.div>
+                    )}
                   </Button>
                 </form>
               </TabsContent>
@@ -669,10 +578,10 @@ export function SignupForm() {
               </h3>
               <p className="text-sm text-muted-foreground mt-1">
                 {isArabic
-                  ? `تم إرسال رمز التحقق إلى رقم هاتفك البنغلاديشي ${form.getValues(
+                  ? `تم إرسال رمز التحقق إلى رقم هاتفك السعودي ${form.getValues(
                       "phone"
                     )}`
-                  : `A verification code has been sent to your Bangladeshi phone number ${form.getValues(
+                  : `A verification code has been sent to your Saudi phone number ${form.getValues(
                       "phone"
                     )}`}
               </p>
@@ -701,10 +610,43 @@ export function SignupForm() {
             </div>
 
             <Button
-              className="w-full"
-              onClick={() => router.push("/dashboard")}
+              className={`w-full ${
+                verificationStatus !== "idle" ? "opacity-100" : ""
+              }`}
+              onClick={() => {
+                setVerificationStatus("verifying");
+                setTimeout(() => {
+                  setVerificationStatus("success");
+                  setTimeout(() => {
+                    router.push("/dashboard");
+                  }, 1500);
+                }, 2000);
+              }}
+              disabled={verificationStatus !== "idle"}
+              style={{ opacity: verificationStatus !== "idle" ? 1 : undefined }}
             >
-              {isArabic ? "تأكيد" : "Confirm"}
+              {verificationStatus === "idle" ? (
+                isArabic ? (
+                  "تأكيد"
+                ) : (
+                  "Confirm"
+                )
+              ) : verificationStatus === "verifying" ? (
+                <motion.div className="flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <span>{isArabic ? "جاري التحقق..." : "Verifying..."}</span>
+                </motion.div>
+              ) : (
+                <motion.div
+                  className="flex items-center gap-2"
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                >
+                  <CheckCircle className="h-4 w-4 text-white" />
+                  <span>{isArabic ? "تم التحقق" : "Verification done"}</span>
+                </motion.div>
+              )}
             </Button>
           </div>
         )}
