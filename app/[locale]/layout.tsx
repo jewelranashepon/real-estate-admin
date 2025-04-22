@@ -126,6 +126,8 @@ import "../globals.css";
 
 import { SearchProvider } from "@/lib/search-context";
 import { locales } from "@/next-intl.config";
+import { getSession } from "@/lib/getSession";
+import { redirect } from "@/i18n/navigation";
 
 export default async function MainLayout(props: {
   children: React.ReactNode;
@@ -139,6 +141,18 @@ export default async function MainLayout(props: {
   }
 
   const messages = await getMessages({ locale });
+
+  
+    // const session = await getSession();
+    // const role = session?.user?.role;
+  
+    // if (role === "admin") {
+    //   redirect({ href: "/admin", locale });
+    // }
+  
+    // if (role === "agent") {
+    //   redirect({ href: "/agent/dashboard", locale });
+    // }
 
   return (
     <html lang={locale}>

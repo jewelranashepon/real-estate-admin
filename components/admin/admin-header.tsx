@@ -14,11 +14,13 @@ import { Input } from "@/components/ui/input";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
-import { signOut } from "@/lib/auth-client";
+import { signOut, useSession } from "@/lib/auth-client";
 import LanguageSelector from "../home/language-selector";
 
 export default function AdminHeader() {
   const router = useRouter();
+  const session = useSession();
+  const user = session?.data?.user;
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6 shadow-sm">
@@ -89,7 +91,7 @@ export default function AdminHeader() {
             <Button variant="ghost" size="icon">
               <Avatar className="h-10 w-10">
                 <AvatarImage src="/avatar.png" alt="Admin" />
-                <AvatarFallback>AD</AvatarFallback>
+                <AvatarFallback>{user?.name}</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>

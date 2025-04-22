@@ -16,6 +16,10 @@ model User {
   email          String          @unique
   emailVerified  Boolean
   image          String?
+  role           String?
+  banned         Boolean?
+  banReason      String?
+  banExpires     Int?
   createdAt      DateTime        @default(now())
   updatedAt      DateTime
   Property       Property[]
@@ -35,6 +39,7 @@ model Session {
   ipAddress String?
   userAgent String?
   userId    String
+  impersonatedBy String?
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([token])
