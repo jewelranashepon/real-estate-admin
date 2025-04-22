@@ -12,9 +12,15 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
+import { signOut, useSession } from "@/lib/auth-client";
 
 export default function DashboardPage() {
   const t = useTranslations("dashboard");
+  const router = useRouter();
+  const session = useSession();
+  const user = session?.data?.user;
+
   return (
     <div className="flex min-h-screen flex-col">
       <div className="flex flex-col">
