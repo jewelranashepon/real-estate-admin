@@ -13,7 +13,7 @@ import {
   MessageCircle,
   Briefcase,
 } from "lucide-react";
-
+import { propertyListings } from "@/lib/property-data";
 import { useTranslations } from "next-intl";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRouter, Link } from "@/i18n/navigation";
@@ -194,9 +194,15 @@ function SearchResults() {
               <PropertyMap />
             </div>
             <div className="h-[calc(100vh-220px)] overflow-y-auto pr-2">
-              <Link href="/listings">
+              {propertyListings.map((property, index) => (
+                          <Link
+                            href={`/property/${property.id}`}
+                            key={property.id}
+                            className="block"
+                          >
                 <PropertyList />
               </Link>
+            ))}
             </div>
           </div>
         </TabsContent>

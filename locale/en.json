@@ -70,7 +70,16 @@
       "DaysAgo" : "Days Ago",
       "Residential" : "Residential",
       "Streets" : "Streets",
-      "villa": "Villa" 
+      "villa": "Villa" ,
+      "CallNow": "Call Now",
+      "ContactSeller": "Contact the Seller",
+      "Close": "Close",
+      "falappro" : "FAL Approved",
+      "Fali":"FAL License Info",
+      "LNo":"License No",
+      "CVW": "Contact via WhatsApp",
+      "SCW": "Click below to start a chat with the agent on WhatsApp.",
+      "OW" : "Open WhatsApp"
     },
     "map": {
       "customView": "Custom Map View",
