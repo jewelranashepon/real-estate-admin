@@ -19,6 +19,8 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Edit, MoreHorizontal, Trash2, Eye } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 // Mock property data
 const properties = [
@@ -89,6 +91,9 @@ export default function PropertyList() {
   const [filter, setFilter] = useState<
     "all" | "approved" | "pending" | "rejected"
   >("all");
+  const { locale } = useParams();
+  const t = useTranslations();
+  const isRtl = locale === "ar";
 
   const filteredProperties =
     filter === "all"
@@ -120,26 +125,36 @@ export default function PropertyList() {
     switch (status) {
       case "approved":
         return (
-          <Badge className="bg-green-500 hover:bg-green-600">Approved</Badge>
+          <Badge className="bg-green-500 hover:bg-green-600">
+            {t("properties.approved")}
+          </Badge>
         );
       case "pending":
         return (
-          <Badge className="bg-yellow-500 hover:bg-yellow-600">Pending</Badge>
+          <Badge className="bg-yellow-500 hover:bg-yellow-600">
+            {t("properties.pending")}
+          </Badge>
         );
       case "rejected":
-        return <Badge className="bg-red-500 hover:bg-red-600">Rejected</Badge>;
+        return (
+          <Badge className="bg-red-500 hover:bg-red-600">
+            {t("properties.rejected")}
+          </Badge>
+        );
       default:
         return null;
     }
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={isRtl ? "rtl" : "ltr"}>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">My Properties</h2>
+          <h2 className="text-3xl font-bold tracking-tight">
+            {t("common.myProperties")}
+          </h2>
           <p className="text-muted-foreground">
-            Manage your property listings and their status.
+            {t("properties.manageListings")}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -149,10 +164,30 @@ export default function PropertyList() {
             className="w-[400px]"
           >
             <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="approved">Approved</TabsTrigger>
-              <TabsTrigger value="pending">Pending</TabsTrigger>
-              <TabsTrigger value="rejected">Rejected</TabsTrigger>
+              <TabsTrigger
+                value="all"
+                className="data-[state=active]:bg-green-600 data-[state=active]:text-white"
+              >
+                {t("properties.all")}
+              </TabsTrigger>
+              <TabsTrigger
+                value="approved"
+                className="data-[state=active]:bg-green-600 data-[state=active]:text-white"
+              >
+                {t("properties.approved")}
+              </TabsTrigger>
+              <TabsTrigger
+                value="pending"
+                className="data-[state=active]:bg-green-600 data-[state=active]:text-white"
+              >
+                {t("properties.pending")}
+              </TabsTrigger>
+              <TabsTrigger
+                value="rejected"
+                className="data-[state=active]:bg-green-600 data-[state=active]:text-white"
+              >
+                {t("properties.rejected")}
+              </TabsTrigger>
             </TabsList>
           </Tabs>
           <div className="flex items-center gap-1 ml-2">
@@ -160,7 +195,7 @@ export default function PropertyList() {
               variant={view === "grid" ? "default" : "outline"}
               size="icon"
               onClick={() => setView("grid")}
-              className="h-8 w-8"
+              className="h-8 w-8 data-[state=active]:bg-green-600"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -236,8 +271,9 @@ export default function PropertyList() {
                       variant="outline"
                       size="icon"
                       onClick={() => handleView(property.id)}
+                      className="border-green-200 hover:bg-green-50 hover:border-green-300"
                     >
-                      <Eye className="h-4 w-4" />
+                      <Eye className="h-4 w-4 text-green-600" />
                     </Button>
                     {property.status !== "approved" && (
                       <>
@@ -245,15 +281,17 @@ export default function PropertyList() {
                           variant="outline"
                           size="icon"
                           onClick={() => handleEdit(property.id)}
+                          className="border-green-200 hover:bg-green-50 hover:border-green-300"
                         >
-                          <Edit className="h-4 w-4" />
+                          <Edit className="h-4 w-4 text-green-600" />
                         </Button>
                         <Button
                           variant="outline"
                           size="icon"
                           onClick={() => handleDelete(property.id)}
+                          className="border-green-200 hover:bg-green-50 hover:border-green-300"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4 text-green-600" />
                         </Button>
                       </>
                     )}
@@ -269,17 +307,27 @@ export default function PropertyList() {
             <table className="w-full caption-bottom text-sm">
               <thead>
                 <tr className="border-b bg-muted/50">
-                  <th className="h-12 px-4 text-left font-medium">Title</th>
-                  <th className="h-12 px-4 text-left font-medium">Type</th>
-                  <th className="h-12 px-4 text-left font-medium">District</th>
                   <th className="h-12 px-4 text-left font-medium">
-                    Price (SAR)
+                    {t("properties.title")}
                   </th>
-                  <th className="h-12 px-4 text-left font-medium">Status</th>
                   <th className="h-12 px-4 text-left font-medium">
-                    Date Added
+                    {t("properties.type")}
                   </th>
-                  <th className="h-12 px-4 text-left font-medium">Actions</th>
+                  <th className="h-12 px-4 text-left font-medium">
+                    {t("properties.district")}
+                  </th>
+                  <th className="h-12 px-4 text-left font-medium">
+                    {t("properties.price")}
+                  </th>
+                  <th className="h-12 px-4 text-left font-medium">
+                    {t("properties.status")}
+                  </th>
+                  <th className="h-12 px-4 text-left font-medium">
+                    {t("properties.dateAdded")}
+                  </th>
+                  <th className="h-12 px-4 text-left font-medium">
+                    {t("properties.actions")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -307,23 +355,26 @@ export default function PropertyList() {
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem
                             onClick={() => handleView(property.id)}
+                            className="text-green-600 focus:bg-green-50 focus:text-green-700"
                           >
                             <Eye className="mr-2 h-4 w-4" />
-                            View
+                            {t("properties.view")}
                           </DropdownMenuItem>
                           {property.status !== "approved" && (
                             <>
                               <DropdownMenuItem
                                 onClick={() => handleEdit(property.id)}
+                                className="text-green-600 focus:bg-green-50 focus:text-green-700"
                               >
                                 <Edit className="mr-2 h-4 w-4" />
-                                Edit
+                                {t("properties.edit")}
                               </DropdownMenuItem>
                               <DropdownMenuItem
                                 onClick={() => handleDelete(property.id)}
+                                className="text-green-600 focus:bg-green-50 focus:text-green-700"
                               >
                                 <Trash2 className="mr-2 h-4 w-4" />
-                                Delete
+                                {t("properties.delete")}
                               </DropdownMenuItem>
                             </>
                           )}

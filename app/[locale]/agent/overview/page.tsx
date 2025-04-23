@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
   Card,
   CardContent,
@@ -8,11 +7,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Building, CheckCircle, Users } from "lucide-react";
-
-export const metadata: Metadata = {
-  title: "Overview | Agent Portal",
-  description: "System overview and quick actions",
-};
 
 export default function OverviewPage() {
   return (
@@ -122,7 +116,10 @@ export default function OverviewPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <Button className="w-full justify-between" asChild>
+              <Button
+                className="w-full justify-between bg-green-600 hover:bg-green-700"
+                asChild
+              >
                 <a href="/agent/properties/add">
                   Add New Property
                   <ArrowRight className="h-4 w-4" />

@@ -1,19 +1,25 @@
 import type React from "react";
-import type { Metadata } from "next";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AgentSidebar from "@/components/agent/agent-sidebar";
 import AgentHeader from "@/components/agent/agent-header";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Agent Portal | Property Management System",
-  description: "Manage your property listings and profile",
-};
-
-export default function AgentLayout({
+export default async function AgentLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
+  const { locale } = params;
+
+  let messages;
+  try {
+    messages = (await import(`../../../locale/${locale}.json`)).default;
+  } catch (error) {
+    notFound();
+  }
+
   return (
     <SidebarProvider defaultOpen={true}>
       <div className="flex h-screen w-full overflow-hidden bg-background">

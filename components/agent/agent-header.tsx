@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Bell,
   Search,
-  User,
   Settings,
   HelpCircle,
   LogOut,
@@ -23,7 +22,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuGroup,
   DropdownMenuShortcut,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
@@ -32,20 +30,33 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRouter } from "@/i18n/navigation";
+import LanguageSwitcher from "@/components/language-switcher";
+import { useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function AgentHeader() {
   const [searchOpen, setSearchOpen] = useState(false);
   const router = useRouter();
   const session = useSession();
   const user = session?.data?.user;
+  const {} = useSearchParams();
+  const t = useTranslations();
+
+  const locale = useLocale();
+  const isRtl = locale === "ar";
 
   return (
-    <header className="sticky top-0 z-30 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header
+      className="sticky top-0 z-30 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6"
+      dir={isRtl ? "rtl" : "ltr"}
+    >
       <SidebarTrigger className="md:hidden" />
 
       <div className="flex flex-1 items-center gap-4 md:gap-8">
         <div className="hidden md:block">
-          <h1 className="text-xl font-semibold">Property Management System</h1>
+          <h1 className="text-xl font-semibold">
+            {t("common.propertyManagement")}
+          </h1>
         </div>
 
         {/* Mobile menu */}
@@ -56,12 +67,15 @@ export default function AgentHeader() {
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] sm:w-[400px] pr-0">
+          <SheetContent
+            side={isRtl ? "right" : "left"}
+            className="w-[300px] sm:w-[400px] pr-0"
+          >
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between border-b pb-4">
                 <div className="flex items-center gap-2">
                   <Avatar className="h-10 w-10 border-2 border-primary">
-                    <AvatarImage src="../../public/avatar.png" alt="Agent" />
+                    <AvatarImage src="/avatar.png" alt="Agent" />
                     <AvatarFallback>AR</AvatarFallback>
                   </Avatar>
                   <div>
@@ -88,7 +102,9 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/dashboard">Dashboard</Link>
+                      <Link href="/agent/dashboard">
+                        {t("common.dashboard")}
+                      </Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -96,7 +112,7 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/overview">Overview</Link>
+                      <Link href="/agent/overview">{t("common.overview")}</Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -104,7 +120,9 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/properties">Properties</Link>
+                      <Link href="/agent/properties">
+                        {t("common.properties")}
+                      </Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -112,7 +130,9 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/properties/add">Add Property</Link>
+                      <Link href="/agent/properties/add">
+                        {t("common.addProperty")}
+                      </Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -120,7 +140,7 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/map">Property Map</Link>
+                      <Link href="/agent/map">{t("common.propertyMap")}</Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -128,7 +148,7 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/profile">Profile</Link>
+                      <Link href="/agent/profile">{t("common.profile")}</Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -137,7 +157,7 @@ export default function AgentHeader() {
                       asChild
                     >
                       <Link href="/agent/notifications">
-                        Notifications
+                        {t("common.notifications")}
                         <Badge className="ml-auto">3</Badge>
                       </Link>
                     </Button>
@@ -168,7 +188,7 @@ export default function AgentHeader() {
                       className="w-full justify-start"
                       size="sm"
                     >
-                      Settings
+                      {t("common.settings")}
                     </Button>
                   </div>
                 </div>
@@ -177,7 +197,7 @@ export default function AgentHeader() {
               <div className="border-t pt-4">
                 <Button variant="outline" className="w-full">
                   <LogOut className="mr-2 h-4 w-4" />
-                  Logout
+                  {t("common.logout")}
                 </Button>
               </div>
             </div>
@@ -193,7 +213,7 @@ export default function AgentHeader() {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search properties..."
+            placeholder={t("common.search")}
             className="w-full bg-background pl-8 md:w-[300px] lg:w-[400px]"
           />
         </div>
@@ -209,15 +229,22 @@ export default function AgentHeader() {
             <Search className="h-5 w-5" />
           </Button>
 
+          {/* Language Switcher */}
+          <LanguageSwitcher />
+
           {/* Help dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="hidden md:flex">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hidden md:flex bg-green-700 hover:bg-green-600 text-white hover:text-white"
+              >
                 <HelpCircle className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>Help & Support</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("common.help")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 User Guide
@@ -245,20 +272,20 @@ export default function AgentHeader() {
                 className="relative bg-green-700 hover:bg-green-600 text-white hover:text-white font-extrabold"
               >
                 <Bell className="h-7 w-7" />
-                <Badge className="absolute bg-gray-600 text-white -right-1 -top-1 h-5 w-5 flex items-center justify-center  rounded-full p-0 text-xs">
+                <Badge className="absolute bg-gray-600 text-white -right-1 -top-1 h-5 w-5 flex items-center justify-center rounded-full p-0 text-xs">
                   3
                 </Badge>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-80">
               <DropdownMenuLabel className="flex items-center justify-between">
-                Notifications
+                {t("common.notifications")}
                 <Button
                   variant="ghost"
                   size="sm"
                   className="h-auto p-1 text-xs"
                 >
-                  Mark all as read
+                  {t("notifications.markAllRead")}
                 </Button>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -304,7 +331,11 @@ export default function AgentHeader() {
           {/* User profile dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="bg-green-700 hover:bg-green-600 text-white hover:text-white"
+              >
                 <Avatar className="h-10 w-10">
                   <AvatarImage src="/avatar.png" alt="Agent" />
                   <AvatarFallback>
@@ -318,11 +349,11 @@ export default function AgentHeader() {
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <UserCircle className="mr-2 h-4 w-4" />
-                Profile
+                {t("common.profile")}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="mr-2 h-4 w-4" />
-                Settings
+                {t("common.settings")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -337,7 +368,7 @@ export default function AgentHeader() {
                 }}
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                Log out
+                {t("common.logout")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
