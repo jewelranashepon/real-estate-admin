@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { PropertyCard } from "./property-card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { PlusCircle, Search } from "lucide-react"
-import Link from "next/link"
+import { useState } from "react";
+import { PropertyCard } from "./property-card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { PlusCircle, Search } from "lucide-react";
+import Link from "next/link";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,41 +15,41 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
-import { deleteProperty } from "@/lib/actions"
-import { useRouter } from "next/navigation"
-import { toast } from "@/components/ui/use-toast"
-import { useTranslations } from "next-intl"
+} from "@/components/ui/alert-dialog";
+import { deleteProperty } from "@/lib/actions";
+import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
+import { useTranslations } from "next-intl";
 
 interface PropertyWithRelations {
-  id: number
-  name: string
-  description: string
-  price: number
-  type: { id: number; value: string }
-  status: { id: number; value: string }
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  type: { id: number; value: string };
+  status: { id: number; value: string };
   feature?: {
-    bedrooms: number
-    bathrooms: number
-    area: number
-  }
+    bedrooms: number;
+    bathrooms: number;
+    area: number;
+  };
   location?: {
-    city: string
-    state: string
-  }
-  images: { id: number; url: string }[]
+    city: string;
+    state: string;
+  };
+  images: { id: number; url: string }[];
 }
 
 interface PropertyGridProps {
-  properties: PropertyWithRelations[]
+  properties: PropertyWithRelations[];
 }
 
 export function PropertyGrid({ properties }: PropertyGridProps) {
-  const router = useRouter()
-  const t = useTranslations('dashboard')
-  const [searchQuery, setSearchQuery] = useState("")
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
-  const [propertyToDelete, setPropertyToDelete] = useState<number | null>(null)
+  const router = useRouter();
+  const t = useTranslations("dashboard");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [propertyToDelete, setPropertyToDelete] = useState<number | null>(null);
 
   // Filter properties based on search query
   const filteredProperties = properties.filter(
@@ -57,45 +57,51 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
       property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       property.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       property.type.value.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (property.location?.city && property.location.city.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (property.location?.state && property.location.state.toLowerCase().includes(searchQuery.toLowerCase())),
-  )
+      (property.location?.city &&
+        property.location.city
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())) ||
+      (property.location?.state &&
+        property.location.state
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()))
+  );
 
   const handleDeleteClick = (id: number) => {
-    setPropertyToDelete(id)
-    setDeleteDialogOpen(true)
-  }
+    setPropertyToDelete(id);
+    setDeleteDialogOpen(true);
+  };
 
   const handleDeleteProperty = async () => {
-    if (!propertyToDelete) return
+    if (!propertyToDelete) return;
 
     try {
-      const result = await deleteProperty(propertyToDelete)
+      const result = await deleteProperty(propertyToDelete);
 
       if (result.success) {
         toast({
           title: "Property deleted",
           description: "The property has been successfully deleted.",
-        })
-        router.refresh()
+        });
+        router.refresh();
       } else {
         toast({
           title: "Error",
           description: "Failed to delete property. Please try again.",
           variant: "destructive",
-        })
+        });
       }
     } catch (error) {
       toast({
         title: "Error",
         description: "An unexpected error occurred.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setDeleteDialogOpen(false)
-      setPropertyToDelete(null)
+      setDeleteDialogOpen(false);
+      setPropertyToDelete(null);
     }
-  }
+  };
 
   return (
     <div className="space-y-4">
@@ -103,7 +109,7 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
         <div className="relative max-w-sm">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search properties..."
+            placeholder={t("search")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-8"
@@ -114,15 +120,19 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
       {filteredProperties.length === 0 ? (
         <div className="flex h-[400px] items-center justify-center rounded-md border border-dashed">
           <div className="text-center">
-            <h3 className="mt-2 text-lg font-semibold">{t('noPropertiesFound')}</h3>
+            <h3 className="mt-2 text-lg font-semibold">
+              {t("noPropertiesFound")}
+            </h3>
             <p className="mb-4 mt-1 text-sm text-muted-foreground">
-              {searchQuery ? "Try a different search term" : t("getStartedByAddingProperty")}
+              {searchQuery
+                ? "Try a different search term"
+                : t("getStartedByAddingProperty")}
             </p>
             {!searchQuery && (
               <Button asChild>
                 <Link href="/admin/properties/new">
                   <PlusCircle className="mr-2 h-4 w-4" />
-                  {t('addProperty')}
+                  {t("addProperty")}
                 </Link>
               </Button>
             )}
@@ -131,7 +141,11 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredProperties.map((property) => (
-            <PropertyCard key={property.id} property={property} onDelete={handleDeleteClick} />
+            <PropertyCard
+              key={property.id}
+              property={property}
+              onDelete={handleDeleteClick}
+            />
           ))}
         </div>
       )}
@@ -139,20 +153,22 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t("title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the property and remove it from our servers.
+              {t("altdescription")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteProperty} className="bg-destructive text-destructive-foreground">
-              Delete
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteProperty}
+              className="bg-destructive text-destructive-foreground"
+            >
+              {t("confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </div>
-  )
+  );
 }
-

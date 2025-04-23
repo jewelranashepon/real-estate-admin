@@ -19,8 +19,40 @@
       "Name": "أدخل اسمك",
       "noAccount": "ليس لديك حساب؟"
     },
+    "table": {
+      "columns": "الأعمدة",
+      "toggleVisibility": "إظهار/إخفاء",
+      "selectAll": "تحديد الكل",
+      "selectRow": "تحديد الصف",
+      "previous": "السابق",
+      "next": "التالي"
+    },
     "property": {
       "beds": "غرفة",
+      "propertyLabel": "العقار",
+      "price": "السعر",
+      "location": "الموقع",
+      "type": "النوع",
+      "status": "الحالة",
+      "statusPublished": "منشور",
+      "statusDraft": "مسودة",
+      "statusSold": "مباع",
+      "notAvailable": "غير متوفر",
+      "filterPlaceholder": "فلتر العقارات...",
+      "filterByStatusPlaceholder": "تصفية حسب الحالة",
+      "filterByTypePlaceholder": "تصفية حسب النوع",
+      "allStatuses": "جميع الحالات",
+      "allTypes": "جميع الأنواع",
+      "deleteSuccess": "تم حذف العقار",
+      "deleteSuccessDescription": "تمت إزالة العقار بنجاح.",
+      "deleteError": "فشل في حذف العقار.",
+      "deleteConfirmTitle": "هل أنت متأكد؟",
+      "deleteConfirmDescription": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف العقار نهائيًا وإزالته من خوادمنا.",
+      "noPropertiesFound": "لم يتم العثور على عقارات.",
+      "rowsSelected": "تم تحديد ",
+      "delete": "حذف",
+      "edit": "تعديل",
+      "view": "عرض",
       "baths": "حمام",
       "sqft": "قدم مربع",
       "house": "منزل",
@@ -328,6 +360,10 @@
     "noPropertiesFound": "لم يتم العثور على أي عقارات",
     "Featured Properties": "العقارات المميزة",
     "getStartedByAddingProperty": "ابدأ بإضافة عقار جديد",
+    "title": "هل أنت متأكد؟",
+    "altdescription": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف العقار نهائيًا وإزالته من خوادمنا.",
+    "cancel": "إلغاء",
+    "confirm": "حذف",
     "propertyOverview": "نظرة عامة على العقارات",
     "distributionByTypeStatus": "توزيع العقارات حسب النوع والحالة",
     "propertyStatus": "حالة العقار",
@@ -477,6 +513,7 @@
     "siteInformation": "معلومات الموقع",
     "siteName": "اسم الموقع",
     "siteDescription": "وصف الموقع",
+    "search": "ابحث عن العقارات...",
     "contactInformation": "معلومات الاتصال",
     "contactInfoDescription": "تفاصيل الاتصال المعروضة على موقعك",
     "address": "العنوان",
@@ -486,6 +523,7 @@
     "regionalSettingsDescription": "الإعدادات المحلية والإقليمية",
     "timezone": "المنطقة الزمنية",
     "theme": "السمة",
+    "pageViews": "مشاهدات الصفحة",
     "themeDescription": "تخصيص مظهر لوحة التحكم",
     "colorMode": "وضع الألوان",
     "light": "فاتح",
@@ -767,6 +805,301 @@
           "actionLabel": "عرض العميل المحتمل"
         }
       }
+    },
+    "supportDashboard": {
+      "tabs": {
+        "helpCenter": "مركز المساعدة",
+        "faq": "الأسئلة الشائعة",
+        "contact": "اتصل بالدعم"
+      },
+      "helpCenter": {
+        "title": "مركز المساعدة",
+        "description": "ابحث عن الموارد والأدلة لمساعدتك في استخدام لوحة التحكم",
+        "searchPlaceholder": "ابحث عن مقالات المساعدة..."
+      },
+      "resources": {
+        "userGuide": {
+          "title": "دليل المستخدم",
+          "description": "دليل شامل لاستخدام لوحة التحكم"
+        },
+        "videoTutorials": {
+          "title": "دروس فيديو",
+          "description": "أدلة فيديو خطوة بخطوة للمهام الشائعة"
+        },
+        "knowledgeBase": {
+          "title": "قاعدة المعرفة",
+          "description": "مقالات وأدلة لاستكشاف الأخطاء وإصلاحها"
+        },
+        "liveChat": {
+          "title": "دردشة مباشرة مع الدعم",
+          "description": "تحدث مع فريق الدعم لدينا في الوقت الفعلي"
+        }
+      },
+      "updates": {
+        "title": "التحديثات الأخيرة",
+        "description": "أحدث التحديثات والتحسينات على المنصة",
+        "newBadge": "جديد",
+        "improvedBadge": "محسن",
+        "analytics": {
+          "title": "لوحة تحليل جديدة",
+          "description": "لقد أطلقنا لوحة تحليل جديدة مع تصورات ورؤى محسنة.",
+          "date": "15 نوفمبر 2023"
+        },
+        "propertySearch": {
+          "title": "تحسين البحث عن العقارات",
+          "description": "تم تحسين وظيفة البحث عن العقارات مع عوامل التصفية وخيارات الفرز.",
+          "date": "10 نوفمبر 2023"
+        },
+        "mobileApp": {
+          "title": "إطلاق التطبيق المحمول",
+          "description": "تطبيقنا المحمول متاح الآن لأجهزة iOS و Android.",
+          "date": "5 نوفمبر 2023"
+        }
+      },
+      "gettingStarted": {
+        "title": "ابدأ هنا",
+        "description": "أدلة سريعة لمساعدتك في البدء باستخدام لوحة التحكم",
+        "viewGuide": "عرض الدليل",
+        "profile": {
+          "title": "1. إعداد ملفك الشخصي",
+          "description": "أكمل معلومات ملفك الشخصي وقم بتعيين تفضيلاتك."
+        },
+        "addProperty": {
+          "title": "2. أضف عقارك الأول",
+          "description": "تعلم كيفية إضافة وإدارة قوائم العقارات."
+        },
+        "inviteTeam": {
+          "title": "3. دعوة أعضاء الفريق",
+          "description": "أضف أعضاء الفريق وقم بتعيين الأدوار والأذونات."
+        },
+        "integrations": {
+          "title": "4. تكاملات التكوين",
+          "description": "قم بإعداد التكاملات مع خدمات الطرف الثالث."
+        }
+      },
+      "faq": {
+        "title": "الأسئلة الشائعة",
+        "description": "ابحث عن إجابات للأسئلة الشائعة حول استخدام لوحة التحكم",
+        "searchPlaceholder": "ابحث في الأسئلة الشائعة...",
+        "noResults": {
+          "title": "لا توجد نتائج",
+          "description": "لم نتمكن من العثور على أي أسئلة شائعة تطابق بحثك. جرب مصطلح بحث مختلف أو تصفح جميع الأسئلة الشائعة."
+        },
+        "addProperty": {
+          "question": "كيف يمكنني إضافة عقار جديد؟",
+          "answer": "لإضافة عقار جديد، انتقل إلى قسم العقارات في الشريط الجانبي وانقر على زر 'إضافة عقار'. املأ نموذج تفاصيل العقار وانقر على 'إنشاء عقار' لحفظه."
+        },
+        "manageUsers": {
+          "question": "كيف يمكنني إدارة حسابات المستخدمين؟",
+          "answer": "يمكنك إدارة حسابات المستخدمين من خلال الذهاب إلى قسم المستخدمين والوكلاء. من هناك، يمكنك عرض أو تعديل أو حذف حسابات المستخدمين، وكذلك تغيير أدوار المستخدمين والأذونات."
+        },
+        "processPayments": {
+          "question": "كيف يمكنني معالجة المدفوعات؟",
+          "answer": "يمكن معالجة المدفوعات من خلال قسم المدفوعات. تأكد من تكوين بوابة الدفع الخاصة بك في صفحة الإعدادات > التكاملات قبل معالجة المدفوعات."
+        },
+        "exportData": {
+          "question": "كيف يمكنني تصدير بيانات العقارات؟",
+          "answer": "لتصدير بيانات العقارات، انتقل إلى قسم العقارات، حدد العقارات التي تريد تصديرها باستخدام مربعات الاختيار، وانقر على زر 'تصدير' في قائمة الإجراءات."
+        },
+        "emailNotifications": {
+          "question": "كيف يمكنني إعداد إشعارات البريد الإلكتروني؟",
+          "answer": "يمكن تكوين إشعارات البريد الإلكتروني في صفحة الإعدادات > الإشعارات. يمكنك اختيار الأحداث التي تؤدي إلى إشعارات البريد الإلكتروني وتخصيص قوالب البريد الإلكتروني."
+        }
+      },
+      "contactForm": {
+        "title": "اتصل بالدعم",
+        "description": "تواصل مع فريق الدعم لدينا للحصول على المساعدة",
+        "nameLabel": "الاسم",
+        "namePlaceholder": "اسمك",
+        "emailLabel": "البريد الإلكتروني",
+        "emailPlaceholder": "بريدك الإلكتروني",
+        "subjectLabel": "الموضوع",
+        "subjectPlaceholder": "موضوع استفسارك",
+        "messageLabel": "الرسالة",
+        "messagePlaceholder": "صف مشكلتك أو سؤالك بالتفصيل",
+        "attachmentLabel": "المرفق (اختياري)",
+        "attachmentDescription": "الحد الأقصى لحجم الملف: 10 ميجابايت. التنسيقات المدعومة: JPG، PNG، PDF.",
+        "responseTime": "وقت الاستجابة: 24-48 ساعة",
+        "submitButton": "إرسال التذكرة",
+        "submitting": "جاري الإرسال...",
+        "defaultName": "مستخدم مسؤول",
+        "defaultEmail": "admin@example.com"
+      },
+      "toast": {
+        "error": {
+          "title": "خطأ",
+          "description": "الرجاء إدخال رسالة قبل الإرسال."
+        },
+        "success": {
+          "title": "تم إرسال تذكرة الدعم",
+          "description": "سوف نعود إليك في أقرب وقت ممكن."
+        }
+      }
+    },
+    "adminLeads": {
+      "searchPlaceholder": "ابحث عن العملاء المحتملين...",
+      "noLeadsFound": "لا توجد عملاء محتملين.",
+      "pagination": {
+        "previous": "السابق",
+        "next": "التالي"
+      },
+      "columns": {
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "phone": "الهاتف",
+        "propertyInterest": "الاهتمام بالعقار",
+        "status": "الحالة",
+        "source": "المصدر",
+        "date": "التاريخ"
+      },
+      "status": {
+        "new": "جديد",
+        "contacted": "تم التواصل",
+        "qualified": "مؤهل",
+        "converted": "تم التحويل",
+        "lost": "مفقود"
+      },
+      "actions": {
+        "openMenu": "فتح القائمة",
+        "label": "الإجراءات",
+        "markContacted": "تعليم كمتم التواصل معه",
+        "sendEmail": "إرسال بريد إلكتروني",
+        "call": "اتصال",
+        "delete": "حذف"
+      },
+      "toast": {
+        "statusUpdated": {
+          "title": "تم تحديث الحالة",
+          "description": "تم تعليم {name} كمتم التواصل معه."
+        },
+        "leadDeleted": {
+          "title": "تم حذف العميل المحتمل",
+          "description": "تم حذف {name}."
+        }
+      },
+      "mockLeads": {
+        "john": {
+          "name": "جون سميث",
+          "phone": "(٥٥٥) ١٢٣-٤٥٦٧",
+          "propertyInterest": "شقة حديثة في وسط المدينة",
+          "status": "جديد",
+          "source": "الموقع الإلكتروني"
+        },
+        "sarah": {
+          "name": "سارة جونسون",
+          "phone": "(٥٥٥) ٩٨٧-٦٥٤٣",
+          "propertyInterest": "فيلا فاخرة مع مسبح",
+          "status": "تم التواصل",
+          "source": "إحالة"
+        },
+        "michael": {
+          "name": "مايكل براون",
+          "phone": "(٥٥٥) ٤٥٦-٧٨٩٠",
+          "propertyInterest": "استوديو مريح في الحي التاريخي",
+          "status": "مؤهل",
+          "source": "وسائل التواصل الاجتماعي"
+        },
+        "emily": {
+          "name": "إميلي ديفيس",
+          "phone": "(٥٥٥) ٢٣٤-٥٦٧٨",
+          "propertyInterest": "منزل عائلي واسع",
+          "status": "تم التحويل",
+          "source": "الموقع الإلكتروني"
+        },
+        "david": {
+          "name": "ديفيد ويلسون",
+          "phone": "(٥٥٥) ٨٧٦-٥٤٣٢",
+          "propertyInterest": "شقة مطلة على البحر",
+          "status": "مفقود",
+          "source": "بوابة عقارية"
+        }
+      }
+    },
+    "dashboardAgents": {
+      "searchPlaceholder": "ابحث عن الوكلاء...",
+      "addAgent": "إضافة وكيل",
+      "emptyState": {
+        "title": "لا توجد وكلاء",
+        "getStarted": "ابدأ بإضافة أول وكيل لك",
+        "tryDifferentSearch": "جرب مصطلح بحث مختلف"
+      },
+      "toast": {
+        "deleteSuccess": {
+          "title": "تم حذف الوكيل",
+          "description": "تم حذف الوكيل بنجاح."
+        },
+        "deleteError": {
+          "title": "خطأ",
+          "description": "فشل حذف الوكيل. يرجى المحاولة مرة أخرى."
+        },
+        "unexpectedError": {
+          "title": "خطأ",
+          "description": "حدث خطأ غير متوقع."
+        }
+      },
+      "deleteDialog": {
+        "title": "هل أنت متأكد؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف الوكيل بشكل دائم وإزالة الارتباط من أي عقارات.",
+        "cancel": "إلغاء",
+        "confirm": "حذف"
+      }
+    },
+    "dashboardUsers": {
+      "selectAll": "تحديد الكل",
+      "selectRow": "تحديد الصف",
+      "filterPlaceholder": "تصفية المستخدمين...",
+      "noUsersFound": "لا توجد مستخدمين.",
+      "selectedCount": "{selected} من {total} صفوف محددة.",
+      "pagination": {
+        "previous": "السابق",
+        "next": "التالي"
+      },
+      "columns": {
+        "user": "المستخدم",
+        "role": "الدور",
+        "status": "الحالة",
+        "properties": "العقارات",
+        "joined": "تاريخ الانضمام"
+      },
+      "columnsDropdown": {
+        "label": "الأعمدة",
+        "toggleVisibility": "تبديل رؤية {column}"
+      },
+      "roles": {
+        "admin": "مدير",
+        "agent": "وكيل",
+        "user": "مستخدم"
+      },
+      "statuses": {
+        "active": "نشط",
+        "pending": "قيد الانتظار",
+        "inactive": "غير نشط"
+      },
+      "actions": {
+        "openMenu": "فتح القائمة",
+        "label": "الإجراءات",
+        "edit": "تعديل",
+        "assignProperties": "تعيين عقارات",
+        "changeRole": "تغيير الدور",
+        "resetPassword": "إعادة تعيين كلمة المرور",
+        "delete": "حذف"
+      },
+      "toast": {
+        "deleteSuccess": {
+          "title": "تم حذف المستخدم",
+          "description": "تم حذف المستخدم بنجاح."
+        },
+        "deleteError": {
+          "title": "خطأ",
+          "description": "فشل حذف المستخدم. يرجى المحاولة مرة أخرى."
+        }
+      },
+      "deleteDialog": {
+        "title": "هل أنت متأكد؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف المستخدم بشكل دائم وإزالة بياناته من خوادمنا.",
+        "cancel": "إلغاء",
+        "confirm": "حذف"
+      }
     }
   },
   "service": {
@@ -996,12 +1329,37 @@
       "markedPaid": "تم تمييز الفاتورة كمقبوضة"
     }
   },
+  "BlogPostForm": {
+    "formLabels": {
+      "title": "عنوان المدونة",
+      "category": "الفئة",
+      "tags": "الوسوم (اختياري)",
+      "featuredImage": "الصورة الرئيسية",
+      "content": "محتوى المدونة"
+    },
+    "placeholders": {
+      "title": "أدخل عنوان المدونة",
+      "category": "أدخل فئة المدونة",
+      "tags": "أدخل الوسوم مفصولة بفواصل"
+    },
+    "buttons": {
+      "publish": "نشر المدونة",
+      "update": "تحديث المدونة"
+    },
+    "alerts": {
+      "updateSuccess": "تم تحديث المدونة بنجاح!",
+      "createSuccess": "تم إنشاء المدونة بنجاح!",
+      "saveError": "فشل حفظ المدونة. يرجى المحاولة مرة أخرى.",
+      "unexpectedError": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى."
+    }
+  },
   "common": {
     "propertyManagement": "نظام إدارة العقارات",
     "agentPortal": "بوابة الوكيل",
     "agentdashboard": "لوحة القيادة",
     "overview": "نظرة عامة",
     "leads": "العملاء المحتملون",
+    "leadsAndMessages": "العملاء المحتملين والرسائل",
     "properties": "العقارات",
     "myProperties": "عقاراتي",
     "addProperty": "إضافة عقار",
@@ -1019,7 +1377,15 @@
     "savedProperties": "العقارات المحفوظة",
     "dashboard": "لوحة التحكم",
     "userSearch": "بحث",
-    "userDashboard": "لوحة تحكم المستخدم"
+    "userDashboard": "لوحة تحكم المستخدم",
+    "view": "عرض",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "cancel": "إلغاء",
+    "openMenu": "فتح القائمة",
+    "actions": "الإجراءات",
+    "error": "خطأ",
+    "unexpectedError": "حدث خطأ غير متوقع."
   },
   "agentdashboard": {
     "welcome": "مرحبًا بعودتك إلى لوحة تحكم الوكيل",
