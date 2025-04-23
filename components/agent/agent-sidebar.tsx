@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { SiGoogleadsense } from "react-icons/si";
 import {
   LayoutDashboard,
   User,
@@ -116,6 +117,19 @@ export default function AgentSidebar() {
                   >
                     <BarChart4 />
                     <span>{t("common.overview")}</span>
+                  </SidebarMenuButton>
+                </Link>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <Link href="/agent/leads" passHref legacyBehavior>
+                  <SidebarMenuButton
+                    isActive={isActive("/agent/leads")}
+                    tooltip={t("common.leads")}
+                    className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                  >
+                    <SiGoogleadsense />
+                    <span>{t("common.leads")}</span>
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>
