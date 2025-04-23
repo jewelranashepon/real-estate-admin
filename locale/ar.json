@@ -1439,5 +1439,48 @@
       "settings": "الإعدادات",
       "logout": "تسجيل الخروج"
     }
+  },
+  "SearchPage": {
+    "back": "رجوع",
+    "title": "بحث العقارات",
+    "searchPlaceholder": "ابحث حسب الموقع، اسم العقار...",
+    "filters": "الفلاتر",
+    "resultsCount": "تم العثور على {count} عقار مطابق لبحثك",
+    "noResults": {
+      "title": "لا توجد عقارات",
+      "description": "حاول تعديل فلتر البحث للعثور على المزيد من العقارات."
+    },
+    "resetFilters": "إعادة تعيين الفلاتر"
+  },
+  "SearchFilters": {
+    "title": "الفلاتر",
+    "reset": "إعادة تعيين",
+    "priceRange": "نطاق السعر",
+    "priceRangeLabel": "${min} - ${max} $",
+    "bedrooms": "غرف النوم",
+    "bathrooms": "الحمامات",
+    "propertyType": "نوع العقار",
+    "squareFootage": "المساحة",
+    "sqftRangeLabel": "${min} - ${max} قدم مربع",
+    "features": "المميزات",
+    "any": "أي",
+    "applyFilters": "تطبيق الفلاتر",
+    "propertyTypes": {
+      "house": "منزل",
+      "apartment": "شقة",
+      "condo": "شقة فندقية",
+      "townhouse": "تاون هاوس",
+      "land": "أرض"
+    },
+    "features": {
+      "pool": "مسبح",
+      "garden": "حديقة",
+      "garage": "جراج",
+      "furnished": "مؤثثة",
+      "fireplace": "موقد",
+      "balcony": "شرفة",
+      "gym": "جيم",
+      "elevator": "مصعد"
+    }
   }
 }

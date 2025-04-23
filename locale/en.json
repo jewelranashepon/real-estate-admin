@@ -1433,5 +1433,48 @@
       "settings": "Settings",
       "logout": "Log out"
     }
+  },
+  "SearchPage": {
+    "back": "Back",
+    "title": "Search Properties",
+    "searchPlaceholder": "Search by location, property name...",
+    "filters": "Filters",
+    "resultsCount": "Found {count} properties matching your criteria",
+    "noResults": {
+      "title": "No properties found",
+      "description": "Try adjusting your search filters to find more properties."
+    },
+    "resetFilters": "Reset Filters"
+  },
+  "SearchFilters": {
+    "title": "Filters",
+    "reset": "Reset",
+    "priceRange": "Price Range",
+    "priceRangeLabel": "${min} - ${max}",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "propertyType": "Property Type",
+    "squareFootage": "Square Footage",
+    "sqftRangeLabel": "${min} - ${max} sqft",
+    "features": "Features",
+    "any": "Any",
+    "applyFilters": "Apply Filters",
+    "propertyTypes": {
+      "house": "House",
+      "apartment": "Apartment",
+      "condo": "Condo",
+      "townhouse": "Townhouse",
+      "land": "Land"
+    },
+    "features": {
+      "pool": "Pool",
+      "garden": "Garden",
+      "garage": "Garage",
+      "furnished": "Furnished",
+      "fireplace": "Fireplace",
+      "balcony": "Balcony",
+      "gym": "Gym",
+      "elevator": "Elevator"
+    }
   }
 }
