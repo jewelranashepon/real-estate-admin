@@ -21,6 +21,7 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react"; // Importing useState to manage chat visibility
 import { useSearch } from "@/lib/search-context";
 import Chat from "./chat";
+import LanguageSwitcher from "../language-switcher";
 
 const languageOptions = [
   { code: "en", label: "English", flag: "https://flagcdn.com/w40/us.png" },
@@ -79,7 +80,7 @@ export default function DesktopView() {
 
           {/* Language Selector */}
           <div className="ml-6 flex items-center gap-4">
-            <div className="hidden md:flex items-center">
+            {/* <div className="hidden md:flex items-center">
               <Typography
                 variant="subtitle2"
                 className="text-black font-semibold uppercase text-xs mb-1 p-4"
@@ -103,7 +104,8 @@ export default function DesktopView() {
                   </button>
                 ))}
               </div>
-            </div>
+            </div> */}
+            <LanguageSwitcher/>
             {session?.data ? (
               <Button
                 variant="outline"

@@ -142,6 +142,69 @@
       "LD": "Legal Documents"
     }
   },
+  "landing": {
+    "hero": {
+      "title": "Find Your Dream Home",
+      "subtitle": "The largest real estate platform in the region with thousands of premium properties",
+      "ctaPrimary": "Browse Properties",
+      "ctaSecondary": "Learn More"
+    },
+    "features": {
+      "title": "Why Choose Us?",
+      "qualityProperties": "Quality Properties",
+      "qualityPropertiesDesc": "Carefully selected best properties",
+      "expertAgents": "Expert Agents",
+      "expertAgentsDesc": "Team of professionals to assist you",
+      "easySearch": "Easy Search",
+      "easySearchDesc": "Browse easily with advanced search tools",
+      "secureTransactions": "Secure Transactions",
+      "secureTransactionsDesc": "Full protection for all your transactions"
+    },
+    "properties": {
+      "title": "Featured Properties",
+      "sampleTitle": "Luxury Villa",
+      "sampleLocation": "Dubai, UAE",
+      "samplePrice": "AED 2,500,000",
+      "viewButton": "View Details"
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "About Us",
+      "description": "The leading real estate platform in the region"
+    },
+    "links": {
+      "title": "Quick Links",
+      "home": "Home",
+      "properties": "Properties",
+      "agents": "Agents",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "address": "Dubai, United Arab Emirates",
+      "phone": "+971 4 123 4567",
+      "email": "info@realestate.com"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Subscribe for latest offers",
+      "placeholder": "Your Email",
+      "button": "Subscribe"
+    },
+    "copyright": "All Rights Reserved © 2023"
+  },
+  "nav": {
+    "logo": "RealEstate",
+    "home": "Home",
+    "properties": "Properties",
+    "agents": "Agents",
+    "about": "About",
+    "contact": "Contact",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
   "auth": {
     "login": "Login",
     "register": "Create Account",
@@ -799,5 +862,48 @@
     "deleteSuccess": "Blog post deleted successfully!",
     "deleteFailure": "Failed to delete blog post.",
     "unexpectedError": "An unexpected error occurred."
+  },
+  "SearchPage": {
+    "back": "Back",
+    "title": "Search Properties",
+    "searchPlaceholder": "Search by location, property name...",
+    "filters": "Filters",
+    "resultsCount": "Found {count} properties matching your criteria",
+    "noResults": {
+      "title": "No properties found",
+      "description": "Try adjusting your search filters to find more properties."
+    },
+    "resetFilters": "Reset Filters"
+  },
+  "SearchFilters": {
+    "title": "Filters",
+    "reset": "Reset",
+    "priceRange": "Price Range",
+    "priceRangeLabel": "${min} - ${max}",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "propertyType": "Property Type",
+    "squareFootage": "Square Footage",
+    "sqftRangeLabel": "${min} - ${max} sqft",
+    "features": "Features",
+    "any": "Any",
+    "applyFilters": "Apply Filters",
+    "propertyTypes": {
+      "house": "House",
+      "apartment": "Apartment",
+      "condo": "Condo",
+      "townhouse": "Townhouse",
+      "land": "Land"
+    },
+    "features": {
+      "pool": "Pool",
+      "garden": "Garden",
+      "garage": "Garage",
+      "furnished": "Furnished",
+      "fireplace": "Fireplace",
+      "balcony": "Balcony",
+      "gym": "Gym",
+      "elevator": "Elevator"
+    }
   }
 }

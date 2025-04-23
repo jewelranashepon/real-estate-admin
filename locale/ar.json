@@ -140,6 +140,70 @@
       "LD": "الوثائق القانونية"
     }
   },
+  "landing": {
+    "hero": {
+      "title": "ابحث عن منزل أحلامك",
+      "subtitle": "أكبر منصة عقارية في المنطقة مع آلاف العقارات المميزة",
+      "ctaPrimary": "تصفح العقارات",
+      "ctaSecondary": "تعرف على المزيد"
+    },
+    "features": {
+      "title": "لماذا تختارنا؟",
+      "qualityProperties": "عقارات عالية الجودة",
+      "qualityPropertiesDesc": "أفضل العقارات المختارة بعناية",
+      "expertAgents": "وكلاء خبراء",
+      "expertAgentsDesc": "فريق من المحترفين لمساعدتك",
+      "easySearch": "بحث سهل",
+      "easySearchDesc": "تصفح بسهولة باستخدام أدوات البحث المتقدمة",
+      "secureTransactions": "معاملات آمنة",
+      "secureTransactionsDesc": "حماية كاملة لجميع معاملاتك"
+    },
+    "properties": {
+      "title": "العقارات المميزة",
+      "sampleTitle": "فيلا فاخرة",
+      "sampleLocation": "دبي، الإمارات",
+      "samplePrice": "2,500,000 درهم",
+      "viewButton": "عرض التفاصيل"
+    }
+  },
+
+  "footer": {
+    "about": {
+      "title": "عن الشركة",
+      "description": "منصة العقارات الرائدة في المنطقة"
+    },
+    "links": {
+      "title": "روابط سريعة",
+      "home": "الرئيسية",
+      "properties": "العقارات",
+      "agents": "الوكلاء",
+      "about": "عن الشركة",
+      "contact": "اتصل بنا"
+    },
+    "contact": {
+      "title": "اتصل بنا",
+      "address": "دبي، الإمارات العربية المتحدة",
+      "phone": "+971 4 123 4567",
+      "email": "info@realestate.com"
+    },
+    "newsletter": {
+      "title": "النشرة البريدية",
+      "description": "اشترك لتصلك آخر العروض",
+      "placeholder": "بريدك الإلكتروني",
+      "button": "اشتراك"
+    },
+    "copyright": "جميع الحقوق محفوظة © 2023"
+  },
+  "nav": {
+    "logo": "العقار",
+    "home": "الرئيسية",
+    "properties": "العقارات",
+    "agents": "الوكلاء",
+    "about": "عن الشركة",
+    "contact": "اتصل بنا",
+    "signIn": "تسجيل الدخول",
+    "signUp": "حساب جديد"
+  },
   "auth": {
     "login": "تسجيل الدخول",
     "register": "إنشاء حساب",
@@ -809,5 +873,48 @@
     "deleteSuccess": "تم حذف منشور المدونة بنجاح!",
     "deleteFailure": "فشل في حذف منشور المدونة.",
     "unexpectedError": "حدث خطأ غير متوقع."
+  },
+  "SearchPage": {
+    "back": "رجوع",
+    "title": "بحث العقارات",
+    "searchPlaceholder": "ابحث حسب الموقع، اسم العقار...",
+    "filters": "الفلاتر",
+    "resultsCount": "تم العثور على {count} عقار مطابق لبحثك",
+    "noResults": {
+      "title": "لا توجد عقارات",
+      "description": "حاول تعديل فلتر البحث للعثور على المزيد من العقارات."
+    },
+    "resetFilters": "إعادة تعيين الفلاتر"
+  },
+  "SearchFilters": {
+    "title": "الفلاتر",
+    "reset": "إعادة تعيين",
+    "priceRange": "نطاق السعر",
+    "priceRangeLabel": "${min} - ${max} $",
+    "bedrooms": "غرف النوم",
+    "bathrooms": "الحمامات",
+    "propertyType": "نوع العقار",
+    "squareFootage": "المساحة",
+    "sqftRangeLabel": "${min} - ${max} قدم مربع",
+    "features": "المميزات",
+    "any": "أي",
+    "applyFilters": "تطبيق الفلاتر",
+    "propertyTypes": {
+      "house": "منزل",
+      "apartment": "شقة",
+      "condo": "شقة فندقية",
+      "townhouse": "تاون هاوس",
+      "land": "أرض"
+    },
+    "features": {
+      "pool": "مسبح",
+      "garden": "حديقة",
+      "garage": "جراج",
+      "furnished": "مؤثثة",
+      "fireplace": "موقد",
+      "balcony": "شرفة",
+      "gym": "جيم",
+      "elevator": "مصعد"
+    }
   }
 }
