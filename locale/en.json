@@ -213,10 +213,14 @@
     "subject": "Subject",
     "property": "Property",
     "totalRevenue": "Total Revenue",
+    "totalRevenueMoney": " 1,200,000 SAR",
+    "totalRevenuePervcentance": "  +5% from last month",
     "pendingPayments": "Pending Payments",
     "nextPayout": "Next Payout",
     "fromLastMonth": "from last month",
+    "fromLastMonthValue": "68.2%",
     "pendingTransactions": "pending transactions",
+    "pendingTransactionsAmount": "18,300 SAR",
     "scheduled": "scheduled",
     "invoices": "Invoices",
     "amount": "Amount",
@@ -347,7 +351,9 @@
     "reducedMotion": "Reduced Motion",
     "highContrastModeDescription": "Increase contrast for better visibility",
     "reducedMotionDescription": "Reduce or eliminate motion effects",
-    "propertyTypes": "Property Types"
+    "propertyTypes": "Property Types",
+    "noMessagesFound": "No messages found",
+    "searchLeads": "Search leads..."
   },
   "service": {
     "home": "Home",
@@ -463,7 +469,16 @@
     "coordinates": "Coordinates",
     "viewDetails": "View Details",
     "showOnMap": "Show on Map",
-    "riyadhDistricts": "Riyadh Districts"
+    "riyadhDistricts": "Riyadh Districts",
+    "al_olaya": "Al Olaya",
+    "al_malaz": "Al Malaz",
+    "al_naseem": "Al Naseem",
+    "qurtubah": "Qurtubah",
+    "al_wurud": "Al Wurud",
+    "hittin": "Hittin",
+    "al_nakheel": "Al Nakheel",
+    "al_yasmin": "Al Yasmin",
+    "al_murabba": "Al Murabba"
   },
   "profile": {
     "updateProfile": "Update your profile information and settings",

@@ -203,15 +203,15 @@ export default function PropertyMap() {
                         {t("map.riyadhDistricts")}
                       </div>
                       <div className="grid grid-cols-2 gap-x-4">
-                        <div>• Al Olaya</div>
-                        <div>• Al Malaz</div>
-                        <div>• Al Naseem</div>
-                        <div>• Qurtubah</div>
-                        <div>• Al Wurud</div>
-                        <div>• Hittin</div>
-                        <div>• Al Nakheel</div>
-                        <div>• Al Yasmin</div>
-                        <div>• Al Murabba</div>
+                        <div> {t("map.al_olaya")}</div>
+                        <div>{t("map.al_malaz")}</div>
+                        <div>{t("map.al_naseem")}</div>
+                        <div>{t("map.qurtubah")}</div>
+                        <div>{t("map.al_wurud")}</div>
+                        <div>{t("map.hittin")}</div>
+                        <div>{t("map.al_nakheel")}</div>
+                        <div>{t("map.al_yasmin")}</div>
+                        <div>{t("map.al_murabba")}</div>
                       </div>
                     </div>
                   </div>

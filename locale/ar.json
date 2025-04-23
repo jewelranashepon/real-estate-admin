@@ -211,10 +211,14 @@
     "subject": "الموضوع",
     "property": "العقار",
     "totalRevenue": "إجمالي الإيرادات",
+    "totalRevenueMoney": "١,٢٠٠,٠٠٠ ريال سعودي",
+    "totalRevenuePervcentance": "٥%+ من الشهر الماضي",
     "pendingPayments": "المدفوعات المعلقة",
     "nextPayout": "الدفعة التالية",
     "fromLastMonth": "من الشهر الماضي",
+    "fromLastMonthValue": "٪٦٨٫٢",
     "pendingTransactions": "المعاملات المعلقة",
+    "pendingTransactionsAmount": "١٨,٣٠٠: ريال سعودي",
     "scheduled": "مجدولة",
     "invoices": "الفواتير",
     "amount": "المبلغ",
@@ -345,7 +349,9 @@
     "reducedMotion": "تقليل الحركة",
     "highContrastModeDescription": "زيادة التباين لتحسين الرؤية",
     "reducedMotionDescription": "تقليل أو إزالة تأثيرات الحركة",
-    "propertyTypes": "أنواع العقارات"
+    "propertyTypes": "أنواع العقارات",
+    "noMessagesFound": "لم يتم العثور على رسائل",
+    "searchLeads": "ابحث في العملاء المحتملين..."
   },
   "service": {
     "home": "الرئيسية",
@@ -458,7 +464,16 @@
     "coordinates": "الإحداثيات",
     "viewDetails": "عرض التفاصيل",
     "showOnMap": "عرض على الخريطة",
-    "riyadhDistricts": "أحياء الرياض"
+    "riyadhDistricts": "أحياء الرياض",
+    "al_olaya": "العليا",
+    "al_malaz": "الملز",
+    "al_naseem": "النسيم",
+    "qurtubah": "قرطبة",
+    "al_wurud": "الورود",
+    "hittin": "حطين",
+    "al_nakheel": "النخيل",
+    "al_yasmin": "الياسمين",
+    "al_murabba": "المربع"
   },
   "profile": {
     "updateProfile": "تحديث معلومات ملفك الشخصي والإعدادات",
