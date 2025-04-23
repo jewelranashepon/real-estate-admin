@@ -251,7 +251,8 @@
     "about": "About",
     "contact": "Contact",
     "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "service":"Service"
   },
   "auth": {
     "login": "Login",
