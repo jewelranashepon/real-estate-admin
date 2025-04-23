@@ -216,6 +216,101 @@
       "viewButton": "View Details"
     }
   },
+  "services": {
+    "title": "Our Premium Services",
+    "subtitle": "Experience unparalleled real estate services tailored for Dubai's elite",
+    "urban": {
+      "title": "Luxury Urban Living",
+      "description": "Exclusive properties in Dubai's most prestigious neighborhoods"
+    },
+    "instant": {
+      "title": "Instant Access",
+      "description": "Virtual tours and digital keys for immediate property viewing"
+    },
+    "analytics": {
+      "title": "Market Intelligence",
+      "description": "Data-driven insights for strategic property investments"
+    },
+    "security": {
+      "title": "Secure Transactions",
+      "description": "Blockchain-verified contracts with military-grade encryption"
+    }
+  },
+  "properties": {
+    "availableProperties": "Available Properties",
+    "falCertified": "FAL Certified",
+    "sampleDescription": "This stunning property features modern architecture with spacious living areas, high-end finishes, and breathtaking views. The open floor plan is perfect for entertaining, while the private outdoor space offers tranquility in the heart of the city.",
+    "proceedButton": "Proceed with Purchase",
+    "pricing": {
+      "title": "Pricing Details",
+      "price": "Price",
+      "type": "Property Type"
+    },
+    "details": {
+      "beds": "Beds",
+      "baths": "Baths",
+      "area": "sqft"
+    },
+    "types": {
+      "villa": "Villa",
+      "apartment": "Apartment",
+      "penthouse": "Penthouse",
+      "townhouse": "Townhouse"
+    },
+    "sampleProperties": [
+      {
+        "title": "Luxury Marina Villa",
+        "location": "Dubai Marina, Dubai"
+      },
+      {
+        "title": "Modern Downtown Apartment",
+        "location": "Downtown Dubai"
+      },
+      {
+        "title": "Executive Penthouse",
+        "location": "Palm Jumeirah"
+      },
+      {
+        "title": "Family Townhouse",
+        "location": "Arabian Ranches"
+      },
+      {
+        "title": "Waterfront Villa",
+        "location": "Dubai Creek"
+      }
+    ]
+  },
+
+  "stats": {
+    "title": "Trusted by Thousands",
+    "subtitle": "Our numbers speak for themselves - join our growing community",
+    "propertiesListed": "Properties Listed",
+    "happyClients": "Happy Clients",
+    "yearsExperience": "Years Experience",
+    "awardsWon": "Awards Won"
+  },
+
+  "features": {
+    "title": "Premium Property Solutions",
+    "subtitle": "Experience real estate redefined with our innovative services",
+    "urban": {
+      "title": "Urban Living",
+      "description": "Discover properties in Dubai's most vibrant neighborhoods"
+    },
+    "instant": {
+      "title": "Instant Access",
+      "description": "Get immediate viewing appointments with digital keys"
+    },
+    "analytics": {
+      "title": "Smart Analytics",
+      "description": "Data-driven insights for informed property decisions"
+    },
+    "security": {
+      "title": "Secure Transactions",
+      "description": "Blockchain-verified contracts for peace of mind"
+    }
+  },
+
   "footer": {
     "about": {
       "title": "About Us",
@@ -1432,7 +1527,7 @@
     "static_documentCompletion": "90% ",
     "static_profileCompleteness": "85% "
   },
-  "properties": {
+  "property": {
     "manageListings": "Manage your property listings and their status",
     "allProperties": "All your properties shown on the map",
     "all": "All",

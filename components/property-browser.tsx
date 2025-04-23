@@ -22,6 +22,7 @@ type Property = {
 export default function PropertyBrowser() {
   const { locale } = useParams();
   const t = useTranslations("properties");
+  const searchT = useTranslations('app')
   const isRtl = locale === "ar";
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -187,7 +188,7 @@ export default function PropertyBrowser() {
             <div className="relative">
               <input
                 type="text"
-                placeholder={t("search.placeholder") || "Search properties..."}
+                placeholder={searchT("search.placeholder") || "Search properties..."}
                 className="w-full p-3 pl-10 rounded-lg bg-gray-800 border border-gray-700 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-white transition"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -262,7 +263,7 @@ export default function PropertyBrowser() {
                 variants={itemVariants}
                 className="text-center py-8 text-gray-500"
               >
-                {t("search.noResults") || "No properties found"}
+                {searchT("search.noResults") || "No properties found"}
               </motion.div>
             )}
           </motion.div>
