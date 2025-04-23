@@ -25,7 +25,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link href="/" className="text-2xl font-bold text-blue-600">
-              {t("nav.logo")}
+              <img src="/realLogo.png" alt="RealEstate" width={100} />
             </Link>
           </div>
 
