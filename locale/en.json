@@ -289,6 +289,7 @@
     "notifications": "Notifications",
     "support": "Support",
     "addProperty": "Add Property",
+    "search": "Search properties...",
     "grid": "Grid",
     "table": "Table",
     "addUser": "Add User",
@@ -435,6 +436,7 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System",
+    "pageViews": "Page Views",
     "primaryColor": "Primary Color",
     "layout": "Layout",
     "layoutDescription": "Customize the layout of the admin panel",
@@ -710,6 +712,301 @@
           "actionLabel": "View Lead"
         }
       }
+    },
+    "supportDashboard": {
+      "tabs": {
+        "helpCenter": "Help Center",
+        "faq": "FAQ",
+        "contact": "Contact Support"
+      },
+      "helpCenter": {
+        "title": "Help Center",
+        "description": "Find resources and guides to help you use the admin panel",
+        "searchPlaceholder": "Search for help articles..."
+      },
+      "resources": {
+        "userGuide": {
+          "title": "User Guide",
+          "description": "Comprehensive guide to using the admin panel"
+        },
+        "videoTutorials": {
+          "title": "Video Tutorials",
+          "description": "Step-by-step video guides for common tasks"
+        },
+        "knowledgeBase": {
+          "title": "Knowledge Base",
+          "description": "Articles and guides for troubleshooting"
+        },
+        "liveChat": {
+          "title": "Live Chat Support",
+          "description": "Chat with our support team in real-time"
+        }
+      },
+      "updates": {
+        "title": "Recent Updates",
+        "description": "Latest updates and improvements to the platform",
+        "newBadge": "New",
+        "improvedBadge": "Improved",
+        "analytics": {
+          "title": "New Analytics Dashboard",
+          "description": "We've launched a new analytics dashboard with improved visualizations and insights.",
+          "date": "November 15, 2023"
+        },
+        "propertySearch": {
+          "title": "Enhanced Property Search",
+          "description": "The property search functionality has been enhanced with filters and sorting options.",
+          "date": "November 10, 2023"
+        },
+        "mobileApp": {
+          "title": "Mobile App Launch",
+          "description": "Our mobile app is now available for iOS and Android devices.",
+          "date": "November 5, 2023"
+        }
+      },
+      "gettingStarted": {
+        "title": "Getting Started",
+        "description": "Quick guides to help you get started with the admin panel",
+        "viewGuide": "View Guide",
+        "profile": {
+          "title": "1. Set up your profile",
+          "description": "Complete your profile information and set your preferences."
+        },
+        "addProperty": {
+          "title": "2. Add your first property",
+          "description": "Learn how to add and manage property listings."
+        },
+        "inviteTeam": {
+          "title": "3. Invite team members",
+          "description": "Add team members and assign roles and permissions."
+        },
+        "integrations": {
+          "title": "4. Configure integrations",
+          "description": "Set up integrations with third-party services."
+        }
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "description": "Find answers to common questions about using the admin panel",
+        "searchPlaceholder": "Search FAQs...",
+        "noResults": {
+          "title": "No results found",
+          "description": "We couldn't find any FAQs matching your search. Try a different search term or browse all FAQs."
+        },
+        "addProperty": {
+          "question": "How do I add a new property?",
+          "answer": "To add a new property, navigate to the Properties section in the sidebar and click on the 'Add Property' button. Fill out the property details form and click 'Create Property' to save it."
+        },
+        "manageUsers": {
+          "question": "How do I manage user accounts?",
+          "answer": "You can manage user accounts by going to the Users & Agents section. From there, you can view, edit, or delete user accounts, as well as change user roles and permissions."
+        },
+        "processPayments": {
+          "question": "How do I process payments?",
+          "answer": "Payments can be processed through the Payments section. Make sure you have configured your payment gateway in the Settings > Integrations page before processing payments."
+        },
+        "exportData": {
+          "question": "How do I export property data?",
+          "answer": "To export property data, go to the Properties section, select the properties you want to export using the checkboxes, and click on the 'Export' button in the actions menu."
+        },
+        "emailNotifications": {
+          "question": "How do I set up email notifications?",
+          "answer": "Email notifications can be configured in the Settings > Notifications page. You can choose which events trigger email notifications and customize the email templates."
+        }
+      },
+      "contactForm": {
+        "title": "Contact Support",
+        "description": "Get in touch with our support team for assistance",
+        "nameLabel": "Name",
+        "namePlaceholder": "Your name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Your email",
+        "subjectLabel": "Subject",
+        "subjectPlaceholder": "Subject of your inquiry",
+        "messageLabel": "Message",
+        "messagePlaceholder": "Describe your issue or question in detail",
+        "attachmentLabel": "Attachment (optional)",
+        "attachmentDescription": "Max file size: 10MB. Supported formats: JPG, PNG, PDF.",
+        "responseTime": "Response time: 24-48 hours",
+        "submitButton": "Submit Ticket",
+        "submitting": "Submitting...",
+        "defaultName": "Admin User",
+        "defaultEmail": "admin@example.com"
+      },
+      "toast": {
+        "error": {
+          "title": "Error",
+          "description": "Please enter a message before submitting."
+        },
+        "success": {
+          "title": "Support ticket submitted",
+          "description": "We'll get back to you as soon as possible."
+        }
+      }
+    },
+    "adminLeads": {
+      "searchPlaceholder": "Search leads...",
+      "noLeadsFound": "No leads found.",
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "columns": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "propertyInterest": "Property Interest",
+        "status": "Status",
+        "source": "Source",
+        "date": "Date"
+      },
+      "status": {
+        "new": "New",
+        "contacted": "Contacted",
+        "qualified": "Qualified",
+        "converted": "Converted",
+        "lost": "Lost"
+      },
+      "actions": {
+        "openMenu": "Open menu",
+        "label": "Actions",
+        "markContacted": "Mark as Contacted",
+        "sendEmail": "Send Email",
+        "call": "Call",
+        "delete": "Delete"
+      },
+      "toast": {
+        "statusUpdated": {
+          "title": "Status updated",
+          "description": "{name} marked as contacted."
+        },
+        "leadDeleted": {
+          "title": "Lead deleted",
+          "description": "{name} has been deleted."
+        }
+      },
+      "mockLeads": {
+        "john": {
+          "name": "John Smith",
+          "phone": "(555) 123-4567",
+          "propertyInterest": "Modern Apartment in Downtown",
+          "status": "New",
+          "source": "Website"
+        },
+        "sarah": {
+          "name": "Sarah Johnson",
+          "phone": "(555) 987-6543",
+          "propertyInterest": "Luxury Villa with Pool",
+          "status": "Contacted",
+          "source": "Referral"
+        },
+        "michael": {
+          "name": "Michael Brown",
+          "phone": "(555) 456-7890",
+          "propertyInterest": "Cozy Studio in Historic District",
+          "status": "Qualified",
+          "source": "Social Media"
+        },
+        "emily": {
+          "name": "Emily Davis",
+          "phone": "(555) 234-5678",
+          "propertyInterest": "Spacious Family Home",
+          "status": "Converted",
+          "source": "Website"
+        },
+        "david": {
+          "name": "David Wilson",
+          "phone": "(555) 876-5432",
+          "propertyInterest": "Seaview Apartment",
+          "status": "Lost",
+          "source": "Property Portal"
+        }
+      }
+    },
+    "dashboardAgents": {
+      "searchPlaceholder": "Search agents...",
+      "addAgent": "Add Agent",
+      "emptyState": {
+        "title": "No agents found",
+        "getStarted": "Get started by adding your first agent",
+        "tryDifferentSearch": "Try a different search term"
+      },
+      "toast": {
+        "deleteSuccess": {
+          "title": "Agent deleted",
+          "description": "The agent has been successfully deleted."
+        },
+        "deleteError": {
+          "title": "Error",
+          "description": "Failed to delete agent. Please try again."
+        },
+        "unexpectedError": {
+          "title": "Error",
+          "description": "An unexpected error occurred."
+        }
+      },
+      "deleteDialog": {
+        "title": "Are you sure?",
+        "description": "This action cannot be undone. This will permanently delete the agent and remove the association from any properties.",
+        "cancel": "Cancel",
+        "confirm": "Delete"
+      }
+    },
+    "dashboardUsers": {
+      "selectAll": "Select all",
+      "selectRow": "Select row",
+      "filterPlaceholder": "Filter users...",
+      "noUsersFound": "No users found.",
+      "selectedCount": "{selected} of {total} row(s) selected.",
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "columns": {
+        "user": "User",
+        "role": "Role",
+        "status": "Status",
+        "properties": "Properties",
+        "joined": "Joined"
+      },
+      "columnsDropdown": {
+        "label": "Columns",
+        "toggleVisibility": "Toggle {column} visibility"
+      },
+      "roles": {
+        "admin": "Admin",
+        "agent": "Agent",
+        "user": "User"
+      },
+      "statuses": {
+        "active": "Active",
+        "pending": "Pending",
+        "inactive": "Inactive"
+      },
+      "actions": {
+        "openMenu": "Open menu",
+        "label": "Actions",
+        "edit": "Edit",
+        "assignProperties": "Assign Properties",
+        "changeRole": "Change Role",
+        "resetPassword": "Reset Password",
+        "delete": "Delete"
+      },
+      "toast": {
+        "deleteSuccess": {
+          "title": "User deleted",
+          "description": "The user has been successfully deleted."
+        },
+        "deleteError": {
+          "title": "Error",
+          "description": "Failed to delete user. Please try again."
+        }
+      },
+      "deleteDialog": {
+        "title": "Are you sure?",
+        "description": "This action cannot be undone. This will permanently delete the user and remove their data from our servers.",
+        "cancel": "Cancel",
+        "confirm": "Delete"
+      }
     }
   },
   "service": {
@@ -742,6 +1039,30 @@
     "supportHelpText": "Our team of experts is ready to help you find the perfect solution.",
     "contactSupport": "Contact Support",
     "contactUs": "Contact Us"
+  },
+  "BlogPostForm": {
+    "formLabels": {
+      "title": "Blog Title",
+      "category": "Category",
+      "tags": "Tags (Optional)",
+      "featuredImage": "Featured Image",
+      "content": "Blog Content"
+    },
+    "placeholders": {
+      "title": "Enter blog title",
+      "category": "Enter blog category",
+      "tags": "Enter tags separated by commas"
+    },
+    "buttons": {
+      "publish": "Publish Blog",
+      "update": "Update Blog"
+    },
+    "alerts": {
+      "updateSuccess": "Blog updated successfully!",
+      "createSuccess": "Blog post created!",
+      "saveError": "Failed to save blog post. Please try again.",
+      "unexpectedError": "An unexpected error occurred. Please try again."
+    }
   },
   "newUser": {
     "title": "Create New User",
@@ -945,6 +1266,7 @@
     "agentdashboard": "Dashboard",
     "overview": "Overview",
     "leads": "Leads",
+    "leadsAndMessages": "Leads & Messages",
     "properties": "Properties",
     "myProperties": "My Properties",
     "addProperty": "Add Property",
