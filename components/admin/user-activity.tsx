@@ -45,11 +45,11 @@ export function UserActivity() {
   ];
 
   const trafficSources = [
-    { name: "Direct", value: 34 },
-    { name: "Organic", value: 26 },
-    { name: "Social", value: 20 },
-    { name: "Referral", value: 14 },
-    { name: "Email", value: 6 },
+    { name: "مباشر", value: 34 }, // Direct
+    { name: "عضوي", value: 26 }, // Organic
+    { name: "شبكات التواصل", value: 20 }, // Social
+    { name: "إحالة", value: 14 }, // Referral
+    { name: "البريد الإلكتروني", value: 6 }, // Email
   ];
 
   const activeList = [

@@ -124,12 +124,12 @@ const LoginPage = () => {
           </Form>
           <div className="mt-5 text-center text-sm">
             <p>
-              Do not have an account?{" "}
+              {t("auth.noAccount")}{" "}
               <Link
                 href="/sign-up"
                 className="font-medium text-primary hover:underline underline-offset-4"
               >
-                Sign Up
+                {t("auth.signUpButton")}
               </Link>
             </p>
           </div>

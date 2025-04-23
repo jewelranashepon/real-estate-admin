@@ -25,10 +25,13 @@ import {
 } from "@/components/ui/sidebar";
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 export default function AdminSidebar() {
   const t = useTranslations("dashboard");
   const pathname = usePathname();
+  const { locale } = useParams();
+  const isRtl = locale === "ar";
 
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -61,6 +64,7 @@ export default function AdminSidebar() {
       className={`flex flex-col h-screen transition-all duration-300 ${
         collapsed ? "w-20" : "w-72"
       } bg-gradient-to-b from-emerald-700 via-emerald-800 to-emerald-900 text-white shadow-2xl md:rounded-r-xl`}
+      dir={isRtl ? "rtl" : "ltr"}
     >
       {/* Header */}
       <SidebarHeader
@@ -76,10 +80,10 @@ export default function AdminSidebar() {
               <Building2 className="h-6 w-6 text-white" />
               <div className="hidden md:flex flex-col leading-tight">
                 <span className="text-base font-semibold text-white">
-                  Birds of Eden
+                  {t("adminPanel.title")}
                 </span>
                 <span className="text-sm text-white font-medium tracking-wide">
-                  Admin Panel
+                  {t("adminPanel.subtitle")}
                 </span>
               </div>
             </Link>
@@ -118,7 +122,6 @@ export default function AdminSidebar() {
                   }`}
                 >
                   <Link href={path} className="flex items-center w-full">
-                    {/* Active bar (optional) */}
                     <Icon
                       className={`h-5 w-5 shrink-0 transition-colors ${
                         active
@@ -157,15 +160,19 @@ export default function AdminSidebar() {
       </SidebarContent>
 
       {/* Footer */}
-      <SidebarFooter className="mt-auto border-t border-green-800 px-4 py-3 ">
+      <SidebarFooter className="mt-auto border-t border-green-800 px-4 py-3">
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-primary/20 text-white flex items-center justify-center font-bold shadow-inner">
             AD
           </div>
           {!collapsed && (
             <div className="flex flex-col">
-              <span className="text-sm font-medium text-white">Admin User</span>
-              <span className="text-xs text-white">admin@example.com</span>
+              <span className="text-sm font-medium text-white">
+                {t("adminPanel.user.name")}
+              </span>
+              <span className="text-xs text-white">
+                {t("adminPanel.user.email")}
+              </span>
             </div>
           )}
         </div>
