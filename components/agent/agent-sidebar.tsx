@@ -3,7 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   Sidebar,
   SidebarContent,
@@ -55,12 +55,12 @@ export default function AgentSidebar() {
   };
 
   return (
-    <Sidebar variant="floating" className="border-r w-64">
+    <div className="border-r h-full flex flex-col w-64 rtl:order-1">
       <SidebarHeader className="bg-green-600 text-white flex flex-col items-center justify-center py-6">
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-2">
             <Building className="h-6 w-6 text-white" />
-            <h1 className="text-xl font-bold">PropManage</h1>
+            <h1 className="text-xl font-bold"> {t("common.agentPortal")}</h1>
           </div>
           <Badge variant="outline" className="px-2 py-0.5 text-xs text-white">
             {t("common.agentPortal")}
@@ -78,15 +78,19 @@ export default function AgentSidebar() {
               <AvatarFallback>AR</AvatarFallback>
             </Avatar>
             <div className="space-y-1">
-              <h3 className="text-sm font-medium leading-none">Ahmed Rashid</h3>
-              <p className="text-xs text-muted-foreground">Real Estate Agent</p>
+              <h3 className="text-sm font-medium leading-none">
+                {t("common.agentName")}
+              </h3>
+              <p className="text-xs text-muted-foreground">
+                {t("common.description")}
+              </p>
             </div>
           </div>
         </div>
 
         <SidebarGroup>
           <SidebarGroupLabel className="text-green-800">
-            {t("common.dashboard")}
+            {t("common.agentdashboard")}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -94,11 +98,11 @@ export default function AgentSidebar() {
                 <Link href="/agent/dashboard" passHref legacyBehavior>
                   <SidebarMenuButton
                     isActive={isActive("/agent/dashboard")}
-                    tooltip={t("common.dashboard")}
+                    tooltip={t("common.agentdashboard")}
                     className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
                   >
                     <LayoutDashboard />
-                    <span>{t("common.dashboard")}</span>
+                    <span>{t("common.agentdashboard")}</span>
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>
@@ -249,7 +253,7 @@ export default function AgentSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
-    </Sidebar>
+    </div>
   );
 }
 
@@ -276,7 +280,7 @@ const SidebarMenuSubButton = ({
   isActive?: boolean;
 }) => (
   <a
-    className={`flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground text-sm data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground group-data-[collapsible=icon]:hidden ${className}`}
+    className={`flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-green-500 hover:text-white focus-visible:ring-2 active:bg-green-500 active:text-white disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground text-sm data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground group-data-[collapsible=icon]:hidden ${className}`}
     data-active={isActive}
     {...props}
   />

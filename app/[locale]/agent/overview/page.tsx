@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -7,27 +9,34 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Building, CheckCircle, Users } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function OverviewPage() {
+  const t = useTranslations("overviewpage");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={isRtl ? "rtl" : "ltr"}>
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">System Overview</h2>
-        <p className="text-muted-foreground">
-          Quick overview of the property management system.
-        </p>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active User</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              {t("cards.activeUsers.title")}
+            </CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">245</div>
+            <div className="text-2xl font-bold">
+              {t("cards.activeUsers.subtitlevalue")}
+            </div>
             <p className="text-xs text-muted-foreground">
-              +12% from last month
+              {t("cards.activeUsers.subtitle")}
             </p>
           </CardContent>
         </Card>
@@ -35,24 +44,34 @@ export default function OverviewPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-              Total Properties
+              {t("cards.totalProperties.title")}
             </CardTitle>
             <Building className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">1,234</div>
-            <p className="text-xs text-muted-foreground">+5% from last month</p>
+            <div className="text-2xl font-bold">
+              {t("cards.totalProperties.subtitlevalue")}{" "}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {t("cards.totalProperties.subtitle")}
+            </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Approval Rate</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              {t("cards.approvalRate.title")}
+            </CardTitle>
             <CheckCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">78%</div>
-            <p className="text-xs text-muted-foreground">+2% from last month</p>
+            <div className="text-2xl font-bold">
+              {t("cards.approvalRate.subtitlevalue")}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {t("cards.approvalRate.subtitle")}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -60,49 +79,46 @@ export default function OverviewPage() {
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Recent System Updates</CardTitle>
-            <CardDescription>
-              Latest changes and improvements to the platform
-            </CardDescription>
+            <CardTitle>{t("updates.title")}</CardTitle>
+            <CardDescription>{t("updates.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <div className="font-medium">Map Integration</div>
+                  <div className="font-medium">{t("updates.map.title")}</div>
                   <div className="text-xs text-muted-foreground">
-                    2 days ago
+                    {t("updates.map.time")}
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Added interactive map feature to visualize property locations
-                  in Riyadh.
+                  {t("updates.map.desc")}
                 </p>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <div className="font-medium">Document Upload</div>
+                  <div className="font-medium">{t("updates.docs.title")}</div>
                   <div className="text-xs text-muted-foreground">
-                    1 week ago
+                    {t("updates.docs.time")}
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Added support for uploading property documents and
-                  verification files.
+                  {t("updates.docs.desc")}
                 </p>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <div className="font-medium">Notification System</div>
+                  <div className="font-medium">
+                    {t("updates.notifications.title")}
+                  </div>
                   <div className="text-xs text-muted-foreground">
-                    2 weeks ago
+                    {t("updates.notifications.time")}
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Implemented real-time notifications for property status
-                  changes.
+                  {t("updates.notifications.desc")}
                 </p>
               </div>
             </div>
@@ -111,8 +127,8 @@ export default function OverviewPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>Common tasks and shortcuts</CardDescription>
+            <CardTitle>{t("actions.title")}</CardTitle>
+            <CardDescription>{t("actions.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -121,40 +137,35 @@ export default function OverviewPage() {
                 asChild
               >
                 <a href="/agent/properties/add">
-                  Add New Property
-                  <ArrowRight className="h-4 w-4" />
+                  {t("actions.addProperty")} <ArrowRight className="h-4 w-4" />
                 </a>
               </Button>
-
               <Button
                 className="w-full justify-between"
                 variant="outline"
                 asChild
               >
                 <a href="/agent/properties">
-                  View My Properties
+                  {t("actions.viewProperties")}{" "}
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </Button>
-
               <Button
                 className="w-full justify-between"
                 variant="outline"
                 asChild
               >
                 <a href="/agent/map">
-                  Explore Property Map
-                  <ArrowRight className="h-4 w-4" />
+                  {t("actions.map")} <ArrowRight className="h-4 w-4" />
                 </a>
               </Button>
-
               <Button
                 className="w-full justify-between"
                 variant="outline"
                 asChild
               >
                 <a href="/agent/profile">
-                  Update Profile
+                  {t("actions.updateProfile")}{" "}
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </Button>

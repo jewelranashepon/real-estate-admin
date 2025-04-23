@@ -23,7 +23,7 @@ import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 // Mock notification data
-const notifications = [
+const notificationsen = [
   {
     id: 1,
     title: "Property Approved",
@@ -65,6 +65,53 @@ const notifications = [
     title: "New Feature Added",
     message:
       "We've added a new map feature to help you visualize your property locations. Check it out!",
+    date: "2023-11-08T11:05:00",
+    type: "info",
+    read: true,
+  },
+];
+
+const notifications = [
+  {
+    id: 1,
+    title: "تمت الموافقة على العقار",
+    message:
+      'تمت الموافقة على عقارك "فيلا فاخرة في العليا" وهو الآن مرئي للعامة.',
+    date: "2023-11-15T10:30:00",
+    type: "success",
+    read: false,
+  },
+  {
+    id: 2,
+    title: "تم رفض العقار",
+    message: 'تم رفض عقارك "شقة استوديو". يرجى تحديث المعلومات وإعادة التقديم.',
+    date: "2023-11-14T14:45:00",
+    type: "error",
+    read: false,
+  },
+  {
+    id: 3,
+    title: "تحذير انتهاء الترخيص",
+    message:
+      "ستنتهي صلاحية رخصتك العقارية خلال 30 يومًا. يرجى تجديدها قبل انتهاء الصلاحية.",
+    date: "2023-11-12T09:15:00",
+    type: "warning",
+    read: true,
+  },
+  {
+    id: 4,
+    title: "صيانة النظام",
+    message:
+      "سيخضع النظام للصيانة في 20 نوفمبر من الساعة 2:00 صباحًا حتى 4:00 صباحًا (GMT+3).",
+    date: "2023-11-10T16:20:00",
+    type: "info",
+    read: true,
+  },
+  {
+    id: 5,
+    title: "تمت إضافة ميزة جديدة",
+    message:
+      "لقد أضفنا ميزة جديدة للخريطة لمساعدتك في تصور مواقع عقاراتك. جرّبها الآن!",
     date: "2023-11-08T11:05:00",
     type: "info",
     read: true,

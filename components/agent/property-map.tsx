@@ -12,86 +12,85 @@ import { Badge } from "@/components/ui/badge";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-// Mock property data with coordinates
 const properties = [
   {
     id: 1,
-    title: "Luxury Villa in Al Olaya",
-    type: "Villa",
-    district: "Al Olaya",
-    status: "approved",
+    title: "فيلا فاخرة في العليا",
+    type: "فيلا",
+    district: "العليا",
+    status: "تمت الموافقة",
     lat: 24.7136,
     lng: 46.6753,
   },
   {
     id: 2,
-    title: "Modern Apartment in Al Malaz",
-    type: "Apartment",
-    district: "Al Malaz",
-    status: "pending",
+    title: "شقة حديثة في الملز",
+    type: "شقة",
+    district: "الملز",
+    status: "قيد الانتظار",
     lat: 24.6748,
     lng: 46.7354,
   },
   {
     id: 3,
-    title: "Commercial Land in Al Naseem",
-    type: "Land",
-    district: "Al Naseem",
-    status: "rejected",
+    title: "أرض تجارية في النسيم",
+    type: "أرض",
+    district: "النسيم",
+    status: "مرفوض",
     lat: 24.7719,
     lng: 46.7247,
   },
   {
     id: 4,
-    title: "Office Space in Qurtubah",
-    type: "Office",
-    district: "Qurtubah",
-    status: "approved",
+    title: "مساحة مكتبية في قرطبة",
+    type: "مكتب",
+    district: "قرطبة",
+    status: "تمت الموافقة",
     lat: 24.7867,
     lng: 46.7184,
   },
   {
     id: 5,
-    title: "Retail Shop in Al Wurud",
-    type: "Retail",
-    district: "Al Wurud",
-    status: "pending",
+    title: "محل تجاري في الورود",
+    type: "محل تجاري",
+    district: "الورود",
+    status: "قيد الانتظار",
     lat: 24.7328,
     lng: 46.6564,
   },
   {
     id: 6,
-    title: "Spacious Villa in Hittin",
-    type: "Villa",
-    district: "Hittin",
-    status: "approved",
+    title: "فيلا واسعة في حطين",
+    type: "فيلا",
+    district: "حطين",
+    status: "تمت الموافقة",
     lat: 24.7742,
     lng: 46.6415,
   },
   {
     id: 7,
-    title: "Luxury Apartment in Al Nakheel",
-    type: "Apartment",
-    district: "Al Nakheel",
-    status: "approved",
+    title: "شقة فاخرة في النخيل",
+    type: "شقة",
+    district: "النخيل",
+    status: "تمت الموافقة",
     lat: 24.7531,
     lng: 46.6804,
   },
   {
     id: 8,
-    title: "Commercial Building in Al Yasmin",
-    type: "Commercial",
-    district: "Al Yasmin",
-    status: "pending",
+    title: "مبنى تجاري في الياسمين",
+    type: "تجاري",
+    district: "الياسمين",
+    status: "قيد الانتظار",
     lat: 24.8232,
     lng: 46.6365,
   },
   {
     id: 9,
-    title: "Residential Land in Al Murabba",
-    type: "Land",
-    district: "Al Murabba",
-    status: "approved",
+    title: "أرض سكنية في المربع",
+    type: "أرض",
+    district: "المربع",
+    status: "تمت الموافقة",
     lat: 24.6384,
     lng: 46.7124,
   },
@@ -294,9 +293,7 @@ export default function PropertyMap() {
       <Card>
         <CardHeader>
           <CardTitle>{t("common.propertyMap")}</CardTitle>
-          <CardDescription>
-            All your properties shown on the map.
-          </CardDescription>
+          <CardDescription>{t("properties.allProperties")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="rounded-md border">

@@ -39,10 +39,8 @@ export default function AgentHeader() {
   const router = useRouter();
   const session = useSession();
   const user = session?.data?.user;
-  const {} = useSearchParams();
-  const t = useTranslations();
-
   const locale = useLocale();
+  const t = useTranslations("headerdata");
   const isRtl = locale === "ar";
 
   return (
@@ -54,9 +52,7 @@ export default function AgentHeader() {
 
       <div className="flex flex-1 items-center gap-4 md:gap-8">
         <div className="hidden md:block">
-          <h1 className="text-xl font-semibold">
-            {t("common.propertyManagement")}
-          </h1>
+          <h1 className="text-xl font-semibold">{t("propertyManagement")}</h1>
         </div>
 
         {/* Mobile menu */}
@@ -64,7 +60,7 @@ export default function AgentHeader() {
           <SheetTrigger asChild className="md:hidden">
             <Button variant="outline" size="icon" className="mr-2">
               <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle Menu</span>
+              <span className="sr-only">{t("toggleMenu")}</span>
             </Button>
           </SheetTrigger>
           <SheetContent
@@ -79,9 +75,9 @@ export default function AgentHeader() {
                     <AvatarFallback>AR</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="text-sm font-medium">Ahmed Rashid</p>
+                    <p className="text-sm font-medium">{t("agentName")}</p>
                     <p className="text-xs text-muted-foreground">
-                      Real Estate Agent
+                      {t("agentTitle")}
                     </p>
                   </div>
                 </div>
@@ -93,7 +89,7 @@ export default function AgentHeader() {
               <nav className="flex-1 overflow-auto py-4">
                 <div className="px-2 py-1">
                   <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-                    Main Menu
+                    {t("mainMenu")}
                   </h2>
                   <div className="space-y-1">
                     <Button
@@ -102,9 +98,7 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/dashboard">
-                        {t("common.dashboard")}
-                      </Link>
+                      <Link href="/agent/dashboard">{t("dashboard")}</Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -112,7 +106,7 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/overview">{t("common.overview")}</Link>
+                      <Link href="/agent/overview">{t("overview")}</Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -120,9 +114,7 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/properties">
-                        {t("common.properties")}
-                      </Link>
+                      <Link href="/agent/properties">{t("properties")}</Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -131,7 +123,7 @@ export default function AgentHeader() {
                       asChild
                     >
                       <Link href="/agent/properties/add">
-                        {t("common.addProperty")}
+                        {t("addProperty")}
                       </Link>
                     </Button>
                     <Button
@@ -140,7 +132,7 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/map">{t("common.propertyMap")}</Link>
+                      <Link href="/agent/map">{t("propertyMap")}</Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -148,7 +140,7 @@ export default function AgentHeader() {
                       size="sm"
                       asChild
                     >
-                      <Link href="/agent/profile">{t("common.profile")}</Link>
+                      <Link href="/agent/profile">{t("profile")}</Link>
                     </Button>
                     <Button
                       variant="ghost"
@@ -157,16 +149,17 @@ export default function AgentHeader() {
                       asChild
                     >
                       <Link href="/agent/notifications">
-                        {t("common.notifications")}
+                        {t("notifications")}
                         <Badge className="ml-auto">3</Badge>
                       </Link>
                     </Button>
                   </div>
                 </div>
+
                 <Separator className="my-4" />
                 <div className="px-2 py-1">
                   <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-                    Support
+                    {t("support")}
                   </h2>
                   <div className="space-y-1">
                     <Button
@@ -174,21 +167,21 @@ export default function AgentHeader() {
                       className="w-full justify-start"
                       size="sm"
                     >
-                      Help & Resources
+                      {t("helpResources")}
                     </Button>
                     <Button
                       variant="ghost"
                       className="w-full justify-start"
                       size="sm"
                     >
-                      Documentation
+                      {t("documentation")}
                     </Button>
                     <Button
                       variant="ghost"
                       className="w-full justify-start"
                       size="sm"
                     >
-                      {t("common.settings")}
+                      {t("settings")}
                     </Button>
                   </div>
                 </div>
@@ -197,14 +190,14 @@ export default function AgentHeader() {
               <div className="border-t pt-4">
                 <Button variant="outline" className="w-full">
                   <LogOut className="mr-2 h-4 w-4" />
-                  {t("common.logout")}
+                  {t("logout")}
                 </Button>
               </div>
             </div>
           </SheetContent>
         </Sheet>
 
-        {/* Search bar */}
+        {/* Search */}
         <div
           className={`relative flex-1 ${
             searchOpen ? "block" : "hidden md:block"
@@ -213,13 +206,12 @@ export default function AgentHeader() {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder={t("common.search")}
+            placeholder={t("searchPlaceholder")}
             className="w-full bg-background pl-8 md:w-[300px] lg:w-[400px]"
           />
         </div>
 
         <div className="flex items-center gap-2 ml-auto">
-          {/* Search toggle for mobile */}
           <Button
             variant="ghost"
             size="icon"
@@ -229,47 +221,35 @@ export default function AgentHeader() {
             <Search className="h-5 w-5" />
           </Button>
 
-          {/* Language Switcher */}
           <LanguageSwitcher />
 
-          {/* Help dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="hidden md:flex bg-green-700 hover:bg-green-600 text-white hover:text-white"
+                className="hidden md:flex bg-green-700 hover:bg-green-600 text-white"
               >
                 <HelpCircle className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>{t("common.help")}</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("help")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                User Guide
-                <DropdownMenuShortcut>⌘G</DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                FAQs
-                <DropdownMenuShortcut>⌘F</DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Contact Support
-                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-              </DropdownMenuItem>
+              <DropdownMenuItem>{t("userGuide")}</DropdownMenuItem>
+              <DropdownMenuItem>{t("faqs")}</DropdownMenuItem>
+              <DropdownMenuItem>{t("contactSupport")}</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Report an Issue</DropdownMenuItem>
+              <DropdownMenuItem>{t("reportIssue")}</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Notifications dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="relative bg-green-700 hover:bg-green-600 text-white hover:text-white font-extrabold"
+                className="relative bg-green-700 text-white font-extrabold"
               >
                 <Bell className="h-7 w-7" />
                 <Badge className="absolute bg-gray-600 text-white -right-1 -top-1 h-5 w-5 flex items-center justify-center rounded-full p-0 text-xs">
@@ -279,62 +259,37 @@ export default function AgentHeader() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-80">
               <DropdownMenuLabel className="flex items-center justify-between">
-                {t("common.notifications")}
+                {t("notifications")}
                 <Button
                   variant="ghost"
                   size="sm"
                   className="h-auto p-1 text-xs"
                 >
-                  {t("notifications.markAllRead")}
+                  {t("markAllRead")}
                 </Button>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <div className="max-h-80 overflow-auto">
-                <DropdownMenuItem className="flex flex-col items-start gap-1 p-4 cursor-pointer">
-                  <div className="font-medium">Property Approved</div>
-                  <div className="text-sm text-muted-foreground">
-                    Your property "Luxury Villa in Al Olaya" has been approved.
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    2 hours ago
-                  </div>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex flex-col items-start gap-1 p-4 cursor-pointer">
-                  <div className="font-medium">Property Rejected</div>
-                  <div className="text-sm text-muted-foreground">
-                    Your property "Studio Apartment" has been rejected. Please
-                    update the information.
-                  </div>
-                  <div className="text-xs text-muted-foreground">1 day ago</div>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex flex-col items-start gap-1 p-4 cursor-pointer">
-                  <div className="font-medium">System Announcement</div>
-                  <div className="text-sm text-muted-foreground">
-                    New features have been added to the platform. Check them
-                    out!
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    3 days ago
-                  </div>
-                </DropdownMenuItem>
+                {/* Optional: Replace with t("notificationX") if you want to localize these too */}
               </div>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="justify-center font-medium cursor-pointer"
                 asChild
               >
-                <Link href="/agent/notifications">View All Notifications</Link>
+                <Link href="/agent/notifications">
+                  {t("viewAllNotifications")}
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* User profile dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="bg-green-700 hover:bg-green-600 text-white hover:text-white"
+                className="bg-green-700 hover:bg-green-600 text-white"
               >
                 <Avatar className="h-10 w-10">
                   <AvatarImage src="/avatar.png" alt="Agent" />
@@ -345,15 +300,15 @@ export default function AgentHeader() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("myAccount")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <UserCircle className="mr-2 h-4 w-4" />
-                {t("common.profile")}
+                {t("profile")}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="mr-2 h-4 w-4" />
-                {t("common.settings")}
+                {t("settings")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -368,7 +323,7 @@ export default function AgentHeader() {
                 }}
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                {t("common.logout")}
+                {t("logout")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

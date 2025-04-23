@@ -58,6 +58,7 @@
       "ListingID": "Listing ID",
       "CreatedAt": "Created At",
       "LastUpdated": "Last Updated",
+      "licenseInfo": "License Information",
       "LicenseNumber": "License Number",
       "LED": "License Expiration Date",
       "Source": "Source",
@@ -382,7 +383,7 @@
   "common": {
     "propertyManagement": "Property Management System",
     "agentPortal": "Agent Portal",
-    "dashboard": "Dashboard",
+    "agentdashboard": "Dashboard",
     "overview": "Overview",
     "properties": "Properties",
     "myProperties": "My Properties",
@@ -394,7 +395,9 @@
     "logout": "Logout",
     "search": "Search properties...",
     "help": "Help & Support",
-    "language": "Language"
+    "language": "Language",
+    "agentName": "Ahmed Rashid",
+    "description": "Real Estate Agent"
   },
   "agentdashboard": {
     "welcome": "Welcome back to your agent dashboard",
@@ -409,10 +412,24 @@
     "propertyStatus": "Property Status",
     "distribution": "Distribution of your property listings by status",
     "agentPerformance": "Agent Performance",
-    "performanceMetrics": "Your performance metrics and activity summary"
+    "performanceMetrics": "Your performance metrics and activity summary",
+    "listingApprovalRate": "Listing Approval Rate",
+    "averageResponseTime": "Average Response Time",
+    "documentCompletion": "Document Completion",
+    "profileCompleteness": "Profile Completeness",
+    "static_totalProperties": "23 ",
+    "static_fromLastMonth": "+2 ",
+    "static_pendingApprovals": "7 ",
+    "static_approved": "12 ",
+    "static_rejected": "4 ",
+    "static_listingApprovalRate": "75% ",
+    "static_averageResponseTime": "2.3 ",
+    "static_documentCompletion": "90% ",
+    "static_profileCompleteness": "85% "
   },
   "properties": {
     "manageListings": "Manage your property listings and their status",
+    "allProperties": "All your properties shown on the map",
     "all": "All",
     "approved": "Approved",
     "pending": "Pending",
@@ -426,7 +443,10 @@
     "actions": "Actions",
     "view": "View",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "mapProperty": {
+      "title1": "Luxury Villa in Al Olaya"
+    }
   },
   "map": {
     "viewProperties": "View your properties on the map of Riyadh",
@@ -464,5 +484,223 @@
     "noCategory": "You have no notifications in this category",
     "markAsRead": "Mark as read",
     "new": "New"
+  },
+  "headerdata": {
+    "propertyManagement": "Property Management System",
+    "toggleMenu": "Toggle Menu",
+    "agentName": "Ahmed Rashid",
+    "agentTitle": "Real Estate Agent",
+    "mainMenu": "Main Menu",
+    "dashboard": "Dashboard",
+    "overview": "Overview",
+    "properties": "Properties",
+    "addProperty": "Add Property",
+    "propertyMap": "Property Map",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "support": "Support",
+    "helpResources": "Help & Resources",
+    "documentation": "Documentation",
+    "settings": "Settings",
+    "logout": "Logout",
+    "searchPlaceholder": "Search properties...",
+    "help": "Help & Support",
+    "userGuide": "User Guide",
+    "faqs": "FAQs",
+    "contactSupport": "Contact Support",
+    "reportIssue": "Report an Issue",
+    "markAllRead": "Mark All as Read",
+    "viewAllNotifications": "View All Notifications",
+    "myAccount": "My Account"
+  },
+  "overviewpage": {
+    "title": "System Overview",
+    "description": "Quick overview of the property management system.",
+    "cards": {
+      "activeUsers": {
+        "title": "Active Users",
+        "subtitle": "+12% from last month",
+        "subtitlevalue": "245"
+      },
+      "totalProperties": {
+        "title": "Total Properties",
+        "subtitle": "+5% from last month",
+        "subtitlevalue": "1,234"
+      },
+      "approvalRate": {
+        "title": "Approval Rate",
+        "subtitle": "+2% from last month",
+        "subtitlevalue": "78%"
+      }
+    },
+    "updates": {
+      "title": "Recent System Updates",
+      "description": "Latest changes and improvements to the platform",
+      "map": {
+        "title": "Map Integration",
+        "desc": "Added interactive map feature to visualize property locations in Riyadh.",
+        "time": "2 days ago"
+      },
+      "docs": {
+        "title": "Document Upload",
+        "desc": "Added support for uploading property documents and verification files.",
+        "time": "1 week ago"
+      },
+      "notifications": {
+        "title": "Notification System",
+        "desc": "Implemented real-time notifications for property status changes.",
+        "time": "2 weeks ago"
+      }
+    },
+    "actions": {
+      "title": "Quick Actions",
+      "description": "Common tasks and shortcuts",
+      "addProperty": "Add New Property",
+      "viewProperties": "View My Properties",
+      "map": "Explore Property Map",
+      "updateProfile": "Update Profile"
+    }
+  },
+  "propertiesdata": {
+    "manageListings": "Manage your property listings and their status",
+    "all": "All",
+    "approved": "Approved",
+    "pending": "Pending",
+    "rejected": "Rejected",
+    "title": "Title",
+    "type": "Type",
+    "district": "District",
+    "price": "Price (SAR)",
+    "status": "Status",
+    "dateAdded": "Date Added",
+    "actions": "Actions",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "allProperties": {
+      "luxury_villa": "Luxury Villa in Al Olaya",
+      "modern_apartment": "Modern Apartment in Al Malaz",
+      "commercial_land": "Commercial Land in Al Naseem",
+      "office_space": "Office Space in Qurtubah",
+      "retail_shop": "Retail Shop in Al Wurud",
+      "spacious_villa": "Spacious Villa in Hittin",
+      "villa_type": "Villa",
+      "apartment_type": "Apartment",
+      "land_type": "Land",
+      "office_type": "Office",
+      "retail_type": "Retail",
+      "al_olaya": "Al Olaya",
+      "al_malaz": "Al Malaz",
+      "al_naseem": "Al Naseem",
+      "qurtubah": "Qurtubah",
+      "al_wurud": "Al Wurud",
+      "hittin": "Hittin",
+      "price1": "850000",
+      "price2": "4200000",
+      "price3": "2500000",
+      "price4": "1345600",
+      "price5": "950000",
+      "price6": "750000",
+      "sar": "SAR"
+    }
+  },
+
+  "propertiesAdd": {
+    "addProperty": "Add Property",
+    "formDescription": "Fill in the details below to add a new property listing.",
+    "propertyInfo": "Property Information",
+    "formInstructions": "Enter the details of your property. All fields are required unless specified.",
+    "title": {
+      "label": "Title",
+      "placeholder": "Luxury Villa in Al Olaya",
+      "description": "A descriptive title for your property"
+    },
+    "price": {
+      "label": "Price",
+      "placeholder": "1000000",
+      "description": "The price in Saudi Riyal"
+    },
+    "type": {
+      "label": "Type",
+      "placeholder": "Select property type",
+      "description": "The type of property you are listing",
+      "options": {
+        "apartment": "Apartment",
+        "villa": "Villa",
+        "land": "Land",
+        "office": "Office Space",
+        "retail": "Retail Space",
+        "warehouse": "Warehouse"
+      }
+    },
+    "district": {
+      "label": "District",
+      "placeholder": "Select district",
+      "description": "The district in Riyadh where the property is located",
+      "options": {
+        "al_olaya": "Al Olaya",
+        "al_malaz": "Al Malaz",
+        "al_murabba": "Al Murabba",
+        "al_naseem": "Al Naseem",
+        "al_rawdah": "Al Rawdah",
+        "al_wurud": "Al Wurud",
+        "hittin": "Hittin",
+        "qurtubah": "Qurtubah",
+        "al_nakheel": "Al Nakheel",
+        "al_yasmin": "Al Yasmin"
+      }
+    },
+    "city": {
+      "label": "City",
+      "description": "Default city is set to Riyadh"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Provide a detailed description of your property...",
+      "description": "Detailed description of the property including features, amenities, etc."
+    },
+    "images": {
+      "label": "Property Images",
+      "uploadText": "Click to upload or drag and drop",
+      "fileTypes": "PNG, JPG or JPEG (MAX. 5MB per image)",
+      "description": "Upload one or more images of your property. At least one image is required."
+    },
+    "submit": "Submit Property",
+    "note": "Note:",
+    "approvalNote": "Upon submission, your property will enter an \"Admin Approval Pending\" state. It will only be visible to the public once approved by an administrator."
+  },
+  "userProfile": {
+    "profile": "Profile",
+    "updateProfile": "Update your profile information",
+    "profileInfo": "Profile Information",
+    "updatePersonal": "Update your personal details",
+    "changePhoto": "Change Photo",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "licenseNumber": "License Number",
+    "licenseExpiry": "License Expiry Date",
+    "saveChanges": "Save Changes",
+    "documents": {
+      "title": "Document Uploads",
+      "description": "Upload additional documents related to your real estate license and properties",
+      "noc": "NOC Documents",
+      "deed": "Deed Copies",
+      "uploadText": "Click to upload or drag and drop",
+      "fileTypes": "PDF, DOC or DOCX (MAX. 10MB)",
+      "note": "Note:",
+      "noteText": "Uploaded documents are only visible to administrators for verification purposes. Please ensure all documents are clear and legible."
+    },
+    "licenseStatus": {
+      "expired": "Your license has expired! Please renew immediately.",
+      "warning": "Your license expires in {days} days. Please renew soon."
+    },
+    "descriptions": {
+      "name": "Your name as it appears on your official documents",
+      "email": "Your primary contact email",
+      "phone": "Your primary contact phone number",
+      "licenseNumber": "Your official real estate license number",
+      "licenseExpiry": "The expiration date of your real estate license"
+    }
   }
 }
