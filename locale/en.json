@@ -1409,6 +1409,7 @@
     "totalProperties": "Total Properties",
     "pendingApprovals": "Pending Approvals",
     "approved": "Approved",
+    "sold": "Sold",
     "rejected": "Rejected",
     "fromLastMonth": "from last month",
     "awaitingReview": "Awaiting admin review",
@@ -1578,6 +1579,7 @@
   "propertiesdata": {
     "manageListings": "Manage your property listings and their status",
     "all": "All",
+    "sold": "Sold",
     "approved": "Approved",
     "pending": "Pending",
     "rejected": "Rejected",

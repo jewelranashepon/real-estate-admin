@@ -1393,6 +1393,7 @@
     "totalProperties": "إجمالي العقارات",
     "pendingApprovals": "الموافقات المعلقة",
     "approved": "تمت الموافقة",
+    "sold": "تم البيع",
     "rejected": "مرفوضة",
     "fromLastMonth": "من الشهر الماضي",
     "awaitingReview": "في انتظار مراجعة المشرف",
@@ -1574,6 +1575,7 @@
   "propertiesdata": {
     "manageListings": "إدارة قوائم العقارات الخاصة بك وحالتها",
     "all": "الكل",
+    "sold": "تم البيع",
     "approved": "مقبول",
     "pending": "قيد الانتظار",
     "rejected": "مرفوض",
