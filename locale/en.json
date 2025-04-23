@@ -16,7 +16,8 @@
     "auth": {
       "signIn": "Sign In",
       "signUp": "Sign Up",
-      "Name": "Enter your Name"
+      "Name": "Enter your Name",
+      "noAccount": "Don't have an account?"
     },
     "property": {
       "beds": "bd",
@@ -81,6 +82,12 @@
       "CVW": "Contact via WhatsApp",
       "SCW": "Click below to start a chat with the agent on WhatsApp.",
       "OW": "Open WhatsApp"
+    },
+    "propertyEdit": {
+      "title": "Edit Property | Real Estate Admin",
+      "description": "Edit property details",
+      "pageTitle": "Edit Property",
+      "notFound": "Property not found"
     },
     "map": {
       "customView": "Custom Map View",
@@ -232,7 +239,88 @@
     "Password": "Password",
     "enterEmail": "Enter your Email",
     "enterPassword": "Enter your password",
-    "signUpButton": "Sign Up"
+    "signUpButton": "Sign Up",
+    "noAccount": "Don't have an account?"
+  },
+  "adminPanel": {
+    "title": "Admin Panel",
+    "description": "Manage users, properties, and approvals",
+    "tabs": {
+      "approvals": "Approvals",
+      "users": "Users",
+      "settings": "System Settings"
+    },
+    "approvals": {
+      "agentsTitle": "Agents Pending Approval",
+      "agentsDescription": "List of agents waiting for account approval",
+      "agentsTable": {
+        "name": "Name",
+        "licenseNumber": "License Number",
+        "phone": "Phone",
+        "submittedAt": "Submitted At",
+        "actions": "Actions"
+      },
+      "propertiesTitle": "Properties Pending Approval",
+      "propertiesDescription": "List of properties waiting for approval before publishing",
+      "propertiesTable": {
+        "title": "Title",
+        "agent": "Agent",
+        "type": "Type",
+        "submittedAt": "Submitted At",
+        "actions": "Actions"
+      }
+    },
+    "users": {
+      "title": "User Management",
+      "description": "Manage user accounts, roles, and permissions",
+      "table": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "settings": {
+      "title": "System Settings",
+      "description": "Configure system settings and integrations",
+      "approvalSettings": "Approval Settings",
+      "autoApproveProperties": {
+        "title": "Auto-approve Properties",
+        "description": "Automatically approve properties added by verified agents"
+      },
+      "licenseVerification": {
+        "title": "License Verification",
+        "description": "Automatically verify agent licenses during registration"
+      },
+      "systemIntegrations": "System Integrations",
+      "smsService": {
+        "title": "SMS Service",
+        "description": "Integration with Unifonic SMS service"
+      },
+      "paymentGateway": {
+        "title": "Payment Gateway",
+        "description": "Integration with Stripe payment service"
+      },
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "configure": "Configure"
+    },
+    "actions": {
+      "view": "View",
+      "approve": "Approve",
+      "reject": "Reject",
+      "edit": "Edit"
+    },
+    "roles": {
+      "admin": "Admin",
+      "support": "Support",
+      "agent": "Agent"
+    },
+    "status": {
+      "active": "Active",
+      "suspended": "Suspended"
+    }
   },
   "dashboard": {
     "db": "Dashboard",
@@ -340,7 +428,7 @@
     "previous": "Previous",
     "price": "Price",
     "next": "Next",
-    "propertyPerformance": "Property Performance",
+    "propertyPerformance": "Performance",
     "userActivity": "User Activity",
     "dailyUserActivityMetrics": "Daily user activity metrics",
     "marketTrends": "Market Trends",
@@ -427,7 +515,265 @@
     "noMessagesFound": "No messages found",
     "searchLeads": "Search leads...",
     "recentBlog": "Recent Blog Posts",
-    "lastBlog": "Last 4 blog posts"
+    "lastBlog": "Last 4 blog posts",
+    "newListings": "New Listings",
+    "propertyViews": "Property Views",
+    "adminPanel": {
+      "title": "Birds of Eden",
+      "subtitle": "Admin Panel",
+      "user": {
+        "name": "Admin User",
+        "email": "admin@example.com"
+      }
+    },
+    "dashboardsettings": {
+      "general": {
+        "defaultValues": {
+          "siteName": "Real Estate Admin",
+          "siteDescription": "Admin panel for managing real estate properties in the Middle East",
+          "address": "123 Sheikh Zayed Road, Dubai, UAE"
+        },
+        "siteInformation": {
+          "title": "Site Information",
+          "description": "Basic information about your real estate website",
+          "siteName": "Site Name",
+          "siteDescription": "Site Description"
+        },
+        "contactInformation": {
+          "title": "Contact Information",
+          "description": "How users can contact your business",
+          "email": "Email",
+          "phone": "Phone Number",
+          "address": "Business Address"
+        },
+        "regionalSettings": {
+          "title": "Regional Settings",
+          "description": "Settings specific to your region",
+          "timezone": "Timezone",
+          "timezonePlaceholder": "Select timezone",
+          "dateFormat": "Date Format",
+          "dateFormatPlaceholder": "Select date format",
+          "currency": "Currency",
+          "currencyPlaceholder": "Select currency"
+        },
+        "timezones": {
+          "dubai": "Dubai",
+          "riyadh": "Riyadh",
+          "doha": "Doha",
+          "kuwait": "Kuwait",
+          "beirut": "Beirut"
+        },
+        "currencies": {
+          "aed": "UAE Dirham",
+          "sar": "Saudi Riyal",
+          "qar": "Qatari Riyal",
+          "kwd": "Kuwaiti Dinar",
+          "usd": "US Dollar"
+        },
+        "toast": {
+          "title": "Settings updated",
+          "description": "Your general settings have been updated successfully."
+        },
+        "saveChanges": "Save Changes",
+        "saving": "Saving..."
+      }
+    },
+    "settingsAppearance": {
+      "theme": {
+        "title": "Theme",
+        "description": "Customize the look and feel of the admin panel",
+        "colorMode": "Color Mode",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System",
+        "primaryColor": "Primary Color"
+      },
+      "layout": {
+        "title": "Layout",
+        "description": "Customize the layout of the admin panel",
+        "sidebarCollapsed": "Sidebar Collapsed by Default",
+        "sidebarCollapsedDescription": "Start with the sidebar collapsed when loading the page",
+        "enableAnimations": "Enable Animations",
+        "enableAnimationsDescription": "Enable animations and transitions throughout the interface"
+      },
+      "accessibility": {
+        "title": "Accessibility",
+        "description": "Customize accessibility settings",
+        "highContrast": "High Contrast Mode",
+        "highContrastDescription": "Increase contrast for better visibility",
+        "reducedMotion": "Reduced Motion",
+        "reducedMotionDescription": "Reduce or eliminate motion effects"
+      },
+      "toast": {
+        "title": "Appearance updated",
+        "description": "Your appearance settings have been updated successfully."
+      },
+      "saveChanges": "Save Changes",
+      "saving": "Saving..."
+    },
+    "settingsNotifications": {
+      "email": {
+        "title": "Email Notifications",
+        "description": "Configure which email notifications you want to receive",
+        "newProperty": "New Property Listed",
+        "newPropertyDescription": "Receive an email when a new property is listed",
+        "propertyUpdated": "Property Updated",
+        "propertyUpdatedDescription": "Receive an email when a property is updated",
+        "newLead": "New Lead",
+        "newLeadDescription": "Receive an email when a new lead is created",
+        "newMessage": "New Message",
+        "newMessageDescription": "Receive an email when you get a new message",
+        "paymentReceived": "Payment Received",
+        "paymentReceivedDescription": "Receive an email when a payment is received",
+        "systemUpdates": "System Updates",
+        "systemUpdatesDescription": "Receive emails about system updates and maintenance"
+      },
+      "inApp": {
+        "title": "In-App Notifications",
+        "description": "Configure which notifications you want to see in the app",
+        "newProperty": "New Property Listed",
+        "newPropertyDescription": "Show notification when a new property is listed",
+        "propertyUpdated": "Property Updated",
+        "propertyUpdatedDescription": "Show notification when a property is updated",
+        "newLead": "New Lead",
+        "newLeadDescription": "Show notification when a new lead is created",
+        "newMessage": "New Message",
+        "newMessageDescription": "Show notification when you get a new message"
+      },
+      "push": {
+        "title": "Push Notifications",
+        "description": "Configure which push notifications you want to receive on your devices",
+        "newLead": "New Lead",
+        "newLeadDescription": "Receive push notification when a new lead is created",
+        "newMessage": "New Message",
+        "newMessageDescription": "Receive push notification when you get a new message",
+        "paymentReceived": "Payment Received",
+        "paymentReceivedDescription": "Receive push notification when a payment is received"
+      },
+      "toast": {
+        "title": "Notification settings updated",
+        "description": "Your notification preferences have been saved."
+      },
+      "saveChanges": "Save Changes",
+      "saving": "Saving..."
+    },
+    "settingsIntegrations": {
+      "googleMaps": {
+        "title": "Google Maps",
+        "description": "Configure Google Maps integration for property locations",
+        "enableLabel": "Enable Google Maps",
+        "enableDescription": "Show property locations on Google Maps",
+        "apiKeyLabel": "API Key",
+        "getApiKey": "Get a Google Maps API key"
+      },
+      "stripe": {
+        "title": "Stripe",
+        "description": "Configure Stripe for payment processing",
+        "enableLabel": "Enable Stripe",
+        "enableDescription": "Process payments through Stripe",
+        "publicKeyLabel": "Public Key",
+        "secretKeyLabel": "Secret Key",
+        "getApiKeys": "Get your Stripe API keys"
+      },
+      "mailchimp": {
+        "title": "Mailchimp",
+        "description": "Configure Mailchimp for email marketing",
+        "enableLabel": "Enable Mailchimp",
+        "enableDescription": "Sync leads and contacts with Mailchimp",
+        "apiKeyLabel": "API Key",
+        "listIdLabel": "List ID",
+        "findListId": "How to find your Mailchimp List ID"
+      },
+      "googleAnalytics": {
+        "title": "Google Analytics",
+        "description": "Configure Google Analytics for website tracking",
+        "enableLabel": "Enable Google Analytics",
+        "enableDescription": "Track website traffic and user behavior",
+        "trackingIdLabel": "Tracking ID",
+        "findTrackingId": "How to find your Google Analytics Tracking ID"
+      },
+      "toast": {
+        "title": "Integration settings updated",
+        "description": "Your integration settings have been saved."
+      },
+      "saveChanges": "Save Changes",
+      "saving": "Saving..."
+    },
+    "notificationsList": {
+      "tabs": {
+        "all": "All",
+        "unread": "Unread",
+        "property": "Properties",
+        "message": "Messages",
+        "user": "Users",
+        "system": "System"
+      },
+      "actions": {
+        "markAllRead": "Mark All Read",
+        "markAsRead": "Mark as Read",
+        "clearAll": "Clear All",
+        "delete": "Delete notification"
+      },
+      "emptyState": {
+        "title": "No notifications",
+        "description": "You don't have any {type} notifications at the moment."
+      },
+      "timeAgo": {
+        "minutes": "{count} minute{count, plural, one {} other {s}} ago",
+        "hours": "{count} hour{count, plural, one {} other {s}} ago",
+        "days": "{count} day{count, plural, one {} other {s}} ago"
+      },
+      "toast": {
+        "markAllRead": {
+          "title": "All notifications marked as read",
+          "description": "You have marked all notifications as read."
+        },
+        "deleteNotification": {
+          "title": "Notification deleted",
+          "description": "The notification has been deleted."
+        },
+        "clearAll": {
+          "title": "All notifications cleared",
+          "description": "All notifications have been cleared."
+        }
+      },
+      "mockNotifications": {
+        "newProperty": {
+          "title": "New property submission",
+          "description": "A new property has been submitted for review",
+          "actionLabel": "Review Property"
+        },
+        "newMessage": {
+          "title": "New message received",
+          "description": "You have received a new message from John Smith regarding Modern Apartment in Downtown",
+          "actionLabel": "View Message"
+        },
+        "newUser": {
+          "title": "New user registration",
+          "description": "A new agent has registered and requires approval",
+          "actionLabel": "Review User"
+        },
+        "payment": {
+          "title": "Payment received",
+          "description": "Payment of $350 has been received for listing #12345",
+          "actionLabel": "View Payment"
+        },
+        "system": {
+          "title": "System update",
+          "description": "The system will be updated tonight at 2 AM"
+        },
+        "propertyStatus": {
+          "title": "Property status changed",
+          "description": "Property 'Luxury Villa with Pool' has been marked as Sold",
+          "actionLabel": "View Property"
+        },
+        "newLead": {
+          "title": "New lead generated",
+          "description": "A new lead has been generated from the contact form",
+          "actionLabel": "View Lead"
+        }
+      }
+    }
   },
   "service": {
     "home": "Home",
@@ -459,6 +805,202 @@
     "supportHelpText": "Our team of experts is ready to help you find the perfect solution.",
     "contactSupport": "Contact Support",
     "contactUs": "Contact Us"
+  },
+  "newUser": {
+    "title": "Create New User",
+    "description": "Fill out the form below to add a new user to the system.",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter full name",
+      "email": "Email Address",
+      "emailPlaceholder": "user@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Create User",
+      "submitting": "Creating...",
+      "validation": {
+        "nameRequired": "Full name is required",
+        "emailInvalid": "Invalid email",
+        "emailRequired": "Email is required",
+        "passwordMin": "Minimum 6 characters",
+        "passwordRequired": "Password is required"
+      }
+    },
+    "messages": {
+      "loading": "Creating account...",
+      "success": "Account Creation Successful",
+      "error": "Error creating account",
+      "backLink": "Want to manage users?",
+      "backText": "Back to user list"
+    }
+  },
+  "adminPayments": {
+    "columns": {
+      "transactionId": "Transaction ID",
+      "customer": "Customer",
+      "amount": "Amount",
+      "status": "Status",
+      "paymentMethod": "Payment Method",
+      "date": "Date"
+    },
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "failed": "Failed",
+      "refunded": "Refunded"
+    },
+    "methods": {
+      "creditCard": "Credit Card",
+      "bankTransfer": "Bank Transfer",
+      "paypal": "PayPal",
+      "cash": "Cash"
+    },
+    "actions": {
+      "title": "Actions",
+      "openMenu": "Open menu",
+      "viewReceipt": "View Receipt",
+      "downloadReceipt": "Download Receipt",
+      "viewTransaction": "View Transaction"
+    },
+    "search": {
+      "placeholder": "Search payments..."
+    },
+    "table": {
+      "noPayments": "No payments found."
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "toast": {
+      "receiptGenerated": {
+        "title": "Receipt generated",
+        "description": "Receipt for {transactionId} has been generated."
+      },
+      "receiptDownloaded": {
+        "title": "Receipt downloaded",
+        "description": "Receipt for {transactionId} has been downloaded."
+      },
+      "paymentDetails": {
+        "title": "Payment details",
+        "description": "Viewing details for {transactionId}."
+      }
+    }
+  },
+  "adminInvoice": {
+    "searchPlaceholder": "Search invoices...",
+    "noInvoices": "No invoices found.",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "columns": {
+      "invoiceNumber": "Invoice",
+      "customer": "Customer",
+      "amount": "Amount",
+      "status": "Status",
+      "dueDate": "Due Date",
+      "issuedDate": "Issued Date"
+    },
+    "status": {
+      "paid": "Paid",
+      "pending": "Pending",
+      "overdue": "Overdue",
+      "draft": "Draft"
+    },
+    "actions": {
+      "menuTitle": "Actions",
+      "view": "View Invoice",
+      "download": "Download PDF",
+      "send": "Send to Customer",
+      "markPaid": "Mark as Paid"
+    },
+    "toast": {
+      "viewed": "Invoice viewed",
+      "downloaded": "Invoice downloaded",
+      "sent": "Invoice sent",
+      "markedPaid": "Invoice marked as paid"
+    }
+  },
+  "agentForm": {
+    "tabs": {
+      "basic": "Basic Info",
+      "details": "Details",
+      "social": "Social Media"
+    },
+    "basicInfo": {
+      "title": "Basic Information",
+      "description": "Enter the basic information about the agent",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Enter first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Enter last name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "phone": "Phone",
+      "phonePlaceholder": "Enter your phone number",
+      "companyName": "Company Name",
+      "companyNamePlaceholder": "Enter your company name",
+      "jobtitle": "Job Title",
+      "titlePlaceholder": "Enter your job title",
+      "profileImage": "Profile Image",
+      "bio": "Bio",
+      "bioPlaceholder": "Write a short bio about the agent..."
+    },
+    "details": {
+      "title": "Agent Details",
+      "description": "Enter additional details about the agent",
+      "website": "Website",
+      "websitePlaceholder": "https://example.com",
+      "licenseNumber": "FAL License Number",
+      "licenseNumberPlaceholder": "******************",
+      "yearsOfExperience": "Years of Experience",
+      "propertiesListed": "Properties Listed",
+      "propertiesSold": "Properties Sold",
+      "propertiesChecked": "Properties Checked",
+      "languages": "Languages",
+      "languagesPlaceholder": "Add a language...",
+      "badges": "Badges",
+      "badgesPlaceholder": "Add a badge...",
+      "badgesDescription": "Examples: TruBroker™, Quality Lister, Responsive Broker"
+    },
+    "social": {
+      "title": "Social Media",
+      "description": "Add social media profiles for the agent",
+      "facebook": "Facebook",
+      "facebookPlaceholder": "https://facebook.com/username",
+      "twitter": "Twitter",
+      "twitterPlaceholder": "https://twitter.com/username",
+      "instagram": "Instagram",
+      "instagramPlaceholder": "https://instagram.com/username",
+      "linkedin": "LinkedIn",
+      "linkedinPlaceholder": "https://linkedin.com/in/username",
+      "youtube": "YouTube",
+      "youtubePlaceholder": "https://youtube.com/channel/id"
+    },
+    "buttons": {
+      "add": "Add",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "update": "Update Agent",
+      "create": "Create Agent",
+      "updating": "Updating...",
+      "creating": "Creating..."
+    },
+    "imageUpload": {
+      "success": "Your profile image has been uploaded successfully.",
+      "failed": "Upload failed",
+      "current": "Current profile image"
+    },
+    "toast": {
+      "updateTitle": "Agent updated",
+      "createTitle": "Agent created",
+      "updateSuccess": "The agent has been successfully updated.",
+      "createSuccess": "The agent has been successfully created.",
+      "errorTitle": "Error",
+      "errorDescription": "Failed to update/create agent.",
+      "tryAgain": "Please try again."
+    }
   },
   "common": {
     "propertyManagement": "Property Management System",
@@ -863,47 +1405,33 @@
     "deleteFailure": "Failed to delete blog post.",
     "unexpectedError": "An unexpected error occurred."
   },
-  "SearchPage": {
-    "back": "Back",
-    "title": "Search Properties",
-    "searchPlaceholder": "Search by location, property name...",
-    "filters": "Filters",
-    "resultsCount": "Found {count} properties matching your criteria",
-    "noResults": {
-      "title": "No properties found",
-      "description": "Try adjusting your search filters to find more properties."
+  "adminNotification": {
+    "searchPlaceholder": "Search...",
+    "notifications": {
+      "title": "Notifications",
+      "items": [
+        {
+          "title": "New property submission",
+          "desc": "A new property has been submitted for review",
+          "time": "2 minutes ago"
+        },
+        {
+          "title": "New user registration",
+          "desc": "A new agent has registered and requires approval",
+          "time": "1 hour ago"
+        },
+        {
+          "title": "System update",
+          "desc": "The system will be updated tonight at 2 AM",
+          "time": "5 hours ago"
+        }
+      ]
     },
-    "resetFilters": "Reset Filters"
-  },
-  "SearchFilters": {
-    "title": "Filters",
-    "reset": "Reset",
-    "priceRange": "Price Range",
-    "priceRangeLabel": "${min} - ${max}",
-    "bedrooms": "Bedrooms",
-    "bathrooms": "Bathrooms",
-    "propertyType": "Property Type",
-    "squareFootage": "Square Footage",
-    "sqftRangeLabel": "${min} - ${max} sqft",
-    "features": "Features",
-    "any": "Any",
-    "applyFilters": "Apply Filters",
-    "propertyTypes": {
-      "house": "House",
-      "apartment": "Apartment",
-      "condo": "Condo",
-      "townhouse": "Townhouse",
-      "land": "Land"
-    },
-    "features": {
-      "pool": "Pool",
-      "garden": "Garden",
-      "garage": "Garage",
-      "furnished": "Furnished",
-      "fireplace": "Fireplace",
-      "balcony": "Balcony",
-      "gym": "Gym",
-      "elevator": "Elevator"
+    "account": {
+      "title": "My Account",
+      "profile": "Profile",
+      "settings": "Settings",
+      "logout": "Log out"
     }
   }
 }

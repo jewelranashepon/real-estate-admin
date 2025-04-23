@@ -1,18 +1,27 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { toast } from "@/components/ui/use-toast"
-import { Switch } from "@/components/ui/switch"
-import { Loader2, ExternalLink } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
-import { useForm, FormProvider } from "react-hook-form"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { toast } from "@/components/ui/use-toast";
+import { Switch } from "@/components/ui/switch";
+import { Loader2, ExternalLink } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { useForm, FormProvider } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
 export function SettingsIntegrations() {
-  const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations("dashboard.settingsIntegrations");
+  const [isLoading, setIsLoading] = useState(false);
   const [integrations, setIntegrations] = useState({
     googleMaps: {
       enabled: true,
@@ -20,7 +29,7 @@ export function SettingsIntegrations() {
     },
     stripe: {
       enabled: true,
-      publicKey: "pk_test_1234567890abcdefghijklmnopqrstuv",
+      publicKey: "***********************************",
       secretKey: "sk_test_1234567890abcdefghijklmnopqrstuv",
     },
     mailchimp: {
@@ -36,14 +45,14 @@ export function SettingsIntegrations() {
       enabled: false,
       webhookUrl: "",
     },
-  })
+  });
 
   const methods = useForm({
     defaultValues: {
       googleMapsEnabled: true,
       googleMapsApiKey: "AIzaSyA1234567890abcdefghijklmnopqrstuv",
       stripeEnabled: true,
-      stripePublicKey: "pk_test_1234567890abcdefghijklmnopqrstuv",
+      stripePublicKey: "***********************************",
       stripeSecretKey: "sk_test_1234567890abcdefghijklmnopqrstuv",
       mailchimpEnabled: false,
       mailchimpApiKey: "",
@@ -53,18 +62,25 @@ export function SettingsIntegrations() {
       zapierEnabled: false,
       zapierWebhookUrl: "",
     },
-  })
+  });
 
   const handleToggle = (integration: string, value: boolean) => {
-    methods.setValue(`${integration}Enabled`, value)
-  }
+    methods.setValue(`${integration}Enabled`, value);
+  };
 
-  const handleInputChange = (integration: string, field: string, value: string) => {
-    methods.setValue(`${integration}${field.charAt(0).toUpperCase() + field.slice(1)}`, value)
-  }
+  const handleInputChange = (
+    integration: string,
+    field: string,
+    value: string
+  ) => {
+    methods.setValue(
+      `${integration}${field.charAt(0).toUpperCase() + field.slice(1)}`,
+      value
+    );
+  };
 
   const handleSubmit = (data: any) => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     // Update integrations state based on form data
     setIntegrations({
@@ -90,17 +106,17 @@ export function SettingsIntegrations() {
         enabled: data.zapierEnabled,
         webhookUrl: data.zapierWebhookUrl,
       },
-    })
+    });
 
     // Simulate API call
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
       toast({
-        title: "Integration settings updated",
-        description: "Your integration settings have been saved.",
-      })
-    }, 1000)
-  }
+        title: t("toast.title"),
+        description: t("toast.description"),
+      });
+    }, 1000);
+  };
 
   return (
     <FormProvider {...methods}>
@@ -108,14 +124,16 @@ export function SettingsIntegrations() {
         <div className="grid gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Google Maps</CardTitle>
-              <CardDescription>Configure Google Maps integration for property locations</CardDescription>
+              <CardTitle>{t("googleMaps.title")}</CardTitle>
+              <CardDescription>{t("googleMaps.description")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Enable Google Maps</Label>
-                  <p className="text-sm text-muted-foreground">Show property locations on Google Maps</p>
+                  <Label>{t("googleMaps.enableLabel")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("googleMaps.enableDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={integrations.googleMaps.enabled}
@@ -126,12 +144,20 @@ export function SettingsIntegrations() {
                 <>
                   <Separator />
                   <div className="grid gap-2">
-                    <Label htmlFor="googleMapsApiKey">API Key</Label>
+                    <Label htmlFor="googleMapsApiKey">
+                      {t("googleMaps.apiKeyLabel")}
+                    </Label>
                     <Input
                       id="googleMapsApiKey"
                       type="password"
                       value={integrations.googleMaps.apiKey}
-                      onChange={(e) => handleInputChange("googleMaps", "apiKey", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "googleMaps",
+                          "apiKey",
+                          e.target.value
+                        )
+                      }
                     />
                     <p className="text-xs text-muted-foreground">
                       <a
@@ -140,7 +166,7 @@ export function SettingsIntegrations() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-primary hover:underline"
                       >
-                        Get a Google Maps API key
+                        {t("googleMaps.getApiKey")}
                         <ExternalLink className="ml-1 h-3 w-3" />
                       </a>
                     </p>
@@ -152,14 +178,16 @@ export function SettingsIntegrations() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Stripe</CardTitle>
-              <CardDescription>Configure Stripe for payment processing</CardDescription>
+              <CardTitle>{t("stripe.title")}</CardTitle>
+              <CardDescription>{t("stripe.description")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Enable Stripe</Label>
-                  <p className="text-sm text-muted-foreground">Process payments through Stripe</p>
+                  <Label>{t("stripe.enableLabel")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("stripe.enableDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={integrations.stripe.enabled}
@@ -170,20 +198,28 @@ export function SettingsIntegrations() {
                 <>
                   <Separator />
                   <div className="grid gap-2">
-                    <Label htmlFor="stripePublicKey">Public Key</Label>
+                    <Label htmlFor="stripePublicKey">
+                      {t("stripe.publicKeyLabel")}
+                    </Label>
                     <Input
                       id="stripePublicKey"
                       value={integrations.stripe.publicKey}
-                      onChange={(e) => handleInputChange("stripe", "publicKey", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("stripe", "publicKey", e.target.value)
+                      }
                     />
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="stripeSecretKey">Secret Key</Label>
+                    <Label htmlFor="stripeSecretKey">
+                      {t("stripe.secretKeyLabel")}
+                    </Label>
                     <Input
                       id="stripeSecretKey"
                       type="password"
                       value={integrations.stripe.secretKey}
-                      onChange={(e) => handleInputChange("stripe", "secretKey", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("stripe", "secretKey", e.target.value)
+                      }
                     />
                     <p className="text-xs text-muted-foreground">
                       <a
@@ -192,7 +228,7 @@ export function SettingsIntegrations() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-primary hover:underline"
                       >
-                        Get your Stripe API keys
+                        {t("stripe.getApiKeys")}
                         <ExternalLink className="ml-1 h-3 w-3" />
                       </a>
                     </p>
@@ -204,14 +240,16 @@ export function SettingsIntegrations() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Mailchimp</CardTitle>
-              <CardDescription>Configure Mailchimp for email marketing</CardDescription>
+              <CardTitle>{t("mailchimp.title")}</CardTitle>
+              <CardDescription>{t("mailchimp.description")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Enable Mailchimp</Label>
-                  <p className="text-sm text-muted-foreground">Sync leads and contacts with Mailchimp</p>
+                  <Label>{t("mailchimp.enableLabel")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("mailchimp.enableDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={integrations.mailchimp.enabled}
@@ -222,20 +260,28 @@ export function SettingsIntegrations() {
                 <>
                   <Separator />
                   <div className="grid gap-2">
-                    <Label htmlFor="mailchimpApiKey">API Key</Label>
+                    <Label htmlFor="mailchimpApiKey">
+                      {t("mailchimp.apiKeyLabel")}
+                    </Label>
                     <Input
                       id="mailchimpApiKey"
                       type="password"
                       value={integrations.mailchimp.apiKey}
-                      onChange={(e) => handleInputChange("mailchimp", "apiKey", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("mailchimp", "apiKey", e.target.value)
+                      }
                     />
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="mailchimpListId">List ID</Label>
+                    <Label htmlFor="mailchimpListId">
+                      {t("mailchimp.listIdLabel")}
+                    </Label>
                     <Input
                       id="mailchimpListId"
                       value={integrations.mailchimp.listId}
-                      onChange={(e) => handleInputChange("mailchimp", "listId", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("mailchimp", "listId", e.target.value)
+                      }
                     />
                     <p className="text-xs text-muted-foreground">
                       <a
@@ -244,7 +290,7 @@ export function SettingsIntegrations() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-primary hover:underline"
                       >
-                        How to find your Mailchimp List ID
+                        {t("mailchimp.findListId")}
                         <ExternalLink className="ml-1 h-3 w-3" />
                       </a>
                     </p>
@@ -256,29 +302,43 @@ export function SettingsIntegrations() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Google Analytics</CardTitle>
-              <CardDescription>Configure Google Analytics for website tracking</CardDescription>
+              <CardTitle>{t("googleAnalytics.title")}</CardTitle>
+              <CardDescription>
+                {t("googleAnalytics.description")}
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Enable Google Analytics</Label>
-                  <p className="text-sm text-muted-foreground">Track website traffic and user behavior</p>
+                  <Label>{t("googleAnalytics.enableLabel")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("googleAnalytics.enableDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={integrations.googleAnalytics.enabled}
-                  onCheckedChange={(value) => handleToggle("googleAnalytics", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("googleAnalytics", value)
+                  }
                 />
               </div>
               {integrations.googleAnalytics.enabled && (
                 <>
                   <Separator />
                   <div className="grid gap-2">
-                    <Label htmlFor="gaTrackingId">Tracking ID</Label>
+                    <Label htmlFor="gaTrackingId">
+                      {t("googleAnalytics.trackingIdLabel")}
+                    </Label>
                     <Input
                       id="gaTrackingId"
                       value={integrations.googleAnalytics.trackingId}
-                      onChange={(e) => handleInputChange("googleAnalytics", "trackingId", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "googleAnalytics",
+                          "trackingId",
+                          e.target.value
+                        )
+                      }
                     />
                     <p className="text-xs text-muted-foreground">
                       <a
@@ -287,7 +347,7 @@ export function SettingsIntegrations() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-primary hover:underline"
                       >
-                        How to find your Google Analytics Tracking ID
+                        {t("googleAnalytics.findTrackingId")}
                         <ExternalLink className="ml-1 h-3 w-3" />
                       </a>
                     </p>
@@ -300,10 +360,10 @@ export function SettingsIntegrations() {
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Saving...
+                    {t("saving")}
                   </>
                 ) : (
-                  "Save Changes"
+                  t("saveChanges")
                 )}
               </Button>
             </CardFooter>
@@ -311,6 +371,5 @@ export function SettingsIntegrations() {
         </div>
       </form>
     </FormProvider>
-  )
+  );
 }
-

@@ -26,17 +26,16 @@ import { FormError } from "@/components/FormError";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
-import { signUpSchema } from "@/validators/authValidators";
 import { signUp } from "@/lib/auth-client";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 
 // Validation Schema
 const createUserSchema = yup.object().shape({
-  name: yup.string().required("Full name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
-  password: yup
-    .string()
-    .min(6, "Minimum 6 characters")
-    .required("Password is required"),
+  name: yup.string().required("nameRequired"),
+  email: yup.string().email("emailInvalid").required("emailRequired"),
+  password: yup.string().min(6, "passwordMin").required("passwordRequired"),
 });
 
 type CreateUserFormData = yup.InferType<typeof createUserSchema>;
@@ -45,6 +44,9 @@ const CreateUserForm = () => {
   const [formError, setFormError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const { locale } = useParams();
+  const t = useTranslations("newUser");
+  const isRtl = locale === "ar";
 
   const form = useForm<CreateUserFormData>({
     resolver: yupResolver(createUserSchema),
@@ -66,10 +68,10 @@ const CreateUserForm = () => {
       {
         onRequest: () => {
           setFormError("");
-          toast.loading("Creating account...");
+          toast.loading(t("messages.loading"));
         },
         onSuccess: () => {
-          toast.success("Account Creation Successful");
+          toast.success(t("messages.success"));
           router.push("/admin/users");
         },
         onError: (ctx) => {
@@ -82,7 +84,10 @@ const CreateUserForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 py-12 bg-gray-100">
+    <div
+      className="flex items-center justify-center px-4 py-12 "
+      dir={isRtl ? "rtl" : "ltr"}
+    >
       <Card className="w-full max-w-xl shadow-md border rounded-xl border-gray-200">
         <CardHeader className="text-center space-y-2">
           <img
@@ -92,11 +97,9 @@ const CreateUserForm = () => {
             height={64}
             className="mx-auto"
           />
-          <CardTitle className="text-2xl font-semibold">
-            Create New User
-          </CardTitle>
+          <CardTitle className="text-2xl font-semibold">{t("title")}</CardTitle>
           <CardDescription className="text-gray-500">
-            Fill out the form below to add a new user to the system.
+            {t("description")}
           </CardDescription>
         </CardHeader>
 
@@ -108,17 +111,20 @@ const CreateUserForm = () => {
                 <FormField
                   control={form.control}
                   name="name"
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormItem>
-                      <FormLabel>Full Name</FormLabel>
+                      <FormLabel>{t("form.name")}</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Enter full name"
+                          placeholder={t("form.namePlaceholder")}
                           {...field}
                           autoComplete="name"
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage>
+                        {fieldState.error &&
+                          t(`form.validation.${fieldState.error.message}`)}
+                      </FormMessage>
                     </FormItem>
                   )}
                 />
@@ -127,18 +133,21 @@ const CreateUserForm = () => {
                 <FormField
                   control={form.control}
                   name="email"
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormItem>
-                      <FormLabel>Email Address</FormLabel>
+                      <FormLabel>{t("form.email")}</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="user@example.com"
+                          placeholder={t("form.emailPlaceholder")}
                           {...field}
                           autoComplete="email"
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage>
+                        {fieldState.error &&
+                          t(`form.validation.${fieldState.error.message}`)}
+                      </FormMessage>
                     </FormItem>
                   )}
                 />
@@ -147,18 +156,21 @@ const CreateUserForm = () => {
                 <FormField
                   control={form.control}
                   name="password"
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>{t("form.password")}</FormLabel>
                       <FormControl>
                         <Input
                           type="password"
-                          placeholder="••••••••"
+                          placeholder={t("form.passwordPlaceholder")}
                           {...field}
                           autoComplete="new-password"
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage>
+                        {fieldState.error &&
+                          t(`form.validation.${fieldState.error.message}`)}
+                      </FormMessage>
                     </FormItem>
                   )}
                 />
@@ -178,7 +190,7 @@ const CreateUserForm = () => {
                 className="mt-6 w-full"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Creating..." : "Create User"}
+                {isSubmitting ? t("form.submitting") : t("form.submit")}
               </Button>
             </form>
           </Form>
@@ -186,10 +198,10 @@ const CreateUserForm = () => {
 
         <CardFooter className="text-sm text-center text-muted-foreground">
           <p className="w-full">
-            Want to manage users?{" "}
-            <a href="/admin/users" className="text-blue-600 hover:underline">
-              Back to user list
-            </a>
+            {t("messages.backLink")}{" "}
+            <Link href="/admin/users" className="text-blue-600 hover:underline">
+              {t("messages.backText")}
+            </Link>
           </p>
         </CardFooter>
       </Card>

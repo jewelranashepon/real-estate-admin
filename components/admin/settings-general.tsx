@@ -1,45 +1,58 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2 } from "lucide-react"
-import { useForm, FormProvider } from "react-hook-form"
-import { useTranslations } from 'next-intl';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Loader2 } from "lucide-react";
+import { useForm, FormProvider } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
 export function SettingsGeneral() {
-  const t = useTranslations('dashboard')
-  const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations("dashboard.dashboardsettings.general");
+  const [isLoading, setIsLoading] = useState(false);
   const methods = useForm({
     defaultValues: {
-      siteName: "Real Estate Admin",
-      siteDescription: "Admin panel for managing real estate properties",
+      siteName: t("defaultValues.siteName"),
+      siteDescription: t("defaultValues.siteDescription"),
       contactEmail: "admin@example.com",
-      contactPhone: "+1 (555) 123-4567",
-      address: "123 Main St, New York, NY 10001",
-      timezone: "America/New_York",
-      dateFormat: "MM/DD/YYYY",
-      currency: "USD",
+      contactPhone: "+971 50 123 4567",
+      address: t("defaultValues.address"),
+      timezone: "Asia/Dubai",
+      dateFormat: "DD/MM/YYYY",
+      currency: "AED",
     },
-  })
+  });
 
   const handleSubmit = (data: any) => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     // Simulate API call
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
       toast({
-        title: "Settings updated",
-        description: "Your general settings have been updated successfully.",
-      })
-    }, 1000)
-  }
+        title: t("toast.title"),
+        description: t("toast.description"),
+      });
+    }, 1000);
+  };
 
   return (
     <FormProvider {...methods}>
@@ -47,37 +60,61 @@ export function SettingsGeneral() {
         <div className="grid gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>{t('siteInformation')}</CardTitle>
-              <CardDescription>Basic information about your real estate website</CardDescription>
+              <CardTitle>{t("siteInformation.title")}</CardTitle>
+              <CardDescription>
+                {t("siteInformation.description")}
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-2">
-                <Label htmlFor="siteName">{t('siteName')}</Label>
+                <Label htmlFor="siteName">
+                  {t("siteInformation.siteName")}
+                </Label>
                 <Input id="siteName" {...methods.register("siteName")} />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="siteDescription">{t('siteDescription')}</Label>
-                <Textarea id="siteDescription" {...methods.register("siteDescription")} />
+                <Label htmlFor="siteDescription">
+                  {t("siteInformation.siteDescription")}
+                </Label>
+                <Textarea
+                  id="siteDescription"
+                  {...methods.register("siteDescription")}
+                />
               </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>{t('contactInformation')}</CardTitle>
-              <CardDescription>{t('contactInfoDescription')}</CardDescription>
+              <CardTitle>{t("contactInformation.title")}</CardTitle>
+              <CardDescription>
+                {t("contactInformation.description")}
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-2">
-                <Label htmlFor="contactEmail">{t('email')}</Label>
-                <Input id="contactEmail" type="email" {...methods.register("contactEmail")} />
+                <Label htmlFor="contactEmail">
+                  {t("contactInformation.email")}
+                </Label>
+                <Input
+                  id="contactEmail"
+                  type="email"
+                  {...methods.register("contactEmail")}
+                />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="contactPhone">{t('contactPhone')}</Label>
-                <Input id="contactPhone" {...methods.register("contactPhone")} />
+                <Label htmlFor="contactPhone">
+                  {t("contactInformation.phone")}
+                </Label>
+                <Input
+                  id="contactPhone"
+                  {...methods.register("contactPhone")}
+                />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="address">{t('address')}</Label>
+                <Label htmlFor="address">
+                  {t("contactInformation.address")}
+                </Label>
                 <Textarea id="address" {...methods.register("address")} />
               </div>
             </CardContent>
@@ -85,62 +122,98 @@ export function SettingsGeneral() {
 
           <Card>
             <CardHeader>
-              <CardTitle>{t('regionalSettings')}</CardTitle>
-              <CardDescription>{t('regionalSettingsDescription')}</CardDescription>
+              <CardTitle>{t("regionalSettings.title")}</CardTitle>
+              <CardDescription>
+                {t("regionalSettings.description")}
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-2">
-                <Label htmlFor="timezone">{t('timezone')}</Label>
+                <Label htmlFor="timezone">
+                  {t("regionalSettings.timezone")}
+                </Label>
                 <Select
                   {...methods.register("timezone")}
                   onValueChange={(value) => methods.setValue("timezone", value)}
                   defaultValue={methods.getValues("timezone")}
                 >
                   <SelectTrigger id="timezone">
-                    <SelectValue placeholder="Select timezone" />
+                    <SelectValue
+                      placeholder={t("regionalSettings.timezonePlaceholder")}
+                    />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="America/New_York">Eastern Time (ET)</SelectItem>
-                    <SelectItem value="America/Chicago">Central Time (CT)</SelectItem>
-                    <SelectItem value="America/Denver">Mountain Time (MT)</SelectItem>
-                    <SelectItem value="America/Los_Angeles">Pacific Time (PT)</SelectItem>
-                    <SelectItem value="Europe/London">Greenwich Mean Time (GMT)</SelectItem>
+                    <SelectItem value="Asia/Dubai">
+                      {t("timezones.dubai")} (GMT+4)
+                    </SelectItem>
+                    <SelectItem value="Asia/Riyadh">
+                      {t("timezones.riyadh")} (GMT+3)
+                    </SelectItem>
+                    <SelectItem value="Asia/Qatar">
+                      {t("timezones.doha")} (GMT+3)
+                    </SelectItem>
+                    <SelectItem value="Asia/Kuwait">
+                      {t("timezones.kuwait")} (GMT+3)
+                    </SelectItem>
+                    <SelectItem value="Asia/Beirut">
+                      {t("timezones.beirut")} (GMT+3)
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="dateFormat">{t('dateFormat')}</Label>
+                <Label htmlFor="dateFormat">
+                  {t("regionalSettings.dateFormat")}
+                </Label>
                 <Select
                   {...methods.register("dateFormat")}
-                  onValueChange={(value) => methods.setValue("dateFormat", value)}
+                  onValueChange={(value) =>
+                    methods.setValue("dateFormat", value)
+                  }
                   defaultValue={methods.getValues("dateFormat")}
                 >
                   <SelectTrigger id="dateFormat">
-                    <SelectValue placeholder="Select date format" />
+                    <SelectValue
+                      placeholder={t("regionalSettings.dateFormatPlaceholder")}
+                    />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="MM/DD/YYYY">MM/DD/YYYY</SelectItem>
                     <SelectItem value="DD/MM/YYYY">DD/MM/YYYY</SelectItem>
+                    <SelectItem value="MM/DD/YYYY">MM/DD/YYYY</SelectItem>
                     <SelectItem value="YYYY-MM-DD">YYYY-MM-DD</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="currency">{t('currency')}</Label>
+                <Label htmlFor="currency">
+                  {t("regionalSettings.currency")}
+                </Label>
                 <Select
                   {...methods.register("currency")}
                   onValueChange={(value) => methods.setValue("currency", value)}
                   defaultValue={methods.getValues("currency")}
                 >
                   <SelectTrigger id="currency">
-                    <SelectValue placeholder="Select currency" />
+                    <SelectValue
+                      placeholder={t("regionalSettings.currencyPlaceholder")}
+                    />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="USD">US Dollar ($)</SelectItem>
-                    <SelectItem value="EUR">Euro (€)</SelectItem>
-                    <SelectItem value="GBP">British Pound (£)</SelectItem>
-                    <SelectItem value="CAD">Canadian Dollar (C$)</SelectItem>
-                    <SelectItem value="AUD">Australian Dollar (A$)</SelectItem>
+                    <SelectItem value="AED">
+                      {t("currencies.aed")} (د.إ)
+                    </SelectItem>
+                    <SelectItem value="SAR">
+                      {t("currencies.sar")} (﷼)
+                    </SelectItem>
+                    <SelectItem value="QAR">
+                      {t("currencies.qar")} (ر.ق)
+                    </SelectItem>
+                    <SelectItem value="KWD">
+                      {t("currencies.kwd")} (د.ك)
+                    </SelectItem>
+                    <SelectItem value="USD">
+                      {t("currencies.usd")} ($)
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -150,10 +223,10 @@ export function SettingsGeneral() {
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Saving...
+                    {t("saving")}
                   </>
                 ) : (
-                  "Save Changes"
+                  t("saveChanges")
                 )}
               </Button>
             </CardFooter>
@@ -161,6 +234,5 @@ export function SettingsGeneral() {
         </div>
       </form>
     </FormProvider>
-  )
+  );
 }
-

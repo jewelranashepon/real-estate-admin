@@ -1,17 +1,26 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { toast } from "@/components/ui/use-toast"
-import { Switch } from "@/components/ui/switch"
-import { Loader2 } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
-import { useForm, FormProvider } from "react-hook-form"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { toast } from "@/components/ui/use-toast";
+import { Switch } from "@/components/ui/switch";
+import { Loader2 } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { useForm, FormProvider } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
 export function SettingsNotifications() {
-  const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations("dashboard.settingsNotifications");
+  const [isLoading, setIsLoading] = useState(false);
   const methods = useForm({
     defaultValues: {
       // Email notifications
@@ -38,7 +47,7 @@ export function SettingsNotifications() {
       pushPaymentReceived: false,
       pushSystemUpdates: false,
     },
-  })
+  });
 
   const [notifications, setNotifications] = useState({
     // Email notifications
@@ -64,27 +73,27 @@ export function SettingsNotifications() {
     pushNewMessage: true,
     pushPaymentReceived: false,
     pushSystemUpdates: false,
-  })
+  });
 
   const handleToggle = (key: string, value: boolean) => {
-    methods.setValue(key, value)
-  }
+    methods.setValue(key, value);
+  };
 
   const handleSubmit = (data: any) => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     // Update notifications state with form data
-    setNotifications(data)
+    setNotifications(data);
 
     // Simulate API call
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
       toast({
-        title: "Notification settings updated",
-        description: "Your notification preferences have been saved.",
-      })
-    }, 1000)
-  }
+        title: t("toast.title"),
+        description: t("toast.description"),
+      });
+    }, 1000);
+  };
 
   return (
     <FormProvider {...methods}>
@@ -92,73 +101,97 @@ export function SettingsNotifications() {
         <div className="grid gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Email Notifications</CardTitle>
-              <CardDescription>Configure which email notifications you want to receive</CardDescription>
+              <CardTitle>{t("email.title")}</CardTitle>
+              <CardDescription>{t("email.description")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>New Property Listed</Label>
-                  <p className="text-sm text-muted-foreground">Receive an email when a new property is listed</p>
+                  <Label>{t("email.newProperty")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("email.newPropertyDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("emailNewProperty")}
-                  onCheckedChange={(value) => handleToggle("emailNewProperty", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("emailNewProperty", value)
+                  }
                 />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Property Updated</Label>
-                  <p className="text-sm text-muted-foreground">Receive an email when a property is updated</p>
+                  <Label>{t("email.propertyUpdated")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("email.propertyUpdatedDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("emailPropertyUpdated")}
-                  onCheckedChange={(value) => handleToggle("emailPropertyUpdated", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("emailPropertyUpdated", value)
+                  }
                 />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>New Lead</Label>
-                  <p className="text-sm text-muted-foreground">Receive an email when a new lead is created</p>
+                  <Label>{t("email.newLead")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("email.newLeadDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("emailNewLead")}
-                  onCheckedChange={(value) => handleToggle("emailNewLead", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("emailNewLead", value)
+                  }
                 />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>New Message</Label>
-                  <p className="text-sm text-muted-foreground">Receive an email when you get a new message</p>
+                  <Label>{t("email.newMessage")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("email.newMessageDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("emailNewMessage")}
-                  onCheckedChange={(value) => handleToggle("emailNewMessage", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("emailNewMessage", value)
+                  }
                 />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Payment Received</Label>
-                  <p className="text-sm text-muted-foreground">Receive an email when a payment is received</p>
+                  <Label>{t("email.paymentReceived")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("email.paymentReceivedDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("emailPaymentReceived")}
-                  onCheckedChange={(value) => handleToggle("emailPaymentReceived", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("emailPaymentReceived", value)
+                  }
                 />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>System Updates</Label>
-                  <p className="text-sm text-muted-foreground">Receive emails about system updates and maintenance</p>
+                  <Label>{t("email.systemUpdates")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("email.systemUpdatesDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("emailSystemUpdates")}
-                  onCheckedChange={(value) => handleToggle("emailSystemUpdates", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("emailSystemUpdates", value)
+                  }
                 />
               </div>
             </CardContent>
@@ -166,36 +199,46 @@ export function SettingsNotifications() {
 
           <Card>
             <CardHeader>
-              <CardTitle>In-App Notifications</CardTitle>
-              <CardDescription>Configure which notifications you want to see in the app</CardDescription>
+              <CardTitle>{t("inApp.title")}</CardTitle>
+              <CardDescription>{t("inApp.description")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>New Property Listed</Label>
-                  <p className="text-sm text-muted-foreground">Show notification when a new property is listed</p>
+                  <Label>{t("inApp.newProperty")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("inApp.newPropertyDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("appNewProperty")}
-                  onCheckedChange={(value) => handleToggle("appNewProperty", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("appNewProperty", value)
+                  }
                 />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Property Updated</Label>
-                  <p className="text-sm text-muted-foreground">Show notification when a property is updated</p>
+                  <Label>{t("inApp.propertyUpdated")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("inApp.propertyUpdatedDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("appPropertyUpdated")}
-                  onCheckedChange={(value) => handleToggle("appPropertyUpdated", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("appPropertyUpdated", value)
+                  }
                 />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>New Lead</Label>
-                  <p className="text-sm text-muted-foreground">Show notification when a new lead is created</p>
+                  <Label>{t("inApp.newLead")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("inApp.newLeadDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("appNewLead")}
@@ -205,12 +248,16 @@ export function SettingsNotifications() {
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>New Message</Label>
-                  <p className="text-sm text-muted-foreground">Show notification when you get a new message</p>
+                  <Label>{t("inApp.newMessage")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("inApp.newMessageDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("appNewMessage")}
-                  onCheckedChange={(value) => handleToggle("appNewMessage", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("appNewMessage", value)
+                  }
                 />
               </div>
             </CardContent>
@@ -218,40 +265,52 @@ export function SettingsNotifications() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Push Notifications</CardTitle>
-              <CardDescription>Configure which push notifications you want to receive on your devices</CardDescription>
+              <CardTitle>{t("push.title")}</CardTitle>
+              <CardDescription>{t("push.description")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>New Lead</Label>
-                  <p className="text-sm text-muted-foreground">Receive push notification when a new lead is created</p>
+                  <Label>{t("push.newLead")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("push.newLeadDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("pushNewLead")}
-                  onCheckedChange={(value) => handleToggle("pushNewLead", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("pushNewLead", value)
+                  }
                 />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>New Message</Label>
-                  <p className="text-sm text-muted-foreground">Receive push notification when you get a new message</p>
+                  <Label>{t("push.newMessage")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("push.newMessageDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("pushNewMessage")}
-                  onCheckedChange={(value) => handleToggle("pushNewMessage", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("pushNewMessage", value)
+                  }
                 />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Payment Received</Label>
-                  <p className="text-sm text-muted-foreground">Receive push notification when a payment is received</p>
+                  <Label>{t("push.paymentReceived")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("push.paymentReceivedDescription")}
+                  </p>
                 </div>
                 <Switch
                   checked={methods.watch("pushPaymentReceived")}
-                  onCheckedChange={(value) => handleToggle("pushPaymentReceived", value)}
+                  onCheckedChange={(value) =>
+                    handleToggle("pushPaymentReceived", value)
+                  }
                 />
               </div>
             </CardContent>
@@ -260,10 +319,10 @@ export function SettingsNotifications() {
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Saving...
+                    {t("saving")}
                   </>
                 ) : (
-                  "Save Changes"
+                  t("saveChanges")
                 )}
               </Button>
             </CardFooter>
@@ -271,6 +330,5 @@ export function SettingsNotifications() {
         </div>
       </form>
     </FormProvider>
-  )
+  );
 }
-

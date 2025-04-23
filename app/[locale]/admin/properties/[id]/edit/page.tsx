@@ -40,7 +40,7 @@ export default async function EditPropertyPage(props: {
   return (
     <>
       <div className="flex flex-col gap-6">
-        <h1 className="text-3xl font-bold tracking-tight">Edit Property</h1>
+        <h1 className="text-3xl font-bold tracking-tight">تعديل العقار</h1>
         <PropertyForm
           property={property}
           propertyTypes={propertyTypes}
