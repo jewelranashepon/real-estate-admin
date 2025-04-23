@@ -48,10 +48,8 @@ export default async function AdminLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <SidebarProvider>
         <div className="flex h-screen w-full bg-background overflow-hidden">
-          {/* Fixed Sidebar */}
           <AdminSidebar />
 
-          {/* Right section: Header + Scrollable content */}
           <div className="flex flex-col flex-1 h-full">
             <AdminHeader />
             <main className="flex-1 overflow-y-auto p-6">{children}</main>

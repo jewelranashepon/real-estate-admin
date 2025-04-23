@@ -276,7 +276,7 @@ export function LeadsTable() {
     <div className="space-y-4">
       <div className="flex items-center">
         <Input
-          placeholder="Search leads..."
+          placeholder={t("searchLeads")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="max-w-sm"
@@ -334,7 +334,7 @@ export function LeadsTable() {
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          {t("previous")}
         </Button>
         <Button
           variant="outline"
@@ -342,7 +342,7 @@ export function LeadsTable() {
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          {t("next")}
         </Button>
       </div>
     </div>
