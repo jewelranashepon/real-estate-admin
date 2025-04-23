@@ -9,53 +9,90 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
-// Mock property data with coordinates
 const properties = [
   {
     id: 1,
-    title: "Luxury Villa in Al Olaya",
-    type: "Villa",
-    district: "Al Olaya",
-    status: "approved",
+    title: "فيلا فاخرة في العليا",
+    type: "فيلا",
+    district: "العليا",
+    status: "تمت الموافقة",
     lat: 24.7136,
-    lng: 40.6753,
+    lng: 46.6753,
   },
   {
     id: 2,
-    title: "Modern Apartment in Al Malaz",
-    type: "Apartment",
-    district: "Al Malaz",
-    status: "pending",
-    lat: 26.7867,
-    lng: 44.7184,
+    title: "شقة حديثة في الملز",
+    type: "شقة",
+    district: "الملز",
+    status: "قيد الانتظار",
+    lat: 24.6748,
+    lng: 46.7354,
   },
   {
     id: 3,
-    title: "Commercial Land in Al Naseem",
-    type: "Land",
-    district: "Al Naseem",
-    status: "rejected",
+    title: "أرض تجارية في النسيم",
+    type: "أرض",
+    district: "النسيم",
+    status: "مرفوض",
     lat: 24.7719,
     lng: 46.7247,
   },
   {
     id: 4,
-    title: "Office Space in Qurtubah",
-    type: "Office",
-    district: "Qurtubah",
-    status: "approved",
+    title: "مساحة مكتبية في قرطبة",
+    type: "مكتب",
+    district: "قرطبة",
+    status: "تمت الموافقة",
     lat: 24.7867,
     lng: 46.7184,
   },
   {
     id: 5,
-    title: "Retail Shop in Al Wurud",
-    type: "Retail",
-    district: "Al Wurud",
-    status: "pending",
-    lat: 20.7867,
-    lng: 40.7184,
+    title: "محل تجاري في الورود",
+    type: "محل تجاري",
+    district: "الورود",
+    status: "قيد الانتظار",
+    lat: 24.7328,
+    lng: 46.6564,
+  },
+  {
+    id: 6,
+    title: "فيلا واسعة في حطين",
+    type: "فيلا",
+    district: "حطين",
+    status: "تمت الموافقة",
+    lat: 24.7742,
+    lng: 46.6415,
+  },
+  {
+    id: 7,
+    title: "شقة فاخرة في النخيل",
+    type: "شقة",
+    district: "النخيل",
+    status: "تمت الموافقة",
+    lat: 24.7531,
+    lng: 46.6804,
+  },
+  {
+    id: 8,
+    title: "مبنى تجاري في الياسمين",
+    type: "تجاري",
+    district: "الياسمين",
+    status: "قيد الانتظار",
+    lat: 24.8232,
+    lng: 46.6365,
+  },
+  {
+    id: 9,
+    title: "أرض سكنية في المربع",
+    type: "أرض",
+    district: "المربع",
+    status: "تمت الموافقة",
+    lat: 24.6384,
+    lng: 46.7124,
   },
 ];
 
@@ -63,6 +100,9 @@ export default function PropertyMap() {
   const mapRef = useRef<HTMLDivElement>(null);
   const [selectedProperty, setSelectedProperty] = useState<any>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const { locale } = useParams();
+  const t = useTranslations();
+  const isRtl = locale === "ar";
 
   useEffect(() => {
     // This is a placeholder for actual map integration
@@ -81,35 +121,41 @@ export default function PropertyMap() {
     switch (status) {
       case "approved":
         return (
-          <Badge className="bg-green-500 hover:bg-green-600">Approved</Badge>
+          <Badge className="bg-green-500 hover:bg-green-600">
+            {t("properties.approved")}
+          </Badge>
         );
       case "pending":
         return (
-          <Badge className="bg-yellow-500 hover:bg-yellow-600">Pending</Badge>
+          <Badge className="bg-yellow-500 hover:bg-yellow-600">
+            {t("properties.pending")}
+          </Badge>
         );
       case "rejected":
-        return <Badge className="bg-red-500 hover:bg-red-600">Rejected</Badge>;
+        return (
+          <Badge className="bg-red-500 hover:bg-red-600">
+            {t("properties.rejected")}
+          </Badge>
+        );
       default:
         return null;
     }
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={isRtl ? "rtl" : "ltr"}>
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Property Map</h2>
-        <p className="text-muted-foreground">
-          View your properties on the map of Riyadh.
-        </p>
+        <h2 className="text-3xl font-bold tracking-tight">
+          {t("common.propertyMap")}
+        </h2>
+        <p className="text-muted-foreground">{t("map.viewProperties")}</p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Map View</CardTitle>
-            <CardDescription>
-              Interactive map showing your property locations in Riyadh.
-            </CardDescription>
+            <CardTitle>{t("map.mapView")}</CardTitle>
+            <CardDescription>{t("map.interactiveMap")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div
@@ -118,7 +164,7 @@ export default function PropertyMap() {
             >
               {!mapLoaded ? (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+                  <div className="h-8 w-8 animate-spin rounded-full border-4 border-green-500 border-t-transparent"></div>
                 </div>
               ) : (
                 <>
@@ -134,6 +180,10 @@ export default function PropertyMap() {
                             : property.status === "pending"
                             ? "bg-yellow-500"
                             : "bg-red-500"
+                        } ${
+                          selectedProperty?.id === property.id
+                            ? "ring-2 ring-white ring-offset-2"
+                            : ""
                         }`}
                         style={{
                           left: `${((property.lng - 46.6) / 0.3) * 100}%`,
@@ -149,14 +199,19 @@ export default function PropertyMap() {
 
                     {/* Map labels */}
                     <div className="absolute bottom-4 right-4 bg-white p-2 rounded-md shadow-md text-xs">
-                      <div className="font-bold mb-1">Riyadh Districts</div>
+                      <div className="font-bold mb-1">
+                        {t("map.riyadhDistricts")}
+                      </div>
                       <div className="grid grid-cols-2 gap-x-4">
-                        <div>• Al Olaya</div>
-                        <div>• Al Malaz</div>
-                        <div>• Al Naseem</div>
-                        <div>• Qurtubah</div>
-                        <div>• Al Wurud</div>
-                        <div>• Hittin</div>
+                        <div> {t("map.al_olaya")}</div>
+                        <div>{t("map.al_malaz")}</div>
+                        <div>{t("map.al_naseem")}</div>
+                        <div>{t("map.qurtubah")}</div>
+                        <div>{t("map.al_wurud")}</div>
+                        <div>{t("map.hittin")}</div>
+                        <div>{t("map.al_nakheel")}</div>
+                        <div>{t("map.al_yasmin")}</div>
+                        <div>{t("map.al_murabba")}</div>
                       </div>
                     </div>
                   </div>
@@ -168,10 +223,8 @@ export default function PropertyMap() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Property Details</CardTitle>
-            <CardDescription>
-              Select a property on the map to view details.
-            </CardDescription>
+            <CardTitle>{t("map.propertyDetails")}</CardTitle>
+            <CardDescription>{t("map.selectProperty")}</CardDescription>
           </CardHeader>
           <CardContent>
             {selectedProperty ? (
@@ -186,13 +239,13 @@ export default function PropertyMap() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div className="font-medium">Type:</div>
+                  <div className="font-medium">{t("properties.type")}:</div>
                   <div>{selectedProperty.type}</div>
 
-                  <div className="font-medium">District:</div>
+                  <div className="font-medium">{t("properties.district")}:</div>
                   <div>{selectedProperty.district}</div>
 
-                  <div className="font-medium">Coordinates:</div>
+                  <div className="font-medium">{t("map.coordinates")}:</div>
                   <div>
                     {selectedProperty.lat.toFixed(4)},{" "}
                     {selectedProperty.lng.toFixed(4)}
@@ -200,14 +253,16 @@ export default function PropertyMap() {
                 </div>
 
                 <div className="pt-4 border-t">
-                  <h4 className="font-medium mb-2">Actions:</h4>
+                  <h4 className="font-medium mb-2">
+                    {t("properties.actions")}:
+                  </h4>
                   <div className="flex gap-2">
-                    <button className="text-sm px-3 py-1 bg-primary text-primary-foreground rounded-md">
-                      View Details
+                    <button className="text-sm px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">
+                      {t("map.viewDetails")}
                     </button>
                     {selectedProperty.status !== "approved" && (
                       <button className="text-sm px-3 py-1 bg-muted text-muted-foreground rounded-md">
-                        Edit
+                        {t("properties.edit")}
                       </button>
                     )}
                   </div>
@@ -223,12 +278,12 @@ export default function PropertyMap() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-12 w-12 mb-4"
+                  className="h-12 w-12 mb-4 text-green-500"
                 >
                   <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
-                <p>Select a property pin on the map to view its details.</p>
+                <p>{t("map.selectProperty")}</p>
               </div>
             )}
           </CardContent>
@@ -237,10 +292,8 @@ export default function PropertyMap() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Property List</CardTitle>
-          <CardDescription>
-            All your properties shown on the map.
-          </CardDescription>
+          <CardTitle>{t("common.propertyMap")}</CardTitle>
+          <CardDescription>{t("properties.allProperties")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="rounded-md border">
@@ -249,13 +302,21 @@ export default function PropertyMap() {
                 <thead>
                   <tr className="border-b bg-muted/50">
                     <th className="h-12 px-4 text-left font-medium">ID</th>
-                    <th className="h-12 px-4 text-left font-medium">Title</th>
-                    <th className="h-12 px-4 text-left font-medium">Type</th>
                     <th className="h-12 px-4 text-left font-medium">
-                      District
+                      {t("properties.title")}
                     </th>
-                    <th className="h-12 px-4 text-left font-medium">Status</th>
-                    <th className="h-12 px-4 text-left font-medium">Actions</th>
+                    <th className="h-12 px-4 text-left font-medium">
+                      {t("properties.type")}
+                    </th>
+                    <th className="h-12 px-4 text-left font-medium">
+                      {t("properties.district")}
+                    </th>
+                    <th className="h-12 px-4 text-left font-medium">
+                      {t("properties.status")}
+                    </th>
+                    <th className="h-12 px-4 text-left font-medium">
+                      {t("properties.actions")}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -264,7 +325,7 @@ export default function PropertyMap() {
                       key={property.id}
                       className={`border-b ${
                         selectedProperty?.id === property.id
-                          ? "bg-muted/50"
+                          ? "bg-green-50"
                           : ""
                       }`}
                     >
@@ -279,10 +340,10 @@ export default function PropertyMap() {
                       </td>
                       <td className="p-4 align-middle">
                         <button
-                          className="text-sm px-3 py-1 bg-primary text-primary-foreground rounded-md"
+                          className="text-sm px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700"
                           onClick={() => setSelectedProperty(property)}
                         >
-                          Show on Map
+                          {t("map.showOnMap")}
                         </button>
                       </td>
                     </tr>

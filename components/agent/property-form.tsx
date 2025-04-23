@@ -1,19 +1,41 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
-import { Upload, X } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { Upload, X } from "lucide-react";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const propertyFormSchema = z.object({
   title: z.string().min(5, {
@@ -32,72 +54,72 @@ const propertyFormSchema = z.object({
   description: z.string().min(20, {
     message: "Description must be at least 20 characters.",
   }),
-})
+});
 
-type PropertyFormValues = z.infer<typeof propertyFormSchema>
+type PropertyFormValues = z.infer<typeof propertyFormSchema>;
 
 const defaultValues: Partial<PropertyFormValues> = {
   city: "Riyadh",
-}
+};
 
 export default function PropertyForm() {
-  const [images, setImages] = useState<File[]>([])
-  const [previews, setPreviews] = useState<string[]>([])
+  const [images, setImages] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
+  const { locale } = useParams();
+  const t = useTranslations("propertiesAdd");
+  const isRtl = locale === "ar";
 
   const form = useForm<PropertyFormValues>({
     resolver: zodResolver(propertyFormSchema),
     defaultValues,
-  })
+  });
 
   function onSubmit(data: PropertyFormValues) {
     toast({
-      title: "Property submitted for approval",
-      description: "Your property has been submitted and is pending admin approval.",
-    })
-    console.log(data, images)
-    // Reset form after submission
-    form.reset(defaultValues)
-    setImages([])
-    setPreviews([])
+      title: t("submitSuccess.title"),
+      description: t("submitSuccess.description"),
+    });
+    console.log(data, images);
+    form.reset(defaultValues);
+    setImages([]);
+    setPreviews([]);
   }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const filesArray = Array.from(e.target.files)
-      const newPreviews = filesArray.map((file) => URL.createObjectURL(file))
+      const filesArray = Array.from(e.target.files);
+      const newPreviews = filesArray.map((file) => URL.createObjectURL(file));
 
-      setImages((prev) => [...prev, ...filesArray])
-      setPreviews((prev) => [...prev, ...newPreviews])
+      setImages((prev) => [...prev, ...filesArray]);
+      setPreviews((prev) => [...prev, ...newPreviews]);
     }
-  }
+  };
 
   const removeImage = (index: number) => {
-    const newImages = [...images]
-    const newPreviews = [...previews]
+    const newImages = [...images];
+    const newPreviews = [...previews];
 
-    // Revoke the object URL to avoid memory leaks
-    URL.revokeObjectURL(newPreviews[index])
+    URL.revokeObjectURL(newPreviews[index]);
+    newImages.splice(index, 1);
+    newPreviews.splice(index, 1);
 
-    newImages.splice(index, 1)
-    newPreviews.splice(index, 1)
-
-    setImages(newImages)
-    setPreviews(newPreviews)
-  }
+    setImages(newImages);
+    setPreviews(newPreviews);
+  };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={isRtl ? "rtl" : "ltr"}>
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Add New Property</h2>
-        <p className="text-muted-foreground">Fill in the details below to add a new property listing.</p>
+        <h2 className="text-3xl font-bold tracking-tight">
+          {t("addProperty")}
+        </h2>
+        <p className="text-muted-foreground">{t("formDescription")}</p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Property Information</CardTitle>
-          <CardDescription>
-            Enter the details of your property. All fields are required unless specified.
-          </CardDescription>
+          <CardTitle>{t("propertyInfo")}</CardTitle>
+          <CardDescription>{t("formInstructions")}</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -108,11 +130,17 @@ export default function PropertyForm() {
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Title</FormLabel>
+                      <FormLabel>{t("title.label")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="Luxury Villa in Al Olaya" {...field} />
+                        <Input
+                          placeholder={t("title.placeholder")}
+                          {...field}
+                          className="focus-visible:ring-green-500"
+                        />
                       </FormControl>
-                      <FormDescription>A descriptive title for your property.</FormDescription>
+                      <FormDescription>
+                        {t("title.description")}
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -123,11 +151,18 @@ export default function PropertyForm() {
                   name="price"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Price (SAR)</FormLabel>
+                      <FormLabel>{t("price.label")}</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="1000000" {...field} />
+                        <Input
+                          type="number"
+                          placeholder={t("price.placeholder")}
+                          {...field}
+                          className="focus-visible:ring-green-500"
+                        />
                       </FormControl>
-                      <FormDescription>The price in Saudi Riyal.</FormDescription>
+                      <FormDescription>
+                        {t("price.description")}
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -140,23 +175,27 @@ export default function PropertyForm() {
                   name="type"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Property Type</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormLabel>{t("type.label")}</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select property type" />
+                          <SelectTrigger className="focus-visible:ring-green-500">
+                            <SelectValue placeholder={t("type.placeholder")} />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="apartment">Apartment</SelectItem>
-                          <SelectItem value="villa">Villa</SelectItem>
-                          <SelectItem value="land">Land</SelectItem>
-                          <SelectItem value="office">Office Space</SelectItem>
-                          <SelectItem value="retail">Retail Space</SelectItem>
-                          <SelectItem value="warehouse">Warehouse</SelectItem>
+                          {Object.entries(t.raw("type.options")).map(
+                            ([value, label]) => (
+                              <SelectItem key={value} value={value}>
+                                {label as string}
+                              </SelectItem>
+                            )
+                          )}
                         </SelectContent>
                       </Select>
-                      <FormDescription>The type of property you are listing.</FormDescription>
+                      <FormDescription>{t("type.description")}</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -167,27 +206,31 @@ export default function PropertyForm() {
                   name="district"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>District</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormLabel>{t("district.label")}</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select district" />
+                          <SelectTrigger className="focus-visible:ring-green-500">
+                            <SelectValue
+                              placeholder={t("district.placeholder")}
+                            />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="al_olaya">Al Olaya</SelectItem>
-                          <SelectItem value="al_malaz">Al Malaz</SelectItem>
-                          <SelectItem value="al_murabba">Al Murabba</SelectItem>
-                          <SelectItem value="al_naseem">Al Naseem</SelectItem>
-                          <SelectItem value="al_rawdah">Al Rawdah</SelectItem>
-                          <SelectItem value="al_wurud">Al Wurud</SelectItem>
-                          <SelectItem value="hittin">Hittin</SelectItem>
-                          <SelectItem value="qurtubah">Qurtubah</SelectItem>
-                          <SelectItem value="al_nakheel">Al Nakheel</SelectItem>
-                          <SelectItem value="al_yasmin">Al Yasmin</SelectItem>
+                          {Object.entries(t.raw("district.options")).map(
+                            ([value, label]) => (
+                              <SelectItem key={value} value={value}>
+                                {label as string}
+                              </SelectItem>
+                            )
+                          )}
                         </SelectContent>
                       </Select>
-                      <FormDescription>The district in Riyadh where the property is located.</FormDescription>
+                      <FormDescription>
+                        {t("district.description")}
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -199,11 +242,11 @@ export default function PropertyForm() {
                 name="city"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>City</FormLabel>
+                    <FormLabel>{t("city.label")}</FormLabel>
                     <FormControl>
                       <Input disabled {...field} />
                     </FormControl>
-                    <FormDescription>Default city is set to Riyadh.</FormDescription>
+                    <FormDescription>{t("city.description")}</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -214,16 +257,16 @@ export default function PropertyForm() {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>{t("description.label")}</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Provide a detailed description of your property..."
-                        className="min-h-[150px]"
+                        placeholder={t("description.placeholder")}
+                        className="min-h-[150px] focus-visible:ring-green-500"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Detailed description of the property including features, amenities, etc.
+                      {t("description.description")}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -231,19 +274,21 @@ export default function PropertyForm() {
               />
 
               <div>
-                <FormLabel>Property Images</FormLabel>
+                <FormLabel>{t("images.label")}</FormLabel>
                 <div className="mt-2 grid gap-5">
                   <div className="flex items-center justify-center w-full">
                     <label
                       htmlFor="image-upload"
-                      className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-muted/50 hover:bg-muted"
+                      className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-muted/50 hover:bg-muted border-green-200 hover:border-green-300"
                     >
                       <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <Upload className="w-8 h-8 mb-2 text-muted-foreground" />
+                        <Upload className="w-8 h-8 mb-2 text-green-500" />
                         <p className="mb-2 text-sm text-muted-foreground">
-                          <span className="font-semibold">Click to upload</span> or drag and drop
+                          {t("images.uploadText")}
                         </p>
-                        <p className="text-xs text-muted-foreground">PNG, JPG or JPEG (MAX. 5MB per image)</p>
+                        <p className="text-xs text-muted-foreground">
+                          {t("images.fileTypes")}
+                        </p>
                       </div>
                       <Input
                         id="image-upload"
@@ -278,24 +323,24 @@ export default function PropertyForm() {
                   )}
                 </div>
                 <FormDescription className="mt-2">
-                  Upload one or more images of your property. At least one image is required.
+                  {t("images.description")}
                 </FormDescription>
               </div>
 
-              <Button type="submit" className="w-full md:w-auto">
-                Submit Property
+              <Button
+                type="submit"
+                className="w-full md:w-auto bg-green-600 hover:bg-green-700"
+              >
+                {t("submit")}
               </Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="flex flex-col items-start border-t px-6 py-4">
-          <h3 className="text-sm font-medium">Note:</h3>
-          <p className="text-sm text-muted-foreground">
-            Upon submission, your property will enter an "Admin Approval Pending" state. It will only be visible to the
-            public once approved by an administrator.
-          </p>
+          <h3 className="text-sm font-medium">{t("note")}</h3>
+          <p className="text-sm text-muted-foreground">{t("approvalNote")}</p>
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }

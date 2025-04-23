@@ -1,6 +1,4 @@
 "use client";
-import React from "react";
-
 import {
   Card,
   CardContent,
@@ -9,72 +7,97 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Building, Clock, CheckCircle, XCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 export default function DashboardOverview() {
+  const { locale } = useParams();
+  const t = useTranslations();
+  const isRtl = locale === "ar";
+
   // Mock data for the chart
   const statusData = [
-    { name: "Approved", value: 12, color: "bg-green-500" },
-    { name: "Rejected", value: 4, color: "bg-red-500" },
-    { name: "Pending", value: 7, color: "bg-yellow-500" },
+    { name: t("agentdashboard.approved"), value: 12, color: "bg-green-500" },
+    { name: t("agentdashboard.rejected"), value: 4, color: "bg-red-500" },
+    { name: t("properties.pending"), value: 7, color: "bg-yellow-500" },
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={isRtl ? "rtl" : "ltr"}>
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        <p className="text-muted-foreground">
-          Welcome back to your agent dashboard.
-        </p>
+        <h2 className="text-3xl font-bold tracking-tight">
+          {t("common.agentdashboard")}
+        </h2>
+        <p className="text-muted-foreground">{t("agentdashboard.welcome")}</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-              Total Properties
+              {t("agentdashboard.totalProperties")}
             </CardTitle>
             <Building className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">23</div>
-            <p className="text-xs text-muted-foreground">+2 from last month</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Pending Approvals
-            </CardTitle>
-            <Clock className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">7</div>
+            <div className="text-2xl font-bold">
+              {t("agentdashboard.static_totalProperties")}
+            </div>
             <p className="text-xs text-muted-foreground">
-              Awaiting admin review
+              {t("agentdashboard.static_fromLastMonth")}{" "}
+              {t("agentdashboard.fromLastMonth")}
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Approved</CardTitle>
-            <CheckCircle className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">
+              {t("agentdashboard.pendingApprovals")}
+            </CardTitle>
+            <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12</div>
-            <p className="text-xs text-muted-foreground">Visible to public</p>
+            <div className="text-2xl font-bold">
+              {t("agentdashboard.static_pendingApprovals")}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {t("agentdashboard.awaitingReview")}
+            </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Rejected</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              {t("agentdashboard.approved")}
+            </CardTitle>
+            <CheckCircle className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {t("agentdashboard.static_totalProperties")}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {t("agentdashboard.visibleToPublic")}
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              {t("agentdashboard.rejected")}
+            </CardTitle>
             <XCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">4</div>
-            <p className="text-xs text-muted-foreground">Needs revision</p>
+            <div className="text-2xl font-bold">
+              {t("agentdashboard.static_rejected")}{" "}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {t("agentdashboard.needsRevision")}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -82,9 +105,9 @@ export default function DashboardOverview() {
       <div className="grid gap-4 md:grid-cols-2">
         <Card className="col-span-1">
           <CardHeader>
-            <CardTitle>Property Status</CardTitle>
+            <CardTitle>{t("agentdashboard.propertyStatus")}</CardTitle>
             <CardDescription>
-              Distribution of your property listings by status
+              {t("agentdashboard.distribution")}
             </CardDescription>
           </CardHeader>
           <CardContent className="pl-2">
@@ -106,9 +129,9 @@ export default function DashboardOverview() {
 
         <Card className="col-span-1">
           <CardHeader>
-            <CardTitle>Agent Performance</CardTitle>
+            <CardTitle>{t("agentdashboard.agentPerformance")}</CardTitle>
             <CardDescription>
-              Your performance metrics and activity summary
+              {t("agentdashboard.performanceMetrics")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -116,9 +139,11 @@ export default function DashboardOverview() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="text-sm font-medium">
-                    Listing Approval Rate
+                    {t("agentdashboard.listingApprovalRate")}
                   </div>
-                  <div className="text-sm font-medium">75%</div>
+                  <div className="text-sm font-medium">
+                    {t("agentdashboard.static_listingApprovalRate")}
+                  </div>
                 </div>
                 <div className="h-2 w-full rounded-full bg-muted">
                   <div
@@ -131,13 +156,15 @@ export default function DashboardOverview() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="text-sm font-medium">
-                    Average Response Time
+                    {t("agentdashboard.averageResponseTime")}
                   </div>
-                  <div className="text-sm font-medium">2.3 days</div>
+                  <div className="text-sm font-medium">
+                    {t("agentdashboard.static_averageResponseTime")}
+                  </div>
                 </div>
                 <div className="h-2 w-full rounded-full bg-muted">
                   <div
-                    className="h-2 rounded-full bg-blue-500"
+                    className="h-2 rounded-full bg-green-500"
                     style={{ width: "65%" }}
                   />
                 </div>
@@ -145,12 +172,16 @@ export default function DashboardOverview() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium">Document Completion</div>
-                  <div className="text-sm font-medium">90%</div>
+                  <div className="text-sm font-medium">
+                    {t("agentdashboard.documentCompletion")}
+                  </div>
+                  <div className="text-sm font-medium">
+                    {t("agentdashboard.static_documentCompletion")}
+                  </div>
                 </div>
                 <div className="h-2 w-full rounded-full bg-muted">
                   <div
-                    className="h-2 rounded-full bg-purple-500"
+                    className="h-2 rounded-full bg-green-500"
                     style={{ width: "90%" }}
                   />
                 </div>
@@ -159,13 +190,15 @@ export default function DashboardOverview() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="text-sm font-medium">
-                    Profile Completeness
+                    {t("agentdashboard.profileCompleteness")}
                   </div>
-                  <div className="text-sm font-medium">85%</div>
+                  <div className="text-sm font-medium">
+                    {t("agentdashboard.static_profileCompleteness")}
+                  </div>
                 </div>
                 <div className="h-2 w-full rounded-full bg-muted">
                   <div
-                    className="h-2 rounded-full bg-orange-500"
+                    className="h-2 rounded-full bg-green-500"
                     style={{ width: "85%" }}
                   />
                 </div>
