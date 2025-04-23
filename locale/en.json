@@ -75,12 +75,12 @@
       "CallNow": "Call Now",
       "ContactSeller": "Contact the Seller",
       "Close": "Close",
-      "falappro" : "FAL Approved",
-      "Fali":"FAL License Info",
-      "LNo":"License No",
+      "falappro": "FAL Approved",
+      "Fali": "FAL License Info",
+      "LNo": "License No",
       "CVW": "Contact via WhatsApp",
       "SCW": "Click below to start a chat with the agent on WhatsApp.",
-      "OW" : "Open WhatsApp"
+      "OW": "Open WhatsApp"
     },
     "map": {
       "customView": "Custom Map View",
@@ -362,7 +362,9 @@
     "reducedMotionDescription": "Reduce or eliminate motion effects",
     "propertyTypes": "Property Types",
     "noMessagesFound": "No messages found",
-    "searchLeads": "Search leads..."
+    "searchLeads": "Search leads...",
+    "recentBlog": "Recent Blog Posts",
+    "lastBlog": "Last 4 blog posts"
   },
   "service": {
     "home": "Home",
