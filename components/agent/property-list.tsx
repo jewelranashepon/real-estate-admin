@@ -25,7 +25,7 @@ import { useTranslations } from "next-intl";
 export default function PropertyList() {
   const [view, setView] = useState<"grid" | "table">("grid");
   const [filter, setFilter] = useState<
-    "all" | "approved" | "pending" | "rejected"
+    "all" | "sold" | "approved" | "pending" | "rejected"
   >("all");
 
   const { locale } = useParams();
@@ -95,6 +95,16 @@ export default function PropertyList() {
         createdAt: "2023-09-15",
         thumbnail: "/pj6.jpg",
       },
+      {
+        id: 7,
+        title: t("allProperties.commercial_land"),
+        price: t("allProperties.price3"),
+        type: t("allProperties.land_type"),
+        district: t("allProperties.al_naseem"),
+        status: "sold",
+        createdAt: "2023-11-10",
+        thumbnail: "/sa3.webp",
+      },
     ];
   };
 
@@ -110,6 +120,10 @@ export default function PropertyList() {
 
   const getStatusBadge = (status: string) => {
     switch (status) {
+      case "sold":
+        return (
+          <Badge className="bg-green-500 hover:bg-green-600">{t("sold")}</Badge>
+        );
       case "approved":
         return (
           <Badge className="bg-green-500 hover:bg-green-600">
@@ -148,6 +162,12 @@ export default function PropertyList() {
                 className="data-[state=active]:bg-green-600 data-[state=active]:text-white"
               >
                 {t("all")}
+              </TabsTrigger>
+              <TabsTrigger
+                value="sold"
+                className="data-[state=active]:bg-green-600 data-[state=active]:text-white"
+              >
+                {t("sold")}
               </TabsTrigger>
               <TabsTrigger
                 value="approved"
