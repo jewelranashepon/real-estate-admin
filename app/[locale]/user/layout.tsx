@@ -1,17 +1,16 @@
 import { redirect } from "@/i18n/navigation";
 import { getSession } from "@/lib/getSession";
-import UserHeader from "@/components/user/header";
-import UserSidebar from "@/components/user/sidebar";
+import { SidebarProvider } from "@/components/user/ui/sidebar";
+import { AppSidebar } from "@/components/user/app-sidebar";
 
-const UserDashboardLayout = async ({
+export default async function UserDashboardLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
-}) => {
+}) {
   const { locale } = await params;
-
   const session = await getSession();
   const role = session?.user?.role;
 
@@ -28,15 +27,13 @@ const UserDashboardLayout = async ({
   }
 
   return (
-    <div className="flex flex-col w-full">
-      <UserHeader />
-
-      <div className="flex">
-        <UserSidebar />
-        <main className="w-full">{children}</main>
+    <SidebarProvider>
+      <div className="dark relative min-h-screen bg-gradient-to-br from-background/90 text-white to-background">
+        <div className="relative flex min-h-screen">
+          <AppSidebar />
+          <main className="flex-1 overflow-y-auto">{children}</main>
+        </div>
       </div>
-    </div>
+    </SidebarProvider>
   );
-};
-
-export default UserDashboardLayout;
+}

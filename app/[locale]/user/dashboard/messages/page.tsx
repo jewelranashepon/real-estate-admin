@@ -1,436 +1,301 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "@/i18n/navigation";
+import { motion } from "framer-motion";
 import {
-  Search,
-  MoreVertical,
-  Phone,
-  Video,
-  Info,
-  Paperclip,
-  ImageIcon,
-  Smile,
-  Send,
-  Check,
-  CheckCheck,
+  ArrowLeft,
+  MessageSquare,
+  Users,
   Clock,
-  Plus,
+  BarChart3,
+  Send,
 } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/user/ui/button";
+import { Card } from "@/components/user/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-// Sample conversation data
-const conversations = [
-  {
-    id: 1,
-    name: "Sarah Johnson",
-    avatar: "/placeholder.svg?height=40&width=40",
-    role: "Real Estate Agent",
-    lastMessage: "I found a few properties that match your criteria",
-    time: "10:42 AM",
-    unread: 2,
-    online: true,
-  },
-  {
-    id: 2,
-    name: "Michael Chen",
-    avatar: "/placeholder.svg?height=40&width=40",
-    role: "Property Manager",
-    lastMessage: "The apartment is available for viewing this weekend",
-    time: "Yesterday",
-    unread: 0,
-    online: false,
-  },
-  {
-    id: 3,
-    name: "Emma Rodriguez",
-    avatar: "/placeholder.svg?height=40&width=40",
-    role: "Leasing Consultant",
-    lastMessage: "Your application has been received",
-    time: "Yesterday",
-    unread: 0,
-    online: true,
-  },
-  {
-    id: 4,
-    name: "David Kim",
-    avatar: "/placeholder.svg?height=40&width=40",
-    role: "Mortgage Broker",
-    lastMessage: "Let's discuss your financing options",
-    time: "Monday",
-    unread: 0,
-    online: false,
-  },
-  {
-    id: 5,
-    name: "Jessica Patel",
-    avatar: "/placeholder.svg?height=40&width=40",
-    role: "Real Estate Agent",
-    lastMessage: "I have the keys for your new apartment!",
-    time: "Monday",
-    unread: 0,
-    online: true,
-  },
-];
-
-// Sample messages for a conversation
-const messages = [
-  {
-    id: 1,
-    sender: "Sarah Johnson",
-    content:
-      "Hi there! I'm Sarah, your dedicated real estate agent. I understand you're looking for a 2-bedroom apartment in downtown. How can I help you today?",
-    time: "10:30 AM",
-    isMe: false,
-    status: "read",
-  },
-  {
-    id: 2,
-    sender: "Me",
-    content:
-      "Hi Sarah! Yes, I'm looking for a 2-bedroom apartment in downtown with a budget of around $3,000 per month. Ideally with parking and pet-friendly options.",
-    time: "10:32 AM",
-    isMe: true,
-    status: "read",
-  },
-  {
-    id: 3,
-    sender: "Sarah Johnson",
-    content:
-      "Great! I've been searching the market and found several options that might interest you. Are you looking for something available immediately or do you have a specific move-in date in mind?",
-    time: "10:35 AM",
-    isMe: false,
-    status: "read",
-  },
-  {
-    id: 4,
-    sender: "Me",
-    content:
-      "I'm hoping to move in by the end of next month. Would prefer a place with modern amenities and close to public transportation.",
-    time: "10:38 AM",
-    isMe: true,
-    status: "read",
-  },
-  {
-    id: 5,
-    sender: "Sarah Johnson",
-    content:
-      "Perfect timing! I found a few properties that match your criteria. Here are three options I think you'll love:",
-    time: "10:40 AM",
-    isMe: false,
-    status: "read",
-  },
-  {
-    id: 6,
-    sender: "Sarah Johnson",
-    content:
-      "1. Modern Apartment at 123 Main St - $2,800/month, 2 bed/2 bath, pet-friendly with indoor parking, 5-minute walk to subway station.",
-    time: "10:41 AM",
-    isMe: false,
-    status: "read",
-  },
-  {
-    id: 7,
-    sender: "Sarah Johnson",
-    content:
-      "2. Luxury Condo at 456 Park Ave - $3,200/month, 2 bed/2 bath, includes gym and pool access, pet-friendly with a small deposit, covered parking available.",
-    time: "10:41 AM",
-    isMe: false,
-    status: "read",
-  },
-  {
-    id: 8,
-    sender: "Sarah Johnson",
-    content:
-      "3. Downtown Loft at 789 Broadway - $2,950/month, 2 bed/1.5 bath, recently renovated with modern appliances, rooftop access, street parking permits available.",
-    time: "10:42 AM",
-    isMe: false,
-    status: "read",
-  },
-  {
-    id: 9,
-    sender: "Sarah Johnson",
-    content:
-      "Would you like to schedule viewings for any of these properties? I have availability this weekend.",
-    time: "10:42 AM",
-    isMe: false,
-    status: "delivered",
-  },
-];
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/user/ui/avatar";
+import { StatCard } from "@/components/user/stat-card";
+import { messages } from "@/components/user/data/messages";
 
 export default function MessagesPage() {
-  const [activeConversation, setActiveConversation] = useState(
-    conversations[0]
+  const router = useRouter();
+  const [activeConversation, setActiveConversation] = useState<string | null>(
+    null
   );
-  const [newMessage, setNewMessage] = useState("");
+  const [messageText, setMessageText] = useState("");
 
-  const handleSendMessage = () => {
-    if (newMessage.trim()) {
-      // In a real app, you would send the message to the server
-      console.log("Sending message:", newMessage);
-      setNewMessage("");
-    }
-  };
+  // Get unique senders for conversation list
+  const uniqueSenders = Array.from(
+    new Set(messages.map((message) => message.sender.id))
+  ).map((senderId) => {
+    const senderMessages = messages.filter((m) => m.sender.id === senderId);
+    return {
+      id: senderId,
+      name: senderMessages[0].sender.name,
+      image: senderMessages[0].sender.image,
+      isAgent: senderMessages[0].sender.isAgent,
+      lastMessage: senderMessages[0],
+      unreadCount: senderMessages.filter((m) => !m.read).length,
+    };
+  });
+
+  const selectedSender = uniqueSenders.find(
+    (sender) => sender.id === activeConversation
+  );
+  const conversationMessages = activeConversation
+    ? messages.filter((m) => m.sender.id === activeConversation)
+    : [];
 
   return (
     <div className="p-6">
-      <div className="flex flex-col h-[calc(100vh-8rem)] overflow-hidden rounded-lg border bg-background shadow">
-        <div className="grid h-full grid-cols-1 md:grid-cols-[300px_1fr]">
-          {/* Sidebar */}
-          <div className="flex flex-col border-r">
-            <div className="flex items-center justify-between p-4">
-              <h2 className="text-xl font-semibold">Messages</h2>
-              <Button variant="ghost" size="icon">
-                <Plus className="h-5 w-5" />
-                <span className="sr-only">New conversation</span>
-              </Button>
-            </div>
-            <div className="px-4 pb-2">
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search conversations..."
-                  className="pl-8"
-                />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="flex items-center mb-6">
+          <Button variant="ghost" asChild className="mr-2">
+            <button onClick={() => router.back()}>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back
+            </button>
+          </Button>
+          <h1 className="text-2xl font-bold flex-1">Messages</h1>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <StatCard
+            title="Total Conversations"
+            value={uniqueSenders.length.toString()}
+            icon={<MessageSquare className="h-5 w-5" />}
+            change="Active threads"
+            trend="neutral"
+          />
+          <StatCard
+            title="Unread Messages"
+            value={messages.filter((m) => !m.read).length.toString()}
+            icon={<Users className="h-5 w-5" />}
+            change={`${
+              messages.filter((m) => !m.read).length > 0
+                ? "Needs attention"
+                : "All caught up"
+            }`}
+            trend={
+              messages.filter((m) => !m.read).length > 0 ? "up" : "neutral"
+            }
+          />
+          <StatCard
+            title="Response Rate"
+            value="92%"
+            icon={<Clock className="h-5 w-5" />}
+            change="Within 24 hours"
+            trend="up"
+            progress={92}
+          />
+          <StatCard
+            title="Engagement"
+            value="High"
+            icon={<BarChart3 className="h-5 w-5" />}
+            change="Above average"
+            trend="up"
+          />
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Conversation List */}
+          <div
+            className={`w-full lg:w-80 shrink-0 ${
+              activeConversation ? "hidden lg:block" : ""
+            }`}
+          >
+            <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 h-[calc(100vh-240px)] flex flex-col">
+              <div className="p-4 border-b border-emerald-500/20">
+                <h2 className="font-semibold">Conversations</h2>
               </div>
-            </div>
-            <Tabs defaultValue="all" className="px-4">
-              <TabsList className="w-full">
-                <TabsTrigger value="all" className="flex-1">
-                  All
-                </TabsTrigger>
-                <TabsTrigger value="unread" className="flex-1">
-                  Unread
-                </TabsTrigger>
-                <TabsTrigger value="archived" className="flex-1">
-                  Archived
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-            <Separator />
-            <ScrollArea className="flex-1">
-              <div className="space-y-1 p-2">
-                {conversations.map((conversation) => (
-                  <button
-                    key={conversation.id}
-                    className={`flex w-full items-center gap-3 rounded-lg p-2 text-left ${
-                      activeConversation.id === conversation.id
-                        ? "bg-accent"
-                        : "hover:bg-muted"
+              <div className="flex-1 overflow-auto">
+                {uniqueSenders.map((sender) => (
+                  <div
+                    key={sender.id}
+                    className={`p-4 border-b border-emerald-500/10 cursor-pointer hover:bg-emerald-500/10 transition-colors ${
+                      activeConversation === sender.id
+                        ? "bg-gradient-to-r from-emerald-500/20 to-green-500/20 border-l-2 border-l-emerald-500"
+                        : ""
                     }`}
-                    onClick={() => setActiveConversation(conversation)}
+                    onClick={() => setActiveConversation(sender.id)}
                   >
-                    <div className="relative">
-                      <Avatar>
-                        <AvatarImage
-                          src={conversation.avatar || "/placeholder.svg"}
-                          alt={conversation.name}
-                        />
-                        <AvatarFallback>
-                          {conversation.name.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      {conversation.online && (
-                        <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-background" />
-                      )}
-                    </div>
-                    <div className="flex-1 overflow-hidden">
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium">{conversation.name}</span>
-                        <span className="text-xs text-muted-foreground">
-                          {conversation.time}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm text-muted-foreground truncate">
-                          {conversation.lastMessage}
-                        </p>
-                        {conversation.unread > 0 && (
-                          <Badge className="ml-auto" variant="default">
-                            {conversation.unread}
-                          </Badge>
+                    <div className="flex items-center gap-3">
+                      <div className="relative">
+                        <Avatar>
+                          <AvatarImage
+                            src={`/placeholder.svg?height=40&width=40&text=${sender.name.charAt(
+                              0
+                            )}`}
+                          />
+                          <AvatarFallback className="bg-emerald-500/20 text-emerald-500">
+                            {sender.name.charAt(0)}
+                          </AvatarFallback>
+                        </Avatar>
+                        {sender.unreadCount > 0 && (
+                          <span className="absolute -top-1 -right-1 bg-emerald-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                            {sender.unreadCount}
+                          </span>
                         )}
                       </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <p className="font-medium truncate">{sender.name}</p>
+                          <span className="text-xs text-muted-foreground">
+                            {new Date(
+                              sender.lastMessage.timestamp
+                            ).toLocaleDateString()}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-foreground truncate">
+                          {sender.lastMessage.subject}
+                        </p>
+                      </div>
                     </div>
-                  </button>
+                  </div>
                 ))}
               </div>
-            </ScrollArea>
+            </Card>
           </div>
 
           {/* Chat Area */}
-          <div className="flex flex-col">
-            {/* Chat Header */}
-            <div className="flex items-center justify-between border-b p-4">
-              <div className="flex items-center gap-3">
-                <Avatar>
-                  <AvatarImage
-                    src={activeConversation.avatar || "/placeholder.svg"}
-                    alt={activeConversation.name}
-                  />
-                  <AvatarFallback>
-                    {activeConversation.name.charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-semibold">{activeConversation.name}</h3>
-                    {activeConversation.online && (
-                      <Badge
-                        variant="outline"
-                        className="bg-emerald-50 text-emerald-700 border-emerald-200 text-xs"
-                      >
-                        Online
-                      </Badge>
-                    )}
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    {activeConversation.role}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-1">
-                <Button variant="ghost" size="icon">
-                  <Phone className="h-5 w-5" />
-                  <span className="sr-only">Call</span>
-                </Button>
-                <Button variant="ghost" size="icon">
-                  <Video className="h-5 w-5" />
-                  <span className="sr-only">Video call</span>
-                </Button>
-                <Button variant="ghost" size="icon">
-                  <Info className="h-5 w-5" />
-                  <span className="sr-only">Info</span>
-                </Button>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <MoreVertical className="h-5 w-5" />
-                      <span className="sr-only">More options</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Options</DropdownMenuLabel>
-                    <DropdownMenuItem>View profile</DropdownMenuItem>
-                    <DropdownMenuItem>Mute conversation</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="text-destructive">
-                      Block contact
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            </div>
-
-            {/* Messages */}
-            <ScrollArea className="flex-1 p-4">
-              <div className="space-y-4">
-                {messages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={`flex ${
-                      message.isMe ? "justify-end" : "justify-start"
-                    }`}
-                  >
-                    <div
-                      className={`max-w-[80%] rounded-lg px-4 py-2 ${
-                        message.isMe
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted"
-                      }`}
-                    >
-                      <div className="flex flex-col space-y-1">
-                        <p>{message.content}</p>
-                        <div
-                          className={`flex items-center justify-end gap-1 text-xs ${
-                            message.isMe
-                              ? "text-primary-foreground/70"
-                              : "text-muted-foreground"
-                          }`}
-                        >
-                          {message.time}
-                          {message.isMe && (
-                            <>
-                              {message.status === "sent" && (
-                                <Clock className="h-3 w-3" />
-                              )}
-                              {message.status === "delivered" && (
-                                <Check className="h-3 w-3" />
-                              )}
-                              {message.status === "read" && (
-                                <CheckCheck className="h-3 w-3" />
-                              )}
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </ScrollArea>
-
-            {/* Message Input */}
-            <div className="border-t p-4">
-              <div className="flex items-center gap-2">
-                <Button variant="ghost" size="icon">
-                  <Paperclip className="h-5 w-5" />
-                  <span className="sr-only">Attach file</span>
-                </Button>
-                <Button variant="ghost" size="icon">
-                  <ImageIcon className="h-5 w-5" />
-                  <span className="sr-only">Attach image</span>
-                </Button>
-                <div className="relative flex-1">
-                  <Input
-                    placeholder="Type a message..."
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && !e.shiftKey) {
-                        e.preventDefault();
-                        handleSendMessage();
-                      }
-                    }}
-                    className="pr-10"
-                  />
+          {activeConversation ? (
+            <div className="flex-1">
+              <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 h-[calc(100vh-240px)] flex flex-col">
+                <div className="p-4 border-b border-emerald-500/20 flex items-center">
                   <Button
                     variant="ghost"
-                    size="icon"
-                    className="absolute right-0 top-0 h-full"
+                    size="sm"
+                    className="lg:hidden mr-2"
+                    onClick={() => setActiveConversation(null)}
                   >
-                    <Smile className="h-5 w-5" />
-                    <span className="sr-only">Emoji</span>
+                    <ArrowLeft className="h-4 w-4" />
                   </Button>
+                  <div className="flex items-center gap-3">
+                    <Avatar>
+                      <AvatarImage
+                        src={`/placeholder.svg?height=40&width=40&text=${selectedSender?.name.charAt(
+                          0
+                        )}`}
+                      />
+                      <AvatarFallback className="bg-emerald-500/20 text-emerald-500">
+                        {selectedSender?.name.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="font-medium">{selectedSender?.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {selectedSender?.isAgent
+                          ? "Real Estate Agent"
+                          : "Property Owner"}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <Button
-                  size="icon"
-                  onClick={handleSendMessage}
-                  disabled={!newMessage.trim()}
-                >
-                  <Send className="h-5 w-5" />
-                  <span className="sr-only">Send</span>
-                </Button>
-              </div>
+
+                <div className="flex-1 overflow-auto p-4 space-y-4">
+                  {conversationMessages.map((message) => (
+                    <div key={message.id} className="space-y-4">
+                      <div className="flex items-start gap-3">
+                        <Avatar>
+                          <AvatarImage
+                            src={`/placeholder.svg?height=40&width=40&text=${message.sender.name.charAt(
+                              0
+                            )}`}
+                          />
+                          <AvatarFallback className="bg-emerald-500/20 text-emerald-500">
+                            {message.sender.name.charAt(0)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="bg-emerald-950/20 rounded-lg p-3 max-w-[80%]">
+                          <div className="flex items-center justify-between mb-1">
+                            <p className="text-sm font-medium">
+                              {message.subject}
+                            </p>
+                            <span className="text-xs text-muted-foreground">
+                              {new Date(message.timestamp).toLocaleTimeString(
+                                [],
+                                {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                }
+                              )}
+                            </span>
+                          </div>
+                          <p className="text-sm">{message.content}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3 justify-end">
+                        <div className="bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-lg p-3 max-w-[80%]">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs text-muted-foreground">
+                              {new Date().toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
+                            </span>
+                          </div>
+                          <p className="text-sm">
+                            Thank you for your message. I'm very interested in
+                            this property and would like to schedule a viewing.
+                            Is it possible to see it this weekend?
+                          </p>
+                        </div>
+                        <Avatar>
+                          <AvatarImage src="/placeholder.svg?height=40&width=40&text=Y" />
+                          <AvatarFallback className="bg-emerald-500/20 text-emerald-500">
+                            Y
+                          </AvatarFallback>
+                        </Avatar>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="p-4 border-t border-emerald-500/20">
+                  <div className="flex gap-2">
+                    <textarea
+                      className="flex-1 p-3 bg-background/50 border border-emerald-900/20 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500/50 min-h-[80px] text-sm resize-none"
+                      placeholder="Type your message here..."
+                      value={messageText}
+                      onChange={(e) => setMessageText(e.target.value)}
+                    ></textarea>
+                    <Button className="self-end bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm">
+                      <Send className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </Card>
             </div>
-          </div>
+          ) : (
+            <div className="flex-1">
+              <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 h-[calc(100vh-240px)] flex items-center justify-center">
+                <div className="text-center p-6">
+                  <div className="h-16 w-16 rounded-full bg-gradient-to-r from-emerald-500/20 to-green-500/20 flex items-center justify-center text-emerald-400 mx-auto mb-4">
+                    <MessageSquare className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Select a conversation
+                  </h3>
+                  <p className="text-muted-foreground max-w-md mb-6">
+                    Choose a conversation from the list to view messages and
+                    reply.
+                  </p>
+                </div>
+              </Card>
+            </div>
+          )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

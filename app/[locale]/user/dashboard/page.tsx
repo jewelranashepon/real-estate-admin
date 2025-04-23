@@ -1,353 +1,477 @@
 "use client";
 
-import { Heart, MessageSquare, Search, User } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useTranslations } from "next-intl";
+import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
-import { signOut, useSession } from "@/lib/auth-client";
+import { motion } from "framer-motion";
+import { toast } from "sonner";
+import { Heart, Search, MessageSquare, User, Filter } from "lucide-react";
+import { Button } from "@/components/user/ui/button";
+import { Card } from "@/components/user/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/user/ui/tabs";
+import { PropertyCard } from "@/components/user/property-card";
+import { StatCard } from "@/components/user/stat-card";
+import { OfferModal } from "@/components/user/offer-modal";
+import { SearchModal } from "@/components/user/search-modal";
+import { MessageCard } from "@/components/user/message-card";
+import {
+  properties,
+  type SearchFilters,
+  defaultSearchFilters,
+  savedSearches,
+} from "@/components/user/data/properties";
+import { messages } from "@/components/user/data/messages";
 
-export default function DashboardPage() {
-  const t = useTranslations("dashboard");
+export default function Dashboard() {
   const router = useRouter();
-  const session = useSession();
-  const user = session?.data?.user;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
+  const [savedProperties, setSavedProperties] = useState<string[]>([
+    "1",
+    "3",
+    "5",
+  ]);
+  const [searchFilters, setSearchFilters] =
+    useState<SearchFilters>(defaultSearchFilters);
+  const [recentSearches, setRecentSearches] =
+    useState<SearchFilters[]>(savedSearches);
+  const [activeConversation, setActiveConversation] = useState<string | null>(
+    null
+  );
+
+  const openModal = (propertyId: string) => {
+    setSelectedProperty(propertyId);
+    setIsModalOpen(true);
+  };
+
+  const toggleSaveProperty = (propertyId: string) => {
+    setSavedProperties((prev) => {
+      if (prev.includes(propertyId)) {
+        toast.info("Property removed from your favorites");
+        return prev.filter((id) => id !== propertyId);
+      } else {
+        toast.success("Property saved to your favorites!");
+        return [...prev, propertyId];
+      }
+    });
+  };
+
+  const handleSearch = (filters: SearchFilters) => {
+    // Add to recent searches if it's a new search
+    if (JSON.stringify(filters) !== JSON.stringify(defaultSearchFilters)) {
+      setRecentSearches((prev) => {
+        const newSearches = [filters, ...prev.slice(0, 4)];
+        return newSearches;
+      });
+    }
+
+    setSearchFilters(filters);
+    setIsSearchModalOpen(false);
+
+    // Navigate to search page with filters
+    router.push("/search");
+  };
+
+  const navigateToSavedProperties = () => {
+    router.push("/saved");
+  };
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <div className="flex flex-col">
-        <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Saved Properties
-                </CardTitle>
-                <Heart className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">12</div>
-                <p className="text-xs text-muted-foreground">
-                  +2 from last month
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Recent Searches
-                </CardTitle>
-                <Search className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">8</div>
-                <p className="text-xs text-muted-foreground">
-                  +3 from last week
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Unread Messages
-                </CardTitle>
-                <MessageSquare className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">5</div>
-                <p className="text-xs text-muted-foreground">+2 new today</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Profile Completion
-                </CardTitle>
-                <User className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">75%</div>
-                <Progress value={75} className="mt-2" />
-              </CardContent>
-            </Card>
-          </div>
-          <Tabs defaultValue="saved">
-            <div className="flex items-center">
-              <TabsList>
-                <TabsTrigger value="saved">Saved Properties</TabsTrigger>
-                <TabsTrigger value="recent">Recent Searches</TabsTrigger>
-                <TabsTrigger value="messages">Messages</TabsTrigger>
-              </TabsList>
-              <div className="ml-auto">
-                <Button>
-                  <Search className="mr-2 h-4 w-4" />
-                  New Search
-                </Button>
-              </div>
+    <div className="p-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <Button
+            className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
+            onClick={() => setIsSearchModalOpen(true)}
+          >
+            <Search className="mr-2 h-4 w-4" />
+            New Search
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <StatCard
+            title="Saved Properties"
+            value={savedProperties.length.toString()}
+            icon={<Heart className="h-5 w-5" />}
+            change={
+              savedProperties.length > 0
+                ? `+${savedProperties.length} from last month`
+                : "No saved properties"
+            }
+            trend={savedProperties.length > 0 ? "up" : "neutral"}
+          />
+          <StatCard
+            title="Recent Searches"
+            value={recentSearches.length.toString()}
+            icon={<Search className="h-5 w-5" />}
+            change={
+              recentSearches.length > 0
+                ? `+${recentSearches.length} from last week`
+                : "No recent searches"
+            }
+            trend={recentSearches.length > 0 ? "up" : "neutral"}
+          />
+          <StatCard
+            title="Unread Messages"
+            value={messages.filter((m) => !m.read).length.toString()}
+            icon={<MessageSquare className="h-5 w-5" />}
+            change={`${messages.filter((m) => !m.read).length} new today`}
+            trend="up"
+          />
+          <StatCard
+            title="Profile Completion"
+            value="75%"
+            icon={<User className="h-5 w-5" />}
+            progress={75}
+          />
+        </div>
+
+        <Tabs defaultValue="saved" className="mb-8">
+          <TabsList className="bg-background/30 backdrop-blur-md border border-border/40 mb-6">
+            <TabsTrigger
+              value="saved"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
+            >
+              Saved Properties
+            </TabsTrigger>
+            <TabsTrigger
+              value="recent"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
+            >
+              Recent Searches
+            </TabsTrigger>
+            <TabsTrigger
+              value="messages"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
+            >
+              Messages
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Saved Properties Tab */}
+          <TabsContent value="saved" className="mt-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {savedProperties.length > 0 ? (
+                <>
+                  <div className="col-span-full flex justify-between items-center mb-4">
+                    <h2 className="text-xl font-semibold">
+                      Your Saved Properties
+                    </h2>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={navigateToSavedProperties}
+                      className="border-emerald-800/30 bg-emerald-950/10"
+                    >
+                      <Heart className="h-4 w-4 mr-2" />
+                      View All Saved
+                    </Button>
+                  </div>
+                  {properties
+                    .filter((property) => savedProperties.includes(property.id))
+                    .slice(0, 3)
+                    .map((property, index) => (
+                      <PropertyCard
+                        key={property.id}
+                        property={property}
+                        onOfferClick={() => openModal(property.id)}
+                        isSaved={true}
+                        onToggleSave={() => toggleSaveProperty(property.id)}
+                        gradientClass="bg-emerald-50/10"
+                      />
+                    ))}
+                </>
+              ) : (
+                <>
+                  <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 p-6 col-span-3 flex flex-col items-center justify-center py-12">
+                    <div className="h-16 w-16 rounded-full bg-gradient-to-r from-emerald-500/20 to-green-500/20 flex items-center justify-center text-emerald-400 mb-4">
+                      <Heart className="h-8 w-8" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">
+                      No saved properties yet
+                    </h3>
+                    <p className="text-muted-foreground text-center max-w-md mb-6">
+                      Browse our listings and save properties you like to view
+                      them later.
+                    </p>
+                    <Button
+                      className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
+                      onClick={() => router.push("/search")}
+                    >
+                      <Search className="mr-2 h-4 w-4" />
+                      Browse Properties
+                    </Button>
+                  </Card>
+                </>
+              )}
             </div>
-            <TabsContent value="saved" className="border-none p-0">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <PropertyCard
-                  title="Modern Apartment"
-                  address="123 Main St, New York, NY"
-                  price="$2,500/mo"
-                  beds={2}
-                  baths={2}
-                  sqft={1200}
-                  image="/downtown1.webp"
-                />
-                <PropertyCard
-                  title="Luxury Condo"
-                  address="456 Park Ave, New York, NY"
-                  price="$3,800/mo"
-                  beds={3}
-                  baths={2}
-                  sqft={1800}
-                  image="/downtown2.webp"
-                />
-                <PropertyCard
-                  title="Downtown Loft"
-                  address="789 Broadway, New York, NY"
-                  price="$4,200/mo"
-                  beds={1}
-                  baths={1}
-                  sqft={950}
-                  image="/dt3.jpg"
-                />
-                <PropertyCard
-                  title="Garden Apartment"
-                  address="101 Greene St, New York, NY"
-                  price="$3,100/mo"
-                  beds={2}
-                  baths={1}
-                  sqft={1100}
-                  image="/dt4.jpg"
-                />
-                <PropertyCard
-                  title="Penthouse Suite"
-                  address="222 Fifth Ave, New York, NY"
-                  price="$8,500/mo"
-                  beds={3}
-                  baths={3}
-                  sqft={2200}
-                  image="/dt5.webp"
-                />
-                <PropertyCard
-                  title="Brownstone Duplex"
-                  address="333 West Village, New York, NY"
-                  price="$5,200/mo"
-                  beds={3}
-                  baths={2.5}
-                  sqft={1950}
-                  image="/pj1.jpg"
-                />
+          </TabsContent>
+
+          {/* Recent Searches Tab */}
+          <TabsContent value="recent" className="mt-0">
+            {recentSearches.length > 0 ? (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-semibold">Recent Searches</h2>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setIsSearchModalOpen(true)}
+                    className="border-emerald-800/30 bg-emerald-950/10"
+                  >
+                    <Filter className="h-4 w-4 mr-2" />
+                    New Search
+                  </Button>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4">
+                  {recentSearches.map((search, index) => (
+                    <Card
+                      key={index}
+                      className={`bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 p-5 hover:shadow-lg transition-shadow`}
+                      onClick={() => {
+                        setSearchFilters(search);
+                        router.push("/search");
+                      }}
+                    >
+                      <div className="flex items-center justify-between cursor-pointer">
+                        <div>
+                          <h3 className="font-medium mb-1">
+                            {search.searchTerm
+                              ? `"${search.searchTerm}"`
+                              : `Search #${index + 1}`}
+                          </h3>
+                          <div className="flex flex-wrap gap-2">
+                            {search.propertyType && (
+                              <Badge
+                                variant="outline"
+                                className="bg-emerald-950/20 border-emerald-900/20"
+                              >
+                                {search.propertyType}
+                              </Badge>
+                            )}
+                            {search.beds !== null && (
+                              <Badge
+                                variant="outline"
+                                className="bg-emerald-950/20 border-emerald-900/20"
+                              >
+                                {search.beds}+ beds
+                              </Badge>
+                            )}
+                            {search.baths !== null && (
+                              <Badge
+                                variant="outline"
+                                className="bg-emerald-950/20 border-emerald-900/20"
+                              >
+                                {search.baths}+ baths
+                              </Badge>
+                            )}
+                            <Badge
+                              variant="outline"
+                              className="bg-emerald-950/20 border-emerald-900/20"
+                            >
+                              ${search.priceRange[0]} - ${search.priceRange[1]}
+                            </Badge>
+                          </div>
+                        </div>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="text-emerald-400"
+                        >
+                          View Results
+                        </Button>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
               </div>
-            </TabsContent>
-            <TabsContent value="recent" className="border-none p-0">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <SearchCard
-                  location="Brooklyn, NY"
-                  filters="2+ beds, $2000-$3500/mo"
-                  date="2 days ago"
-                  results={24}
-                />
-                <SearchCard
-                  location="Manhattan, NY"
-                  filters="Studio, $1500-$2500/mo"
-                  date="3 days ago"
-                  results={18}
-                />
-                <SearchCard
-                  location="Queens, NY"
-                  filters="3+ beds, $2500-$4000/mo"
-                  date="1 week ago"
-                  results={12}
-                />
-                <SearchCard
-                  location="Upper East Side, NY"
-                  filters="1+ beds, $2000-$3000/mo"
-                  date="1 week ago"
-                  results={9}
-                />
-                <SearchCard
-                  location="Williamsburg, Brooklyn"
-                  filters="2+ beds, $3000-$4500/mo"
-                  date="2 weeks ago"
-                  results={15}
-                />
+            ) : (
+              <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 p-6 flex flex-col items-center justify-center py-12">
+                <div className="h-16 w-16 rounded-full bg-gradient-to-r from-emerald-500/20 to-green-500/20 flex items-center justify-center text-emerald-400 mb-4">
+                  <Search className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">
+                  No recent searches
+                </h3>
+                <p className="text-muted-foreground text-center max-w-md mb-6">
+                  Start searching for properties to see your recent searches
+                  here.
+                </p>
+                <Button
+                  className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
+                  onClick={() => setIsSearchModalOpen(true)}
+                >
+                  <Search className="mr-2 h-4 w-4" />
+                  Start Searching
+                </Button>
+              </Card>
+            )}
+          </TabsContent>
+
+          {/* Messages Tab */}
+          <TabsContent value="messages" className="mt-0">
+            {activeConversation ? (
+              <div className="space-y-4">
+                <div className="flex items-center mb-6">
+                  <Button
+                    variant="ghost"
+                    onClick={() => setActiveConversation(null)}
+                    className="mr-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 mr-2"
+                    >
+                      <path d="m15 18-6-6 6-6" />
+                    </svg>
+                    Back
+                  </Button>
+                  <h2 className="text-xl font-semibold">
+                    Conversation with{" "}
+                    {messages.find((m) => m.id === activeConversation)?.sender
+                      .name || "Agent"}
+                  </h2>
+                </div>
+
+                <div className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 rounded-lg p-4 mb-4">
+                  {messages
+                    .filter((m) => m.id === activeConversation)
+                    .map((message) => (
+                      <div key={message.id} className="mb-6">
+                        <div className="flex items-start gap-3 mb-2">
+                          <div className="h-10 w-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-500 font-semibold flex-shrink-0">
+                            {message.sender.name.charAt(0)}
+                          </div>
+                          <div>
+                            <div className="flex items-center">
+                              <p className="font-medium">
+                                {message.sender.name}
+                              </p>
+                              <span className="text-xs text-muted-foreground ml-2">
+                                {new Date(message.timestamp).toLocaleString()}
+                              </span>
+                            </div>
+                            <h3 className="text-sm font-medium mt-1">
+                              {message.subject}
+                            </h3>
+                            <p className="text-sm mt-1">{message.content}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-3 pl-12">
+                          <div className="h-10 w-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-500 font-semibold flex-shrink-0">
+                            Y
+                          </div>
+                          <div>
+                            <div className="flex items-center">
+                              <p className="font-medium">You</p>
+                              <span className="text-xs text-muted-foreground ml-2">
+                                {new Date().toLocaleString()}
+                              </span>
+                            </div>
+                            <p className="text-sm mt-1">
+                              Thank you for your message. I'm very interested in
+                              this property and would like to schedule a
+                              viewing. Is it possible to see it this weekend?
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+
+                <div className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 rounded-lg p-4">
+                  <textarea
+                    className="w-full p-3 bg-background/50 border border-emerald-900/20 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500/50 min-h-[100px] text-sm"
+                    placeholder="Type your message here..."
+                  ></textarea>
+                  <div className="flex justify-end mt-4">
+                    <Button className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm">
+                      Send Message
+                    </Button>
+                  </div>
+                </div>
               </div>
-            </TabsContent>
-            <TabsContent value="messages" className="border-none p-0">
-              <div className="grid gap-4">
-                <MessageCard
-                  sender="John Smith"
-                  property="Modern Apartment"
-                  date="Today"
-                  message="Hi, I'm interested in scheduling a viewing for this apartment. Is it available this weekend?"
-                  unread={true}
-                />
-                <MessageCard
-                  sender="Sarah Johnson"
-                  property="Luxury Condo"
-                  date="Yesterday"
-                  message="Thank you for the information. I'd like to know if utilities are included in the rent?"
-                  unread={true}
-                />
-                <MessageCard
-                  sender="Michael Brown"
-                  property="Downtown Loft"
-                  date="Yesterday"
-                  message="Is parking available with this unit? And if so, is there an additional cost?"
-                  unread={true}
-                />
-                <MessageCard
-                  sender="Emily Davis"
-                  property="Garden Apartment"
-                  date="2 days ago"
-                  message="I submitted my application yesterday. Could you let me know when I might hear back?"
-                  unread={false}
-                />
-                <MessageCard
-                  sender="David Wilson"
-                  property="Penthouse Suite"
-                  date="3 days ago"
-                  message="Are pets allowed in this building? I have a small dog."
-                  unread={false}
-                />
+            ) : messages.length > 0 ? (
+              <div className="space-y-4">
+                {messages.map((message, index) => (
+                  <MessageCard
+                    key={message.id}
+                    message={message}
+                    gradientClass="bg-emerald-50/10"
+                    onReply={() => setActiveConversation(message.id)}
+                  />
+                ))}
               </div>
-            </TabsContent>
-          </Tabs>
-        </main>
-      </div>
+            ) : (
+              <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 p-6 flex flex-col items-center justify-center py-12">
+                <div className="h-16 w-16 rounded-full bg-gradient-to-r from-emerald-500/20 to-green-500/20 flex items-center justify-center text-emerald-400 mb-4">
+                  <MessageSquare className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">No messages yet</h3>
+                <p className="text-muted-foreground text-center max-w-md mb-6">
+                  When you receive messages from agents or property owners, they
+                  will appear here.
+                </p>
+              </Card>
+            )}
+          </TabsContent>
+        </Tabs>
+
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Featured Properties</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {properties
+              .filter((property) => property.isFeatured)
+              .map((property, index) => (
+                <PropertyCard
+                  key={property.id}
+                  property={property}
+                  onOfferClick={() => openModal(property.id)}
+                  isSaved={savedProperties.includes(property.id)}
+                  onToggleSave={() => toggleSaveProperty(property.id)}
+                  gradientClass="bg-emerald-50/10"
+                />
+              ))}
+          </div>
+        </div>
+      </motion.div>
+
+      <OfferModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        propertyId={selectedProperty}
+        properties={properties}
+      />
+
+      <SearchModal
+        isOpen={isSearchModalOpen}
+        onClose={() => setIsSearchModalOpen(false)}
+        onSearch={handleSearch}
+        initialFilters={searchFilters}
+      />
     </div>
-  );
-}
-
-function PropertyCard({
-  title,
-  address,
-  price,
-  beds,
-  baths,
-  sqft,
-  image,
-}: {
-  title: string;
-  address: string;
-  price: string;
-  beds: number;
-  baths: number;
-  sqft: number;
-  image: string;
-}) {
-  return (
-    <Card className="overflow-hidden">
-      <div className="aspect-video w-full overflow-hidden">
-        <img
-          src={image || "/placeholder.svg"}
-          alt={title}
-          className="h-full w-full object-cover"
-        />
-      </div>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{address}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="text-lg font-bold">{price}</div>
-        <div className="mt-2 flex items-center justify-between text-sm text-muted-foreground">
-          <div>{beds} Beds</div>
-          <div>{baths} Baths</div>
-          <div>{sqft} sqft</div>
-        </div>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline" size="sm">
-          View Details
-        </Button>
-        <Button variant="outline" size="sm" className="gap-1">
-          <Heart className="h-4 w-4" />
-          Saved
-        </Button>
-      </CardFooter>
-    </Card>
-  );
-}
-
-function SearchCard({
-  location,
-  filters,
-  date,
-  results,
-}: {
-  location: string;
-  filters: string;
-  date: string;
-  results: number;
-}) {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-base">{location}</CardTitle>
-        <CardDescription>{filters}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="text-sm text-muted-foreground">Searched {date}</div>
-        <div className="mt-2 text-lg font-semibold">
-          {results} properties found
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button variant="outline" size="sm" className="w-full">
-          <Search className="mr-2 h-4 w-4" />
-          Run Search Again
-        </Button>
-      </CardFooter>
-    </Card>
-  );
-}
-
-function MessageCard({
-  sender,
-  property,
-  date,
-  message,
-  unread,
-}: {
-  sender: string;
-  property: string;
-  date: string;
-  message: string;
-  unread: boolean;
-}) {
-  return (
-    <Card className={unread ? "border-primary/50 bg-primary/5" : ""}>
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-base">{sender}</CardTitle>
-          <div className="text-sm text-muted-foreground">{date}</div>
-        </div>
-        <CardDescription>Re: {property}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="line-clamp-2 text-sm">{message}</p>
-      </CardContent>
-      <CardFooter>
-        <Button variant="outline" size="sm" className="w-full">
-          <MessageSquare className="mr-2 h-4 w-4" />
-          Reply
-        </Button>
-      </CardFooter>
-    </Card>
   );
 }

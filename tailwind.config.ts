@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 import { withUt } from "uploadthing/tw";
 
@@ -86,7 +86,4 @@ export default withUt({
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
-);
-
-
+} satisfies Config);
