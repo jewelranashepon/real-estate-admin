@@ -1952,5 +1952,46 @@
       "gym": "Gym",
       "elevator": "Elevator"
     }
+  },
+  "SavedProperties": {
+    "title": "Saved Properties",
+    "backButton": "Back",
+    "toastSaved": "Property saved to your favorites!",
+    "toastRemoved": "Property removed from your favorites",
+    "sar": "SAR",
+    "stats": {
+      "totalSaved": "Total Saved",
+      "properties": "properties",
+      "totalValue": "Total Value",
+      "combinedValue": "Combined property value",
+      "averagePrice": "Average Price",
+      "range": "Range",
+      "propertyTypes": "Property Types",
+      "categories": "Different property categories"
+    },
+    "filter": {
+      "all": "All Properties",
+      "apartment": "Apartments",
+      "house": "Houses",
+      "condo": "Condos",
+      "townhouse": "Townhouses",
+      "loft": "Lofts"
+    },
+    "sort": {
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low",
+      "dateAsc": "Date: Oldest First",
+      "dateDesc": "Date: Newest First",
+      "nameAsc": "Name: A to Z",
+      "nameDesc": "Name: Z to A"
+    },
+    "showingResults": "Showing {count} of {total} saved properties",
+    "emptyState": {
+      "title": "No saved properties",
+      "filterMessage": "No properties match your current filter. Try changing your filter options.",
+      "defaultMessage": "You haven't saved any properties yet. Browse listings and click the heart icon to save properties you like."
+    },
+    "browseButton": "Browse Properties"
   }
+  
 }

@@ -33,6 +33,7 @@ import { StatCard } from "@/components/user/stat-card";
 import { OfferModal } from "@/components/user/offer-modal";
 import { Badge } from "@/components/user/ui/badge";
 import { properties } from "@/components/user/data/properties";
+import { useTranslations } from "next-intl";
 
 type SortOption =
   | "price-asc"
@@ -50,6 +51,7 @@ type FilterOption =
   | "loft";
 
 export default function SavedPropertiesPage() {
+  const t = useTranslations("SavedProperties");
   const router = useRouter();
   const [savedProperties, setSavedProperties] = useState<string[]>([
     "1",
@@ -120,10 +122,10 @@ export default function SavedPropertiesPage() {
   const toggleSaveProperty = (propertyId: string) => {
     setSavedProperties((prev) => {
       if (prev.includes(propertyId)) {
-        toast.info("Property removed from your favorites");
+        toast.info(t("toastRemoved"));
         return prev.filter((id) => id !== propertyId);
       } else {
-        toast.success("Property saved to your favorites!");
+        toast.success(t("toastSaved"));
         return [...prev, propertyId];
       }
     });
@@ -137,34 +139,34 @@ export default function SavedPropertiesPage() {
   const getSortLabel = (option: SortOption) => {
     switch (option) {
       case "price-asc":
-        return "Price: Low to High";
+        return t("sort.priceAsc");
       case "price-desc":
-        return "Price: High to Low";
+        return t("sort.priceDesc");
       case "date-asc":
-        return "Date: Oldest First";
+        return t("sort.dateAsc");
       case "date-desc":
-        return "Date: Newest First";
+        return t("sort.dateDesc");
       case "name-asc":
-        return "Name: A to Z";
+        return t("sort.nameAsc");
       case "name-desc":
-        return "Name: Z to A";
+        return t("sort.nameDesc");
     }
   };
 
   const getFilterLabel = (option: FilterOption) => {
     switch (option) {
       case "all":
-        return "All Properties";
+        return t("filter.all");
       case "apartment":
-        return "Apartments";
+        return t("filter.apartment");
       case "house":
-        return "Houses";
+        return t("filter.house");
       case "condo":
-        return "Condos";
+        return t("filter.condo");
       case "townhouse":
-        return "Townhouses";
+        return t("filter.townhouse");
       case "loft":
-        return "Lofts";
+        return t("filter.loft");
     }
   };
 
@@ -179,42 +181,42 @@ export default function SavedPropertiesPage() {
           <Button variant="ghost" asChild className="mr-2">
             <button onClick={() => router.back()}>
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
+              {t("backButton")}
             </button>
           </Button>
-          <h1 className="text-2xl font-bold flex-1">Saved Properties</h1>
+          <h1 className="text-2xl font-bold flex-1">{t("title")}</h1>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <StatCard
-            title="Total Saved"
+            title={t("stats.totalSaved")}
             value={savedProperties.length.toString()}
             icon={<Heart className="h-5 w-5" />}
-            change={`${savedProperties.length} properties`}
+            change={`${savedProperties.length} ${t("stats.properties")}`}
             trend="neutral"
           />
           <StatCard
-            title="Total Value"
-            value={`$01,200,000 SAR`}
+            title={t("stats.totalValue")}
+            value={`$01,200,000 ${t("sar")}`}
             icon={<DollarSign className="h-5 w-5" />}
-            change="Combined property value"
+            change={t("stats.combinedValue")}
             trend="up"
           />
           <StatCard
-            title="Average Price"
-            value={`$05,200,000 SAR`}
+            title={t("stats.averagePrice")}
+            value={`$05,200,000 ${t("sar")}`}
             icon={<BarChart3 className="h-5 w-5" />}
-            change={`Range: $${lowestPrice.toLocaleString()} - $${highestPrice.toLocaleString()}`}
+            change={`${t("stats.range")}: $${lowestPrice.toLocaleString()} - $${highestPrice.toLocaleString()}`}
             trend="neutral"
           />
           <StatCard
-            title="Property Types"
+            title={t("stats.propertyTypes")}
             value={Array.from(
               new Set(savedPropertyObjects.map((p) => p.propertyType))
             ).length.toString()}
             icon={<Home className="h-5 w-5" />}
-            change="Different property categories"
+            change={t("stats.categories")}
             trend="neutral"
           />
         </div>
@@ -234,22 +236,22 @@ export default function SavedPropertiesPage() {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => setFilterOption("all")}>
-                  All Properties
+                  {t("filter.all")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setFilterOption("apartment")}>
-                  Apartments
+                  {t("filter.apartment")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setFilterOption("house")}>
-                  Houses
+                  {t("filter.house")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setFilterOption("condo")}>
-                  Condos
+                  {t("filter.condo")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setFilterOption("townhouse")}>
-                  Townhouses
+                  {t("filter.townhouse")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setFilterOption("loft")}>
-                  Lofts
+                  {t("filter.loft")}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -267,27 +269,27 @@ export default function SavedPropertiesPage() {
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => setSortOption("price-asc")}>
                   <ArrowUp className="h-4 w-4 mr-2" />
-                  Price: Low to High
+                  {t("sort.priceAsc")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setSortOption("price-desc")}>
                   <ArrowDown className="h-4 w-4 mr-2" />
-                  Price: High to Low
+                  {t("sort.priceDesc")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setSortOption("date-desc")}>
                   <Calendar className="h-4 w-4 mr-2" />
-                  Date: Newest First
+                  {t("sort.dateDesc")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setSortOption("date-asc")}>
                   <Calendar className="h-4 w-4 mr-2" />
-                  Date: Oldest First
+                  {t("sort.dateAsc")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setSortOption("name-asc")}>
                   <ArrowUp className="h-4 w-4 mr-2" />
-                  Name: A to Z
+                  {t("sort.nameAsc")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setSortOption("name-desc")}>
                   <ArrowDown className="h-4 w-4 mr-2" />
-                  Name: Z to A
+                  {t("sort.nameDesc")}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -326,7 +328,7 @@ export default function SavedPropertiesPage() {
             }
             onClick={() => setFilterOption("all")}
           >
-            All
+            {t("filter.all")}
           </Badge>
           <Badge
             variant={filterOption === "apartment" ? "default" : "outline"}
@@ -337,7 +339,7 @@ export default function SavedPropertiesPage() {
             }
             onClick={() => setFilterOption("apartment")}
           >
-            Apartments
+            {t("filter.apartment")}
           </Badge>
           <Badge
             variant={filterOption === "house" ? "default" : "outline"}
@@ -348,7 +350,7 @@ export default function SavedPropertiesPage() {
             }
             onClick={() => setFilterOption("house")}
           >
-            Houses
+            {t("filter.house")}
           </Badge>
           <Badge
             variant={filterOption === "condo" ? "default" : "outline"}
@@ -359,7 +361,7 @@ export default function SavedPropertiesPage() {
             }
             onClick={() => setFilterOption("condo")}
           >
-            Condos
+            {t("filter.condo")}
           </Badge>
           <Badge
             variant={filterOption === "townhouse" ? "default" : "outline"}
@@ -370,7 +372,7 @@ export default function SavedPropertiesPage() {
             }
             onClick={() => setFilterOption("townhouse")}
           >
-            Townhouses
+            {t("filter.townhouse")}
           </Badge>
           <Badge
             variant={filterOption === "loft" ? "default" : "outline"}
@@ -381,18 +383,17 @@ export default function SavedPropertiesPage() {
             }
             onClick={() => setFilterOption("loft")}
           >
-            Lofts
+            {t("filter.loft")}
           </Badge>
         </div>
 
         {/* Results Count */}
         <div className="mb-6">
           <p className="text-muted-foreground">
-            Showing{" "}
-            <span className="font-medium text-foreground">
-              {sortedProperties.length}
-            </span>{" "}
-            of {savedProperties.length} saved properties
+            {t("showingResults", {
+              count: sortedProperties.length,
+              total: savedProperties.length,
+            })}
           </p>
         </div>
 
@@ -429,18 +430,18 @@ export default function SavedPropertiesPage() {
             <div className="h-16 w-16 rounded-full bg-gradient-to-r from-emerald-500/20 to-green-500/20 flex items-center justify-center text-emerald-400 mb-4">
               <Heart className="h-8 w-8" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">No saved properties</h3>
+            <h3 className="text-xl font-semibold mb-2">{t("emptyState.title")}</h3>
             <p className="text-muted-foreground text-center max-w-md mb-6">
               {savedProperties.length > 0
-                ? "No properties match your current filter. Try changing your filter options."
-                : "You haven't saved any properties yet. Browse listings and click the heart icon to save properties you like."}
+                ? t("emptyState.filterMessage")
+                : t("emptyState.defaultMessage")}
             </p>
             <Button
               className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
               onClick={() => router.push("/user/dashboard/search")}
             >
               <Search className="mr-2 h-4 w-4" />
-              Browse Properties
+              {t("browseButton")}
             </Button>
           </Card>
         )}
