@@ -32,7 +32,7 @@ import { PropertyListItem } from "@/components/user/property-list-item";
 import { StatCard } from "@/components/user/stat-card";
 import { OfferModal } from "@/components/user/offer-modal";
 import { Badge } from "@/components/user/ui/badge";
-import { properties } from "@/data/properties";
+import { properties } from "@/components/user/data/properties";
 
 type SortOption =
   | "price-asc"
