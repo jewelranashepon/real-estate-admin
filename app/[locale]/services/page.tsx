@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import type React from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
@@ -25,7 +25,9 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signOut, useSession } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
-import LanguageSelector from "@/components/home/language-selector";
+// import LanguageSelector from "@/components/home/language-selector";
+import LanguageSwitcher from "@/components/language-switcher";
+import Chat from './../../../components/home/chat';
 
 export default function ServicesPage() {
   const locale = useLocale();
@@ -59,7 +61,7 @@ function MobileView({ locale }: { locale: string }) {
         </div>
 
         <div className="ml-auto flex items-center gap-4">
-          <LanguageSelector />
+          <LanguageSwitcher/>
           {session?.data ? (
             <Button
               variant="outline"
@@ -163,6 +165,13 @@ function MobileView({ locale }: { locale: string }) {
 function DesktopView({ locale }: { locale: string }) {
   const t = useTranslations("service");
   const session = useSession();
+   // State to manage chat visibility
+    const [isChatOpen, setIsChatOpen] = useState(false);
+  
+    // Toggle chat visibility
+    const toggleChat = () => {
+      setIsChatOpen((prev) => !prev);
+    };
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Professional header with shadow */}
@@ -172,8 +181,8 @@ function DesktopView({ locale }: { locale: string }) {
             <div className="relative mr-3">
               <Link href="/">
                 <Image
-                  src="/Boed Logo.png"
-                  alt="Birds Of Eden"
+                  src="/realLogo.png"
+                  alt="Real Estate Fal"
                   width={95}
                   height={95}
                   className="object-contain"
@@ -189,13 +198,15 @@ function DesktopView({ locale }: { locale: string }) {
               >
                 <Briefcase className="h-5 w-5" /> Service
               </Link>
-              <Link
-                href="/chat"
-                className="flex items-center gap-1 text-bold hover:text-gray-900"
-              >
-                <MessageCircle className="h-5 w-5" />
-                Chat
-              </Link>
+              {/* Navbar Chat Button */}
+            <button
+              onClick={toggleChat}
+              className="flex items-center gap-1 font-bold text-gray-700 hover:text-gray-900"
+            >
+              <MessageCircle className="h-5 w-5" />
+              Chat
+            </button>
+         
               {session?.data ? (
                 <Link
                   href="/profile"
@@ -205,13 +216,20 @@ function DesktopView({ locale }: { locale: string }) {
                 </Link>
               ) : null}
             </nav>
-            <LanguageSelector />
+            <div className ="pr-2">
+            <LanguageSwitcher/>
+            </div>
 
             <button className="flex items-center space-x-2 bg-green-50 text-green-600 px-4 py-2 rounded-md hover:bg-green-100 transition-colors">
               <span className="font-medium">{t("contactUs")}</span>
             </button>
           </div>
         </div>
+        {/* Conditionally render the Chat component at the bottom of the screen */}
+              {/* Conditionally render the Chat component */}
+              {isChatOpen && (
+                <Chat isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />
+              )}
       </header>
 
       <div className="max-w-7xl mx-auto px-8 py-8">
