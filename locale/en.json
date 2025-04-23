@@ -353,7 +353,9 @@
     "reducedMotionDescription": "Reduce or eliminate motion effects",
     "propertyTypes": "Property Types",
     "noMessagesFound": "No messages found",
-    "searchLeads": "Search leads..."
+    "searchLeads": "Search leads...",
+    "recentBlog": "Recent Blog Posts",
+    "lastBlog": "Last 4 blog posts"
   },
   "service": {
     "home": "Home",
@@ -718,5 +720,27 @@
       "licenseNumber": "Your official real estate license number",
       "licenseExpiry": "The expiration date of your real estate license"
     }
+  },
+  "blogManagement": {
+    "title": "Blog Management",
+    "subtitle": "Manage your published blog posts",
+    "searchPlaceholder": "Search blogs...",
+    "createButton": "+ Create New Blog",
+    "errorMessage": "Failed to fetch blogs. Please try again later.",
+    "loading": "Loading blogs...",
+    "modal": {
+      "editTitle": "Edit Blog",
+      "createTitle": "Create New Blog",
+      "closeButton": "×"
+    },
+    "allBlogs": "All Blogs",
+    "noBlogs": {
+      "message": "No blogs found.",
+      "suggestion": "Try adjusting your search or create a new blog post."
+    },
+    "deleteConfirmation": "Are you sure you want to delete this blog post?",
+    "deleteSuccess": "Blog post deleted successfully!",
+    "deleteFailure": "Failed to delete blog post.",
+    "unexpectedError": "An unexpected error occurred."
   }
 }

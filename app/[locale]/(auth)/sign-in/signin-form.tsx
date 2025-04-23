@@ -70,7 +70,7 @@ const LoginPage = () => {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
       <Card className="w-full max-w-md p-6">
         <CardHeader className="items-center">
-          <img src="/Boed Logo.png" width={100} height={100} />
+          <img src="/realLogo.png" width={100} height={100} />
           <CardTitle className="text-2xl">{t("auth.login")}</CardTitle>
           <CardDescription>{t("auth.enterEmail&Password")}</CardDescription>
         </CardHeader>
