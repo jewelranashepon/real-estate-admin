@@ -777,5 +777,27 @@
     "newSearch": "New Search",
     "yourSavedProperties": "Your saved properties",
     "resentSearches": "Recent Searches"
+  },
+  "blogManagement": {
+    "title": "Blog Management",
+    "subtitle": "Manage your published blog posts",
+    "searchPlaceholder": "Search blogs...",
+    "createButton": "+ Create New Blog",
+    "errorMessage": "Failed to fetch blogs. Please try again later.",
+    "loading": "Loading blogs...",
+    "modal": {
+      "editTitle": "Edit Blog",
+      "createTitle": "Create New Blog",
+      "closeButton": "×"
+    },
+    "allBlogs": "All Blogs",
+    "noBlogs": {
+      "message": "No blogs found.",
+      "suggestion": "Try adjusting your search or create a new blog post."
+    },
+    "deleteConfirmation": "Are you sure you want to delete this blog post?",
+    "deleteSuccess": "Blog post deleted successfully!",
+    "deleteFailure": "Failed to delete blog post.",
+    "unexpectedError": "An unexpected error occurred."
   }
 }

@@ -787,5 +787,27 @@
     "newSearch": "بحث جديد",
     "yourSavedProperties": "عقاراتك المحفوظة",
     "resentSearches": "عمليات البحث الأخيرة"
+  },
+  "blogManagement": {
+    "title": "إدارة المدونة",
+    "subtitle": "إدارة منشورات المدونة المنشورة",
+    "searchPlaceholder": "ابحث في المدونات...",
+    "createButton": "+ إنشاء مدونة جديدة",
+    "errorMessage": "فشل في جلب المدونات. يرجى المحاولة مرة أخرى لاحقاً.",
+    "loading": "جارٍ تحميل المدونات...",
+    "modal": {
+      "editTitle": "تعديل المدونة",
+      "createTitle": "إنشاء مدونة جديدة",
+      "closeButton": "×"
+    },
+    "allBlogs": "جميع المدونات",
+    "noBlogs": {
+      "message": "لم يتم العثور على مدونات.",
+      "suggestion": "حاول تعديل البحث أو إنشاء منشور مدونة جديد."
+    },
+    "deleteConfirmation": "هل أنت متأكد أنك تريد حذف منشور المدونة هذا؟",
+    "deleteSuccess": "تم حذف منشور المدونة بنجاح!",
+    "deleteFailure": "فشل في حذف منشور المدونة.",
+    "unexpectedError": "حدث خطأ غير متوقع."
   }
 }
