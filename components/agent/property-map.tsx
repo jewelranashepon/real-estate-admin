@@ -14,24 +14,6 @@ import { Badge } from "@/components/ui/badge";
 const properties = [
   {
     id: 1,
-    title: "Luxury Villa in Al Olaya",
-    type: "Villa",
-    district: "Al Olaya",
-    status: "approved",
-    lat: 24.7136,
-    lng: 40.6753,
-  },
-  {
-    id: 2,
-    title: "Modern Apartment in Al Malaz",
-    type: "Apartment",
-    district: "Al Malaz",
-    status: "pending",
-    lat: 26.7867,
-    lng: 44.7184,
-  },
-  {
-    id: 3,
     title: "Commercial Land in Al Naseem",
     type: "Land",
     district: "Al Naseem",
@@ -40,22 +22,13 @@ const properties = [
     lng: 46.7247,
   },
   {
-    id: 4,
+    id: 2,
     title: "Office Space in Qurtubah",
     type: "Office",
     district: "Qurtubah",
     status: "approved",
     lat: 24.7867,
     lng: 46.7184,
-  },
-  {
-    id: 5,
-    title: "Retail Shop in Al Wurud",
-    type: "Retail",
-    district: "Al Wurud",
-    status: "pending",
-    lat: 20.7867,
-    lng: 40.7184,
   },
 ];
 
