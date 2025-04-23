@@ -476,7 +476,7 @@ export default function PropertyBrowser() {
               exit={{ opacity: 0 }}
               className="text-center py-16 text-gray-500"
             >
-              {t("search.noResults") || "No property selected"}
+              {searchT("search.noResults") || "No property selected"}
             </motion.div>
           )}
         </AnimatePresence>
