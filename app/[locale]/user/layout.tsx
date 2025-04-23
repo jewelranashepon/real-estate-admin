@@ -2,6 +2,7 @@ import { redirect } from "@/i18n/navigation";
 import { getSession } from "@/lib/getSession";
 import { SidebarProvider } from "@/components/user/ui/sidebar";
 import { AppSidebar } from "@/components/user/app-sidebar";
+import LanguageSwitcher from "@/components/language-switcher";
 
 export default async function UserDashboardLayout({
   children,
@@ -27,11 +28,14 @@ export default async function UserDashboardLayout({
   }
 
   return (
-    <SidebarProvider>
-      <div className="dark relative min-h-screen bg-gradient-to-br from-background/90 text-white to-background">
-        <div className="relative flex min-h-screen">
-          <AppSidebar />
-          <main className="flex-1 overflow-y-auto">{children}</main>
+    <SidebarProvider defaultOpen={true}>
+      <div className="dark bg-gradient-to-br from-background/90 text-white to-background fixed flex size-full">
+        <AppSidebar />
+        <div className="flex rtl:order-2 flex-col w-full overflow-hidden">
+          <header className="px-6 shrink-0 h-16 bg-sidebar flex items-center justify-end border-b sticky top-0 w-full">
+            <LanguageSwitcher />
+          </header>
+          <main className="overflow-y-auto grow">{children}</main>
         </div>
       </div>
     </SidebarProvider>

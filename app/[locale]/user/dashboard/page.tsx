@@ -27,9 +27,11 @@ import {
   savedSearches,
 } from "@/components/user/data/properties";
 import { messages } from "@/components/user/data/messages";
+import { useTranslations } from "next-intl";
 
 export default function Dashboard() {
   const router = useRouter();
+  const t = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
@@ -76,11 +78,11 @@ export default function Dashboard() {
     setIsSearchModalOpen(false);
 
     // Navigate to search page with filters
-    router.push("/search");
+    router.push("/user/dashboard/search");
   };
 
   const navigateToSavedProperties = () => {
-    router.push("/saved");
+    router.push("/user/dashboard/saved");
   };
 
   return (
@@ -91,48 +93,52 @@ export default function Dashboard() {
         transition={{ duration: 0.5 }}
       >
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <h1 className="text-3xl font-bold">{t("common.dashboard")}</h1>
           <Button
             className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
             onClick={() => setIsSearchModalOpen(true)}
           >
             <Search className="mr-2 h-4 w-4" />
-            New Search
+            {t("userDashboard.newSearch")}
           </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <StatCard
-            title="Saved Properties"
+            title={t("common.savedProperties")}
             value={savedProperties.length.toString()}
             icon={<Heart className="h-5 w-5" />}
             change={
               savedProperties.length > 0
-                ? `+${savedProperties.length} from last month`
+                ? `+${savedProperties.length} ${t(
+                    "userDashboard.fromLastMonth"
+                  )}`
                 : "No saved properties"
             }
             trend={savedProperties.length > 0 ? "up" : "neutral"}
           />
           <StatCard
-            title="Recent Searches"
+            title={t("userDashboard.resentSearches")}
             value={recentSearches.length.toString()}
             icon={<Search className="h-5 w-5" />}
             change={
               recentSearches.length > 0
-                ? `+${recentSearches.length} from last week`
+                ? `+${recentSearches.length} ${t("userDashboard.fromLastWeek")}`
                 : "No recent searches"
             }
             trend={recentSearches.length > 0 ? "up" : "neutral"}
           />
           <StatCard
-            title="Unread Messages"
+            title={t("userDashboard.unreadMessages")}
             value={messages.filter((m) => !m.read).length.toString()}
             icon={<MessageSquare className="h-5 w-5" />}
-            change={`${messages.filter((m) => !m.read).length} new today`}
+            change={`${messages.filter((m) => !m.read).length} ${t(
+              "userDashboard.newToday"
+            )}`}
             trend="up"
           />
           <StatCard
-            title="Profile Completion"
+            title={t("userDashboard.profileCompletion")}
             value="75%"
             icon={<User className="h-5 w-5" />}
             progress={75}
