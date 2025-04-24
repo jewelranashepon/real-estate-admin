@@ -2012,6 +2012,40 @@
       "description": "We couldn't find any properties matching your search criteria. Try adjusting your filters."
     },
     "resetFilters": "Reset Filters"
+  },
+  "PropertyCard": {
+    "verified": "Verified",
+    "featured": "Featured",
+    "beds": "Beds",
+    "baths": "Baths",
+    "sqft": "sqft",
+    "viewDetails": "View Details",
+    "priceButton": "Price"
+  },
+  "MessagesPage": {
+    "title": "Messages",
+    "back": "Back",
+    "stats": {
+      "totalConversations": "Total Conversations",
+      "activeThreads": "Active threads",
+      "unreadMessages": "Unread Messages",
+      "needsAttention": "Needs attention",
+      "allCaughtUp": "All caught up",
+      "responseRate": "Response Rate",
+      "within24Hours": "Within 24 hours",
+      "engagement": "Engagement",
+      "high": "High",
+      "aboveAverage": "Above average"
+    },
+    "conversations": "Conversations",
+    "agent": "Real Estate Agent",
+    "propertyOwner": "Property Owner",
+    "messagePlaceholder": "Type your message here...",
+    "sampleReply": "Thank you for your message. I'm very interested in this property and would like to schedule a viewing. Is it possible to see it this weekend?",
+    "selectConversation": {
+      "title": "Select a conversation",
+      "description": "Choose a conversation from the list to view messages and reply."
+    }
   }
   
 }

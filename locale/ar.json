@@ -2008,6 +2008,40 @@
     "moreFeatures": "المزيد",
     "viewDetails": "عرض التفاصيل",
     "makeOffer": "تقديم عرض"
+  },
+  "PropertyCard": {
+    "verified": "موثق",
+    "featured": "مميز",
+    "beds": "غرف نوم",
+    "baths": "حمامات",
+    "sqft": "قدم مربع",
+    "viewDetails": "عرض التفاصيل",
+    "priceButton": "السعر"
+  },
+  "MessagesPage": {
+    "title": "الرسائل",
+    "back": "رجوع",
+    "stats": {
+      "totalConversations": "إجمالي المحادثات",
+      "activeThreads": "محادثات نشطة",
+      "unreadMessages": "رسائل غير مقروءة",
+      "needsAttention": "تحتاج إلى اهتمام",
+      "allCaughtUp": "تمت متابعتها جميعًا",
+      "responseRate": "معدل الرد",
+      "within24Hours": "خلال 24 ساعة",
+      "engagement": "مشاركة",
+      "high": "عالية",
+      "aboveAverage": "فوق المتوسط"
+    },
+    "conversations": "المحادثات",
+    "agent": "وسيط عقاري",
+    "propertyOwner": "مالك العقار",
+    "messagePlaceholder": "اكتب رسالتك هنا...",
+    "sampleReply": "شكرًا على رسالتك. أنا مهتم جدًا بهذا العقار وأود تحديد موعد لمشاهدته. هل من الممكن رؤيته في نهاية هذا الأسبوع؟",
+    "selectConversation": {
+      "title": "اختر محادثة",
+      "description": "اختر محادثة من القائمة لعرض الرسائل والرد عليها."
+    }
   }
  
 }
