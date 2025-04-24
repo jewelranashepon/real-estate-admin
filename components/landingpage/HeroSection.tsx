@@ -33,7 +33,9 @@ export default function HeroSection() {
             transition={{ delay: 0.3, duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
-              <span className="block text-teal-300">{t("landing.hero.YGT")}</span>
+              <span className="block text-teal-300">
+                {t("landing.hero.YGT")}
+              </span>
               <span className="block">{t("landing.hero.SFP")}</span>
             </h1>
             <motion.p
