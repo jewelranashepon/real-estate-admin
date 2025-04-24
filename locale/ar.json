@@ -1919,36 +1919,44 @@
     "resetFilters": "إعادة تعيين الفلاتر"
   },
   "SearchFilters": {
-    "title": "الفلاتر",
-    "reset": "إعادة تعيين",
-    "priceRange": "نطاق السعر",
-    "priceRangeLabel": "${min} - ${max} $",
-    "bedrooms": "غرف النوم",
-    "bathrooms": "الحمامات",
-    "propertyType": "نوع العقار",
-    "squareFootage": "المساحة",
-    "sqftRangeLabel": "${min} - ${max} قدم مربع",
-    "features": "المميزات",
-    "any": "أي",
-    "applyFilters": "تطبيق الفلاتر",
-    "propertyTypes": {
-      "house": "منزل",
-      "apartment": "شقة",
-      "condo": "شقة فندقية",
-      "townhouse": "تاون هاوس",
-      "land": "أرض"
-    },
-    "features": {
-      "pool": "مسبح",
-      "garden": "حديقة",
-      "garage": "جراج",
-      "furnished": "مؤثثة",
-      "fireplace": "موقد",
-      "balcony": "شرفة",
-      "gym": "جيم",
-      "elevator": "مصعد"
-    }
+  "title": "الفلاتر",
+  "reset": "إعادة تعيين",
+  "priceRange": "نطاق السعر",
+  "priceRangeLabel": "${min} - ${max}",
+  "bedrooms": "غرف النوم",
+  "bathrooms": "الحمامات",
+  "propertyType": "نوع العقار",
+  "squareFootage": "المساحة بالمتر المربع",
+  "sqftRangeLabel": "${min} - ${max} قدم²",
+  "feature": "الميزات",
+  "any": "أي",
+  "applyFilters": "تطبيق الفلاتر",
+  "priceLabel": "تسمية السعر",
+  "sqftLabel": "تسمية المساحة",
+  "resetButton": "زر إعادة التعيين",
+  "propertyTypes": {
+    "house": "منزل",
+    "apartment": "شقة",
+    "condo": "شقة تمليك",
+    "townhouse": "منزل تاون هاوس",
+    "land": "أرض"
   },
+  "features": {
+    "pool": "مسبح",
+    "garden": "حديقة",
+    "garage": "كراج",
+    "furnished": "مفروش",
+    "fireplace": "مدفأة",
+    "balcony": "شرفة",
+    "gym": "صالة رياضية",
+    "elevator": "مصعد",
+    "parking": "موقف سيارات",
+    "wifi": "واي فاي",
+    "kitchen": "مطبخ",
+    "ac": "مكيف هواء",
+    "terrace": "تراس"
+  }
+},
   "SavedProperties": {
     "title": "العقارات المحفوظة",
     "backButton": "رجوع",
@@ -1988,5 +1996,18 @@
       "defaultMessage": "لم تقم بحفظ أي عقارات بعد. تصفح القوائم وانقر على أيقونة القلب لحفظ العقارات التي تعجبك."
     },
     "browseButton": "تصفح العقارات"
+  },
+  "PropertyListItem": {
+    "verifiedBadge": "موثق من FAL",
+    "features": {
+      "beds": "غرف نوم",
+      "baths": "حمامات",
+      "sqft": "قدم مربع",
+      "available": "متاح من"
+    },
+    "moreFeatures": "المزيد",
+    "viewDetails": "عرض التفاصيل",
+    "makeOffer": "تقديم عرض"
   }
+ 
 }

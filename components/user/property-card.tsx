@@ -120,7 +120,7 @@ export function PropertyCard({
             className="flex-1 bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
             onClick={onOfferClick}
           >
-            Offer Price
+            Price
           </Button>
         </CardFooter>
       </Card>

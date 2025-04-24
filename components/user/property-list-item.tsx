@@ -16,6 +16,7 @@ import { Button } from "@/components/user/ui/button";
 import { Card, CardContent } from "@/components/user/ui/card";
 import { Badge } from "@/components/user/ui/badge";
 import type { Property } from "@/components/user/data/properties";
+import { useTranslations } from "next-intl";
 
 interface PropertyListItemProps {
   property: Property;
@@ -30,6 +31,8 @@ export function PropertyListItem({
   onToggleSave,
   gradientClass,
 }: PropertyListItemProps) {
+  const t = useTranslations("PropertyListItem");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -63,7 +66,7 @@ export function PropertyListItem({
                 <Badge className="absolute top-2 left-2 bg-gradient-to-r from-emerald-500/80 to-green-500/80 backdrop-blur-sm border-0">
                   <span className="flex items-center gap-1">
                     <CheckCircle className="w-3 h-3" />
-                    FAL Verified
+                    {t("verifiedBadge")}
                   </span>
                 </Badge>
               )}
@@ -84,20 +87,26 @@ export function PropertyListItem({
               <div className="flex flex-wrap gap-4 my-3">
                 <div className="flex items-center">
                   <BedDouble className="h-4 w-4 text-emerald-400 mr-1" />
-                  <span className="text-sm">{property.beds} Beds</span>
+                  <span className="text-sm">
+                    {property.beds} {t("features.beds")}
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <Bath className="h-4 w-4 text-emerald-400 mr-1" />
-                  <span className="text-sm">{property.baths} Baths</span>
+                  <span className="text-sm">
+                    {property.baths} {t("features.baths")}
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <SquareIcon className="h-4 w-4 text-emerald-400 mr-1" />
-                  <span className="text-sm">{property.sqft} sqft</span>
+                  <span className="text-sm">
+                    {property.sqft} {t("features.sqft")}
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <Calendar className="h-4 w-4 text-emerald-400 mr-1" />
                   <span className="text-sm">
-                    Available {property.availableFrom}
+                    {t("features.available")} {property.availableFrom}
                   </span>
                 </div>
               </div>
@@ -122,7 +131,7 @@ export function PropertyListItem({
                       variant="outline"
                       className="bg-emerald-950/10 border-emerald-900/20"
                     >
-                      +{property.features.length - 3} more
+                      +{property.features.length - 3} {t("moreFeatures")}
                     </Badge>
                   )}
                 </div>
@@ -135,7 +144,7 @@ export function PropertyListItem({
                     asChild
                   >
                     <Link href={`/user/dashboard/property/${property.id}`}>
-                      View Details
+                      {t("viewDetails")}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
@@ -145,7 +154,7 @@ export function PropertyListItem({
                     asChild
                   >
                     <Link href={`/user/dashboard/property/${property.id}`}>
-                      Make an Offer
+                      {t("makeOffer")}
                     </Link>
                   </Button>
                 </div>
