@@ -1,13 +1,44 @@
 "use client";
-import { motion } from "framer-motion";
+
+import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { id: 1, name: "stats.propertiesListed", value: "10,000+", suffix: "+" },
-  { id: 2, name: "stats.happyClients", value: "5,000", suffix: "+" },
+  { id: 1, name: "stats.propertiesListed", value: "10000", suffix: "+" },
+  { id: 2, name: "stats.happyClients", value: "5000", suffix: "+" },
   { id: 3, name: "stats.yearsExperience", value: "15", suffix: "+" },
   { id: 4, name: "stats.awardsWon", value: "24", suffix: "" },
 ];
+
+// CountUp component
+const CountUp = ({ end }: { end: number }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+
+    let start = 0;
+    const duration = 1200;
+    const increment = Math.max(1, Math.ceil(end / (duration / 16)));
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [end, inView]);
+
+  return <span ref={ref}>{count.toLocaleString()}</span>;
+};
 
 const StatCard = ({
   stat,
@@ -43,19 +74,9 @@ const StatCard = ({
               transition={{ delay: index * 0.1 + 0.4, duration: 0.5 }}
               viewport={{ once: true }}
             >
-              {stat.value}
+              <CountUp end={parseInt(stat.value)} />
+              {stat.suffix}
             </motion.p>
-            {stat.suffix && (
-              <motion.span
-                className="text-teal-400 text-2xl font-medium"
-                initial={{ opacity: 0, y: -10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                {stat.suffix}
-              </motion.span>
-            )}
           </div>
           <motion.p
             className="mt-2 text-slate-300 text-lg"
@@ -86,7 +107,7 @@ export default function StatisticsSection() {
     <section className="relative py-24 bg-slate-900 overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f_1px,transparent_1px)] bg-[size:4rem_4rem]" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

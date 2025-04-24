@@ -8,13 +8,6 @@ export default function Footer() {
   const t = useTranslations("footer");
   const isRtl = locale === "ar";
 
-  const socialLinks = [
-    { name: "facebook", icon: "🚀" },
-    { name: "twitter", icon: "🐦" },
-    { name: "instagram", icon: "📷" },
-    { name: "linkedin", icon: "💼" },
-  ];
-
   const quickLinks = [
     { name: "home", href: "/" },
     { name: "properties", href: "/properties" },
@@ -35,16 +28,9 @@ export default function Footer() {
             <h3 className="text-xl font-semibold mb-4">{t("about.title")}</h3>
             <p className="mb-4">{t("about.description")}</p>
             <div className="flex space-x-4">
-              {socialLinks.map((social) => (
-                <Link
-                  key={social.name}
-                  href="#"
-                  aria-label={social.name}
-                  className="text-white hover:text-blue-300 transition"
-                >
-                  {social.icon}
-                </Link>
-              ))}
+              <Link href="/" className="text-blue-500 hover:text-blue-300">
+                <img src="/realLogo.png" alt="Logo" />
+              </Link>
             </div>
           </div>
 
