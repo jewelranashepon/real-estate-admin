@@ -151,19 +151,19 @@ export default function Dashboard() {
               value="saved"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
             >
-              {t('common.SP')}
+              Saved Properties
             </TabsTrigger>
             <TabsTrigger
               value="recent"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
             >
-              {t('common.RS')}
+              Recent Searches
             </TabsTrigger>
             <TabsTrigger
               value="messages"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
             >
-              {t("common.Messages")}
+              Messages
             </TabsTrigger>
           </TabsList>
 
@@ -174,7 +174,7 @@ export default function Dashboard() {
                 <>
                   <div className="col-span-full flex justify-between items-center mb-4">
                     <h2 className="text-xl font-semibold">
-                      {t('common.YSP')}
+                      Your Saved Properties
                     </h2>
                     <Button
                       variant="outline"
@@ -183,7 +183,7 @@ export default function Dashboard() {
                       className="border-emerald-800/30 bg-emerald-950/10"
                     >
                       <Heart className="h-4 w-4 mr-2" />
-                      {t('common.VAS')}
+                      View All Saved
                     </Button>
                   </div>
                   {properties

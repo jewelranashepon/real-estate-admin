@@ -1499,12 +1499,7 @@
     "openMenu": "Open menu",
     "actions": "Actions",
     "error": "Error",
-    "unexpectedError": "An unexpected error occurred.",
-    "SP": "Saved Properties",
-    "RS" : "Recent Searches",
-    "Messages" : "Messages",
-    "YSP" : "Your Saved Properties",
-    "VAS" : "View All Saved"
+    "unexpectedError": "An unexpected error occurred."
   },
   "agentdashboard": {
     "welcome": "Welcome back to your agent dashboard",
