@@ -151,19 +151,19 @@ export default function Dashboard() {
               value="saved"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
             >
-              Saved Properties
+             {t('common.SP')}
             </TabsTrigger>
             <TabsTrigger
               value="recent"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
             >
-              Recent Searches
+            {t('common.RS')}
             </TabsTrigger>
             <TabsTrigger
               value="messages"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
             >
-              Messages
+              {t('common.Messages')}
             </TabsTrigger>
           </TabsList>
 
@@ -174,7 +174,7 @@ export default function Dashboard() {
                 <>
                   <div className="col-span-full flex justify-between items-center mb-4">
                     <h2 className="text-xl font-semibold">
-                      Your Saved Properties
+                      {t('common.YSP')}
                     </h2>
                     <Button
                       variant="outline"
@@ -183,7 +183,7 @@ export default function Dashboard() {
                       className="border-emerald-800/30 bg-emerald-950/10"
                     >
                       <Heart className="h-4 w-4 mr-2" />
-                      View All Saved
+                      {t('common.VAS')}
                     </Button>
                   </div>
                   {properties
@@ -231,7 +231,7 @@ export default function Dashboard() {
             {recentSearches.length > 0 ? (
               <div className="space-y-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold">Recent Searches</h2>
+                  <h2 className="text-xl font-semibold">{t('common.RS')}</h2>
                   <Button
                     variant="outline"
                     size="sm"
@@ -239,7 +239,7 @@ export default function Dashboard() {
                     className="border-emerald-800/30 bg-emerald-950/10"
                   >
                     <Filter className="h-4 w-4 mr-2" />
-                    New Search
+                    {t('common.NS')}
                   </Button>
                 </div>
 
