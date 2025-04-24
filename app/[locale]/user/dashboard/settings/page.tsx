@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
+
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -37,10 +38,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/user/ui/select";
+import { useTranslations } from "next-intl";
 
 export default function SettingsPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("profile");
+  const t = useTranslations("userSettingsPage");
 
   return (
     <div className="p-6">
@@ -53,10 +56,12 @@ export default function SettingsPage() {
           <Button variant="ghost" asChild className="mr-2">
             <button onClick={() => router.back()}>
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
+              {t("navigation.back")}
             </button>
           </Button>
-          <h1 className="text-2xl font-bold flex-1">Settings</h1>
+          <h1 className="text-2xl font-bold flex-1">
+            {t("navigation.settings")}
+          </h1>
         </div>
 
         <div className="flex flex-col md:flex-row gap-6">
@@ -73,21 +78,33 @@ export default function SettingsPage() {
                   </Avatar>
                   <h3 className="font-semibold text-lg">John Doe</h3>
                   <p className="text-sm text-muted-foreground">
-                    john@example.com
+                    {t("user.email")}
                   </p>
                 </div>
 
                 <div className="space-y-1 mt-4">
                   {[
-                    { id: "profile", label: "Profile", icon: User },
-                    { id: "notifications", label: "Notifications", icon: Bell },
-                    { id: "security", label: "Security", icon: Lock },
+                    { id: "profile", label: t("sidebar.profile"), icon: User },
+                    {
+                      id: "notifications",
+                      label: t("sidebar.notifications"),
+                      icon: Bell,
+                    },
+                    {
+                      id: "security",
+                      label: t("sidebar.security"),
+                      icon: Lock,
+                    },
                     {
                       id: "payment",
-                      label: "Payment Methods",
+                      label: t("sidebar.payment"),
                       icon: CreditCard,
                     },
-                    { id: "preferences", label: "Preferences", icon: Home },
+                    {
+                      id: "preferences",
+                      label: t("sidebar.preferences"),
+                      icon: Home,
+                    },
                   ].map((item) => (
                     <Button
                       key={item.id}
@@ -117,15 +134,15 @@ export default function SettingsPage() {
             {activeTab === "profile" && (
               <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20">
                 <CardHeader>
-                  <CardTitle>Profile Information</CardTitle>
-                  <CardDescription>
-                    Update your personal information and contact details
-                  </CardDescription>
+                  <CardTitle>{t("profile.title")}</CardTitle>
+                  <CardDescription>{t("profile.description")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="first-name">First Name</Label>
+                      <Label htmlFor="first-name">
+                        {t("profile.firstName")}
+                      </Label>
                       <Input
                         id="first-name"
                         defaultValue="John"
@@ -133,7 +150,7 @@ export default function SettingsPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="last-name">Last Name</Label>
+                      <Label htmlFor="last-name">{t("profile.lastName")}</Label>
                       <Input
                         id="last-name"
                         defaultValue="Doe"
@@ -143,17 +160,17 @@ export default function SettingsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">{t("profile.email")}</Label>
                     <Input
                       id="email"
                       type="email"
-                      defaultValue="john@example.com"
+                      defaultValue={t("user.email")}
                       className="bg-background/50 border-emerald-900/20"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone">{t("profile.phone")}</Label>
                     <Input
                       id="phone"
                       type="tel"
@@ -163,16 +180,18 @@ export default function SettingsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="bio">Bio</Label>
+                    <Label htmlFor="bio">{t("profile.bio")}</Label>
                     <Textarea
                       id="bio"
-                      defaultValue="I'm looking for a new home in the city center with modern amenities and good access to public transportation."
+                      defaultValue={t("profile.bioDefault")}
                       className="bg-background/50 border-emerald-900/20 min-h-[100px]"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="profile-image">Profile Image</Label>
+                    <Label htmlFor="profile-image">
+                      {t("profile.profileImage")}
+                    </Label>
                     <Input
                       id="profile-image"
                       type="file"
@@ -183,7 +202,7 @@ export default function SettingsPage() {
                 <CardFooter>
                   <Button className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm">
                     <Save className="mr-2 h-4 w-4" />
-                    Save Changes
+                    {t("profile.saveChanges")}
                   </Button>
                 </CardFooter>
               </Card>
@@ -192,27 +211,38 @@ export default function SettingsPage() {
             {activeTab === "notifications" && (
               <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20">
                 <CardHeader>
-                  <CardTitle>Notification Settings</CardTitle>
+                  <CardTitle>{t("notifications.title")}</CardTitle>
                   <CardDescription>
-                    Manage how you receive notifications
+                    {t("notifications.description")}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
-                    <h3 className="text-lg font-medium">Email Notifications</h3>
+                    <h3 className="text-lg font-medium">
+                      {t("notifications.emailNotifications")}
+                    </h3>
                     <div className="space-y-3">
                       {[
                         {
                           id: "new-properties",
-                          label: "New Properties Matching Your Criteria",
+                          label: t("notifications.items.newProperties"),
                         },
                         {
                           id: "price-changes",
-                          label: "Price Changes on Saved Properties",
+                          label: t("notifications.items.priceChanges"),
                         },
-                        { id: "messages", label: "New Messages from Agents" },
-                        { id: "offers", label: "Offer Updates" },
-                        { id: "newsletter", label: "Weekly Newsletter" },
+                        {
+                          id: "messages",
+                          label: t("notifications.items.messages"),
+                        },
+                        {
+                          id: "offers",
+                          label: t("notifications.items.offers"),
+                        },
+                        {
+                          id: "newsletter",
+                          label: t("notifications.items.newsletter"),
+                        },
                       ].map((item) => (
                         <div
                           key={item.id}
@@ -231,12 +261,23 @@ export default function SettingsPage() {
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="text-lg font-medium">Push Notifications</h3>
+                    <h3 className="text-lg font-medium">
+                      {t("notifications.pushNotifications")}
+                    </h3>
                     <div className="space-y-3">
                       {[
-                        { id: "push-messages", label: "New Messages" },
-                        { id: "push-offers", label: "Offer Updates" },
-                        { id: "push-properties", label: "New Properties" },
+                        {
+                          id: "push-messages",
+                          label: t("notifications.pushItems.newMessages"),
+                        },
+                        {
+                          id: "push-offers",
+                          label: t("notifications.pushItems.offerUpdates"),
+                        },
+                        {
+                          id: "push-properties",
+                          label: t("notifications.pushItems.newProperties"),
+                        },
                       ].map((item) => (
                         <div
                           key={item.id}
@@ -257,7 +298,7 @@ export default function SettingsPage() {
                 <CardFooter>
                   <Button className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm">
                     <Save className="mr-2 h-4 w-4" />
-                    Save Preferences
+                    {t("notifications.savePreferences")}
                   </Button>
                 </CardFooter>
               </Card>
@@ -266,14 +307,14 @@ export default function SettingsPage() {
             {activeTab === "security" && (
               <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20">
                 <CardHeader>
-                  <CardTitle>Security Settings</CardTitle>
-                  <CardDescription>
-                    Manage your account security and password
-                  </CardDescription>
+                  <CardTitle>{t("security.title")}</CardTitle>
+                  <CardDescription>{t("security.description")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="current-password">Current Password</Label>
+                    <Label htmlFor="current-password">
+                      {t("security.currentPassword")}
+                    </Label>
                     <Input
                       id="current-password"
                       type="password"
@@ -281,7 +322,9 @@ export default function SettingsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="new-password">New Password</Label>
+                    <Label htmlFor="new-password">
+                      {t("security.newPassword")}
+                    </Label>
                     <Input
                       id="new-password"
                       type="password"
@@ -290,7 +333,7 @@ export default function SettingsPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="confirm-password">
-                      Confirm New Password
+                      {t("security.confirmPassword")}
                     </Label>
                     <Input
                       id="confirm-password"
@@ -301,15 +344,15 @@ export default function SettingsPage() {
 
                   <div className="pt-4">
                     <h3 className="text-lg font-medium mb-4">
-                      Two-Factor Authentication
+                      {t("security.twoFactor")}
                     </h3>
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-medium">
-                          Enable Two-Factor Authentication
+                          {t("security.enableTwoFactor")}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          Add an extra layer of security to your account
+                          {t("security.twoFactorDescription")}
                         </p>
                       </div>
                       <Switch id="2fa" />
@@ -319,7 +362,7 @@ export default function SettingsPage() {
                 <CardFooter>
                   <Button className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm">
                     <Save className="mr-2 h-4 w-4" />
-                    Update Security Settings
+                    {t("security.updateSecurity")}
                   </Button>
                 </CardFooter>
               </Card>
@@ -328,15 +371,13 @@ export default function SettingsPage() {
             {activeTab === "payment" && (
               <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20">
                 <CardHeader>
-                  <CardTitle>Payment Methods</CardTitle>
-                  <CardDescription>
-                    Manage your payment methods and billing information
-                  </CardDescription>
+                  <CardTitle>{t("payment.title")}</CardTitle>
+                  <CardDescription>{t("payment.description")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
                     <h3 className="text-lg font-medium">
-                      Saved Payment Methods
+                      {t("payment.savedMethods")}
                     </h3>
                     <div className="space-y-3">
                       <div className="p-4 border border-emerald-500/20 rounded-lg bg-emerald-950/10 flex items-center justify-between">
@@ -345,9 +386,9 @@ export default function SettingsPage() {
                             <CreditCard className="h-6 w-6 text-emerald-500" />
                           </div>
                           <div>
-                            <p className="font-medium">Visa ending in 4242</p>
+                            <p className="font-medium">{t("payment.visa")}</p>
                             <p className="text-sm text-muted-foreground">
-                              Expires 12/25
+                              {t("payment.visaExpiry")}
                             </p>
                           </div>
                         </div>
@@ -356,7 +397,7 @@ export default function SettingsPage() {
                           size="sm"
                           className="border-emerald-900/20 bg-emerald-950/10"
                         >
-                          Remove
+                          {t("payment.remove")}
                         </Button>
                       </div>
 
@@ -367,10 +408,10 @@ export default function SettingsPage() {
                           </div>
                           <div>
                             <p className="font-medium">
-                              Mastercard ending in 8888
+                              {t("payment.mastercard")}
                             </p>
                             <p className="text-sm text-muted-foreground">
-                              Expires 09/24
+                              {t("payment.mastercardExpiry")}
                             </p>
                           </div>
                         </div>
@@ -379,7 +420,7 @@ export default function SettingsPage() {
                           size="sm"
                           className="border-emerald-900/20 bg-emerald-950/10"
                         >
-                          Remove
+                          {t("payment.remove")}
                         </Button>
                       </div>
                     </div>
@@ -387,40 +428,46 @@ export default function SettingsPage() {
 
                   <div className="space-y-4">
                     <h3 className="text-lg font-medium">
-                      Add New Payment Method
+                      {t("payment.addNew")}
                     </h3>
                     <div className="space-y-3">
                       <div className="space-y-2">
-                        <Label htmlFor="card-number">Card Number</Label>
+                        <Label htmlFor="card-number">
+                          {t("payment.cardNumber")}
+                        </Label>
                         <Input
                           id="card-number"
-                          placeholder="1234 5678 9012 3456"
+                          placeholder={t("payment.cardNumberPlaceholder")}
                           className="bg-background/50 border-emerald-900/20"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="expiry">Expiry Date</Label>
+                          <Label htmlFor="expiry">
+                            {t("payment.expiryDate")}
+                          </Label>
                           <Input
                             id="expiry"
-                            placeholder="MM/YY"
+                            placeholder={t("payment.expiryDatePlaceholder")}
                             className="bg-background/50 border-emerald-900/20"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="cvc">CVC</Label>
+                          <Label htmlFor="cvc">{t("payment.cvc")}</Label>
                           <Input
                             id="cvc"
-                            placeholder="123"
+                            placeholder={t("payment.cvcPlaceholder")}
                             className="bg-background/50 border-emerald-900/20"
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="name-on-card">Name on Card</Label>
+                        <Label htmlFor="name-on-card">
+                          {t("payment.nameOnCard")}
+                        </Label>
                         <Input
                           id="name-on-card"
-                          placeholder="John Doe"
+                          placeholder={t("payment.nameOnCardPlaceholder")}
                           className="bg-background/50 border-emerald-900/20"
                         />
                       </div>
@@ -430,7 +477,7 @@ export default function SettingsPage() {
                 <CardFooter>
                   <Button className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm">
                     <Save className="mr-2 h-4 w-4" />
-                    Save Payment Method
+                    {t("payment.savePayment")}
                   </Button>
                 </CardFooter>
               </Card>
@@ -439,24 +486,28 @@ export default function SettingsPage() {
             {activeTab === "preferences" && (
               <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20">
                 <CardHeader>
-                  <CardTitle>Property Preferences</CardTitle>
+                  <CardTitle>{t("preferences.title")}</CardTitle>
                   <CardDescription>
-                    Set your default property search preferences
+                    {t("preferences.description")}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="location">Preferred Location</Label>
+                    <Label htmlFor="location">
+                      {t("preferences.location")}
+                    </Label>
                     <Input
                       id="location"
-                      defaultValue="New York, NY"
+                      defaultValue={t("preferences.locationDefault")}
                       className="bg-background/50 border-emerald-900/20"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="min-price">Minimum Price</Label>
+                      <Label htmlFor="min-price">
+                        {t("preferences.minPrice")}
+                      </Label>
                       <Input
                         id="min-price"
                         type="number"
@@ -465,7 +516,9 @@ export default function SettingsPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="max-price">Maximum Price</Label>
+                      <Label htmlFor="max-price">
+                        {t("preferences.maxPrice")}
+                      </Label>
                       <Input
                         id="max-price"
                         type="number"
@@ -477,7 +530,9 @@ export default function SettingsPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="bedrooms">Bedrooms</Label>
+                      <Label htmlFor="bedrooms">
+                        {t("preferences.bedrooms")}
+                      </Label>
                       <Select defaultValue="2">
                         <SelectTrigger
                           id="bedrooms"
@@ -486,16 +541,28 @@ export default function SettingsPage() {
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="any">Any</SelectItem>
-                          <SelectItem value="1">1+</SelectItem>
-                          <SelectItem value="2">2+</SelectItem>
-                          <SelectItem value="3">3+</SelectItem>
-                          <SelectItem value="4">4+</SelectItem>
+                          <SelectItem value="any">
+                            {t("preferences.any")}
+                          </SelectItem>
+                          <SelectItem value="1">
+                            {t("preferences.onePlus")}
+                          </SelectItem>
+                          <SelectItem value="2">
+                            {t("preferences.twoPlus")}
+                          </SelectItem>
+                          <SelectItem value="3">
+                            {t("preferences.threePlus")}
+                          </SelectItem>
+                          <SelectItem value="4">
+                            {t("preferences.fourPlus")}
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="bathrooms">Bathrooms</Label>
+                      <Label htmlFor="bathrooms">
+                        {t("preferences.bathrooms")}
+                      </Label>
                       <Select defaultValue="1">
                         <SelectTrigger
                           id="bathrooms"
@@ -504,15 +571,25 @@ export default function SettingsPage() {
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="any">Any</SelectItem>
-                          <SelectItem value="1">1+</SelectItem>
-                          <SelectItem value="2">2+</SelectItem>
-                          <SelectItem value="3">3+</SelectItem>
+                          <SelectItem value="any">
+                            {t("preferences.any")}
+                          </SelectItem>
+                          <SelectItem value="1">
+                            {t("preferences.onePlus")}
+                          </SelectItem>
+                          <SelectItem value="2">
+                            {t("preferences.twoPlus")}
+                          </SelectItem>
+                          <SelectItem value="3">
+                            {t("preferences.threePlus")}
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="property-type">Property Type</Label>
+                      <Label htmlFor="property-type">
+                        {t("preferences.propertyType")}
+                      </Label>
                       <Select defaultValue="apartment">
                         <SelectTrigger
                           id="property-type"
@@ -521,26 +598,51 @@ export default function SettingsPage() {
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="any">Any</SelectItem>
-                          <SelectItem value="apartment">Apartment</SelectItem>
-                          <SelectItem value="house">House</SelectItem>
-                          <SelectItem value="condo">Condo</SelectItem>
-                          <SelectItem value="townhouse">Townhouse</SelectItem>
+                          <SelectItem value="any">
+                            {t("preferences.any")}
+                          </SelectItem>
+                          <SelectItem value="apartment">
+                            {t("preferences.apartment")}
+                          </SelectItem>
+                          <SelectItem value="house">
+                            {t("preferences.house")}
+                          </SelectItem>
+                          <SelectItem value="condo">
+                            {t("preferences.condo")}
+                          </SelectItem>
+                          <SelectItem value="townhouse">
+                            {t("preferences.townhouse")}
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Must-Have Features</Label>
+                    <Label>{t("preferences.features")}</Label>
                     <div className="grid grid-cols-2 gap-2">
                       {[
-                        { id: "parking", label: "Parking" },
-                        { id: "balcony", label: "Balcony" },
-                        { id: "pet-friendly", label: "Pet Friendly" },
-                        { id: "gym", label: "Gym" },
-                        { id: "pool", label: "Pool" },
-                        { id: "laundry", label: "In-unit Laundry" },
+                        {
+                          id: "parking",
+                          label: t("preferences.featureItems.parking"),
+                        },
+                        {
+                          id: "balcony",
+                          label: t("preferences.featureItems.balcony"),
+                        },
+                        {
+                          id: "pet-friendly",
+                          label: t("preferences.featureItems.petFriendly"),
+                        },
+                        { id: "gym", label: t("preferences.featureItems.gym") },
+                        {
+                          id: "pool",
+                          label: t("preferences.featureItems.pool"),
+                        },
+                        {
+                          id: "laundry",
+                          label: t("preferences.featureItems.laundry"),
+                        },
                       ].map((item) => (
                         <div
                           key={item.id}
@@ -563,7 +665,7 @@ export default function SettingsPage() {
                 <CardFooter>
                   <Button className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm">
                     <Save className="mr-2 h-4 w-4" />
-                    Save Preferences
+                    {t("preferences.savePreferences")}
                   </Button>
                 </CardFooter>
               </Card>
