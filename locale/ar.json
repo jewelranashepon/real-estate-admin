@@ -173,14 +173,14 @@
       "LD": "الوثائق القانونية"
     }
   },
- "landing": {
+  "landing": {
     "hero": {
       "title": "ابحث عن منزل أحلامك",
       "subtitle": "أكبر منصة عقارية في المنطقة مع آلاف العقارات المميزة",
       "ctaPrimary": "تصفح العقارات",
       "ctaSecondary": "تعرف على المزيد",
-      "YGT" : "بوابتك إلى",
-      "SFP" :"أرقى عقارات السعودية"
+      "YGT": "بوابتك إلى",
+      "SFP": "أرقى عقارات السعودية"
     },
     "features": {
       "title": "لماذا تختارنا؟",
@@ -288,7 +288,7 @@
     "contact": "اتصل بنا",
     "signIn": "تسجيل الدخول",
     "signUp": "حساب جديد",
-    "service":"الخدمة"
+    "service": "الخدمة"
   },
 
   "properties": {
@@ -1919,44 +1919,44 @@
     "resetFilters": "إعادة تعيين الفلاتر"
   },
   "SearchFilters": {
-  "title": "الفلاتر",
-  "reset": "إعادة تعيين",
-  "priceRange": "نطاق السعر",
-  "priceRangeLabel": "${min} - ${max}",
-  "bedrooms": "غرف النوم",
-  "bathrooms": "الحمامات",
-  "propertyType": "نوع العقار",
-  "squareFootage": "المساحة بالمتر المربع",
-  "sqftRangeLabel": "${min} - ${max} قدم²",
-  "feature": "الميزات",
-  "any": "أي",
-  "applyFilters": "تطبيق الفلاتر",
-  "priceLabel": "تسمية السعر",
-  "sqftLabel": "تسمية المساحة",
-  "resetButton": "زر إعادة التعيين",
-  "propertyTypes": {
-    "house": "منزل",
-    "apartment": "شقة",
-    "condo": "شقة تمليك",
-    "townhouse": "منزل تاون هاوس",
-    "land": "أرض"
+    "title": "الفلاتر",
+    "reset": "إعادة تعيين",
+    "priceRange": "نطاق السعر",
+    "priceRangeLabel": "${min} - ${max}",
+    "bedrooms": "غرف النوم",
+    "bathrooms": "الحمامات",
+    "propertyType": "نوع العقار",
+    "squareFootage": "المساحة بالمتر المربع",
+    "sqftRangeLabel": "${min} - ${max} قدم²",
+    "feature": "الميزات",
+    "any": "أي",
+    "applyFilters": "تطبيق الفلاتر",
+    "priceLabel": "تسمية السعر",
+    "sqftLabel": "تسمية المساحة",
+    "resetButton": "زر إعادة التعيين",
+    "propertyTypes": {
+      "house": "منزل",
+      "apartment": "شقة",
+      "condo": "شقة تمليك",
+      "townhouse": "منزل تاون هاوس",
+      "land": "أرض"
+    },
+    "features": {
+      "pool": "مسبح",
+      "garden": "حديقة",
+      "garage": "كراج",
+      "furnished": "مفروش",
+      "fireplace": "مدفأة",
+      "balcony": "شرفة",
+      "gym": "صالة رياضية",
+      "elevator": "مصعد",
+      "parking": "موقف سيارات",
+      "wifi": "واي فاي",
+      "kitchen": "مطبخ",
+      "ac": "مكيف هواء",
+      "terrace": "تراس"
+    }
   },
-  "features": {
-    "pool": "مسبح",
-    "garden": "حديقة",
-    "garage": "كراج",
-    "furnished": "مفروش",
-    "fireplace": "مدفأة",
-    "balcony": "شرفة",
-    "gym": "صالة رياضية",
-    "elevator": "مصعد",
-    "parking": "موقف سيارات",
-    "wifi": "واي فاي",
-    "kitchen": "مطبخ",
-    "ac": "مكيف هواء",
-    "terrace": "تراس"
-  }
-},
   "SavedProperties": {
     "title": "العقارات المحفوظة",
     "backButton": "رجوع",
@@ -2042,6 +2042,164 @@
       "title": "اختر محادثة",
       "description": "اختر محادثة من القائمة لعرض الرسائل والرد عليها."
     }
+  },
+  "userSettingsPage": {
+    "navigation": {
+      "back": "العودة",
+      "settings": "الإعدادات"
+    },
+    "user": {
+      "email": "john@example.com"
+    },
+    "sidebar": {
+      "profile": "الملف الشخصي",
+      "notifications": "الإشعارات",
+      "security": "الأمان",
+      "payment": "طرق الدفع",
+      "preferences": "التفضيلات"
+    },
+    "profile": {
+      "title": "معلومات الملف الشخصي",
+      "description": "قم بتحديث معلوماتك الشخصية وتفاصيل الاتصال",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "bio": "نبذة",
+      "bioDefault": "أبحث عن منزل جديد في وسط المدينة يتمتع بخدمات حديثة ووصول جيد إلى وسائل النقل العامة.",
+      "profileImage": "صورة الملف الشخصي",
+      "saveChanges": "حفظ التغييرات"
+    },
+    "notifications": {
+      "title": "إعدادات الإشعارات",
+      "description": "إدارة كيفية تلقيك للإشعارات",
+      "emailNotifications": "إشعارات البريد الإلكتروني",
+      "items": {
+        "newProperties": "عقارات جديدة تطابق معاييرك",
+        "priceChanges": "تغييرات الأسعار في العقارات المحفوظة",
+        "messages": "رسائل جديدة من الوكلاء",
+        "offers": "تحديثات العروض",
+        "newsletter": "النشرة الأسبوعية"
+      },
+      "pushNotifications": "إشعارات الدفع",
+      "pushItems": {
+        "newMessages": "رسائل جديدة",
+        "offerUpdates": "تحديثات العروض",
+        "newProperties": "عقارات جديدة"
+      },
+      "savePreferences": "حفظ التفضيلات"
+    },
+    "security": {
+      "title": "إعدادات الأمان",
+      "description": "إدارة أمان الحساب وكلمة المرور",
+      "currentPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة",
+      "twoFactor": "التحقق بخطوتين",
+      "enableTwoFactor": "تفعيل التحقق بخطوتين",
+      "twoFactorDescription": "أضف طبقة أمان إضافية إلى حسابك",
+      "updateSecurity": "تحديث إعدادات الأمان"
+    },
+    "payment": {
+      "title": "طرق الدفع",
+      "description": "إدارة طرق الدفع ومعلومات الفوترة",
+      "savedMethods": "طرق الدفع المحفوظة",
+      "visa": "فيزا تنتهي بـ 4242",
+      "visaExpiry": "تنتهي في 12/25",
+      "mastercard": "ماستركارد تنتهي بـ 8888",
+      "mastercardExpiry": "تنتهي في 09/24",
+      "remove": "إزالة",
+      "addNew": "إضافة طريقة دفع جديدة",
+      "cardNumber": "رقم البطاقة",
+      "cardNumberPlaceholder": "1234 5678 9012 3456",
+      "expiryDate": "تاريخ الانتهاء",
+      "expiryDatePlaceholder": "MM/YY",
+      "cvc": "رمز الأمان",
+      "cvcPlaceholder": "123",
+      "nameOnCard": "الاسم على البطاقة",
+      "nameOnCardPlaceholder": "جون دو",
+      "savePayment": "حفظ طريقة الدفع"
+    },
+    "preferences": {
+      "title": "تفضيلات العقارات",
+      "description": "قم بتعيين تفضيلات البحث الافتراضية للعقارات",
+      "location": "الموقع المفضل",
+      "locationDefault": "نيويورك، نيويورك",
+      "minPrice": "الحد الأدنى للسعر",
+      "maxPrice": "الحد الأقصى للسعر",
+      "bedrooms": "غرف النوم",
+      "bathrooms": "الحمامات",
+      "propertyType": "نوع العقار",
+      "features": "المزايا الضرورية",
+      "featureItems": {
+        "parking": "موقف سيارات",
+        "balcony": "شرفة",
+        "petFriendly": "صديق للحيوانات الأليفة",
+        "gym": "نادي رياضي",
+        "pool": "مسبح",
+        "laundry": "غسيل داخل الوحدة"
+      },
+      "any": "أي",
+      "onePlus": "1+",
+      "twoPlus": "2+",
+      "threePlus": "3+",
+      "fourPlus": "4+",
+      "apartment": "شقة",
+      "house": "منزل",
+      "condo": "شقة فاخرة",
+      "townhouse": "منزل تاون هاوس",
+      "savePreferences": "حفظ التفضيلات"
+    },
+    "common": {
+      "save": "حفظ"
+    }
+  },
+  "landingPage": {
+    "PremiumPropertySection": {
+      "title": "حلول العقارات الفاخرة",
+      "subtitle": "اكتشف مجموعتنا الحصرية من العقارات المتميزة في جميع أنحاء الشرق الأوسط، المصممة خصيصًا للمستثمرين والسكان المميزين.",
+      "cta": "استعرض مجموعتنا",
+      "services": [
+        {
+          "title": "شقق فاخرة",
+          "description": "مساكن شاهقة حصرية بإطلالات بانورامية على المدينة ومرافق راقية في قلب المراكز الحضرية."
+        },
+        {
+          "title": "فلل مطلة على الشاطئ",
+          "description": "ملاذات ساحلية خاصة توفر وصولاً مباشرًا إلى الشاطئ، ومساحات مسبح لا متناهية، وإطلالات خلابة على المحيط."
+        },
+        {
+          "title": "أبراج تجارية",
+          "description": "مساحات مكتبية حديثة مصممة لتحقيق أقصى قدر من الكفاءة والاستدامة والرقي المؤسسي."
+        },
+        {
+          "title": "عقارات صحراوية",
+          "description": "مجمعات فاخرة واسعة ذات طراز معماري عصري مندمج بتناغم مع البيئة الصحراوية الطبيعية."
+        }
+      ]
+    },
+    "FeaturesSection": {
+      "tagline": "ميزات مبتكرة",
+      "title": "جرب العقارات الحديثة",
+      "subtitle": "اكتشف كيف يمكن لمنصتنا المتطورة تبسيط رحلتك العقارية من خلال هذه الميزات القوية.",
+      "features": [
+        {
+          "title": "بحث عقاري ذكي",
+          "description": "أدوات تصفية متقدمة للعثور على العقارات التي تطابق معاييرك الدقيقة، من تفضيلات الموقع إلى وسائل الراحة المحددة."
+        },
+        {
+          "title": "جولات افتراضية",
+          "description": "استكشف العقارات عن بُعد مع جولات غامرة بزاوية 360 درجة وخطط أرضية مفصلة للحصول على إحساس حقيقي بكل مساحة."
+        },
+        {
+          "title": "تحليلات السوق",
+          "description": "الوصول إلى بيانات السوق في الوقت الفعلي والاتجاهات لاتخاذ قرارات استثمارية مستنيرة بثقة."
+        },
+        {
+          "title": "معاملات آمنة",
+          "description": "نظام دفع مشفر من طرف إلى طرف وقوائم عقارات موثقة لضمان معاملات آمنة وشرعية."
+        }
+      ]
+    }
   }
- 
 }

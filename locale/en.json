@@ -196,8 +196,8 @@
       "subtitle": "The largest real estate platform in the region with thousands of premium properties",
       "ctaPrimary": "Browse Properties",
       "ctaSecondary": "Learn More",
-      "YGT" : "YOUR GATEWAY TO",
-      "SFP" : "Saudi'S FINEST PROPERTIES"
+      "YGT": "YOUR GATEWAY TO",
+      "SFP": "Saudi'S FINEST PROPERTIES"
     },
     "features": {
       "title": "Why Choose Us?",
@@ -349,7 +349,7 @@
     "contact": "Contact",
     "signIn": "Sign In",
     "signUp": "Sign Up",
-    "service":"Service"
+    "service": "Service"
   },
   "auth": {
     "login": "Login",
@@ -1923,9 +1923,9 @@
     "feature": "Features",
     "any": "Any",
     "applyFilters": "Apply Filters",
-    "priceLabel" : "priceLabel",
-   "sqftLabel" : "sqftLabel",
-   "resetButton": "Reset Button",
+    "priceLabel": "priceLabel",
+    "sqftLabel": "sqftLabel",
+    "resetButton": "Reset Button",
     "propertyTypes": {
       "house": "House",
       "apartment": "Apartment",
@@ -1942,10 +1942,10 @@
       "balcony": "Balcony",
       "gym": "Gym",
       "elevator": "Elevator",
-      "parking" : "parking",
-      "wifi" : "wifi",
-      "kitchen" : "kitchen",
-      "ac" : "AC",
+      "parking": "parking",
+      "wifi": "wifi",
+      "kitchen": "kitchen",
+      "ac": "AC",
       "terrace": "terrace"
     }
   },
@@ -2046,6 +2046,164 @@
       "title": "Select a conversation",
       "description": "Choose a conversation from the list to view messages and reply."
     }
+  },
+  "userSettingsPage": {
+    "navigation": {
+      "back": "Back",
+      "settings": "Settings"
+    },
+    "user": {
+      "email": "john@example.com"
+    },
+    "sidebar": {
+      "profile": "Profile",
+      "notifications": "Notifications",
+      "security": "Security",
+      "payment": "Payment Methods",
+      "preferences": "Preferences"
+    },
+    "profile": {
+      "title": "Profile Information",
+      "description": "Update your personal information and contact details",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "bio": "Bio",
+      "bioDefault": "I'm looking for a new home in the city center with modern amenities and good access to public transportation.",
+      "profileImage": "Profile Image",
+      "saveChanges": "Save Changes"
+    },
+    "notifications": {
+      "title": "Notification Settings",
+      "description": "Manage how you receive notifications",
+      "emailNotifications": "Email Notifications",
+      "items": {
+        "newProperties": "New Properties Matching Your Criteria",
+        "priceChanges": "Price Changes on Saved Properties",
+        "messages": "New Messages from Agents",
+        "offers": "Offer Updates",
+        "newsletter": "Weekly Newsletter"
+      },
+      "pushNotifications": "Push Notifications",
+      "pushItems": {
+        "newMessages": "New Messages",
+        "offerUpdates": "Offer Updates",
+        "newProperties": "New Properties"
+      },
+      "savePreferences": "Save Preferences"
+    },
+    "security": {
+      "title": "Security Settings",
+      "description": "Manage your account security and password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "twoFactor": "Two-Factor Authentication",
+      "enableTwoFactor": "Enable Two-Factor Authentication",
+      "twoFactorDescription": "Add an extra layer of security to your account",
+      "updateSecurity": "Update Security Settings"
+    },
+    "payment": {
+      "title": "Payment Methods",
+      "description": "Manage your payment methods and billing information",
+      "savedMethods": "Saved Payment Methods",
+      "visa": "Visa ending in 4242",
+      "visaExpiry": "Expires 12/25",
+      "mastercard": "Mastercard ending in 8888",
+      "mastercardExpiry": "Expires 09/24",
+      "remove": "Remove",
+      "addNew": "Add New Payment Method",
+      "cardNumber": "Card Number",
+      "cardNumberPlaceholder": "1234 5678 9012 3456",
+      "expiryDate": "Expiry Date",
+      "expiryDatePlaceholder": "MM/YY",
+      "cvc": "CVC",
+      "cvcPlaceholder": "123",
+      "nameOnCard": "Name on Card",
+      "nameOnCardPlaceholder": "John Doe",
+      "savePayment": "Save Payment Method"
+    },
+    "preferences": {
+      "title": "Property Preferences",
+      "description": "Set your default property search preferences",
+      "location": "Preferred Location",
+      "locationDefault": "New York, NY",
+      "minPrice": "Minimum Price",
+      "maxPrice": "Maximum Price",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "propertyType": "Property Type",
+      "features": "Must-Have Features",
+      "featureItems": {
+        "parking": "Parking",
+        "balcony": "Balcony",
+        "petFriendly": "Pet Friendly",
+        "gym": "Gym",
+        "pool": "Pool",
+        "laundry": "In-unit Laundry"
+      },
+      "any": "Any",
+      "onePlus": "1+",
+      "twoPlus": "2+",
+      "threePlus": "3+",
+      "fourPlus": "4+",
+      "apartment": "Apartment",
+      "house": "House",
+      "condo": "Condo",
+      "townhouse": "Townhouse",
+      "savePreferences": "Save Preferences"
+    },
+    "common": {
+      "save": "Save"
+    }
+  },
+  "landingPage": {
+    "PremiumPropertySection": {
+      "title": "Premium Property Solutions",
+      "subtitle": "Discover our exclusive portfolio of distinguished properties across the Middle East, crafted for discerning investors and residents alike.",
+      "cta": "Explore Our Portfolio",
+      "services": [
+        {
+          "title": "Luxury Apartments",
+          "description": "Exclusive high-rise residences with panoramic city views and premium amenities in the heart of urban centers."
+        },
+        {
+          "title": "Beachfront Villas",
+          "description": "Private coastal retreats offering direct beach access, infinity pools, and spectacular ocean views."
+        },
+        {
+          "title": "Commercial Towers",
+          "description": "State-of-the-art office spaces designed for maximum efficiency, sustainability, and corporate prestige."
+        },
+        {
+          "title": "Desert Estates",
+          "description": "Expansive luxury compounds with modern architecture harmoniously integrated into the natural desert landscape."
+        }
+      ]
+    },
+    "FeaturesSection": {
+      "tagline": "Innovative Features",
+      "title": "Experience Modern Real Estate",
+      "subtitle": "Discover how our cutting-edge platform simplifies your property journey with these powerful features.",
+      "features": [
+        {
+          "title": "Smart Property Search",
+          "description": "Advanced filtering tools to find properties matching your exact criteria, from location preferences to specific amenities."
+        },
+        {
+          "title": "Virtual Tours",
+          "description": "Explore properties remotely with immersive 360° tours and detailed floor plans to get a true sense of each space."
+        },
+        {
+          "title": "Market Analytics",
+          "description": "Access real-time market data and trends to make informed investment decisions with confidence."
+        },
+        {
+          "title": "Secure Transactions",
+          "description": "End-to-end encrypted payment system and verified property listings to ensure safe and legitimate transactions."
+        }
+      ]
+    }
   }
-  
 }
