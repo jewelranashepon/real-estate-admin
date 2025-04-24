@@ -2,9 +2,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
   const t = useTranslations();
+  const router = useRouter();
 
   return (
     <section className="relative h-screen">
@@ -57,13 +59,19 @@ export default function HeroSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => router.push("/listings")}
               className="bg-gradient-to-r from-teal-600 to-teal-400 text-white px-8 py-4 rounded-lg font-medium hover:from-teal-700 hover:to-teal-500 transition-all shadow-lg text-lg"
             >
               {t("landing.hero.ctaPrimary")}
             </motion.button>
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                const el = document.getElementById("features");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
               className="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-medium hover:bg-white hover:text-teal-600 transition-all text-lg"
             >
               {t("landing.hero.ctaSecondary")}
@@ -76,6 +84,10 @@ export default function HeroSection() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1, duration: 0.8 }}
+          onClick={() => {
+            const el = document.getElementById("features");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }}
         >
           <svg
             className="w-10 h-10 text-white animate-bounce"

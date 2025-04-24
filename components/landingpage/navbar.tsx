@@ -26,7 +26,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex rtl:gap-4 items-center space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -42,16 +42,16 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex rtl:gap-4 items-center space-x-4  ">
             <Link
               href="/sign-in"
-              className="px-4 py-2 text-gray-700 hover:text-blue-600"
+              className="px-4 py-2 bg-teal-700 text-white hover:bg-teal-800 rounded-md"
             >
               {t("nav.signIn")}
             </Link>
             <Link
               href="/sign-up"
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
             >
               {t("nav.signUp")}
             </Link>

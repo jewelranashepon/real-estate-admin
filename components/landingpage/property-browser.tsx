@@ -1,7 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -22,8 +22,9 @@ type Property = {
 export default function PropertyBrowser() {
   const { locale } = useParams();
   const t = useTranslations("properties");
-  const searchT = useTranslations('app')
+  const searchT = useTranslations("app");
   const isRtl = locale === "ar";
+  const router = useRouter();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(
@@ -183,12 +184,30 @@ export default function PropertyBrowser() {
             {t("availableProperties")}
           </h2>
 
+          {/* Explore All Button */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-6 flex justify-center"
+          >
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => router.push("/listings")}
+              className="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 px-4 rounded-lg font-medium transition shadow-lg"
+            >
+              {t("exploreAllButton") || "Explore Our Properties"}
+            </motion.button>
+              
+          </motion.div>
+
           {/* Search Input */}
           <motion.div variants={itemVariants} className="mb-6">
             <div className="relative">
               <input
                 type="text"
-                placeholder={searchT("search.placeholder") || "Search properties..."}
+                placeholder={
+                  searchT("search.placeholder") || "Search properties..."
+                }
                 className="w-full p-3 pl-10 rounded-lg bg-gray-800 border border-gray-700 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-white transition"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
