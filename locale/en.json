@@ -1910,18 +1910,6 @@
       "logout": "Log out"
     }
   },
-  "SearchPage": {
-    "back": "Back",
-    "title": "Search Properties",
-    "searchPlaceholder": "Search by location, property name...",
-    "filters": "Filters",
-    "resultsCount": "Found {count} properties matching your criteria",
-    "noResults": {
-      "title": "No properties found",
-      "description": "Try adjusting your search filters to find more properties."
-    },
-    "resetFilters": "Reset Filters"
-  },
   "SearchFilters": {
     "title": "Filters",
     "reset": "Reset",
@@ -1932,9 +1920,12 @@
     "propertyType": "Property Type",
     "squareFootage": "Square Footage",
     "sqftRangeLabel": "${min} - ${max} sqft",
-    "features": "Features",
+    "feature": "Features",
     "any": "Any",
     "applyFilters": "Apply Filters",
+    "priceLabel" : "priceLabel",
+   "sqftLabel" : "sqftLabel",
+   "resetButton": "Reset Button",
     "propertyTypes": {
       "house": "House",
       "apartment": "Apartment",
@@ -1950,7 +1941,12 @@
       "fireplace": "Fireplace",
       "balcony": "Balcony",
       "gym": "Gym",
-      "elevator": "Elevator"
+      "elevator": "Elevator",
+      "parking" : "parking",
+      "wifi" : "wifi",
+      "kitchen" : "kitchen",
+      "ac" : "AC",
+      "terrace": "terrace"
     }
   },
   "SavedProperties": {
@@ -1992,6 +1988,30 @@
       "defaultMessage": "You haven't saved any properties yet. Browse listings and click the heart icon to save properties you like."
     },
     "browseButton": "Browse Properties"
+  },
+  "PropertyListItem": {
+    "verifiedBadge": "FAL Verified",
+    "features": {
+      "beds": "Beds",
+      "baths": "Baths",
+      "sqft": "sqft",
+      "available": "Available"
+    },
+    "moreFeatures": "more",
+    "viewDetails": "View Details",
+    "makeOffer": "Make an Offer"
+  },
+  "SearchPage": {
+    "title": "Search Properties",
+    "back": "Back",
+    "searchPlaceholder": "Search by location, address, or property name...",
+    "filters": "Filters",
+    "resultsCount": "{count} properties found",
+    "noResults": {
+      "title": "No properties found",
+      "description": "We couldn't find any properties matching your search criteria. Try adjusting your filters."
+    },
+    "resetFilters": "Reset Filters"
   }
   
 }

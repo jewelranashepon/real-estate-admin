@@ -19,6 +19,7 @@ import {
   propertyTypes,
   featureOptions,
 } from "@/components/user/data/properties";
+import { useTranslations } from "next-intl";
 
 interface SearchFiltersPanelProps {
   filters: SearchFilters;
@@ -33,13 +34,24 @@ export function SearchFiltersPanel({
   onClose,
   className = "",
 }: SearchFiltersPanelProps) {
+  const t = useTranslations("SearchFilters");
   const [priceLabel, setPriceLabel] = useState<string>("");
   const [sqftLabel, setSqftLabel] = useState<string>("");
 
   useEffect(() => {
-    setPriceLabel(`$${filters.priceRange[0]} - $${filters.priceRange[1]}`);
-    setSqftLabel(`${filters.sqftRange[0]} - ${filters.sqftRange[1]} sqft`);
-  }, [filters.priceRange, filters.sqftRange]);
+    setPriceLabel(
+      t("priceLabel", {
+        min: filters.priceRange[0],
+        max: filters.priceRange[1],
+      })
+    );
+    setSqftLabel(
+      t("sqftLabel", {
+        min: filters.sqftRange[0],
+        max: filters.sqftRange[1],
+      })
+    );
+  }, [filters.priceRange, filters.sqftRange, t]);
 
   const handlePriceChange = (value: number[]) => {
     setFilters({
@@ -92,7 +104,7 @@ export function SearchFiltersPanel({
   return (
     <div className={`space-y-6 ${className}`}>
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold">Filters</h3>
+        <h3 className="font-semibold">{t("title")}</h3>
         <Button
           variant="outline"
           size="sm"
@@ -100,14 +112,14 @@ export function SearchFiltersPanel({
           className="border-emerald-800/30 bg-emerald-950/10 text-xs"
         >
           <X className="h-3 w-3 mr-1" />
-          Reset
+          {t("resetButton")}
         </Button>
       </div>
 
       <div className="space-y-4">
         <div className="space-y-2">
           <div className="flex justify-between">
-            <Label htmlFor="price-range">Price Range</Label>
+            <Label htmlFor="price-range">{t("priceRange")}</Label>
             <span className="text-sm text-muted-foreground">{priceLabel}</span>
           </div>
           <Slider
@@ -122,16 +134,16 @@ export function SearchFiltersPanel({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="beds">Bedrooms</Label>
+          <Label htmlFor="beds">{t("bedrooms")}</Label>
           <Select
             value={filters.beds === null ? "any" : filters.beds.toString()}
             onValueChange={handleBedsChange}
           >
             <SelectTrigger id="beds" className="bg-background/50">
-              <SelectValue placeholder="Any" />
+              <SelectValue placeholder={t("any")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="any">Any</SelectItem>
+              <SelectItem value="any">{t("any")}</SelectItem>
               <SelectItem value="1">1+</SelectItem>
               <SelectItem value="2">2+</SelectItem>
               <SelectItem value="3">3+</SelectItem>
@@ -141,16 +153,16 @@ export function SearchFiltersPanel({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="baths">Bathrooms</Label>
+          <Label htmlFor="baths">{t("bathrooms")}</Label>
           <Select
             value={filters.baths === null ? "any" : filters.baths.toString()}
             onValueChange={handleBathsChange}
           >
             <SelectTrigger id="baths" className="bg-background/50">
-              <SelectValue placeholder="Any" />
+              <SelectValue placeholder={t("any")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="any">Any</SelectItem>
+              <SelectItem value="any">{t("any")}</SelectItem>
               <SelectItem value="1">1+</SelectItem>
               <SelectItem value="2">2+</SelectItem>
               <SelectItem value="3">3+</SelectItem>
@@ -160,19 +172,19 @@ export function SearchFiltersPanel({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="property-type">Property Type</Label>
+          <Label htmlFor="property-type">{t("propertyType")}</Label>
           <Select
             value={filters.propertyType === null ? "any" : filters.propertyType}
             onValueChange={handlePropertyTypeChange}
           >
             <SelectTrigger id="property-type" className="bg-background/50">
-              <SelectValue placeholder="Any" />
+              <SelectValue placeholder={t("any")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="any">Any</SelectItem>
+              <SelectItem value="any">{t("any")}</SelectItem>
               {propertyTypes.map((type) => (
                 <SelectItem key={type.value} value={type.value}>
-                  {type.label}
+                  propertyTypes.${type.value}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -181,7 +193,7 @@ export function SearchFiltersPanel({
 
         <div className="space-y-2">
           <div className="flex justify-between">
-            <Label htmlFor="sqft-range">Square Footage</Label>
+            <Label htmlFor="sqft-range">{t("squareFootage")}</Label>
             <span className="text-sm text-muted-foreground">{sqftLabel}</span>
           </div>
           <Slider
@@ -196,7 +208,7 @@ export function SearchFiltersPanel({
         </div>
 
         <div className="space-y-2">
-          <Label>Features</Label>
+          <Label>{t("feature")}</Label>
           <div className="grid grid-cols-1 gap-2">
             {featureOptions.map((feature) => (
               <div key={feature.value} className="flex items-center space-x-2">
@@ -212,7 +224,7 @@ export function SearchFiltersPanel({
                   htmlFor={`feature-${feature.value}`}
                   className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {feature.label}
+                  {t(`features.${feature.value}`)}
                 </label>
               </div>
             ))}
@@ -226,7 +238,7 @@ export function SearchFiltersPanel({
             className="w-full bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
             onClick={onClose}
           >
-            Apply Filters
+            {t("applyButton")}
           </Button>
         </div>
       )}
