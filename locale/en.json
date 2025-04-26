@@ -492,7 +492,7 @@
     "properties": "Properties",
     "usersAndAgents": "Users & Agents",
     "leadsAndMessages": "Leads & Messages",
-    "admin-admin": "Admin",
+    "admin-admin": "Agent Approval",
     "payments": "Payments",
     "analytics": "Analytics",
     "content": "Content",
@@ -1515,6 +1515,7 @@
     "welcome": "Welcome back to your agent dashboard",
     "totalProperties": "Total Properties",
     "pendingApprovals": "Pending Approvals",
+    "propertystatus": "Property Status",
     "approved": "Approved",
     "sold": "Sold",
     "rejected": "Rejected",
@@ -2017,6 +2018,7 @@
     "searchPlaceholder": "Search by location, address, or property name...",
     "filters": "Filters",
     "resultsCount": "{count} properties found",
+    "viewResults": "View Results",
     "noResults": {
       "title": "No properties found",
       "description": "We couldn't find any properties matching your search criteria. Try adjusting your filters."
@@ -2272,3 +2274,4 @@
     }
   }
 }
+

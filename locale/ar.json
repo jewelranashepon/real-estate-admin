@@ -476,7 +476,7 @@
     "properties": "العقارات",
     "usersAndAgents": "المستخدمون والوكلاء",
     "leadsAndMessages": "العملاء المحتملين والرسائل",
-    "admin-admin": "المسؤول",
+    "admin-admin": "موافقة الوكيل",
     "payments": "المدفوعات",
     "analytics": "التحليلات",
     "content": "المحتوى",
@@ -1501,6 +1501,8 @@
     "totalProperties": "إجمالي العقارات",
     "pendingApprovals": "الموافقات المعلقة",
     "approved": "تمت الموافقة",
+    "propertystatus": "حالة العقار",
+
     "sold": "تم البيع",
     "rejected": "مرفوضة",
     "fromLastMonth": "من الشهر الماضي",
@@ -1922,6 +1924,7 @@
     "title": "بحث العقارات",
     "searchPlaceholder": "ابحث حسب الموقع، اسم العقار...",
     "filters": "الفلاتر",
+    "viewResults": "عرض النتائج",
     "resultsCount": "تم العثور على {count} عقار مطابق لبحثك",
     "noResults": {
       "title": "لا توجد عقارات",

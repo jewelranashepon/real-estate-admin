@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -36,42 +35,83 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-
 import { signOut } from "@/lib/auth-client";
 import { useRouter } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
 export default function AgentSidebar() {
   const pathname = usePathname();
-  const [propertiesOpen, setPropertiesOpen] = useState(true);
-  const [helpOpen, setHelpOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState("");
+  const [propertiesOpen, setPropertiesOpen] = useState(false);
   const pendingNotifications = 3;
   const t = useTranslations();
   const router = useRouter();
   const locale = useLocale();
   const isRtl = locale === "ar";
 
-  const isActive = (path: string) => {
-    return pathname === path;
+  useEffect(() => {
+    // URL পরিবর্তন হলে Active মেনু আপডেট করুন
+    if (pathname === "/agent/dashboard") {
+      setActiveMenu("dashboard");
+      setPropertiesOpen(false);
+    } else if (pathname === "/agent/overview") {
+      setActiveMenu("overview");
+      setPropertiesOpen(false);
+    } else if (pathname === "/agent/leads") {
+      setActiveMenu("leads");
+      setPropertiesOpen(false);
+    } else if (pathname.startsWith("/agent/properties")) {
+      setPropertiesOpen(true);
+      if (pathname === "/agent/properties/add") {
+        setActiveMenu("addProperty");
+      } else if (pathname === "/agent/map") {
+        setActiveMenu("propertyMap");
+      } else {
+        setActiveMenu("myProperties");
+      }
+    } else if (pathname === "/agent/profile") {
+      setActiveMenu("profile");
+      setPropertiesOpen(false);
+    } else if (pathname === "/agent/notifications") {
+      setActiveMenu("notifications");
+      setPropertiesOpen(false);
+    }
+  }, [pathname]);
+
+  const handleMenuClick = (menu: string) => {
+    setActiveMenu(menu);
+    if (
+      menu === "myProperties" ||
+      menu === "addProperty" ||
+      menu === "propertyMap"
+    ) {
+      setPropertiesOpen(true);
+    } else {
+      setPropertiesOpen(false);
+    }
+  };
+
+  const getActiveClass = (menu: string) => {
+    return activeMenu === menu ? "bg-green-600 text-white" : "";
   };
 
   return (
     <div className="border-r h-full flex flex-col w-64 rtl:order-1">
+      {/* সাইডবার হেডার */}
       <SidebarHeader className="bg-green-600 text-white flex flex-col items-center justify-center py-6">
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-2">
             <Building className="h-6 w-6 text-white" />
-            <h1 className="text-xl font-bold"> {t("common.agentPortal")}</h1>
+            <h1 className="text-xl font-bold">{t("common.agentPortal")}</h1>
           </div>
           <Badge variant="outline" className="px-2 py-0.5 text-xs text-white">
             {t("common.agentPortal")}
           </Badge>
         </div>
       </SidebarHeader>
-
       <SidebarSeparator />
-
       <SidebarContent className="bg-green-50">
+        {/* এজেন্ট প্রোফাইল */}
         <div className="mb-4 px-4">
           <div className="flex items-center gap-3 rounded-lg bg-white p-3 shadow-sm">
             <Avatar className="h-10 w-10 border-2 border-green-500">
@@ -89,6 +129,7 @@ export default function AgentSidebar() {
           </div>
         </div>
 
+        {/* ড্যাশবোর্ড মেনু */}
         <SidebarGroup>
           <SidebarGroupLabel className="text-green-800">
             {t("common.agentdashboard")}
@@ -98,9 +139,10 @@ export default function AgentSidebar() {
               <SidebarMenuItem>
                 <Link href="/agent/dashboard" passHref legacyBehavior>
                   <SidebarMenuButton
-                    isActive={isActive("/agent/dashboard")}
-                    tooltip={t("common.agentdashboard")}
-                    className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                    className={`hover:bg-green-500 hover:text-white ${getActiveClass(
+                      "dashboard"
+                    )}`}
+                    onClick={() => handleMenuClick("dashboard")}
                   >
                     <LayoutDashboard />
                     <span>{t("common.agentdashboard")}</span>
@@ -111,9 +153,10 @@ export default function AgentSidebar() {
               <SidebarMenuItem>
                 <Link href="/agent/overview" passHref legacyBehavior>
                   <SidebarMenuButton
-                    isActive={isActive("/agent/overview")}
-                    tooltip={t("common.overview")}
-                    className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                    className={`hover:bg-green-500 hover:text-white ${getActiveClass(
+                      "overview"
+                    )}`}
+                    onClick={() => handleMenuClick("overview")}
                   >
                     <BarChart4 />
                     <span>{t("common.overview")}</span>
@@ -124,9 +167,10 @@ export default function AgentSidebar() {
               <SidebarMenuItem>
                 <Link href="/agent/leads" passHref legacyBehavior>
                   <SidebarMenuButton
-                    isActive={isActive("/agent/leads")}
-                    tooltip={t("common.leads")}
-                    className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                    className={`hover:bg-green-500 hover:text-white ${getActiveClass(
+                      "leads"
+                    )}`}
+                    onClick={() => handleMenuClick("leads")}
                   >
                     <SiGoogleadsense />
                     <span>{t("common.leads")}</span>
@@ -139,6 +183,7 @@ export default function AgentSidebar() {
 
         <SidebarSeparator />
 
+        {/* প্রোপার্টিজ মেনু */}
         <SidebarGroup>
           <SidebarGroupLabel className="text-green-800">
             {t("common.properties")}
@@ -152,7 +197,15 @@ export default function AgentSidebar() {
               >
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
-                    <SidebarMenuButton className="hover:bg-green-500 hover:text-white">
+                    <SidebarMenuButton
+                      className={`hover:bg-green-500 hover:text-white ${
+                        activeMenu === "myProperties" ||
+                        activeMenu === "addProperty" ||
+                        activeMenu === "propertyMap"
+                          ? "bg-green-600 text-white"
+                          : ""
+                      }`}
+                    >
                       <Building />
                       <span>{t("common.properties")}</span>
                       <ChevronDown
@@ -164,51 +217,64 @@ export default function AgentSidebar() {
                   </CollapsibleTrigger>
                 </SidebarMenuItem>
                 <CollapsibleContent>
-                  <SidebarMenuSub>
-                    <SidebarMenuSubItem>
+                  <ul className="mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-green-300 px-2.5 py-0.5">
+                    <li>
                       <Link href="/agent/properties" passHref legacyBehavior>
-                        <SidebarMenuSubButton
-                          isActive={isActive("/agent/properties")}
-                          className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                        <a
+                          className={`flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sm hover:bg-green-500 hover:text-white ${
+                            activeMenu === "myProperties"
+                              ? "bg-green-600 text-white"
+                              : ""
+                          }`}
+                          onClick={() => handleMenuClick("myProperties")}
                         >
                           {t("common.myProperties")}
-                        </SidebarMenuSubButton>
+                        </a>
                       </Link>
-                    </SidebarMenuSubItem>
-                    <SidebarMenuSubItem>
+                    </li>
+                    <li>
                       <Link
                         href="/agent/properties/add"
                         passHref
                         legacyBehavior
                       >
-                        <SidebarMenuSubButton
-                          isActive={isActive("/agent/properties/add")}
-                          className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                        <a
+                          className={`flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sm hover:bg-green-500 hover:text-white ${
+                            activeMenu === "addProperty"
+                              ? "bg-green-600 text-white"
+                              : ""
+                          }`}
+                          onClick={() => handleMenuClick("addProperty")}
                         >
                           {t("common.addProperty")}
-                        </SidebarMenuSubButton>
+                        </a>
                       </Link>
-                    </SidebarMenuSubItem>
-                    <SidebarMenuSubItem>
+                    </li>
+                    <li>
                       <Link href="/agent/map" passHref legacyBehavior>
-                        <SidebarMenuSubButton
-                          isActive={isActive("/agent/map")}
-                          className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                        <a
+                          className={`flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sm hover:bg-green-500 hover:text-white ${
+                            activeMenu === "propertyMap"
+                              ? "bg-green-600 text-white"
+                              : ""
+                          }`}
+                          onClick={() => handleMenuClick("propertyMap")}
                         >
                           {t("common.propertyMap")}
-                        </SidebarMenuSubButton>
+                        </a>
                       </Link>
-                    </SidebarMenuSubItem>
-                  </SidebarMenuSub>
+                    </li>
+                  </ul>
                 </CollapsibleContent>
               </Collapsible>
 
               <SidebarMenuItem>
                 <Link href="/agent/profile" passHref legacyBehavior>
                   <SidebarMenuButton
-                    isActive={isActive("/agent/profile")}
-                    tooltip={t("common.profile")}
-                    className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                    className={`hover:bg-green-500 hover:text-white ${getActiveClass(
+                      "profile"
+                    )}`}
+                    onClick={() => handleMenuClick("profile")}
                   >
                     <User />
                     <span>{t("common.profile")}</span>
@@ -219,9 +285,10 @@ export default function AgentSidebar() {
               <SidebarMenuItem>
                 <Link href="/agent/notifications" passHref legacyBehavior>
                   <SidebarMenuButton
-                    isActive={isActive("/agent/notifications")}
-                    tooltip={t("common.notifications")}
-                    className="hover:bg-green-500 hover:text-white data-[active=true]:bg-green-600 data-[active=true]:text-white"
+                    className={`hover:bg-green-500 hover:text-white ${getActiveClass(
+                      "notifications"
+                    )}`}
+                    onClick={() => handleMenuClick("notifications")}
                   >
                     <Bell />
                     <span>{t("common.notifications")}</span>
@@ -239,7 +306,7 @@ export default function AgentSidebar() {
 
         <SidebarSeparator />
       </SidebarContent>
-
+      {/* সাইডবার ফুটার */}
       <SidebarFooter className="p-4 bg-green-50">
         <SidebarMenu>
           <SidebarMenuItem>
@@ -267,35 +334,7 @@ export default function AgentSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
+         
     </div>
   );
 }
-
-// These components are needed for the submenu functionality
-const SidebarMenuSub = ({
-  className,
-  ...props
-}: React.ComponentProps<"ul">) => (
-  <ul
-    className={`mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-green-300 px-2.5 py-0.5 group-data-[collapsible=icon]:hidden ${className}`}
-    {...props}
-  />
-);
-
-const SidebarMenuSubItem = (props: React.ComponentProps<"li">) => (
-  <li {...props} />
-);
-
-const SidebarMenuSubButton = ({
-  className,
-  isActive,
-  ...props
-}: React.ComponentProps<"a"> & {
-  isActive?: boolean;
-}) => (
-  <a
-    className={`flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-green-500 hover:text-white focus-visible:ring-2 active:bg-green-500 active:text-white disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground text-sm data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground group-data-[collapsible=icon]:hidden ${className}`}
-    data-active={isActive}
-    {...props}
-  />
-);

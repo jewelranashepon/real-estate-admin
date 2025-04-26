@@ -31,7 +31,7 @@ import { useTranslations } from "next-intl";
 
 export default function Dashboard() {
   const router = useRouter();
-  const t = useTranslations();
+  const t = useTranslations("serachPage");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
@@ -289,7 +289,13 @@ export default function Dashboard() {
                               variant="outline"
                               className="bg-emerald-950/20 border-emerald-900/20"
                             >
-                              ${search.priceRange[0]} - ${search.priceRange[1]}
+                              <span
+                        style={{ fontFamily: "saudi_riyal" }}
+                        className="icon-saudi_riyal"
+                      ></span> {search.priceRange[0]} - <span
+                      style={{ fontFamily: "saudi_riyal" }}
+                      className="icon-saudi_riyal"
+                    ></span>{search.priceRange[1]}
                             </Badge>
                           </div>
                         </div>
@@ -298,7 +304,7 @@ export default function Dashboard() {
                           variant="ghost"
                           className="text-emerald-400"
                         >
-                          View Results
+                          {t('viewResults')}
                         </Button>
                       </div>
                     </Card>

@@ -9,9 +9,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Globe } from "lucide-react";
-
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 export default function LanguageSwitcher() {
   const router = useRouter();
@@ -19,10 +19,15 @@ export default function LanguageSwitcher() {
   const { locale } = useParams();
   const t = useTranslations();
 
+  // Set initial direction based on current locale
+  useEffect(() => {
+    document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = locale as string;
+  }, [locale]);
+
   const switchLanguage = (newLocale: string) => {
     router.push(pathname, { locale: newLocale });
-    document.documentElement.dir = newLocale === "ar" ? "rtl" : "ltr";
-    document.documentElement.lang = newLocale;
+    // The useEffect will handle the direction change after the locale changes
   };
 
   return (
