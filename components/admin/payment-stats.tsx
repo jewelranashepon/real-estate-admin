@@ -13,12 +13,12 @@ export function PaymentStats() {
           </div>
           <div>
             <p className="text-sm font-medium text-muted-foreground">
-              {t("totalRevenue")}
+              {t("totalRevenue")} 
             </p>
-            <h3 className="text-2xl font-bold"> {t("totalRevenueMoney")}</h3>
+            <h3 className="text-2xl font-bold"> {t("totalRevenueMoney")} <span className="icon-saudi_riyal"></span></h3>
             <p className="text-xs text-muted-foreground">
               <span className="text-emerald-500">
-                {t("totalRevenuePervcentance")}
+                {t("totalRevenuePervcentance")} 
               </span>
             </p>
           </div>
@@ -35,7 +35,7 @@ export function PaymentStats() {
               {t("pendingPayments")}
             </p>
             <h3 className="text-2xl font-bold">
-              {t("pendingTransactionsAmount")}
+              {t("pendingTransactionsAmount")} <span className="icon-saudi_riyal"></span>
             </h3>
             <p className="text-xs text-muted-foreground">
               <span className="text-amber-500">
