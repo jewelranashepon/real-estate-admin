@@ -154,11 +154,27 @@ export default function SavedPropertiesPage() {
   };
 
   const Currency = () => {
-    return <div>5,200,000 <span className="icon-saudi_riyal"></span></div>
-  }
-  const Currency2 = () =>{
-    return <div>10,500,000 <span className="icon-saudi_riyal"></span></div>
-  }
+    return (
+      <div>
+        5,200,000{" "}
+        <span
+          style={{ fontFamily: "saudi_riyal" }}
+          className="icon-saudi_riyal"
+        ></span>
+      </div>
+    );
+  };
+  const Currency2 = () => {
+    return (
+      <div>
+        10,500,000{" "}
+        <span
+          style={{ fontFamily: "saudi_riyal" }}
+          className="icon-saudi_riyal"
+        ></span>
+      </div>
+    );
+  };
 
   const getFilterLabel = (option: FilterOption) => {
     switch (option) {
@@ -212,9 +228,11 @@ export default function SavedPropertiesPage() {
           />
           <StatCard
             title={t("stats.averagePrice")}
-            Currency = {Currency2}
+            Currency={Currency2}
             icon={<BarChart3 className="h-5 w-5" />}
-            change={`${t("stats.range")}: $${lowestPrice.toLocaleString()} - $${highestPrice.toLocaleString()}`}
+            change={`${t(
+              "stats.range"
+            )}: $${lowestPrice.toLocaleString()} - $${highestPrice.toLocaleString()}`}
             trend="neutral"
           />
           <StatCard
@@ -437,7 +455,9 @@ export default function SavedPropertiesPage() {
             <div className="h-16 w-16 rounded-full bg-gradient-to-r from-emerald-500/20 to-green-500/20 flex items-center justify-center text-emerald-400 mb-4">
               <Heart className="h-8 w-8" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">{t("emptyState.title")}</h3>
+            <h3 className="text-xl font-semibold mb-2">
+              {t("emptyState.title")}
+            </h3>
             <p className="text-muted-foreground text-center max-w-md mb-6">
               {savedProperties.length > 0
                 ? t("emptyState.filterMessage")

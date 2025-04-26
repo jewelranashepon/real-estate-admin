@@ -22,55 +22,6 @@ import {
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-// Mock notification data
-const notificationsen = [
-  {
-    id: 1,
-    title: "Property Approved",
-    message:
-      'Your property "Luxury Villa in Al Olaya" has been approved and is now visible to the public.',
-    date: "2023-11-15T10:30:00",
-    type: "success",
-    read: false,
-  },
-  {
-    id: 2,
-    title: "Property Rejected",
-    message:
-      'Your property "Studio Apartment" has been rejected. Please update the information and resubmit.',
-    date: "2023-11-14T14:45:00",
-    type: "error",
-    read: false,
-  },
-  {
-    id: 3,
-    title: "License Expiry Warning",
-    message:
-      "Your real estate license will expire in 30 days. Please renew it before expiration.",
-    date: "2023-11-12T09:15:00",
-    type: "warning",
-    read: true,
-  },
-  {
-    id: 4,
-    title: "System Maintenance",
-    message:
-      "The system will be undergoing maintenance on November 20th from 2:00 AM to 4:00 AM (GMT+3).",
-    date: "2023-11-10T16:20:00",
-    type: "info",
-    read: true,
-  },
-  {
-    id: 5,
-    title: "New Feature Added",
-    message:
-      "We've added a new map feature to help you visualize your property locations. Check it out!",
-    date: "2023-11-08T11:05:00",
-    type: "info",
-    read: true,
-  },
-];
-
 const notifications = [
   {
     id: 1,
@@ -239,13 +190,13 @@ export default function NotificationCenter() {
                 value="success"
                 className="data-[state=active]:bg-green-600 data-[state=active]:text-white"
               >
-                {t("properties.approved")}
+                {t("property.approved")}
               </TabsTrigger>
               <TabsTrigger
                 value="error"
                 className="data-[state=active]:bg-green-600 data-[state=active]:text-white"
               >
-                {t("properties.rejected")}
+                {t("property.rejected")}
               </TabsTrigger>
               <TabsTrigger
                 value="info"
@@ -316,7 +267,7 @@ export default function NotificationCenter() {
                               }
                             >
                               <Trash2 className="h-4 w-4 mr-1" />
-                              {t("properties.delete")}
+                              {t("property.delete")}
                             </Button>
                           </div>
                         </div>

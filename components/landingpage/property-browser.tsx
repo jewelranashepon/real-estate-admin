@@ -272,7 +272,10 @@ export default function PropertyBrowser() {
                       <div className="flex items-center mt-2">
                         <span className="text-teal-400 font-semibold">
                           {property.price}{" "}
-                          <span className="icon-saudi_riyal"></span>
+                          <span
+                            style={{ fontFamily: "saudi_riyal" }}
+                            className="icon-saudi_riyal"
+                          ></span>
                         </span>
                         {property.falCertified && (
                           <span className="ml-2 bg-teal-900 text-teal-300 text-xs px-2 py-1 rounded">
@@ -430,7 +433,10 @@ export default function PropertyBrowser() {
                       </span>
                       <span className="font-semibold text-teal-400">
                         {selectedProperty.price}{" "}
-                        <span className="icon-saudi_riyal"></span>
+                        <span
+                          style={{ fontFamily: "saudi_riyal" }}
+                          className="icon-saudi_riyal"
+                        ></span>
                       </span>
                     </div>
                     <div className="flex justify-between pb-2 border-b border-gray-700">
