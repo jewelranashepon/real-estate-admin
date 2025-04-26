@@ -82,7 +82,7 @@ export default function AdminHeader() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon">
               <Avatar className="h-10 w-10">
-                <AvatarImage src="/avatar.png" alt="Admin" />
+                <AvatarImage src="/image.jpg" alt="Admin" />
                 <AvatarFallback>{user?.name}</AvatarFallback>
               </Avatar>
             </Button>

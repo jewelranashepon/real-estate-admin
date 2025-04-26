@@ -57,7 +57,7 @@ export function LeadsTable() {
     {
       id: "1",
       name: t("mockLeads.john.name"),
-      email: "john.smith@example.com",
+      email: "abdulkuddus@example.com",
       phone: t("mockLeads.john.phone"),
       propertyInterest: t("mockLeads.john.propertyInterest"),
       status: t("mockLeads.john.status") as Lead["status"],
@@ -67,7 +67,7 @@ export function LeadsTable() {
     {
       id: "2",
       name: t("mockLeads.sarah.name"),
-      email: "sarah.j@example.com",
+      email: "julfiqar@example.com",
       phone: t("mockLeads.sarah.phone"),
       propertyInterest: t("mockLeads.sarah.propertyInterest"),
       status: t("mockLeads.sarah.status") as Lead["status"],
@@ -77,7 +77,7 @@ export function LeadsTable() {
     {
       id: "3",
       name: t("mockLeads.michael.name"),
-      email: "michael.b@example.com",
+      email: "saleh@example.com",
       phone: t("mockLeads.michael.phone"),
       propertyInterest: t("mockLeads.michael.propertyInterest"),
       status: t("mockLeads.michael.status") as Lead["status"],
@@ -87,7 +87,7 @@ export function LeadsTable() {
     {
       id: "4",
       name: t("mockLeads.emily.name"),
-      email: "emily.d@example.com",
+      email: "salman@example.com",
       phone: t("mockLeads.emily.phone"),
       propertyInterest: t("mockLeads.emily.propertyInterest"),
       status: t("mockLeads.emily.status") as Lead["status"],
@@ -97,7 +97,7 @@ export function LeadsTable() {
     {
       id: "5",
       name: t("mockLeads.david.name"),
-      email: "david.w@example.com",
+      email: "sulaiman@example.com",
       phone: t("mockLeads.david.phone"),
       propertyInterest: t("mockLeads.david.propertyInterest"),
       status: t("mockLeads.david.status") as Lead["status"],

@@ -71,8 +71,9 @@ export default function Home() {
       <StatisticsSection />
 
       <div className="w-full h-[2px] bg-green-900"></div>
-
-      <FeaturesSection />
+      <div id="features">
+        <FeaturesSection />
+      </div>
 
       <section className="py-20 bg-slate-900">
         <div className="container mx-auto px-4">

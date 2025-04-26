@@ -17,13 +17,11 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { propertyListings } from "@/lib/property-data";
 import type { PropertyData } from "@/lib/property-data";
 import { signOut, useSession } from "@/lib/auth-client";
-import Typography from "@mui/material/Typography";
-import Chat from "./chat";
 
-const languageOptions = [
-  { code: "en", label: "English", flag: "https://flagcdn.com/w40/us.png" },
-  { code: "ar", label: "العربية", flag: "https://flagcdn.com/w40/sa.png" },
-];
+import Chat from "./chat";
+import LanguageSwitcher from "../language-switcher";
+import Navbar from "../landingpage/navbar";
+
 export default function DesktopListingsView() {
   const router = useRouter();
   const t = useTranslations("app");
@@ -31,9 +29,6 @@ export default function DesktopListingsView() {
   const isRtl = locale === "ar";
   const [activeTab, setActiveTab] = useState("latest");
   const session = useSession();
-  const changeLanguage = (lang: string) => {
-    router.push(`/${lang}/listings`);
-  };
 
   // State to manage chat visibility
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -45,103 +40,7 @@ export default function DesktopListingsView() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center">
-          <img src="/Boed Logo.png" width={120} height={120} />
-          <nav className="ml-auto flex items-center gap-6">
-            {/* Service Link */}
-            <Link
-              href="/services"
-              className="flex items-center gap-1 font-bold text-gray-700 hover:text-gray-900"
-            >
-              <Briefcase className="h-5 w-5 font-bold" /> Service
-            </Link>
-
-            {/* Profile Link, only visible if the session exists */}
-            {session?.data ? (
-              <Link
-                href={`/${locale}/profile`}
-                className="flex items-center gap-1 font-bold text-gray-700 hover:text-gray-900"
-              >
-                <UserIcon className="h-5 w-5 " /> Profile
-              </Link>
-            ) : null}
-
-            {/* Navbar Chat Button */}
-            <button
-              onClick={toggleChat}
-              className="flex items-center gap-1 font-bold text-gray-700 hover:text-gray-900"
-            >
-              <MessageCircle className="h-5 w-5" />
-              Chat
-            </button>
-          </nav>
-
-          {/* Language Selector */}
-          <div className="ml-6 flex items-center gap-4">
-            <div className="hidden md:flex items-center">
-              <Typography
-                variant="subtitle2"
-                className="text-black font-semibold uppercase text-xs mb-1 p-4"
-              >
-                Choose Language :
-              </Typography>
-              <div className="flex items-center space-x-2">
-                {languageOptions.map(({ code, label, flag }) => (
-                  <button
-                    key={code}
-                    onClick={() => changeLanguage(code)}
-                    className="flex flex-col items-center hover:opacity-75 transition duration-200"
-                  >
-                    <img
-                      src={flag}
-                      alt={label}
-                      width={40}
-                      height={40}
-                      className="shadow-md"
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
-            {session?.data ? (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  signOut({
-                    fetchOptions: {
-                      onSuccess: () => {
-                        router.refresh();
-                      },
-                    },
-                  });
-                }}
-              >
-                Log Out
-              </Button>
-            ) : (
-              <>
-                <Link href="/sign-in">
-                  <Button variant="outline" size="sm">
-                    {t("auth.signIn")}
-                  </Button>
-                </Link>
-                <Link href="/sign-up">
-                  <Button size="sm" className="bg-green-600 hover:bg-green-500">
-                    {t("auth.signUp")}
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-        {/* Conditionally render the Chat component at the bottom of the screen */}
-        {/* Conditionally render the Chat component */}
-        {isChatOpen && (
-          <Chat isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />
-        )}
-      </header>
+      <Navbar />
 
       <div className="container mx-auto px-6 py-6">
         <div className="flex items-center justify-between mb-5">

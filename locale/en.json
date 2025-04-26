@@ -243,6 +243,7 @@
     "falCertified": "FAL Certified",
     "sampleDescription": "This stunning property features modern architecture with spacious living areas, high-end finishes, and breathtaking views. The open floor plan is perfect for entertaining, while the private outdoor space offers tranquility in the heart of the city.",
     "proceedButton": "Proceed with Purchase",
+    "exploreAllButton": "Explore All Properties",
     "pricing": {
       "title": "Pricing Details",
       "price": "Price",
@@ -1501,12 +1502,11 @@
     "error": "Error",
     "unexpectedError": "An unexpected error occurred.",
     "SP": "Saved Properties",
-    "RS" : "Recent Searches",
-    "Messages" : "Messages",
-    "YSP" : "Your Saved Properties",
-    "VAS" : "View All Saved",
-    "NS" : "New Search"
-
+    "RS": "Recent Searches",
+    "Messages": "Messages",
+    "YSP": "Your Saved Properties",
+    "VAS": "View All Saved",
+    "NS": "New Search"
   },
   "agentdashboard": {
     "welcome": "Welcome back to your agent dashboard",
@@ -2211,6 +2211,61 @@
           "description": "End-to-end encrypted payment system and verified property listings to ensure safe and legitimate transactions."
         }
       ]
+    }
+  },
+  "Services": {
+    "title": "Our Comprehensive Services",
+    "subtitle": "Tailored solutions for all your real estate needs",
+    "propertyManagement": {
+      "title": "Property Management",
+      "description": "End-to-end management of residential and commercial properties.",
+      "benefits": {
+        "1": "24/7 maintenance support",
+        "2": "Tenant screening & leasing",
+        "3": "Financial reporting"
+      }
+    },
+    "investment": {
+      "title": "Investment Consulting",
+      "description": "Data-driven strategies to maximize your real estate portfolio returns.",
+      "highlight": "Average 12.7% ROI for our clients in 2023"
+    },
+    "valuation": {
+      "title": "Premium Valuation",
+      "description": "Accurate market assessments by certified appraisers.",
+      "label": "Accuracy Rate"
+    },
+    "charts": {
+      "distributionTitle": "Services Distribution",
+      "growthTitle": "Annual Growth",
+      "growthLabel": "Growth Percentage",
+      "property": "Property",
+      "investment": "Investment",
+      "legal": "Legal Services",
+      "valuation": "Valuation",
+      "relocation": "Relocation"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "formTitle": "Send Us a Message",
+    "form": {
+      "name": "Your Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email",
+      "message": "Your Message",
+      "messagePlaceholder": "Type your message here",
+      "submitButton": "Send Message"
+    },
+    "contactInfo": {
+      "title": "Our Contact Information",
+      "addressTitle": "Office Address",
+      "address": "123 Real Estate Ave, Suite 100, Saudi Arab, NY 10001",
+      "phoneTitle": "Phone Number",
+      "emailTitle": "Email",
+      "hoursTitle": "Working Hours",
+      "hours": "Monday - Friday: 9:00 AM - 6:00 PM"
     }
   }
 }

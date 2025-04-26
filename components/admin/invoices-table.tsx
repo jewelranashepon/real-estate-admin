@@ -62,8 +62,8 @@ export function InvoicesTable() {
     {
       id: "1",
       invoiceNumber: "INV-2023-001",
-      customer: "John Smith",
-      email: "john.smith@example.com",
+      customer: "سلمان خان",
+      email: "salman@example.com",
       amount: 350000,
       status: "Paid",
       dueDate: "2023-11-30T00:00:00Z",
