@@ -29,7 +29,7 @@ export default function AdminHeader() {
 
   return (
     <header
-      className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6 shadow-sm"
+      className="sticky top-0 z-30 flex shrink-0 h-16 items-center gap-4 border-b bg-background px-6 shadow-sm"
       dir={isRtl ? "rtl" : "ltr"}
     >
       <SidebarTrigger className="md:hidden" />
