@@ -1501,6 +1501,8 @@
     "totalProperties": "إجمالي العقارات",
     "pendingApprovals": "الموافقات المعلقة",
     "approved": "تمت الموافقة",
+    "propertystatus": "حالة العقار",
+
     "sold": "تم البيع",
     "rejected": "مرفوضة",
     "fromLastMonth": "من الشهر الماضي",

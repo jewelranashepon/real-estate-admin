@@ -1515,6 +1515,7 @@
     "welcome": "Welcome back to your agent dashboard",
     "totalProperties": "Total Properties",
     "pendingApprovals": "Pending Approvals",
+    "propertystatus": "Property Status",
     "approved": "Approved",
     "sold": "Sold",
     "rejected": "Rejected",
