@@ -243,12 +243,16 @@
   },
 
   "stats": {
-    "title": "موثوق به من قبل الآلاف",
+    "title": "موثوق من قبل الآلاف",
     "subtitle": "أرقامنا تتحدث عن نفسها - انضم إلى مجتمعنا المتنامي",
-    "propertiesListed": "عقارات مدرجة",
+    "propertiesListed": "عدد العقارات المدرجة",
+    "propertiesListedValue": "١٠٬٠٠٠",
     "happyClients": "عملاء سعداء",
-    "yearsExperience": "سنوات من الخبرة",
-    "awardsWon": "جوائز حصلنا عليها"
+    "happyClientsValue": "٥٬٠٠٠",
+    "yearsExperience": "سنوات الخبرة",
+    "yearsExperienceValue": "١٠",
+    "awardsWon": "الجوائز المحصولة",
+    "awardsWonValue": "٢٠"
   },
 
   "footer": {
@@ -293,7 +297,7 @@
 
   "properties": {
     "availableProperties": "العقارات المتاحة",
-    "falCertified": "معتمد من FAL",
+    "falCertified": "معتمد من فال",
     "sampleDescription": "تتميز هذه العقار بالهندسة المعمارية الحديثة مع مساحات معيشة واسعة، تشطيبات عالية الجودة، وإطلالات خلابة. التصميم المفتوح مثالي للترفيه، بينما توفر المساحة الخارجية الخاصة الهدوء في قلب المدينة.",
     "proceedButton": "المضي قدما في الشراء",
     "exploreAllButton": " استكشاف جميع العقارات",
@@ -2257,7 +2261,7 @@
     "contactInfo": {
       "title": "معلومات الاتصال الخاصة بنا",
       "addressTitle": "عنوان المكتب",
-      "address": "123 شارع العقارات، الطابق 100، نيويورك، نيويورك 10001",
+      "address": "١٢٣ شارع العقارات، الطابق ٠٠١، نيويورك، نيويورك  ١٠٠٠١",
       "phoneTitle": "رقم الهاتف",
       "emailTitle": "البريد الإلكتروني",
       "hoursTitle": "ساعات العمل",
