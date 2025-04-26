@@ -3,10 +3,9 @@ import type { Metadata } from "next";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AdminSidebar from "@/components/admin/admin-sidebar";
 import AdminHeader from "@/components/admin/admin-header";
-import { NextIntlClientProvider } from "next-intl";
-import { notFound } from "next/navigation";
 import { getSession } from "@/lib/getSession";
 import { redirect } from "@/i18n/navigation";
+import { getLocale } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Real Estate Admin Panel",
@@ -15,19 +14,10 @@ export const metadata: Metadata = {
 
 export default async function AdminLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-
-  let messages;
-  try {
-    messages = (await import(`../../../locale/${locale}.json`)).default;
-  } catch (error) {
-    notFound(); // Show 404 if locale file is missing
-  }
+  const locale = await getLocale();
 
   const session = await getSession();
   const role = session?.user?.role;
@@ -45,17 +35,15 @@ export default async function AdminLayout({
   }
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <SidebarProvider>
-        <div className="flex h-screen w-full bg-background overflow-hidden">
-          <AdminSidebar />
+    <SidebarProvider>
+      <div className="flex h-screen w-full bg-background overflow-hidden">
+        <AdminSidebar />
 
-          <div className="flex flex-col flex-1 h-full">
-            <AdminHeader />
-            <main className="flex-1 overflow-y-auto p-6">{children}</main>
-          </div>
+        <div className="flex flex-col flex-1 h-full">
+          <AdminHeader />
+          <main className="flex-1 overflow-y-auto p-6">{children}</main>
         </div>
-      </SidebarProvider>
-    </NextIntlClientProvider>
+      </div>
+    </SidebarProvider>
   );
 }

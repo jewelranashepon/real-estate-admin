@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" style={{ fontFamily: "saudi_riyal" }}>
-      <body>
+    <html suppressHydrationWarning>
+      <body style={{ fontFamily: "saudi_riyal" }}>
         <SearchProvider>{children}</SearchProvider>
         <Toaster />
       </body>

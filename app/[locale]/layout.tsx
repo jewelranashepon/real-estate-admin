@@ -1,14 +1,12 @@
 import type React from "react";
-import { NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
-import { getMessages } from "next-intl/server";
-
+import { routing } from "@/i18n/routing";
 import "../globals.css";
 
 import { SearchProvider } from "@/lib/search-context";
-import { locales } from "@/next-intl.config";
 
-export default async function MainLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
@@ -16,19 +14,17 @@ export default async function MainLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  if (!locales.includes(locale)) {
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
-  const messages = await getMessages({ locale });
-
   return (
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <SearchProvider>
-            <main className="grow shrink-0 overflow-y-auto">{children}</main>
-          </SearchProvider>
+    <html lang={locale}>
+      <body>
+        <NextIntlClientProvider>
+          <SearchProvider>{children}</SearchProvider>
         </NextIntlClientProvider>
-    
+      </body>
+    </html>
   );
 }

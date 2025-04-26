@@ -2,16 +2,15 @@ import { redirect } from "@/i18n/navigation";
 import { getSession } from "@/lib/getSession";
 import { SidebarProvider } from "@/components/user/ui/sidebar";
 import { AppSidebar } from "@/components/user/app-sidebar";
+import { getLocale } from "next-intl/server";
 import LanguageSwitcher from "@/components/language-switcher";
 
 export default async function UserDashboardLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const locale = await getLocale();
   const session = await getSession();
   const role = session?.user?.role;
 
