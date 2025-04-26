@@ -43,7 +43,7 @@ export default function ServicesPage() {
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
   return (
-    <div dir={isRtl ? "rtl" : "ltr"} className="min-h-screen bg-gray-900">
+    <div dir={isRtl ? "rtl" : "ltr"} className="min-h-screen mt-16 bg-gray-900">
       <Navbar />
 
       <main className="container mx-auto px-4 py-12">

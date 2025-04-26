@@ -12,13 +12,13 @@ export default function HeroSection() {
     <section className="relative h-screen">
       <div className="absolute inset-0">
         <Image
-          src="/sa5.jpg"
+          src="/herobanner.jpg"
           alt="Dubai Skyline"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-black/70 to-slate-100"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-black/70 "></div>
       </div>
 
       <motion.div

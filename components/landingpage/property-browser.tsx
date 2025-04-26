@@ -11,9 +11,9 @@ type Property = {
   type: string;
   price: string;
   location: string;
-  beds: number;
-  baths: number;
-  area: number;
+  beds: string;
+  baths: string;
+  area: string;
   falCertified: boolean;
   thumbnail: string;
   image: string;
@@ -31,16 +31,22 @@ export default function PropertyBrowser() {
     null
   );
 
+  const formatToArabicDigits = (input: string | number): string => {
+    const formatter = new Intl.NumberFormat("ar-EG");
+    if (typeof input === "number") return formatter.format(input);
+    return input.replace(/\d+/g, (num) => formatter.format(Number(num)));
+  };
+
   const properties: Property[] = [
     {
       id: 1,
       title: t("sampleProperties.0.title"),
       type: t("types.villa"),
-      price: "AED 3,200,000",
+      price: formatToArabicDigits(" 3,200,000"),
       location: t("sampleProperties.0.location"),
-      beds: 4,
-      baths: 3,
-      area: 2200,
+      beds: formatToArabicDigits(4),
+      baths: formatToArabicDigits(3),
+      area: formatToArabicDigits(2200),
       falCertified: true,
       thumbnail: "/sa1.jpg",
       image: "/sa1.jpg",
@@ -49,11 +55,11 @@ export default function PropertyBrowser() {
       id: 2,
       title: t("sampleProperties.1.title"),
       type: t("types.apartment"),
-      price: "AED 1,850,000",
+      price: formatToArabicDigits(" 1,850,000"),
       location: t("sampleProperties.1.location"),
-      beds: 2,
-      baths: 2,
-      area: 1200,
+      beds: formatToArabicDigits(2),
+      baths: formatToArabicDigits(2),
+      area: formatToArabicDigits(1200),
       falCertified: false,
       thumbnail: "/sa2.jpg",
       image: "/sa2.jpg",
@@ -62,11 +68,11 @@ export default function PropertyBrowser() {
       id: 3,
       title: t("sampleProperties.2.title"),
       type: t("types.penthouse"),
-      price: "AED 4,750,000",
+      price: formatToArabicDigits(" 4,750,000"),
       location: t("sampleProperties.2.location"),
-      beds: 3,
-      baths: 3,
-      area: 2800,
+      beds: formatToArabicDigits(3),
+      baths: formatToArabicDigits(3),
+      area: formatToArabicDigits(2800),
       falCertified: true,
       thumbnail: "/sa3.webp",
       image: "/sa3.webp",
@@ -75,11 +81,11 @@ export default function PropertyBrowser() {
       id: 4,
       title: t("sampleProperties.3.title"),
       type: t("types.townhouse"),
-      price: "AED 2,300,000",
+      price: formatToArabicDigits(" 2,300,000"),
       location: t("sampleProperties.3.location"),
-      beds: 3,
-      baths: 2,
-      area: 1800,
+      beds: formatToArabicDigits(3),
+      baths: formatToArabicDigits(2),
+      area: formatToArabicDigits(1800),
       falCertified: true,
       thumbnail: "/sa4.jpeg",
       image: "/sa4.jpeg",
@@ -88,11 +94,11 @@ export default function PropertyBrowser() {
       id: 5,
       title: t("sampleProperties.4.title"),
       type: t("types.villa"),
-      price: "AED 5,500,000",
+      price: formatToArabicDigits(" 5,500,000"),
       location: t("sampleProperties.4.location"),
-      beds: 5,
-      baths: 4,
-      area: 3200,
+      beds: formatToArabicDigits(5),
+      baths: formatToArabicDigits(4),
+      area: formatToArabicDigits(3200),
       falCertified: false,
       thumbnail: "/sa5.jpg",
       image: "/sa5.jpg",
@@ -265,7 +271,8 @@ export default function PropertyBrowser() {
                       </p>
                       <div className="flex items-center mt-2">
                         <span className="text-teal-400 font-semibold">
-                          {property.price}
+                          {property.price}{" "}
+                          <span className="icon-saudi_riyal"></span>
                         </span>
                         {property.falCertified && (
                           <span className="ml-2 bg-teal-900 text-teal-300 text-xs px-2 py-1 rounded">
@@ -419,10 +426,11 @@ export default function PropertyBrowser() {
                   <div className="space-y-4 mb-6">
                     <div className="flex justify-between pb-2 border-b border-gray-700">
                       <span className="text-gray-400">
-                        {t("pricing.price")}
+                        {t("pricing.price")}{" "}
                       </span>
                       <span className="font-semibold text-teal-400">
-                        {selectedProperty.price}
+                        {selectedProperty.price}{" "}
+                        <span className="icon-saudi_riyal"></span>
                       </span>
                     </div>
                     <div className="flex justify-between pb-2 border-b border-gray-700">
