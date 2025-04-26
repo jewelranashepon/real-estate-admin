@@ -33,11 +33,7 @@ export default async function RootLayout({
   const locale = await getLocale();
 
   return (
-    <html
-      lang={locale}
-      className={`${inter.className} antialiased`}
-      suppressHydrationWarning
-    >
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn("antialiased", {
           [inter.className]: locale === "en",
