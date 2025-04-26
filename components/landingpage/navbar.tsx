@@ -17,11 +17,11 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-slate-900 shadow-md top-0 fixed w-full z-50 rtl:transition-all duration-300 ease-in-out">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-2">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-blue-600">
+            <Link href="/" className="text-2xl font-bold text-white">
               <img src="/realLogo.png" alt="RealEstate" width={100} />
             </Link>
           </div>
@@ -31,10 +31,10 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`hover:text-blue-600 ${
+                className={`hover:text-gray-300 ${
                   pathname === link.href
-                    ? "text-blue-600 font-medium"
-                    : "text-gray-700"
+                    ? "text-white font-medium"
+                    : "text-white"
                 }`}
               >
                 {link.name}
@@ -51,7 +51,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/sign-up"
-              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              className="px-4 py-2 bg-[#4f98ff] text-white rounded hover:bg-[#4791ff]"
             >
               {t("nav.signUp")}
             </Link>

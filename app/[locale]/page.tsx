@@ -62,9 +62,9 @@ export default function Home() {
   };
 
   return (
-    <div dir={isRtl ? "rtl" : "ltr"} className="min-h-screen">
+    <div dir={isRtl ? "rtl" : "ltr"}>
       <Navbar />
-
+      <div className="mt-16"></div>
       {/* Hero Section */}
       <HeroSection />
 

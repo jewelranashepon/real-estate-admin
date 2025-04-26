@@ -191,7 +191,7 @@ export function PaymentsTable() {
       ),
       cell: ({ row }) => (
         <div className="font-medium">
-          {formatCurrency(row.getValue("amount"))}
+          {(row.getValue("amount"))} <span className="icon-saudi_riyal"></span>
         </div>
       ),
     },
