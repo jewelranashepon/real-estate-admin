@@ -34,7 +34,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div dir={isRtl ? "rtl" : "ltr"} className="min-h-screen bg-gray-900">
+    <div dir={isRtl ? "rtl" : "ltr"} className="min-h-screen mt-16 bg-gray-900">
       <Navbar />
 
       <motion.main
@@ -100,7 +100,7 @@ export default function ContactPage() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition-colors w-full"
+                className="bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700 transition-colors w-full"
               >
                 {t("form.submitButton")}
               </motion.button>

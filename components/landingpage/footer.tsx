@@ -78,16 +78,16 @@ export default function Footer() {
               {t("newsletter.title")}
             </h3>
             <p className="mb-4">{t("newsletter.description")}</p>
-            <form className="flex">
+            <form className="flex gap-2">
               <input
                 type="email"
                 placeholder={t("newsletter.placeholder")}
-                className="px-4 py-2 rounded-l text-gray-800 w-full"
+                className="px-4 py-2 rounded text-gray-800 w-full"
                 required
               />
               <button
                 type="submit"
-                className="bg-blue-600 px-4 py-2 rounded-r hover:bg-blue-700"
+                className="bg-teal-600 px-4 py-2 rounded gap hover:bg-teal-700"
               >
                 {t("newsletter.button")}
               </button>
