@@ -2,6 +2,8 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useTranslations } from "next-intl";
+
 
 // Define the Blog type and component props
 type Blog = {
@@ -18,6 +20,8 @@ type BlogCardProps = {
 };
 
 const BlogCardAdmin: React.FC<BlogCardProps> = ({ blog, onEdit, onDelete }) => {
+  const t = useTranslations("app.property");
+  
   return (
     <div className="bg-white shadow-md rounded-xl border border-gray-200 flex flex-col overflow-hidden">
       <div className="w-full h-44 flex items-center justify-center">
@@ -58,7 +62,7 @@ const BlogCardAdmin: React.FC<BlogCardProps> = ({ blog, onEdit, onDelete }) => {
             aria-label="Edit Blog"
           >
             <FaEdit className="text-lg" />
-            Edit
+            {t("edit")}
           </button>
           <button
             className="text-red-500 text-sm font-bold flex items-center gap-1"
@@ -66,7 +70,7 @@ const BlogCardAdmin: React.FC<BlogCardProps> = ({ blog, onEdit, onDelete }) => {
             aria-label="Delete Blog"
           >
             <RiDeleteBin6Line className="text-lg" />
-            Delete
+            {t("delete")}
           </button>
         </div>
       </div>
