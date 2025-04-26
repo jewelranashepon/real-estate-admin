@@ -107,7 +107,11 @@ export function PropertyCard({ property, onDelete }: PropertyCardProps) {
               {property.type.value}
             </Badge>
             <span className="font-bold text-xl text-emerald-700">
-              {formatCurrency(property.price)}
+              <span
+                style={{ fontFamily: "saudi_riyal" }}
+                className="icon-saudi_riyal"
+              ></span>
+              {property.price}
             </span>
           </div>
 
