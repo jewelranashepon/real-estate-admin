@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import RichTextEditor from "./RichTextEditor";
 import ImageUploader from "./ImageUploader";
 import { useTranslations } from "next-intl";
+import { JoEditor } from "./joeditor";
 
 interface BlogPostFormProps {
   initialData?: {
@@ -168,8 +169,18 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
         <label htmlFor="content" className="block text-lg font-medium mb-2">
           {t("formLabels.content")}
         </label>
-        <RichTextEditor
+        {/* <RichTextEditor
           value={formData.content}
+          onChange={(content) =>
+            setFormData((prev) => ({
+              ...prev,
+              content,
+            }))
+          }
+        /> */}
+
+        <JoEditor
+          content={formData.content}
           onChange={(content) =>
             setFormData((prev) => ({
               ...prev,
