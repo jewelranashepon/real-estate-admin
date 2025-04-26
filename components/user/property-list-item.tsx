@@ -80,7 +80,12 @@ export function PropertyListItem({
                   </p>
                 </div>
                 <p className="text-lg font-bold text-emerald-400">
-                {property.formattedPrice} <span className="icon-saudi_riyal"></span>/mo
+                  {property.formattedPrice}{" "}
+                  <span
+                    style={{ fontFamily: "saudi_riyal" }}
+                    className="icon-saudi_riyal"
+                  ></span>
+                  /mo
                 </p>
               </div>
 

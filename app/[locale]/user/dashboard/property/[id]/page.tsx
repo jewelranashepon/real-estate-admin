@@ -135,7 +135,12 @@ export default function PropertyDetail() {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <h2 className="text-2xl font-bold text-emerald-400">
-                      {property.formattedPrice} <span className="icon-saudi_riyal"></span>/mo
+                      {property.formattedPrice}{" "}
+                      <span
+                        style={{ fontFamily: "saudi_riyal" }}
+                        className="icon-saudi_riyal"
+                      ></span>
+                      /mo
                     </h2>
                     <p className="text-sm text-muted-foreground flex items-center mt-1">
                       <MapPin className="h-4 w-4 mr-1" /> {property.address},{" "}

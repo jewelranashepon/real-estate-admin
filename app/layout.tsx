@@ -39,7 +39,6 @@ export default async function RootLayout({
           [inter.className]: locale === "en",
           [amiri.className]: locale === "ar",
         })}
-        style={{ fontFamily: "saudi_riyal" }}
       >
         <SearchProvider>{children}</SearchProvider>
         <Toaster />
