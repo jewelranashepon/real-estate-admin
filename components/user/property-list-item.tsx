@@ -80,7 +80,7 @@ export function PropertyListItem({
                   </p>
                 </div>
                 <p className="text-lg font-bold text-emerald-400">
-                  {property.formattedPrice}
+                {property.formattedPrice}
                 </p>
               </div>
 
