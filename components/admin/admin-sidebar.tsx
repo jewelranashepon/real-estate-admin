@@ -1,5 +1,5 @@
 "use client";
-
+import { MdOutlineRealEstateAgent } from "react-icons/md";
 import {
   Building2,
   LayoutDashboard,
@@ -42,7 +42,7 @@ export default function AdminSidebar() {
     { label: t("usersAndAgents"), icon: Users, path: "/admin/users" },
     { label: t("content"), icon: FileText, path: "/admin/content" },
     { label: t("leadsAndMessages"), icon: MessageSquare, path: "/admin/leads" },
-    { label: t("admin-admin"), icon: MessageSquare, path: "/admin/admin" },
+    { label: t("admin-admin"), icon: MdOutlineRealEstateAgent, path: "/admin/admin" },
     { label: t("payments"), icon: CreditCard, path: "/admin/payments" },
     { label: t("analytics"), icon: BarChart, path: "/admin/analytics" },
     { label: t("settings"), icon: Settings, path: "/admin/settings" },

@@ -32,6 +32,7 @@ import { useTranslations } from "next-intl";
 export default function Dashboard() {
   const router = useRouter();
   const t = useTranslations();
+  const t = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
