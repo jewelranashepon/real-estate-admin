@@ -31,7 +31,7 @@ import { useTranslations } from "next-intl";
 
 export default function Dashboard() {
   const router = useRouter();
-  const t = useTranslations();
+  const t = useTranslations("serachPage");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null);
@@ -304,7 +304,7 @@ export default function Dashboard() {
                           variant="ghost"
                           className="text-emerald-400"
                         >
-                          View Results
+                          {t('viewResults')}
                         </Button>
                       </div>
                     </Card>
