@@ -9,6 +9,16 @@ import {
 import { Building, Clock, CheckCircle, XCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 export default function DashboardOverview() {
   const { locale } = useParams();
@@ -17,9 +27,9 @@ export default function DashboardOverview() {
 
   // Mock data for the chart
   const statusData = [
-    { name: t("agentdashboard.approved"), value: 12, color: "bg-green-500" },
-    { name: t("agentdashboard.rejected"), value: 4, color: "bg-red-500" },
-    { name: t("properties.pending"), value: 7, color: "bg-yellow-500" },
+    { name: t("agentdashboard.approved"), value: 12, fill: "#22c55e" },
+    { name: t("agentdashboard.rejected"), value: 4, fill: "#ef4444" },
+    { name: t("property.pending"), value: 7, fill: "#eab308" },
   ];
 
   return (
@@ -111,18 +121,54 @@ export default function DashboardOverview() {
             </CardDescription>
           </CardHeader>
           <CardContent className="pl-2">
-            <div className="h-80 flex items-end gap-2">
-              {statusData.map((status) => (
-                <div
-                  key={status.name}
-                  className={`${status.color} w-20 relative`}
-                  style={{ height: `${status.value * 10}px` }}
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={statusData}
+                  layout={isRtl ? "vertical" : "horizontal"}
+                  margin={{
+                    top: 20,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
                 >
-                  <div className="absolute -top-8 left-0 bg-gray-900 text-white p-2 rounded opacity-0 hover:opacity-100">
-                    {status.name}: {status.value}
-                  </div>
-                </div>
-              ))}
+                  <CartesianGrid strokeDasharray="3 3" />
+                  {isRtl ? (
+                    <>
+                      <YAxis type="category" dataKey="name" />
+                      <XAxis type="number" />
+                    </>
+                  ) : (
+                    <>
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                    </>
+                  )}
+                  <Tooltip
+                    formatter={(value) => [
+                      value,
+                      t("agentdashboard.propertystatus"),
+                    ]}
+                    labelFormatter={(label) => t(label)}
+                  />
+                  <Legend />
+                  <Bar
+                    dataKey="value"
+                    name={t("agentdashboard.propertystatus")}
+                    fill="#8884d8"
+                  >
+                    {statusData.map((entry, index) => (
+                      <Bar
+                        key={`bar-${index}`}
+                        dataKey="value"
+                        name={entry.name}
+                        fill={entry.fill}
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>

@@ -6,6 +6,7 @@ import "./globals.css";
 import { SearchProvider } from "@/lib/search-context";
 import { cn } from "@/lib/utils";
 import { getLocale } from "next-intl/server";
+import { getLangDir } from "rtl-detect";
 
 export const metadata: Metadata = {
   title: "real-estate-app",
@@ -31,9 +32,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+  const direction = getLangDir(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} dir={direction} suppressHydrationWarning>
       <body
         className={cn("antialiased", {
           [inter.className]: locale === "en",

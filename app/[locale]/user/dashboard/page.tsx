@@ -289,7 +289,13 @@ export default function Dashboard() {
                               variant="outline"
                               className="bg-emerald-950/20 border-emerald-900/20"
                             >
-                              ${search.priceRange[0]} - ${search.priceRange[1]}
+                              <span
+                        style={{ fontFamily: "saudi_riyal" }}
+                        className="icon-saudi_riyal"
+                      ></span> {search.priceRange[0]} - <span
+                      style={{ fontFamily: "saudi_riyal" }}
+                      className="icon-saudi_riyal"
+                    ></span>{search.priceRange[1]}
                             </Badge>
                           </div>
                         </div>
@@ -298,7 +304,7 @@ export default function Dashboard() {
                           variant="ghost"
                           className="text-emerald-400"
                         >
-                          View Results
+                          {t('SearchPage.viewResults')}
                         </Button>
                       </div>
                     </Card>
