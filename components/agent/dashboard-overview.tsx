@@ -14,10 +14,9 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
+  Cell,
 } from "recharts";
 
 export default function DashboardOverview() {
@@ -25,11 +24,22 @@ export default function DashboardOverview() {
   const t = useTranslations();
   const isRtl = locale === "ar";
 
-  // Mock data for the chart
   const statusData = [
-    { name: t("agentdashboard.approved"), value: 12, fill: "#22c55e" },
-    { name: t("agentdashboard.rejected"), value: 4, fill: "#ef4444" },
-    { name: t("property.pending"), value: 7, fill: "#eab308" },
+    {
+      name: t("agentdashboard.approved"),
+      value: 12,
+      color: "#22c55e", // Tailwind's green-500
+    },
+    {
+      name: t("agentdashboard.rejected"),
+      value: 4,
+      color: "#ef4444", // Tailwind's red-500
+    },
+    {
+      name: t("property.pending"),
+      value: 7,
+      color: "#eab308", // Tailwind's yellow-500
+    },
   ];
 
   return (
@@ -103,7 +113,7 @@ export default function DashboardOverview() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {t("agentdashboard.static_rejected")}{" "}
+              {t("agentdashboard.static_rejected")}
             </div>
             <p className="text-xs text-muted-foreground">
               {t("agentdashboard.needsRevision")}
@@ -113,6 +123,7 @@ export default function DashboardOverview() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
+        {/* Property Status with Recharts */}
         <Card className="col-span-1">
           <CardHeader>
             <CardTitle>{t("agentdashboard.propertyStatus")}</CardTitle>
@@ -120,59 +131,23 @@ export default function DashboardOverview() {
               {t("agentdashboard.distribution")}
             </CardDescription>
           </CardHeader>
-          <CardContent className="pl-2">
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={statusData}
-                  layout={isRtl ? "vertical" : "horizontal"}
-                  margin={{
-                    top: 20,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  {isRtl ? (
-                    <>
-                      <YAxis type="category" dataKey="name" />
-                      <XAxis type="number" />
-                    </>
-                  ) : (
-                    <>
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                    </>
-                  )}
-                  <Tooltip
-                    formatter={(value) => [
-                      value,
-                      t("agentdashboard.propertystatus"),
-                    ]}
-                    labelFormatter={(label) => t(label)}
-                  />
-                  <Legend />
-                  <Bar
-                    dataKey="value"
-                    name={t("agentdashboard.propertystatus")}
-                    fill="#8884d8"
-                  >
-                    {statusData.map((entry, index) => (
-                      <Bar
-                        key={`bar-${index}`}
-                        dataKey="value"
-                        name={entry.name}
-                        fill={entry.fill}
-                      />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+          <CardContent className="h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={statusData}>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="value">
+                  {statusData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
           </CardContent>
         </Card>
 
+        {/* Agent Performance Metrics */}
         <Card className="col-span-1">
           <CardHeader>
             <CardTitle>{t("agentdashboard.agentPerformance")}</CardTitle>
@@ -182,73 +157,41 @@ export default function DashboardOverview() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium">
-                    {t("agentdashboard.listingApprovalRate")}
+              {[
+                {
+                  title: t("agentdashboard.listingApprovalRate"),
+                  value: t("agentdashboard.static_listingApprovalRate"),
+                  width: "75%",
+                },
+                {
+                  title: t("agentdashboard.averageResponseTime"),
+                  value: t("agentdashboard.static_averageResponseTime"),
+                  width: "65%",
+                },
+                {
+                  title: t("agentdashboard.documentCompletion"),
+                  value: t("agentdashboard.static_documentCompletion"),
+                  width: "90%",
+                },
+                {
+                  title: t("agentdashboard.profileCompleteness"),
+                  value: t("agentdashboard.static_profileCompleteness"),
+                  width: "85%",
+                },
+              ].map((metric, idx) => (
+                <div key={idx} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm font-medium">{metric.title}</div>
+                    <div className="text-sm font-medium">{metric.value}</div>
                   </div>
-                  <div className="text-sm font-medium">
-                    {t("agentdashboard.static_listingApprovalRate")}
-                  </div>
-                </div>
-                <div className="h-2 w-full rounded-full bg-muted">
-                  <div
-                    className="h-2 rounded-full bg-green-500"
-                    style={{ width: "75%" }}
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium">
-                    {t("agentdashboard.averageResponseTime")}
-                  </div>
-                  <div className="text-sm font-medium">
-                    {t("agentdashboard.static_averageResponseTime")}
-                  </div>
-                </div>
-                <div className="h-2 w-full rounded-full bg-muted">
-                  <div
-                    className="h-2 rounded-full bg-green-500"
-                    style={{ width: "65%" }}
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium">
-                    {t("agentdashboard.documentCompletion")}
-                  </div>
-                  <div className="text-sm font-medium">
-                    {t("agentdashboard.static_documentCompletion")}
+                  <div className="h-2 w-full rounded-full bg-muted">
+                    <div
+                      className="h-2 rounded-full bg-green-500"
+                      style={{ width: metric.width }}
+                    />
                   </div>
                 </div>
-                <div className="h-2 w-full rounded-full bg-muted">
-                  <div
-                    className="h-2 rounded-full bg-green-500"
-                    style={{ width: "90%" }}
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium">
-                    {t("agentdashboard.profileCompleteness")}
-                  </div>
-                  <div className="text-sm font-medium">
-                    {t("agentdashboard.static_profileCompleteness")}
-                  </div>
-                </div>
-                <div className="h-2 w-full rounded-full bg-muted">
-                  <div
-                    className="h-2 rounded-full bg-green-500"
-                    style={{ width: "85%" }}
-                  />
-                </div>
-              </div>
+              ))}
             </div>
           </CardContent>
         </Card>
