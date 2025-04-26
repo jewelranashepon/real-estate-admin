@@ -174,7 +174,7 @@ const BlogManagement: React.FC = () => {
 
       {/* Blog List */}
       <section>
-        <div className="mb-5 flex justify-between items-center">
+        <div className="mb-4 flex justify-between items-center">
           <h2 className="text-xl font-semibold text-gray-800">
             {t("allBlogs")}{" "}
             <span className="text-blue-600">({filteredPosts.length})</span>
