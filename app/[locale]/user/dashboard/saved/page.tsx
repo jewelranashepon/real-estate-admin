@@ -153,6 +153,13 @@ export default function SavedPropertiesPage() {
     }
   };
 
+  const Currency = () => {
+    return <div>5,200,000 <span className="icon-saudi_riyal"></span></div>
+  }
+  const Currency2 = () =>{
+    return <div>10,500,000 <span className="icon-saudi_riyal"></span></div>
+  }
+
   const getFilterLabel = (option: FilterOption) => {
     switch (option) {
       case "all":
@@ -198,14 +205,14 @@ export default function SavedPropertiesPage() {
           />
           <StatCard
             title={t("stats.totalValue")}
-            value={`$01,200,000 ${t("sar")}`}
+            Currency={Currency}
             icon={<DollarSign className="h-5 w-5" />}
             change={t("stats.combinedValue")}
             trend="up"
           />
           <StatCard
             title={t("stats.averagePrice")}
-            value={`$05,200,000 ${t("sar")}`}
+            Currency = {Currency2}
             icon={<BarChart3 className="h-5 w-5" />}
             change={`${t("stats.range")}: $${lowestPrice.toLocaleString()} - $${highestPrice.toLocaleString()}`}
             trend="neutral"

@@ -7,7 +7,8 @@ import { Progress } from "@/components/user/ui/progress";
 
 interface StatCardProps {
   title: string;
-  value: string;
+  value?: string;
+  Currency?: React.ReactNode
   icon: ReactNode;
   change?: string;
   trend?: "up" | "down" | "neutral";
@@ -21,6 +22,7 @@ export function StatCard({
   change,
   trend,
   progress,
+  Currency
 }: StatCardProps) {
   return (
     <motion.div
@@ -39,7 +41,7 @@ export function StatCard({
               {icon}
             </div>
           </div>
-          <div className="text-2xl font-bold mb-1">{value}</div>
+          <div className="text-2xl font-bold mb-1">{Currency ? <Currency /> : value}</div>
           {change && (
             <div
               className={`text-xs ${
