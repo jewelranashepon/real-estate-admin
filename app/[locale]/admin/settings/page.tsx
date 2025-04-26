@@ -18,7 +18,7 @@ export default function SettingsPage() {
       <h1 className="text-3xl font-bold tracking-tight">{t('settings')}</h1>
 
       <Tabs defaultValue="general" className="w-full">
-        <TabsList className="grid w-full max-w-md grid-cols-4">
+        <TabsList className="grid w-full max-w-xl grid-cols-4">
           <TabsTrigger value="general">{t('general')}</TabsTrigger>
           <TabsTrigger value="appearance">{t('appearance')}</TabsTrigger>
           <TabsTrigger value="notifications">{t('notifications')}</TabsTrigger>

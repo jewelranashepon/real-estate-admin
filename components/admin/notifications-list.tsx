@@ -203,15 +203,15 @@ export function NotificationsList() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2 justify-between">
         <Tabs
           defaultValue="all"
           value={activeTab}
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid w-full max-w-md grid-cols-6">
-            <TabsTrigger value="all" className="relative">
+          <TabsList className="grid w-full max-w-2xl grid-cols-6">
+            <TabsTrigger value="all" className="relative px-4">
               {t("tabs.all")}
               {unreadCount > 0 && (
                 <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-[10px]">
@@ -219,11 +219,21 @@ export function NotificationsList() {
                 </Badge>
               )}
             </TabsTrigger>
-            <TabsTrigger value="unread">{t("tabs.unread")}</TabsTrigger>
-            <TabsTrigger value="property">{t("tabs.property")}</TabsTrigger>
-            <TabsTrigger value="message">{t("tabs.message")}</TabsTrigger>
-            <TabsTrigger value="user">{t("tabs.user")}</TabsTrigger>
-            <TabsTrigger value="system">{t("tabs.system")}</TabsTrigger>
+            <TabsTrigger className="px-4" value="unread">
+              {t("tabs.unread")}
+            </TabsTrigger>
+            <TabsTrigger className="px-4" value="property">
+              {t("tabs.property")}
+            </TabsTrigger>
+            <TabsTrigger className="px-4" value="message">
+              {t("tabs.message")}
+            </TabsTrigger>
+            <TabsTrigger className="px-4" value="user">
+              {t("tabs.user")}
+            </TabsTrigger>
+            <TabsTrigger className="px-4" value="system">
+              {t("tabs.system")}
+            </TabsTrigger>
           </TabsList>
         </Tabs>
         <div className="flex gap-2">
