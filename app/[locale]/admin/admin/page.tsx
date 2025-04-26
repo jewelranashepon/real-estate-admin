@@ -75,7 +75,7 @@ export default function AdminPage() {
       </div>
 
       <Tabs defaultValue="approvals">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full max-w-lg grid-cols-3">
           <TabsTrigger value="approvals">{t("tabs.approvals")}</TabsTrigger>
           <TabsTrigger value="users">{t("tabs.users")}</TabsTrigger>
           <TabsTrigger value="settings">{t("tabs.settings")}</TabsTrigger>
