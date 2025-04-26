@@ -151,19 +151,19 @@ export default function Dashboard() {
               value="saved"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
             >
-             {t('common.SP')}
+              {t("common.SP")}
             </TabsTrigger>
             <TabsTrigger
               value="recent"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
             >
-            {t('common.RS')}
+              {t("common.RS")}
             </TabsTrigger>
             <TabsTrigger
               value="messages"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500/20 data-[state=active]:to-green-500/20 data-[state=active]:border data-[state=active]:border-emerald-500/30"
             >
-              {t('common.Messages')}
+              {t("common.Messages")}
             </TabsTrigger>
           </TabsList>
 
@@ -173,9 +173,7 @@ export default function Dashboard() {
               {savedProperties.length > 0 ? (
                 <>
                   <div className="col-span-full flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-semibold">
-                      {t('common.YSP')}
-                    </h2>
+                    <h2 className="text-xl font-semibold">{t("common.YSP")}</h2>
                     <Button
                       variant="outline"
                       size="sm"
@@ -183,7 +181,7 @@ export default function Dashboard() {
                       className="border-emerald-800/30 bg-emerald-950/10"
                     >
                       <Heart className="h-4 w-4 mr-2" />
-                      {t('common.VAS')}
+                      {t("common.VAS")}
                     </Button>
                   </div>
                   {properties
@@ -231,7 +229,7 @@ export default function Dashboard() {
             {recentSearches.length > 0 ? (
               <div className="space-y-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold">{t('common.RS')}</h2>
+                  <h2 className="text-xl font-semibold">{t("common.RS")}</h2>
                   <Button
                     variant="outline"
                     size="sm"
@@ -239,7 +237,7 @@ export default function Dashboard() {
                     className="border-emerald-800/30 bg-emerald-950/10"
                   >
                     <Filter className="h-4 w-4 mr-2" />
-                    {t('common.NS')}
+                    {t("common.NS")}
                   </Button>
                 </div>
 
@@ -290,12 +288,15 @@ export default function Dashboard() {
                               className="bg-emerald-950/20 border-emerald-900/20"
                             >
                               <span
-                        style={{ fontFamily: "saudi_riyal" }}
-                        className="icon-saudi_riyal"
-                      ></span> {search.priceRange[0]} - <span
-                      style={{ fontFamily: "saudi_riyal" }}
-                      className="icon-saudi_riyal"
-                    ></span>{search.priceRange[1]}
+                                style={{ fontFamily: "saudi_riyal" }}
+                                className="icon-saudi_riyal"
+                              ></span>{" "}
+                              {search.priceRange[0]} -{" "}
+                              <span
+                                style={{ fontFamily: "saudi_riyal" }}
+                                className="icon-saudi_riyal"
+                              ></span>
+                              {search.priceRange[1]}
                             </Badge>
                           </div>
                         </div>
@@ -304,7 +305,7 @@ export default function Dashboard() {
                           variant="ghost"
                           className="text-emerald-400"
                         >
-                          {t('SearchPage.viewResults')}
+                          {t("SearchPage.viewResults")}
                         </Button>
                       </div>
                     </Card>
