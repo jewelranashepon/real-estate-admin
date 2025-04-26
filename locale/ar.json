@@ -1924,6 +1924,7 @@
     "title": "بحث العقارات",
     "searchPlaceholder": "ابحث حسب الموقع، اسم العقار...",
     "filters": "الفلاتر",
+    "viewResults": "عرض النتائج",
     "resultsCount": "تم العثور على {count} عقار مطابق لبحثك",
     "noResults": {
       "title": "لا توجد عقارات",

@@ -2018,6 +2018,7 @@
     "searchPlaceholder": "Search by location, address, or property name...",
     "filters": "Filters",
     "resultsCount": "{count} properties found",
+    "viewResults": "View Results",
     "noResults": {
       "title": "No properties found",
       "description": "We couldn't find any properties matching your search criteria. Try adjusting your filters."

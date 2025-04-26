@@ -148,7 +148,7 @@ export default function DashboardOverview() {
                   <Tooltip
                     formatter={(value) => [
                       value,
-                      t("agentdashboard.properties"),
+                      t("agentdashboard.propertystatus"),
                     ]}
                     labelFormatter={(label) => t(label)}
                   />
