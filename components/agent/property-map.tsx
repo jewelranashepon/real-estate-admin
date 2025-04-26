@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-const properties = [
+const property = [
   {
     id: 1,
     title: "فيلا فاخرة في العليا",
@@ -122,19 +122,19 @@ export default function PropertyMap() {
       case "approved":
         return (
           <Badge className="bg-green-500 hover:bg-green-600">
-            {t("properties.approved")}
+            {t("property.approved")}
           </Badge>
         );
       case "pending":
         return (
           <Badge className="bg-yellow-500 hover:bg-yellow-600">
-            {t("properties.pending")}
+            {t("property.pending")}
           </Badge>
         );
       case "rejected":
         return (
           <Badge className="bg-red-500 hover:bg-red-600">
-            {t("properties.rejected")}
+            {t("property.rejected")}
           </Badge>
         );
       default:
@@ -171,7 +171,7 @@ export default function PropertyMap() {
                   {/* Placeholder for the actual map */}
                   <div className="absolute inset-0 bg-[url('/map.png')] bg-cover bg-left">
                     {/* Simulated map with property pins */}
-                    {properties.map((property) => (
+                    {property.map((property) => (
                       <button
                         key={property.id}
                         className={`absolute transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer transition-all hover:scale-125 ${
@@ -239,10 +239,10 @@ export default function PropertyMap() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div className="font-medium">{t("properties.type")}:</div>
+                  <div className="font-medium">{t("property.type")}:</div>
                   <div>{selectedProperty.type}</div>
 
-                  <div className="font-medium">{t("properties.district")}:</div>
+                  <div className="font-medium">{t("property.district")}:</div>
                   <div>{selectedProperty.district}</div>
 
                   <div className="font-medium">{t("map.coordinates")}:</div>
@@ -253,16 +253,14 @@ export default function PropertyMap() {
                 </div>
 
                 <div className="pt-4 border-t">
-                  <h4 className="font-medium mb-2">
-                    {t("properties.actions")}:
-                  </h4>
+                  <h4 className="font-medium mb-2">{t("property.actions")}:</h4>
                   <div className="flex gap-2">
                     <button className="text-sm px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">
                       {t("map.viewDetails")}
                     </button>
                     {selectedProperty.status !== "approved" && (
                       <button className="text-sm px-3 py-1 bg-muted text-muted-foreground rounded-md">
-                        {t("properties.edit")}
+                        {t("property.edit")}
                       </button>
                     )}
                   </div>
@@ -293,7 +291,7 @@ export default function PropertyMap() {
       <Card>
         <CardHeader>
           <CardTitle>{t("common.propertyMap")}</CardTitle>
-          <CardDescription>{t("properties.allProperties")}</CardDescription>
+          <CardDescription>{t("property.allProperties")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="rounded-md border">
@@ -303,24 +301,24 @@ export default function PropertyMap() {
                   <tr className="border-b bg-muted/50">
                     <th className="h-12 px-4 text-left font-medium">ID</th>
                     <th className="h-12 px-4 text-left font-medium">
-                      {t("properties.title")}
+                      {t("property.title")}
                     </th>
                     <th className="h-12 px-4 text-left font-medium">
-                      {t("properties.type")}
+                      {t("property.type")}
                     </th>
                     <th className="h-12 px-4 text-left font-medium">
-                      {t("properties.district")}
+                      {t("property.district")}
                     </th>
                     <th className="h-12 px-4 text-left font-medium">
-                      {t("properties.status")}
+                      {t("property.status")}
                     </th>
                     <th className="h-12 px-4 text-left font-medium">
-                      {t("properties.actions")}
+                      {t("property.actions")}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {properties.map((property) => (
+                  {property.map((property) => (
                     <tr
                       key={property.id}
                       className={`border-b ${
