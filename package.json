@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@emran-alhaddad/saudi-riyal-font": "^1.0.3",
     "@hookform/resolvers": "latest",
     "@mui/material": "^7.0.1",
     "@prisma/client": "latest",

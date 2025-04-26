@@ -76,7 +76,6 @@ export default function DesktopView() {
               Chat
             </button>
           </nav>
-
           {/* Language Selector */}
           <div className="ml-6 flex items-center gap-4">
             <div className="hidden md:flex items-center">
