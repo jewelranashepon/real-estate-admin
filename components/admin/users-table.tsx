@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -12,10 +12,19 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal, Pencil, Trash2, UserPlus, Shield, ShieldAlert } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "@tanstack/react-table";
+import {
+  ArrowUpDown,
+  ChevronDown,
+  MoreHorizontal,
+  Pencil,
+  Trash2,
+  UserPlus,
+  Shield,
+  ShieldAlert,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,11 +32,18 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -37,52 +53,57 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
-import { useRouter } from "next/navigation"
-import { toast } from "@/components/ui/use-toast"
-import { formatDate } from "@/lib/utils"
+} from "@/components/ui/alert-dialog";
+import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
+import { formatDate } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface User {
-  id: string
-  name: string
-  email: string
-  avatarUrl?: string | null
-  createdAt: Date
-  role?: string
-  status?: string
+  id: string;
+  name: string;
+  email: string;
+  avatarUrl?: string | null;
+  createdAt: Date;
+  role?: string;
+  status?: string;
   _count: {
-    Property: number
-  }
+    Property: number;
+  };
 }
 
 interface UsersTableProps {
-  users: User[]
+  users: User[];
 }
 
 export function UsersTable({ users }: UsersTableProps) {
-  const router = useRouter()
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = useState({})
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
-  const [userToDelete, setUserToDelete] = useState<string | null>(null)
+  const router = useRouter();
+  const t = useTranslations("dashboard.dashboardUsers");
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<string | null>(null);
 
   const columns: ColumnDef<User>[] = [
     {
       id: "select",
       header: ({ table }) => (
         <Checkbox
-          checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
+          }
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
+          aria-label={t("selectAll")}
         />
       ),
       cell: ({ row }) => (
         <Checkbox
           checked={row.getIsSelected()}
           onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
+          aria-label={t("selectRow")}
         />
       ),
       enableSorting: false,
@@ -90,11 +111,11 @@ export function UsersTable({ users }: UsersTableProps) {
     },
     {
       accessorKey: "name",
-      header: "User",
+      header: t("columns.user"),
       cell: ({ row }) => {
-        const user = row.original
-        const name = user.name
-        const initials = `${user.name.charAt(0)}${user.name.charAt(0)}`
+        const user = row.original;
+        const name = user.name;
+        const initials = `${user.name.charAt(0)}${user.name.charAt(0)}`;
 
         return (
           <div className="flex items-center gap-3">
@@ -107,34 +128,54 @@ export function UsersTable({ users }: UsersTableProps) {
               <div className="text-sm text-muted-foreground">{user.email}</div>
             </div>
           </div>
-        )
+        );
       },
     },
     {
       accessorKey: "role",
-      header: "Role",
+      header: t("columns.role"),
       cell: ({ row }) => {
-        const role = row.original.role || "User"
-        return <Badge variant={role === "Admin" ? "default" : role === "Agent" ? "secondary" : "outline"}>{role}</Badge>
+        const role = row.original.role || t("roles.user");
+        return (
+          <Badge
+            variant={
+              role === t("roles.admin")
+                ? "default"
+                : role === t("roles.agent")
+                ? "secondary"
+                : "outline"
+            }
+          >
+            {role}
+          </Badge>
+        );
       },
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("columns.status"),
       cell: ({ row }) => {
-        const status = row.original.status || "Active"
+        const status = row.original.status || t("statuses.active");
         return (
-          <Badge variant={status === "Active" ? "success" : status === "Pending" ? "warning" : "destructive"}>
+          <Badge
+            variant={
+              status === t("statuses.active")
+                ? "success"
+                : status === t("statuses.pending")
+                ? "warning"
+                : "destructive"
+            }
+          >
             {status}
           </Badge>
-        )
+        );
       },
     },
     {
       accessorKey: "_count.Property",
       header: ({ column }) => (
         <div className="flex items-center">
-          Properties
+          {t("columns.properties")}
           <Button
             variant="ghost"
             size="sm"
@@ -151,7 +192,7 @@ export function UsersTable({ users }: UsersTableProps) {
       accessorKey: "createdAt",
       header: ({ column }) => (
         <div className="flex items-center">
-          Joined
+          {t("columns.joined")}
           <Button
             variant="ghost"
             size="sm"
@@ -162,57 +203,61 @@ export function UsersTable({ users }: UsersTableProps) {
           </Button>
         </div>
       ),
-      cell: ({ row }) => <div>{formatDate(row.original.createdAt.toString())}</div>,
+      cell: ({ row }) => (
+        <div>{formatDate(row.original.createdAt.toString())}</div>
+      ),
     },
     {
       id: "actions",
       cell: ({ row }) => {
-        const user = row.original
+        const user = row.original;
 
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
+                <span className="sr-only">{t("actions.openMenu")}</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem onClick={() => router.push(`/admin/users/${user.id}/edit`)}>
+              <DropdownMenuLabel>{t("actions.label")}</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => router.push(`/admin/users/${user.id}/edit`)}
+              >
                 <Pencil className="mr-2 h-4 w-4" />
-                Edit
+                {t("actions.edit")}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <UserPlus className="mr-2 h-4 w-4" />
-                Assign Properties
+                {t("actions.assignProperties")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Shield className="mr-2 h-4 w-4" />
-                Change Role
+                {t("actions.changeRole")}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <ShieldAlert className="mr-2 h-4 w-4" />
-                Reset Password
+                {t("actions.resetPassword")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="text-destructive focus:text-destructive"
                 onClick={() => {
-                  setUserToDelete(user.id)
-                  setDeleteDialogOpen(true)
+                  setUserToDelete(user.id);
+                  setDeleteDialogOpen(true);
                 }}
               >
                 <Trash2 className="mr-2 h-4 w-4" />
-                Delete
+                {t("actions.delete")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        )
+        );
       },
     },
-  ]
+  ];
 
   const table = useReactTable({
     data: users,
@@ -231,46 +276,49 @@ export function UsersTable({ users }: UsersTableProps) {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   const handleDeleteUser = async () => {
-    if (!userToDelete) return
+    if (!userToDelete) return;
 
     try {
       // In a real app, you would call a server action here
       // const result = await deleteUser(userToDelete)
 
       toast({
-        title: "User deleted",
-        description: "The user has been successfully deleted.",
-      })
-      router.refresh()
+        title: t("toast.deleteSuccess.title"),
+        description: t("toast.deleteSuccess.description"),
+      });
+      router.refresh();
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to delete user. Please try again.",
+        title: t("toast.deleteError.title"),
+        description: t("toast.deleteError.description"),
         variant: "destructive",
-      })
+      });
     } finally {
-      setDeleteDialogOpen(false)
-      setUserToDelete(null)
+      setDeleteDialogOpen(false);
+      setUserToDelete(null);
     }
-  }
+  };
 
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
         <Input
-          placeholder="Filter users..."
+          placeholder={t("filterPlaceholder")}
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
+          onChange={(event) =>
+            table.getColumn("name")?.setFilterValue(event.target.value)
+          }
           className="max-w-sm"
         />
         <div className="ml-auto flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
-                Columns <ChevronDown className="ml-2 h-4 w-4" />
+                {t("columnsDropdown.label")}{" "}
+                <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -282,16 +330,20 @@ export function UsersTable({ users }: UsersTableProps) {
                     <DropdownMenuItem
                       key={column.id}
                       className="capitalize"
-                      onClick={() => column.toggleVisibility(!column.getIsVisible())}
+                      onClick={() =>
+                        column.toggleVisibility(!column.getIsVisible())
+                      }
                     >
                       <Checkbox
                         checked={column.getIsVisible()}
                         className="mr-2"
-                        aria-label={`Toggle ${column.id} visibility`}
+                        aria-label={t("columnsDropdown.toggleVisibility", {
+                          column: column.id,
+                        })}
                       />
                       {column.id}
                     </DropdownMenuItem>
-                  )
+                  );
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
@@ -305,9 +357,14 @@ export function UsersTable({ users }: UsersTableProps) {
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -315,16 +372,27 @@ export function UsersTable({ users }: UsersTableProps) {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No users found.
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  {t("noUsersFound")}
                 </TableCell>
               </TableRow>
             )}
@@ -333,8 +401,10 @@ export function UsersTable({ users }: UsersTableProps) {
       </div>
       <div className="flex items-center justify-between">
         <div className="text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s)
-          selected.
+          {t("selectedCount", {
+            selected: table.getFilteredSelectedRowModel().rows.length,
+            total: table.getFilteredRowModel().rows.length,
+          })}
         </div>
         <div className="flex items-center gap-2">
           <Button
@@ -343,10 +413,15 @@ export function UsersTable({ users }: UsersTableProps) {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            {t("pagination.previous")}
           </Button>
-          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-            Next
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            {t("pagination.next")}
           </Button>
         </div>
       </div>
@@ -354,21 +429,22 @@ export function UsersTable({ users }: UsersTableProps) {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t("deleteDialog.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the user and remove their data from our
-              servers.
+              {t("deleteDialog.description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteUser} className="bg-destructive text-destructive-foreground">
-              Delete
+            <AlertDialogCancel>{t("deleteDialog.cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteUser}
+              className="bg-destructive text-destructive-foreground"
+            >
+              {t("deleteDialog.confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </div>
-  )
+  );
 }
-

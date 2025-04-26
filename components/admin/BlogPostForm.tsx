@@ -3,6 +3,7 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import RichTextEditor from "./RichTextEditor";
 import ImageUploader from "./ImageUploader";
+import { useTranslations } from "next-intl";
 
 interface BlogPostFormProps {
   initialData?: {
@@ -11,10 +12,10 @@ interface BlogPostFormProps {
     post_content: string;
     category?: string;
     tags?: string;
-    post_image?: string; // Added for image URL
-  } | null; // Allow null
+    post_image?: string;
+  } | null;
   onClose: () => void;
-  onUpdate: (updatedBlog: any) => void; // Pass updated data to the parent
+  onUpdate: (updatedBlog: any) => void;
 }
 
 interface FormData {
@@ -22,8 +23,8 @@ interface FormData {
   title: string;
   content: string;
   category: string;
-  tags?: string; // Made optional
-  image?: string; // Added for image URL
+  tags?: string;
+  image?: string;
 }
 
 const BlogPostForm: React.FC<BlogPostFormProps> = ({
@@ -31,6 +32,7 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
   onClose,
   onUpdate,
 }) => {
+  const t = useTranslations("BlogPostForm");
   const [formData, setFormData] = useState<FormData>({
     id: initialData?.id || undefined,
     title: initialData?.post_title || "",
@@ -71,9 +73,9 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
       id: formData.id,
       post_title: formData.title,
       post_content: formData.content,
-      post_category: formData.category, // Match the field name in API
+      post_category: formData.category,
       post_tags: formData.tags || "",
-      post_image: formData.image || "", // Added image URL
+      post_image: formData.image || "",
     };
 
     try {
@@ -89,15 +91,15 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
 
       if (response.ok) {
         alert(
-          formData.id ? "Blog updated successfully!" : "Blog post created!"
+          formData.id ? t("alerts.updateSuccess") : t("alerts.createSuccess")
         );
-        onUpdate(result); // Pass the updated data to parent
+        onUpdate(result);
         onClose();
       } else {
-        alert("Failed to save blog post. Please try again.");
+        alert(t("alerts.saveError"));
       }
     } catch (error) {
-      alert("An unexpected error occurred. Please try again.");
+      alert(t("alerts.unexpectedError"));
     }
   };
 
@@ -105,7 +107,7 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
     <form onSubmit={handleSubmit} className="p-6 space-y-6">
       <div>
         <label htmlFor="title" className="block text-lg font-medium mb-2">
-          Blog Title
+          {t("formLabels.title")}
         </label>
         <input
           type="text"
@@ -114,14 +116,14 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
           value={formData.title}
           onChange={handleChange}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-          placeholder="Enter blog title"
+          placeholder={t("placeholders.title")}
           required
         />
       </div>
 
       <div>
         <label htmlFor="category" className="block text-lg font-medium mb-2">
-          Category
+          {t("formLabels.category")}
         </label>
         <input
           type="text"
@@ -130,14 +132,14 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
           value={formData.category}
           onChange={handleChange}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-          placeholder="Enter blog category"
+          placeholder={t("placeholders.category")}
           required
         />
       </div>
 
       <div>
         <label htmlFor="tags" className="block text-lg font-medium mb-2">
-          Tags (Optional)
+          {t("formLabels.tags")}
         </label>
         <input
           type="text"
@@ -146,14 +148,14 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
           value={formData.tags}
           onChange={handleChange}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-          placeholder="Enter tags separated by commas"
+          placeholder={t("placeholders.tags")}
         />
       </div>
 
       <div className="border-2 border-dotted border-slate-400 rounded-xl p-4 flex justify-center text-center">
         <div>
           <label className="block text-lg font-medium mb-2">
-            Featured Image
+            {t("formLabels.featuredImage")}
           </label>
           <ImageUploader
             currentImageUrl={formData.image}
@@ -164,7 +166,7 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
 
       <div>
         <label htmlFor="content" className="block text-lg font-medium mb-2">
-          Blog Content
+          {t("formLabels.content")}
         </label>
         <RichTextEditor
           value={formData.content}
@@ -180,9 +182,9 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({
       <div className="text-right">
         <button
           type="submit"
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-500"
         >
-          {formData.id ? "Update Blog" : "Publish Blog"}
+          {formData.id ? t("buttons.update") : t("buttons.publish")}
         </button>
       </div>
     </form>

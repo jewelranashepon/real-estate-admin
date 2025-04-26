@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Search, User, LogOut, Settings, UserCircle } from "lucide-react";
+import { Bell, Search, Settings, UserCircle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,24 +15,30 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "@/i18n/navigation";
 import { signOut, useSession } from "@/lib/auth-client";
-import LanguageSelector from "../home/language-selector";
 import LanguageSwitcher from "../language-switcher";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function AdminHeader() {
   const router = useRouter();
   const session = useSession();
   const user = session?.data?.user;
+  const { locale } = useParams();
+  const t = useTranslations("adminNotification");
+  const isRtl = locale === "ar";
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6 shadow-sm">
-      {/* Sidebar toggle (mobile) */}
+    <header
+      className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6 shadow-sm"
+      dir={isRtl ? "rtl" : "ltr"}
+    >
       <SidebarTrigger className="md:hidden" />
 
       {/* Search bar */}
       <div className="relative hidden md:flex md:w-64">
         <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
         <Input
-          placeholder="Search..."
+          placeholder={t("searchPlaceholder")}
           className="w-full pl-10 rounded-md border bg-muted text-sm"
         />
       </div>
@@ -40,6 +46,7 @@ export default function AdminHeader() {
       {/* Right side */}
       <div className="ml-auto flex items-center gap-4">
         <LanguageSwitcher />
+
         {/* Notifications */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -49,26 +56,10 @@ export default function AdminHeader() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-80">
-            <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+            <DropdownMenuLabel>{t("notifications.title")}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <div className="max-h-96 overflow-auto">
-              {[
-                {
-                  title: "New property submission",
-                  desc: "A new property has been submitted for review",
-                  time: "2 minutes ago",
-                },
-                {
-                  title: "New user registration",
-                  desc: "A new agent has registered and requires approval",
-                  time: "1 hour ago",
-                },
-                {
-                  title: "System update",
-                  desc: "The system will be updated tonight at 2 AM",
-                  time: "5 hours ago",
-                },
-              ].map((item, index) => (
+              {t.raw("notifications.items").map((item: any, index: number) => (
                 <DropdownMenuItem
                   key={index}
                   className="flex flex-col items-start gap-1 p-3"
@@ -91,21 +82,21 @@ export default function AdminHeader() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon">
               <Avatar className="h-10 w-10">
-                <AvatarImage src="/avatar.png" alt="Admin" />
+                <AvatarImage src="/image.jpg" alt="Admin" />
                 <AvatarFallback>{user?.name}</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>{t("account.title")}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <UserCircle className="mr-2 h-4 w-4" />
-              Profile
+              {t("account.profile")}
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" />
-              Settings
+              {t("account.settings")}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
@@ -120,7 +111,7 @@ export default function AdminHeader() {
                 });
               }}
             >
-              Log out
+              {t("account.logout")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

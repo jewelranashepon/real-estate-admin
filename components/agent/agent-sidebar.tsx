@@ -75,7 +75,7 @@ export default function AgentSidebar() {
         <div className="mb-4 px-4">
           <div className="flex items-center gap-3 rounded-lg bg-white p-3 shadow-sm">
             <Avatar className="h-10 w-10 border-2 border-green-500">
-              <AvatarImage src="/avatar.png" alt="Agent" />
+              <AvatarImage src="/image.jpg" alt="Agent" />
               <AvatarFallback>AR</AvatarFallback>
             </Avatar>
             <div className="space-y-1">

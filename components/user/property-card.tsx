@@ -8,6 +8,7 @@ import { Button } from "@/components/user/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/user/ui/card";
 import { Badge } from "@/components/user/ui/badge";
 import type { Property } from "@/components/user/data/properties";
+import { useTranslations } from "next-intl";
 
 interface PropertyCardProps {
   property: Property;
@@ -24,6 +25,8 @@ export function PropertyCard({
   onToggleSave,
   gradientClass,
 }: PropertyCardProps) {
+  const t = useTranslations("PropertyCard");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -56,7 +59,7 @@ export function PropertyCard({
             <Badge className="absolute top-2 left-2 bg-gradient-to-r from-emerald-500/80 to-green-500/80 backdrop-blur-sm border-0">
               <span className="flex items-center gap-1">
                 <CheckCircle className="w-3 h-3" />
-                Verified
+                {t("verified")}
               </span>
             </Badge>
           )}
@@ -75,7 +78,7 @@ export function PropertyCard({
                     clipRule="evenodd"
                   />
                 </svg>
-                Featured
+                {t("featured")}
               </span>
             </Badge>
           )}
@@ -93,15 +96,15 @@ export function PropertyCard({
           <div className="grid grid-cols-3 gap-2 mt-4">
             <div className="text-center p-2 rounded-md bg-emerald-950/20 border border-emerald-900/10">
               <p className="text-sm font-medium">{property.beds}</p>
-              <p className="text-xs text-muted-foreground">Beds</p>
+              <p className="text-xs text-muted-foreground">{t("beds")}</p>
             </div>
             <div className="text-center p-2 rounded-md bg-emerald-950/20 border border-emerald-900/10">
               <p className="text-sm font-medium">{property.baths}</p>
-              <p className="text-xs text-muted-foreground">Baths</p>
+              <p className="text-xs text-muted-foreground">{t("baths")}</p>
             </div>
             <div className="text-center p-2 rounded-md bg-emerald-950/20 border border-emerald-900/10">
               <p className="text-sm font-medium">{property.sqft}</p>
-              <p className="text-xs text-muted-foreground">sqft</p>
+              <p className="text-xs text-muted-foreground">{t("sqft")}</p>
             </div>
           </div>
         </CardContent>
@@ -112,7 +115,7 @@ export function PropertyCard({
             asChild
           >
             <Link href={`/user/dashboard/property/${property.id}`}>
-              View Details
+              {t("viewDetails")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
@@ -120,7 +123,7 @@ export function PropertyCard({
             className="flex-1 bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
             onClick={onOfferClick}
           >
-            Offer Price
+            {t("priceButton")}
           </Button>
         </CardFooter>
       </Card>

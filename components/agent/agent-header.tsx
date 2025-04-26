@@ -71,7 +71,7 @@ export default function AgentHeader() {
               <div className="flex items-center justify-between border-b pb-4">
                 <div className="flex items-center gap-2">
                   <Avatar className="h-10 w-10 border-2 border-primary">
-                    <AvatarImage src="/avatar.png" alt="Agent" />
+                    <AvatarImage src="/image.jpg" alt="Agent" />
                     <AvatarFallback>AR</AvatarFallback>
                   </Avatar>
                   <div>
@@ -286,13 +286,9 @@ export default function AgentHeader() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="bg-green-700 hover:bg-green-600 text-white"
-              >
+              <Button variant="ghost" size="icon" className="ring-2 text-white">
                 <Avatar className="h-10 w-10">
-                  <AvatarImage src="/avatar.png" alt="Agent" />
+                  <AvatarImage src="/image.jpg" alt="Agent" />
                   <AvatarFallback>
                     {user?.name?.charAt(0) || "AG"}
                   </AvatarFallback>

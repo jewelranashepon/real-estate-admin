@@ -97,8 +97,8 @@ export function AppSidebar() {
       <SidebarFooter className="py-0 bg-zinc-800">
         <div className="flex items-center gap-3 px-2 py-3">
           <Avatar>
-            <AvatarFallback>JD</AvatarFallback>
-            <AvatarImage src="https://avatar.iran.liara.run/public/boy" />
+            <AvatarFallback>محمد صلاح حامد محروس غالي</AvatarFallback>
+            <AvatarImage src="/image.jpg" />
           </Avatar>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium">{session?.user.name}</p>

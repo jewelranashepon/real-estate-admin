@@ -24,8 +24,10 @@ import {
   type SearchFilters,
   defaultSearchFilters,
 } from "@/components/user/data/properties";
+import { useTranslations } from "next-intl";
 
 export default function SearchPage() {
+  const t = useTranslations("SearchPage");
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState<SearchFilters>(defaultSearchFilters);
@@ -126,10 +128,10 @@ export default function SearchPage() {
           <Button variant="ghost" asChild className="mr-2">
             <button onClick={() => router.back()}>
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
+              {t("back")}
             </button>
           </Button>
-          <h1 className="text-2xl font-bold flex-1">Search Properties</h1>
+          <h1 className="text-2xl font-bold flex-1">{t("title")}</h1>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6">
@@ -151,7 +153,7 @@ export default function SearchPage() {
               <div className="relative flex-1">
                 <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search by location, property name..."
+                  placeholder={t("searchPlaceholder")}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-9 bg-emerald-50/10 border-emerald-900/20"
@@ -164,7 +166,7 @@ export default function SearchPage() {
                   onClick={() => setIsFilterPanelOpen(true)}
                 >
                   <Filter className="h-4 w-4 mr-2" />
-                  Filters
+                  {t("filters")}
                 </Button>
                 <Button
                   variant="outline"
@@ -194,11 +196,7 @@ export default function SearchPage() {
             {/* Results Count */}
             <div className="mb-6">
               <p className="text-muted-foreground">
-                Found{" "}
-                <span className="font-medium text-foreground">
-                  {filteredProperties.length}
-                </span>{" "}
-                properties matching your criteria
+                {t("resultsCount", { count: filteredProperties.length })}
               </p>
             </div>
 
@@ -236,17 +234,17 @@ export default function SearchPage() {
                   <Search className="h-8 w-8" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
-                  No properties found
+                  {t("noResults.title")}
                 </h3>
                 <p className="text-muted-foreground text-center max-w-md mb-6">
-                  Try adjusting your search filters to find more properties.
+                  {t("noResults.description")}
                 </p>
                 <Button
                   className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
                   onClick={() => setFilters(defaultSearchFilters)}
                 >
                   <SlidersHorizontal className="mr-2 h-4 w-4" />
-                  Reset Filters
+                  {t("resetFilters")}
                 </Button>
               </Card>
             )}
@@ -259,7 +257,7 @@ export default function SearchPage() {
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 lg:hidden">
           <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-gradient-to-br from-background/95 to-emerald-950/5 backdrop-blur-xl border-l border-emerald-900/20 shadow-xl p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">Filters</h2>
+              <h2 className="text-xl font-semibold">{t("filters")}</h2>
               <Button
                 variant="ghost"
                 size="sm"

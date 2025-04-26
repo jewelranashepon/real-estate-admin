@@ -13,7 +13,7 @@ import {
   MessageCircle,
   Briefcase,
 } from "lucide-react";
-
+import { propertyListings } from "@/lib/property-data";
 import { useTranslations } from "next-intl";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRouter, Link } from "@/i18n/navigation";
@@ -21,6 +21,7 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react"; // Importing useState to manage chat visibility
 import { useSearch } from "@/lib/search-context";
 import Chat from "./chat";
+import LanguageSwitcher from "../language-switcher";
 
 const languageOptions = [
   { code: "en", label: "English", flag: "https://flagcdn.com/w40/us.png" },
@@ -78,7 +79,7 @@ export default function DesktopView() {
           </nav>
           {/* Language Selector */}
           <div className="ml-6 flex items-center gap-4">
-            <div className="hidden md:flex items-center">
+            {/* <div className="hidden md:flex items-center">
               <Typography
                 variant="subtitle2"
                 className="text-black font-semibold uppercase text-xs mb-1 p-4"
@@ -102,7 +103,8 @@ export default function DesktopView() {
                   </button>
                 ))}
               </div>
-            </div>
+            </div> */}
+            <LanguageSwitcher/>
             {session?.data ? (
               <Button
                 variant="outline"
@@ -193,9 +195,15 @@ function SearchResults() {
               <PropertyMap />
             </div>
             <div className="h-[calc(100vh-220px)] overflow-y-auto pr-2">
-              <Link href="/listings">
+              {propertyListings.map((property, index) => (
+                          <Link
+                            href={`/property/${property.id}`}
+                            key={property.id}
+                            className="block"
+                          >
                 <PropertyList />
               </Link>
+            ))}
             </div>
           </div>
         </TabsContent>

@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import BlogPostForm from "@/components/admin/BlogPostForm";
 import PaginatedItems from "@/components/admin/Pagination";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface Blog {
   id: number;
@@ -21,13 +23,16 @@ const BlogManagement: React.FC = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [editBlogData, setEditBlogData] = useState<Blog | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const { locale } = useParams();
+  const t = useTranslations("blogManagement");
+  const isRtl = locale === "ar";
 
   useEffect(() => {
     const fetchBlogs = async () => {
       setIsLoading(true);
       try {
         const response = await fetch("/api/blogfetch");
-        if (!response.ok) throw new Error("Failed to fetch blogs.");
+        if (!response.ok) throw new Error(t("errorMessage"));
         const data = await response.json();
 
         const transformedData: Blog[] = data.map((item: any) => ({
@@ -45,14 +50,14 @@ const BlogManagement: React.FC = () => {
 
         setBlogs(transformedData);
       } catch (err) {
-        setError("Failed to fetch blogs. Please try again later.");
+        setError(t("errorMessage"));
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchBlogs();
-  }, []);
+  }, [t]);
 
   const filteredPosts = blogs.filter((post) =>
     post.post_title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -69,7 +74,7 @@ const BlogManagement: React.FC = () => {
   };
 
   const handleDeleteClick = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this blog post?")) return;
+    if (!confirm(t("deleteConfirmation"))) return;
 
     try {
       const res = await fetch("/api/blogfetch", {
@@ -80,12 +85,12 @@ const BlogManagement: React.FC = () => {
 
       if (res.ok) {
         setBlogs((prev) => prev.filter((blog) => blog.id !== id));
-        alert("Blog post deleted successfully!");
+        alert(t("deleteSuccess"));
       } else {
-        alert("Failed to delete blog post.");
+        alert(t("deleteFailure"));
       }
     } catch (error) {
-      alert("An unexpected error occurred.");
+      alert(t("unexpectedError"));
     }
   };
 
@@ -100,32 +105,32 @@ const BlogManagement: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-gray-600 text-lg">Loading blogs...</p>
+        <p className="text-gray-600 text-lg">{t("loading")}</p>
       </div>
     );
   }
 
   return (
-    <div className="p-6 min-h-screen">
+    <div className="p-6 min-h-screen" dir={isRtl ? "rtl" : "ltr"}>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">Blog Management</h1>
-          <p className="text-gray-500">Manage your published blog posts</p>
+          <h1 className="text-3xl font-bold text-gray-800">{t("title")}</h1>
+          <p className="text-gray-500">{t("subtitle")}</p>
         </div>
         <div className="flex gap-3 flex-wrap items-center">
           <input
             type="text"
-            placeholder="Search blogs..."
+            placeholder={t("searchPlaceholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-blue-400"
           />
           <button
             onClick={handleCreateNewClick}
-            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
+            className="bg-green-800 text-white px-5 py-2 rounded-md hover:bg-green-700 transition"
           >
-            + Create New Blog
+            {t("createButton")}
           </button>
         </div>
       </div>
@@ -149,13 +154,13 @@ const BlogManagement: React.FC = () => {
           >
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-gray-800">
-                {editBlogData ? "Edit Blog" : "Create New Blog"}
+                {editBlogData ? t("modal.editTitle") : t("modal.createTitle")}
               </h2>
               <button
                 onClick={handleCloseModal}
                 className="text-gray-400 hover:text-red-600 text-xl font-bold"
               >
-                &times;
+                {t("modal.closeButton")}
               </button>
             </div>
             <BlogPostForm
@@ -171,7 +176,7 @@ const BlogManagement: React.FC = () => {
       <section>
         <div className="mb-4 flex justify-between items-center">
           <h2 className="text-xl font-semibold text-gray-800">
-            All Blogs{" "}
+            {t("allBlogs")}{" "}
             <span className="text-blue-600">({filteredPosts.length})</span>
           </h2>
         </div>
@@ -185,10 +190,8 @@ const BlogManagement: React.FC = () => {
           />
         ) : (
           <div className="text-center py-12 text-gray-500">
-            <p className="text-lg">No blogs found.</p>
-            <p className="text-sm mt-1">
-              Try adjusting your search or create a new blog post.
-            </p>
+            <p className="text-lg">{t("noBlogs.message")}</p>
+            <p className="text-sm mt-1">{t("noBlogs.suggestion")}</p>
           </div>
         )}
       </section>

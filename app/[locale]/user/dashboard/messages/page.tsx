@@ -20,8 +20,10 @@ import {
 } from "@/components/user/ui/avatar";
 import { StatCard } from "@/components/user/stat-card";
 import { messages } from "@/components/user/data/messages";
+import { useTranslations } from "next-intl";
 
 export default function MessagesPage() {
+  const t = useTranslations("MessagesPage");
   const router = useRouter();
   const [activeConversation, setActiveConversation] = useState<string | null>(
     null
@@ -61,47 +63,47 @@ export default function MessagesPage() {
           <Button variant="ghost" asChild className="mr-2">
             <button onClick={() => router.back()}>
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
+              {t("back")}
             </button>
           </Button>
-          <h1 className="text-2xl font-bold flex-1">Messages</h1>
+          <h1 className="text-2xl font-bold flex-1">{t("title")}</h1>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <StatCard
-            title="Total Conversations"
+            title={t("stats.totalConversations")}
             value={uniqueSenders.length.toString()}
             icon={<MessageSquare className="h-5 w-5" />}
-            change="Active threads"
+            change={t("stats.activeThreads")}
             trend="neutral"
           />
           <StatCard
-            title="Unread Messages"
+            title={t("stats.unreadMessages")}
             value={messages.filter((m) => !m.read).length.toString()}
             icon={<Users className="h-5 w-5" />}
-            change={`${
+            change={
               messages.filter((m) => !m.read).length > 0
-                ? "Needs attention"
-                : "All caught up"
-            }`}
+                ? t("stats.needsAttention")
+                : t("stats.allCaughtUp")
+            }
             trend={
               messages.filter((m) => !m.read).length > 0 ? "up" : "neutral"
             }
           />
           <StatCard
-            title="Response Rate"
+            title={t("stats.responseRate")}
             value="92%"
             icon={<Clock className="h-5 w-5" />}
-            change="Within 24 hours"
+            change={t("stats.within24Hours")}
             trend="up"
             progress={92}
           />
           <StatCard
-            title="Engagement"
-            value="High"
+            title={t("stats.engagement")}
+            value={t("stats.high")}
             icon={<BarChart3 className="h-5 w-5" />}
-            change="Above average"
+            change={t("stats.aboveAverage")}
             trend="up"
           />
         </div>
@@ -115,7 +117,7 @@ export default function MessagesPage() {
           >
             <Card className="bg-emerald-50/10 backdrop-blur-md border border-emerald-500/20 h-[calc(100vh-240px)] flex flex-col">
               <div className="p-4 border-b border-emerald-500/20">
-                <h2 className="font-semibold">Conversations</h2>
+                <h2 className="font-semibold">{t("conversations")}</h2>
               </div>
               <div className="flex-1 overflow-auto">
                 {uniqueSenders.map((sender) => (
@@ -194,8 +196,8 @@ export default function MessagesPage() {
                       <p className="font-medium">{selectedSender?.name}</p>
                       <p className="text-xs text-muted-foreground">
                         {selectedSender?.isAgent
-                          ? "Real Estate Agent"
-                          : "Property Owner"}
+                          ? t("agent")
+                          : t("propertyOwner")}
                       </p>
                     </div>
                   </div>
@@ -245,9 +247,7 @@ export default function MessagesPage() {
                             </span>
                           </div>
                           <p className="text-sm">
-                            Thank you for your message. I'm very interested in
-                            this property and would like to schedule a viewing.
-                            Is it possible to see it this weekend?
+                            {t("sampleReply")}
                           </p>
                         </div>
                         <Avatar>
@@ -265,7 +265,7 @@ export default function MessagesPage() {
                   <div className="flex gap-2">
                     <textarea
                       className="flex-1 p-3 bg-background/50 border border-emerald-900/20 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500/50 min-h-[80px] text-sm resize-none"
-                      placeholder="Type your message here..."
+                      placeholder={t("messagePlaceholder")}
                       value={messageText}
                       onChange={(e) => setMessageText(e.target.value)}
                     ></textarea>
@@ -284,11 +284,10 @@ export default function MessagesPage() {
                     <MessageSquare className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">
-                    Select a conversation
+                    {t("selectConversation.title")}
                   </h3>
                   <p className="text-muted-foreground max-w-md mb-6">
-                    Choose a conversation from the list to view messages and
-                    reply.
+                    {t("selectConversation.description")}
                   </p>
                 </div>
               </Card>

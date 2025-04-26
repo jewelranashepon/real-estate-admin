@@ -68,8 +68,8 @@ export default async function DashboardPage() {
       <div>
         <Card className="">
           <CardHeader>
-            <CardTitle>Recent Blogs</CardTitle>
-            <CardDescription>Last 4 blog posts</CardDescription>
+            <CardTitle>{t("recentBlog")}</CardTitle>
+            <CardDescription>{t("lastBlog")}</CardDescription>
           </CardHeader>
           <CardContent>
             <RecentBlogs blogs={recentBlogs} />
