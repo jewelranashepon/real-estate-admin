@@ -283,14 +283,17 @@
       }
     ]
   },
-
   "stats": {
     "title": "Trusted by Thousands",
     "subtitle": "Our numbers speak for themselves - join our growing community",
     "propertiesListed": "Properties Listed",
+    "propertiesListedValue": "10,000",
     "happyClients": "Happy Clients",
+    "happyClientsValue": "5,000",
     "yearsExperience": "Years Experience",
-    "awardsWon": "Awards Won"
+    "yearsExperienceValue": "10",
+    "awardsWon": "Awards Won",
+    "awardsWonValue": "20"
   },
 
   "features": {
