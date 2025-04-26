@@ -36,12 +36,11 @@ export default async function AdminLayout({
 
   return (
     <SidebarProvider>
-      <div className="flex h-screen w-full bg-background overflow-hidden">
+      <div className="flex fixed size-full bg-background">
         <AdminSidebar />
-
-        <div className="flex flex-col flex-1 h-full">
+        <div className="flex w-full flex-col overflow-hidden">
           <AdminHeader />
-          <main className="flex-1 overflow-y-auto p-6">{children}</main>
+          <main className="grow overflow-y-auto p-6">{children}</main>
         </div>
       </div>
     </SidebarProvider>
