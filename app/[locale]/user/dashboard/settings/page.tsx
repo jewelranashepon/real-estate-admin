@@ -76,7 +76,7 @@ export default function SettingsPage() {
                       JD
                     </AvatarFallback>
                   </Avatar>
-                  <h3 className="font-semibold text-lg">John Doe</h3>
+                  <h3 className="font-semibold text-lg">Mohammed Ali</h3>
                   <p className="text-sm text-muted-foreground">
                     {t("user.email")}
                   </p>
