@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ fontFamily: "saudi_riyal" }}>
+    <html lang="ar" style={{ fontFamily: "saudi_riyal" }}>
       <body>
         <SearchProvider>{children}</SearchProvider>
         <Toaster />
