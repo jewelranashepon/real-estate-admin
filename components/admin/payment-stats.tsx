@@ -1,4 +1,4 @@
-import { DollarSign, CreditCard, TrendingUp, Calendar } from "lucide-react";
+import { DollarSign, CreditCard, TrendingUp, Calendar, Wallet, BanknoteIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 
@@ -9,7 +9,8 @@ export function PaymentStats() {
       <Card>
         <CardContent className="flex items-center gap-4 p-6">
           <div className="rounded-full bg-primary/10 p-3">
-            <DollarSign className="h-6 w-6 text-primary" />
+            {/* <DollarSign className="h-6 w-6 text-primary" /> */}
+            <BanknoteIcon className="h-6 w-6 text-primary" />
           </div>
           <div>
             <p className="text-sm font-medium text-muted-foreground">
