@@ -12,7 +12,7 @@ export default function HeroSection() {
     <section className="relative h-screen">
       <div className="absolute inset-0">
         <Image
-          src="/property-4.jpg"
+          src="/sa5.jpg"
           alt="Dubai Skyline"
           fill
           className="object-cover"
