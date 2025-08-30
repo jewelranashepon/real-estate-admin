@@ -1617,6 +1617,49 @@
     "VAS": "View All Saved",
     "NS": "New Search"
   },
+  "userDashboard": {
+  "fullSearchText": "Search by location or property name",
+  "searchProperties": "Search Properties",
+  "offerPrice": "Offer Price",
+  "viewDetails": "View Details",
+  "back": "Back",
+  "conversations": "Conversations",
+  "selectConversation": "Select a conversation",
+  "selectConversationText": "Choose a conversation from the list to view messages and reply.",
+  "profile": "Profile",
+  "profileInformation": "Profile Information",
+  "profileInformationText": "Update your personal information and contact details",
+  "notifications": "Notifications",
+  "security": "Security",
+  "paymentMethods": "Payment Methods",
+  "preferences": "Preferences",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "email": "Email",
+  "phoneNumber": "Phone Number",
+  "bio": "Bio",
+  "profileImage": "Profile Image",
+  "propertyType": "Property Types",
+  "differentPropertyCategories": "Different property categories",
+  "averagePrice": "Average Price",
+  "price": "Price",
+  "totalValue": "Total Value",
+  "totalSaved": "Total Saved",
+  "properties": "Properties",
+  "unreadMessages": "Unread Messages",
+  "needAttention": "Needs attention",
+  "engagement": "Engagement",
+  "high": "High",
+  "aboveAverage": "Above average",
+  "responseRate": "Response Rate",
+  "profileCompletion": "Profile Completeness",
+  "newToday": "New today",
+  "fromLastWeek": "from last week",
+  "fromLastMonth": "from last month",
+  "newSearch": "New Search",
+  "yourSavedProperties": "Your Saved Properties",
+  "resentSearches": "Recent Searches"
+},
   "agentdashboard": {
     "welcome": "Welcome back to your agent dashboard",
     "totalProperties": "Total Properties",
@@ -1646,6 +1689,85 @@
     "static_averageResponseTime": "2.3 ",
     "static_documentCompletion": "90% ",
     "static_profileCompleteness": "85% "
+  },
+  "PropertyDetail": {
+    "back": "Back",
+    "image": "Image",
+    "perMonth": "/mo",
+    "verified": "FAL Verified",
+    "stats": {
+      "beds": "Beds",
+      "baths": "Baths",
+      "sqft": "sqft"
+    },
+    "description": "Description",
+    "features": {
+      "title": "Features",
+      "balcony": "Balcony",
+      "parking": "Parking",
+      "wifi": "Wi-Fi",
+      "kitchen": "Kitchen",
+      "ac": "Air Conditioning"
+    },
+    "contact": {
+      "title": "Contact Agent",
+      "reviews": "reviews",
+      "phone": "Phone",
+      "email": "Email",
+      "experience": "Experience",
+      "years": "years"
+    },
+    "actions": {
+      "makeOffer": "Make an Offer"
+    },
+    "availability": {
+      "title": "Availability",
+      "availableFrom": "Available from"
+    },
+    "details": {
+      "title": "Property Details",
+      "propertyType": "Property Type",
+      "yearBuilt": "Year Built",
+      "listed": "Listed"
+    },
+    "notFound": {
+      "title": "Property Not Found",
+      "text": "The property you're looking for doesn't exist or has been removed.",
+      "back": "Back to Dashboard"
+    },
+    "toast": {
+      "saved": "Property saved to your favorites!",
+      "removed": "Property removed from your favorites"
+    },
+    "aria": {
+      "save": "Toggle save property"
+    }
+  },
+  "OfferModal": {
+    "title": "Make an Offer",
+    "description": "Send your offer for {property} at {address}",
+    "form": {
+      "amount": {
+        "label": "Offer Amount",
+        "placeholder": "Enter your offer amount"
+      },
+      "message": {
+        "label": "Message to Agent",
+        "placeholder": "Write a message to the agent..."
+      }
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "send": "Send Offer",
+      "sending": "Sending..."
+    },
+    "success": {
+      "title": "Thank You!",
+      "text": "Your offer has been sent successfully. We'll contact you soon."
+    },
+    "toast": {
+      "sent": "Your offer has been sent successfully!"
+    }
   },
   "property": {
     "manageListings": "Manage your property listings and their status",
@@ -1942,6 +2064,45 @@
     "viewDetails": "View Details",
     "makeOffer": "Make an Offer"
   },
+  "SearchFilters": {
+  "title": "Filters",
+  "reset": "Reset",
+  "priceRange": "Price Range",
+  "priceRangeLabel": "${min} - ${max}",
+  "bedrooms": "Bedrooms",
+  "bathrooms": "Bathrooms",
+  "propertyType": "Property Type",
+  "squareFootage": "Square Footage",
+  "sqftRangeLabel": "${min} - ${max} م²",
+  "feature": "Features",
+  "any": "Any",
+  "applyFilters": "Apply Filters",
+  "priceLabel": "Price Label",
+  "sqftLabel": "Area Label",
+  "resetButton": "Reset Button",
+  "propertyTypes": {
+    "house": "House",
+    "apartment": "Apartment",
+    "condo": "Condo",
+    "townhouse": "Townhouse",
+    "land": "Land"
+  },
+  "features": {
+    "pool": "Pool",
+    "garden": "Garden",
+    "garage": "Garage",
+    "furnished": "Furnished",
+    "fireplace": "Fireplace",
+    "balcony": "Balcony",
+    "gym": "Gym",
+    "elevator": "Elevator",
+    "parking": "Parking",
+    "wifi": "Wi-Fi",
+    "kitchen": "Kitchen",
+    "ac": "Air Conditioning",
+    "terrace": "Terrace"
+  }
+},
   "SearchPage": {
     "title": "Search Properties",
     "back": "Back",

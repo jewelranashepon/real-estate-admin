@@ -1861,6 +1861,86 @@
     "yourSavedProperties": "عقاراتك المحفوظة",
     "resentSearches": "عمليات البحث الأخيرة"
   },
+  "PropertyDetail": {
+    "back": "رجوع",
+    "image": "صورة",
+    "perMonth": "/شهر",
+    "verified": "موثّق FAL",
+    "stats": {
+      "beds": "غرف",
+      "baths": "حمامات",
+      "sqft": "قدم²"
+    },
+    "description": "الوصف",
+    "features": {
+      "title": "المميزات",
+      "balcony": "شرفة",
+      "parking": "موقف سيارات",
+      "wifi": "واي فاي",
+      "kitchen": "مطبخ",
+      "ac": "تكييف"
+    },
+    "contact": {
+      "title": "التواصل مع الوكيل",
+      "reviews": "تقييمات",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "experience": "الخبرة",
+      "years": "سنة"
+    },
+    "actions": {
+      "makeOffer": "تقديم عرض"
+    },
+    "availability": {
+      "title": "التوفّر",
+      "availableFrom": "متاح ابتداءً من"
+    },
+    "details": {
+      "title": "تفاصيل العقار",
+      "propertyType": "نوع العقار",
+      "yearBuilt": "سنة البناء",
+      "listed": "تاريخ الإدراج"
+    },
+    "notFound": {
+      "title": "العقار غير موجود",
+      "text": "العقار الذي تبحث عنه غير موجود أو تمّت إزالته.",
+      "back": "العودة للوحة التحكم"
+    },
+    "toast": {
+      "saved": "تم حفظ العقار في المفضلة!",
+      "removed": "تمت إزالة العقار من المفضلة"
+    },
+    "aria": {
+      "save": "تبديل حفظ العقار"
+    }
+  },
+
+  "OfferModal": {
+    "title": "تقديم عرض",
+    "description": "أرسل عرضك لـ {property} في {address}",
+    "form": {
+      "amount": {
+        "label": "قيمة العرض",
+        "placeholder": "أدخل قيمة العرض"
+      },
+      "message": {
+        "label": "رسالة للوكيل",
+        "placeholder": "اكتب رسالة للوكيل..."
+      }
+    },
+    "actions": {
+      "cancel": "إلغاء",
+      "send": "إرسال العرض",
+      "sending": "جارٍ الإرسال..."
+    },
+    "success": {
+      "title": "شكرًا لك!",
+      "text": "تم إرسال عرضك بنجاح. سنتواصل معك قريبًا."
+    },
+    "toast": {
+      "sent": "تم إرسال عرضك بنجاح!"
+    }
+  },
   "blogManagement": {
     "title": "إدارة المدونة",
     "subtitle": "إدارة منشورات المدونة المنشورة",

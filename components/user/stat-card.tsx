@@ -41,7 +41,7 @@ export function StatCard({
               {icon}
             </div>
           </div>
-          <div className="text-2xl font-bold mb-1">{Currency ? <Currency /> : value}</div>
+          <div className="text-2xl font-bold mb-1">{Currency ?? value}</div>
           {change && (
             <div
               className={`text-xs ${

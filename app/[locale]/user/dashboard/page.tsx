@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/user/ui/badge";
 
 import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
@@ -10,18 +10,19 @@ import { Heart, Search, MessageSquare, User, Filter } from "lucide-react";
 import { Button } from "@/components/user/ui/button";
 import { Card } from "@/components/user/ui/card";
 import {
-                            <Badge
-                              variant="outline"
-                              className="bg-emerald-950/20 border-emerald-900/20"
-                            >
-                              <span className="icon-jod"></span>{" "}
-                              {search.priceRange[0]} - {" "}
-                              <span className="icon-jod"></span>
-                              {search.priceRange[1]}
-                            </Badge>
+  properties,
+  defaultSearchFilters,
+  savedSearches,
 } from "@/components/user/data/properties";
+import type { SearchFilters } from "@/components/user/data/properties";
 import { messages } from "@/components/user/data/messages";
 import { useTranslations } from "next-intl";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/user/ui/tabs";
+import { StatCard } from "@/components/user/stat-card";
+import { PropertyCard } from "@/components/user/property-card";
+import { OfferModal } from "@/components/user/offer-modal";
+import { SearchModal } from "@/components/user/search-modal";
+import { MessageCard } from "@/components/user/message-card";
 
 export default function Dashboard() {
   const router = useRouter();

@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -17,6 +16,7 @@ import { Button } from "@/components/user/ui/button";
 import { Input } from "@/components/user/ui/input";
 import { Label } from "@/components/user/ui/label";
 import { Textarea } from "@/components/user/ui/textarea";
+import { useLocale, useTranslations } from "next-intl";
 
 interface Property {
   id: string;
@@ -42,6 +42,10 @@ export function OfferModal({
   propertyId,
   properties,
 }: OfferModalProps) {
+  const t = useTranslations("OfferModal");
+  const locale = useLocale();
+  const isRTL = locale?.startsWith("ar");
+
   const [offerAmount, setOfferAmount] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -58,13 +62,13 @@ export function OfferModal({
       setIsSubmitting(false);
       setIsSuccess(true);
 
-      // Reset form after showing success message
+      // Reset after success message
       setTimeout(() => {
         setIsSuccess(false);
         setOfferAmount("");
         setMessage("");
         onClose();
-        toast.success("Your offer has been sent successfully!");
+        toast.success(t("toast.sent"));
       }, 2000);
     }, 1500);
   };
@@ -72,12 +76,18 @@ export function OfferModal({
   if (!property) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-xl border border-border/40">
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent
+        className="sm:max-w-md bg-background/80 backdrop-blur-xl border border-border/40"
+        dir={isRTL ? "rtl" : "ltr"}
+      >
         <DialogHeader>
-          <DialogTitle>Make an Offer</DialogTitle>
+          <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>
-            Send your offer for {property.title} at {property.address}
+            {t("description", {
+              property: property.title,
+              address: property.address,
+            })}
           </DialogDescription>
         </DialogHeader>
 
@@ -105,10 +115,8 @@ export function OfferModal({
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Thank You!</h3>
-              <p className="text-muted-foreground">
-                Your offer has been sent successfully. We'll contact you soon.
-              </p>
+              <h3 className="text-xl font-semibold mb-2">{t("success.title")}</h3>
+              <p className="text-muted-foreground">{t("success.text")}</p>
             </motion.div>
           ) : (
             <motion.form
@@ -119,42 +127,58 @@ export function OfferModal({
               className="space-y-4"
             >
               <div className="space-y-2">
-                <Label htmlFor="amount">Offer Amount</Label>
-                <Input
-                  id="amount"
-                  placeholder="Enter your offer amount"
-                  value={offerAmount}
-                  onChange={(e) => setOfferAmount(e.target.value)}
-                  className="bg-background/50"
-                  required
-                />
+                <Label htmlFor="amount">{t("form.amount.label")}</Label>
+
+                {/* Amount with JOD icon prefix (uses your existing .icon-jod) */}
+                <div className="relative">
+                  <span
+                    className={`absolute inset-y-0 flex items-center px-2 text-muted-foreground ${
+                      isRTL ? "right-0" : "left-0"
+                    }`}
+                  >
+                    <span className="icon-jod" />
+                  </span>
+                  <Input
+                    id="amount"
+                    inputMode="numeric"
+                    placeholder={t("form.amount.placeholder")}
+                    value={offerAmount}
+                    onChange={(e) => setOfferAmount(e.target.value)}
+                    className={`bg-background/50 ${
+                      isRTL ? "pr-8" : "pl-8"
+                    }`}
+                    required
+                  />
+                </div>
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="message">Message to Agent</Label>
+                <Label htmlFor="message">{t("form.message.label")}</Label>
                 <Textarea
                   id="message"
-                  placeholder="Write a message to the agent..."
+                  placeholder={t("form.message.placeholder")}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="bg-background/50 min-h-[100px]"
                   required
                 />
               </div>
-              <DialogFooter className="mt-6">
+
+              <DialogFooter className={`mt-6 flex gap-2 ${isRTL ? "justify-start mr-2" : ""}`}>
                 <Button
                   type="button"
                   variant="outline"
                   onClick={onClose}
-                  className="border-border/40"
+                  className="border-border/40 "
                 >
-                  Cancel
+                  {t("actions.cancel")}
                 </Button>
                 <Button
                   type="submit"
                   className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Sending..." : "Send Offer"}
+                  {isSubmitting ? t("actions.sending") : t("actions.send")}
                 </Button>
               </DialogFooter>
             </motion.form>

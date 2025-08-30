@@ -24,11 +24,13 @@ import {
   type SearchFilters,
   defaultSearchFilters,
 } from "@/components/user/data/properties";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function SearchPage() {
   const t = useTranslations("SearchPage");
   const router = useRouter();
+  const locale = useLocale();
+  const isRTL = locale?.startsWith("ar");
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState<SearchFilters>(defaultSearchFilters);
   const [filteredProperties, setFilteredProperties] =
@@ -118,16 +120,16 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6" dir={isRTL ? "rtl" : "ltr"}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <div className="flex items-center mb-6">
-          <Button variant="ghost" asChild className="mr-2">
+          <Button variant="ghost" asChild className={isRTL ? "ml-2" : "mr-2"}>
             <button onClick={() => router.back()}>
-              <ArrowLeft className="h-4 w-4 mr-2" />
+              <ArrowLeft className={`h-4 w-4 ${isRTL ? "ml-2" : "mr-2"}`} />
               {t("back")}
             </button>
           </Button>
@@ -151,12 +153,16 @@ export default function SearchPage() {
             {/* Search Bar and Controls */}
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="relative flex-1">
-                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <MapPin
+                  className={`absolute top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground ${
+                    isRTL ? "right-3" : "left-3"
+                  }`}
+                />
                 <Input
                   placeholder={t("searchPlaceholder")}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-9 bg-emerald-50/10 border-emerald-900/20"
+                  className={`${isRTL ? "pr-9" : "pl-9"} bg-emerald-50/10 border-emerald-900/20`}
                 />
               </div>
               <div className="flex gap-2">
@@ -165,7 +171,7 @@ export default function SearchPage() {
                   className="lg:hidden border-emerald-800/30 bg-emerald-950/10"
                   onClick={() => setIsFilterPanelOpen(true)}
                 >
-                  <Filter className="h-4 w-4 mr-2" />
+                  <Filter className={`h-4 w-4 ${isRTL ? "ml-2" : "mr-2"}`} />
                   {t("filters")}
                 </Button>
                 <Button
@@ -243,7 +249,7 @@ export default function SearchPage() {
                   className="bg-gradient-to-r from-emerald-500/80 to-green-500/80 text-white hover:from-emerald-600/80 hover:to-green-600/80 backdrop-blur-sm"
                   onClick={() => setFilters(defaultSearchFilters)}
                 >
-                  <SlidersHorizontal className="mr-2 h-4 w-4" />
+                  <SlidersHorizontal className={`${isRTL ? "ml-2" : "mr-2"} h-4 w-4`} />
                   {t("resetFilters")}
                 </Button>
               </Card>
@@ -255,7 +261,11 @@ export default function SearchPage() {
       {/* Mobile Filters Panel */}
       {isFilterPanelOpen && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 lg:hidden">
-          <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-gradient-to-br from-background/95 to-emerald-950/5 backdrop-blur-xl border-l border-emerald-900/20 shadow-xl p-6">
+          <div
+            className={`fixed inset-y-0 w-full max-w-xs bg-gradient-to-br from-background/95 to-emerald-950/5 backdrop-blur-xl border-emerald-900/20 shadow-xl p-6 ${
+              isRTL ? "left-0 border-r" : "right-0 border-l"
+            }`}
+          >
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold">{t("filters")}</h2>
               <Button
@@ -263,7 +273,7 @@ export default function SearchPage() {
                 size="sm"
                 onClick={() => setIsFilterPanelOpen(false)}
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className={`h-4 w-4 ${isRTL ? "scale-x-[-1]" : ""}`} />
               </Button>
             </div>
             <SearchFiltersPanel
