@@ -545,7 +545,7 @@ function SimilarListing({
         </div>
         <div className="text-gray-500 text-xs mt-1">• {type}</div>
         <div className="text-gray-500 text-xs mt-1 text-right">
-          • شارع الخليج، الخبر، المملكة العربية السعودية
+          • شارع الخليج، الخبر، المملكة العربية الأردن
         </div>
       </div>
       <div className="w-20 h-20 relative ml-3">

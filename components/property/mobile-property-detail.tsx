@@ -459,7 +459,7 @@
 //           <div className="bg-gray-100 text-xs px-2 py-0.5 rounded-sm">{area}</div>
 //         </div>
 //         <div className="text-gray-500 text-xs mt-1">• {type}</div>
-//         <div className="text-gray-500 text-xs mt-1 text-right">• شارع الخليج، الخبر، المملكة العربية السعودية</div>
+//         <div className="text-gray-500 text-xs mt-1 text-right">• شارع الخليج، الخبر، المملكة العربية الأردن</div>
 //       </div>
 //       <div className="w-20 h-20 relative ml-3">
 //         <Image
@@ -813,7 +813,7 @@ function SimilarListing({ title, price, area, type, imageUrl }: SimilarListingPr
           <div className="bg-gray-100 text-xs px-2 py-0.5 rounded-sm">{area}</div>
         </div>
         <div className="text-gray-500 text-xs mt-1">• {type}</div>
-        <div className="text-gray-500 text-xs mt-1 text-right">• شارع الخليج، الخبر، المملكة العربية السعودية</div>
+        <div className="text-gray-500 text-xs mt-1 text-right">• شارع الخليج، الخبر، المملكة العربية الأردن</div>
       </div>
       <div className="w-20 h-20 relative ml-3">
         <Image
