@@ -73,13 +73,13 @@
       "Ads": "Advertisement: Dealing with or without payments makes you responsible to the description and information",
       "Dist": "District Information for Al Gharra",
       "Avg": "Average meter price",
-      "SemiAnnually": "1710 SAR Semiannually",
+      "SemiAnnually": "1710 JOD Semiannually",
       "Platform": "Based on the data of the ads published on Aqar platform",
       "LD": "Listing Details",
       "AddInfo": " Additional Information",
       "Location": " Location",
       "Sale": "Land for sale",
-      "SAR": "1,100,000 SAR",
+      "SAR": "1,100,000 JOD",
       "property": "Would you like to own the property?",
       "financingOptions": " Financing options",
       "Area": "Area",
@@ -193,11 +193,11 @@
   "landing": {
     "hero": {
       "title": "Find Your Dream Home",
-      "subtitle": "The largest real estate platform in the region with thousands of premium properties",
+      "subtitle": "The largest real estate platform in Jordan with thousands of premium properties",
       "ctaPrimary": "Browse Properties",
       "ctaSecondary": "Learn More",
       "YGT": "YOUR GATEWAY TO",
-      "SFP": "Saudi'S FINEST PROPERTIES"
+      "SFP": "Jordan's FINEST PROPERTIES"
     },
     "features": {
       "title": "Why Choose Us?",
@@ -213,17 +213,17 @@
     "properties": {
       "title": "Featured Properties",
       "sampleTitle": "Luxury Villa",
-      "sampleLocation": "Dubai, UAE",
-      "samplePrice": "AED 2,500,000",
+      "sampleLocation": "Amman, Jordan",
+      "samplePrice": "JOD 2,500,000",
       "viewButton": "View Details"
     }
   },
   "services": {
     "title": "Our Premium Services",
-    "subtitle": "Experience unparalleled real estate services tailored for Dubai's elite",
+    "subtitle": "Experience unparalleled real estate services tailored for Jordan's market",
     "urban": {
       "title": "Luxury Urban Living",
-      "description": "Exclusive properties in Dubai's most prestigious neighborhoods"
+      "description": "Exclusive properties in Amman's most prestigious neighborhoods"
     },
     "instant": {
       "title": "Instant Access",
@@ -263,23 +263,23 @@
     "sampleProperties": [
       {
         "title": "Luxury Marina Villa",
-        "location": "Dubai Marina, Dubai"
+        "location": "Abdoun, Amman"
       },
       {
         "title": "Modern Downtown Apartment",
-        "location": "Downtown Dubai"
+        "location": "Al Abdali, Amman"
       },
       {
         "title": "Executive Penthouse",
-        "location": "Palm Jumeirah"
+        "location": "Jabal Amman"
       },
       {
         "title": "Family Townhouse",
-        "location": "Arabian Ranches"
+        "location": "Dabouq"
       },
       {
         "title": "Waterfront Villa",
-        "location": "Dubai Creek"
+        "location": "Sweifieh"
       }
     ]
   },
@@ -295,13 +295,12 @@
     "awardsWon": "Awards Won",
     "awardsWonValue": "20"
   },
-
   "features": {
     "title": "Premium Property Solutions",
     "subtitle": "Experience real estate redefined with our innovative services",
     "urban": {
       "title": "Urban Living",
-      "description": "Discover properties in Dubai's most vibrant neighborhoods"
+      "description": "Discover properties in Amman's most vibrant neighborhoods"
     },
     "instant": {
       "title": "Instant Access",
@@ -316,11 +315,10 @@
       "description": "Blockchain-verified contracts for peace of mind"
     }
   },
-
   "footer": {
     "about": {
       "title": "About Us",
-      "description": "The leading real estate platform in the region"
+      "description": "The leading real estate platform in Jordan"
     },
     "links": {
       "title": "Quick Links",
@@ -332,8 +330,8 @@
     },
     "contact": {
       "title": "Contact Us",
-      "address": "Dubai, United Arab Emirates",
-      "phone": "+971 4 123 4567",
+      "address": "Amman, Jordan",
+      "phone": "+962 6 123 4567",
       "email": "info@realestate.com"
     },
     "newsletter": {
@@ -342,7 +340,7 @@
       "placeholder": "Your Email",
       "button": "Subscribe"
     },
-    "copyright": "All Rights Reserved © 2025"
+    "copyright": "All Rights Reserved 2025"
   },
   "nav": {
     "logo": "RealEstate",
@@ -482,7 +480,6 @@
     "altdescription": "This action cannot be undone. This will permanently delete the property and remove it from our servers.",
     "cancel": "Cancel",
     "confirm": "Delete",
-
     "propertyOverview": "Property Overview",
     "distributionByTypeStatus": "Distribution of properties by type and status",
     "propertyStatus": "Property Status",
@@ -680,8 +677,8 @@
       "general": {
         "defaultValues": {
           "siteName": "Real Estate Admin",
-          "siteDescription": "Admin panel for managing real estate properties in the Middle East",
-          "address": "123 Sheikh Zayed Road, Dubai, UAE"
+          "siteDescription": "Admin panel for managing real estate properties in Jordan",
+          "address": "123 Zahran Street, Amman, Jordan"
         },
         "siteInformation": {
           "title": "Site Information",
@@ -707,8 +704,8 @@
           "currencyPlaceholder": "Select currency"
         },
         "timezones": {
-          "dubai": "Dubai",
-          "riyadh": "Riyadh",
+          "amman": "Amman",
+          "riyadh": "Amman",
           "doha": "Doha",
           "kuwait": "Kuwait",
           "beirut": "Beirut"
@@ -718,7 +715,8 @@
           "sar": "Saudi Riyal",
           "qar": "Qatari Riyal",
           "kwd": "Kuwaiti Dinar",
-          "usd": "US Dollar"
+          "usd": "US Dollar",
+          "jod": "Jordanian Dinar"
         },
         "toast": {
           "title": "Settings updated",
@@ -1537,13 +1535,11 @@
     "static_approved": "12 ",
     "static_rejected": "4 ",
     "static_listingApprovalRate": "75% ",
-    "static_averageResponseTime": "2.3 ",
-    "static_documentCompletion": "90% ",
-    "static_profileCompleteness": "85% "
+    "static_averageResponseTime": "2.3 "
   },
   "property": {
     "manageListings": "Manage your property listings and their status",
-    "allProperties": "All your properties shown on the map",
+    "allProperties": "All your properties shown on the map of Amman",
     "all": "All",
     "approved": "Approved",
     "pending": "Pending",
@@ -1551,7 +1547,7 @@
     "title": "Title",
     "type": "Type",
     "district": "District",
-    "price": "Price (SAR)",
+    "price": "Price (JOD)",
     "status": "Status",
     "dateAdded": "Date Added",
     "actions": "Actions",
@@ -1559,28 +1555,28 @@
     "edit": "Edit",
     "delete": "Delete",
     "mapProperty": {
-      "title1": "Luxury Villa in Al Olaya"
+      "title1": "Luxury Villa in Abdoun"
     }
   },
   "map": {
-    "viewProperties": "View your properties on the map of Riyadh",
+    "viewProperties": "View your properties on the map of Amman",
     "mapView": "Map View",
-    "interactiveMap": "Interactive map showing your property locations in Riyadh",
+    "interactiveMap": "Interactive map showing your property locations in Amman",
     "propertyDetails": "Property Details",
     "selectProperty": "Select a property on the map to view details",
     "coordinates": "Coordinates",
     "viewDetails": "View Details",
     "showOnMap": "Show on Map",
-    "riyadhDistricts": "Riyadh Districts",
-    "al_olaya": "Al Olaya",
-    "al_malaz": "Al Malaz",
-    "al_naseem": "Al Naseem",
-    "qurtubah": "Qurtubah",
-    "al_wurud": "Al Wurud",
-    "hittin": "Hittin",
-    "al_nakheel": "Al Nakheel",
-    "al_yasmin": "Al Yasmin",
-    "al_murabba": "Al Murabba"
+    "riyadhDistricts": "Amman Districts",
+    "al_olaya": "Abdoun",
+    "al_malaz": "Al Abdali",
+    "al_naseem": "Jabal Amman",
+    "qurtubah": "Dabouq",
+    "al_wurud": "Sweifieh",
+    "hittin": "Khalda",
+    "al_nakheel": "Deir Ghbar",
+    "al_yasmin": "Shmeisani",
+    "al_murabba": "Tla' Al-Ali"
   },
   "profile": {
     "updateProfile": "Update your profile information and settings",
@@ -1593,48 +1589,6 @@
     "licenseExpiry": "License Expiry Date",
     "changePhoto": "Change Photo",
     "saveChanges": "Save Changes"
-  },
-  "notifications": {
-    "stayUpdated": "Stay updated with property approvals, system announcements, and more",
-    "markAllRead": "Mark All as Read",
-    "notificationCenter": "Notification Center",
-    "manageNotifications": "Manage your notifications and alerts",
-    "all": "All",
-    "unread": "Unread",
-    "system": "System",
-    "noNotifications": "No notifications",
-    "noUnread": "You have no unread notifications",
-    "noCategory": "You have no notifications in this category",
-    "markAsRead": "Mark as read",
-    "new": "New"
-  },
-  "headerdata": {
-    "propertyManagement": "Property Management System",
-    "toggleMenu": "Toggle Menu",
-    "agentName": "Ahmed Rashid",
-    "agentTitle": "Real Estate Agent",
-    "mainMenu": "Main Menu",
-    "dashboard": "Dashboard",
-    "overview": "Overview",
-    "properties": "Properties",
-    "addProperty": "Add Property",
-    "propertyMap": "Property Map",
-    "profile": "Profile",
-    "notifications": "Notifications",
-    "support": "Support",
-    "helpResources": "Help & Resources",
-    "documentation": "Documentation",
-    "settings": "Settings",
-    "logout": "Logout",
-    "searchPlaceholder": "Search properties...",
-    "help": "Help & Support",
-    "userGuide": "User Guide",
-    "faqs": "FAQs",
-    "contactSupport": "Contact Support",
-    "reportIssue": "Report an Issue",
-    "markAllRead": "Mark All as Read",
-    "viewAllNotifications": "View All Notifications",
-    "myAccount": "My Account"
   },
   "overviewpage": {
     "title": "System Overview",
@@ -1661,7 +1615,7 @@
       "description": "Latest changes and improvements to the platform",
       "map": {
         "title": "Map Integration",
-        "desc": "Added interactive map feature to visualize property locations in Riyadh.",
+        "desc": "Added interactive map feature to visualize property locations in Amman.",
         "time": "2 days ago"
       },
       "docs": {
@@ -1694,7 +1648,7 @@
     "title": "Title",
     "type": "Type",
     "district": "District",
-    "price": "Price (SAR)",
+    "price": "Price (JOD)",
     "status": "Status",
     "dateAdded": "Date Added",
     "actions": "Actions",
@@ -1702,47 +1656,46 @@
     "edit": "Edit",
     "delete": "Delete",
     "allProperties": {
-      "luxury_villa": "Luxury Villa in Al Olaya",
-      "modern_apartment": "Modern Apartment in Al Malaz",
-      "commercial_land": "Commercial Land in Al Naseem",
-      "office_space": "Office Space in Qurtubah",
-      "retail_shop": "Retail Shop in Al Wurud",
-      "spacious_villa": "Spacious Villa in Hittin",
+      "luxury_villa": "Luxury Villa in Abdoun",
+      "modern_apartment": "Modern Apartment in Al Abdali",
+      "commercial_land": "Commercial Land in Jabal Amman",
+      "office_space": "Office Space in Dabouq",
+      "retail_shop": "Retail Shop in Sweifieh",
+      "spacious_villa": "Spacious Villa in Khalda",
       "villa_type": "Villa",
       "apartment_type": "Apartment",
       "land_type": "Land",
       "office_type": "Office",
       "retail_type": "Retail",
-      "al_olaya": "Al Olaya",
-      "al_malaz": "Al Malaz",
-      "al_naseem": "Al Naseem",
-      "qurtubah": "Qurtubah",
-      "al_wurud": "Al Wurud",
-      "hittin": "Hittin",
+      "al_olaya": "Abdoun",
+      "al_malaz": "Al Abdali",
+      "al_naseem": "Jabal Amman",
+      "qurtubah": "Dabouq",
+      "al_wurud": "Sweifieh",
+      "hittin": "Khalda",
       "price1": "850000",
       "price2": "4200000",
       "price3": "2500000",
       "price4": "1345600",
       "price5": "950000",
       "price6": "750000",
-      "sar": "SAR"
+      "sar": "JOD"
     }
   },
-
   "propertiesAdd": {
     "addProperty": "Add Property",
-    "formDescription": "Fill in the details below to add a new property listing.",
+    "formDescription": "Fill in the details below to add a new property listing in Jordan.",
     "propertyInfo": "Property Information",
     "formInstructions": "Enter the details of your property. All fields are required unless specified.",
     "title": {
       "label": "Title",
-      "placeholder": "Luxury Villa in Al Olaya",
+      "placeholder": "Luxury Villa in Abdoun",
       "description": "A descriptive title for your property"
     },
     "price": {
       "label": "Price",
       "placeholder": "1000000",
-      "description": "The price in Saudi Riyal"
+      "description": "The price in Jordanian Dinar (JOD)"
     },
     "type": {
       "label": "Type",
@@ -1760,23 +1713,23 @@
     "district": {
       "label": "District",
       "placeholder": "Select district",
-      "description": "The district in Riyadh where the property is located",
+      "description": "The district in Amman where the property is located",
       "options": {
-        "al_olaya": "Al Olaya",
-        "al_malaz": "Al Malaz",
-        "al_murabba": "Al Murabba",
-        "al_naseem": "Al Naseem",
-        "al_rawdah": "Al Rawdah",
-        "al_wurud": "Al Wurud",
-        "hittin": "Hittin",
-        "qurtubah": "Qurtubah",
-        "al_nakheel": "Al Nakheel",
-        "al_yasmin": "Al Yasmin"
+        "al_olaya": "Abdoun",
+        "al_malaz": "Al Abdali",
+        "al_murabba": "Tla' Al-Ali",
+        "al_naseem": "Jabal Amman",
+        "al_rawdah": "Dabouq",
+        "al_wurud": "Sweifieh",
+        "hittin": "Khalda",
+        "qurtubah": "Deir Ghbar",
+        "al_nakheel": "Shmeisani",
+        "al_yasmin": "Um Uthaina"
       }
     },
     "city": {
       "label": "City",
-      "description": "Default city is set to Riyadh"
+      "description": "Default city is set to Amman"
     },
     "description": {
       "label": "Description",
@@ -1793,179 +1746,12 @@
     "note": "Note:",
     "approvalNote": "Upon submission, your property will enter an \"Admin Approval Pending\" state. It will only be visible to the public once approved by an administrator."
   },
-  "userProfile": {
-    "profile": "Profile",
-    "updateProfile": "Update your profile information",
-    "profileInfo": "Profile Information",
-    "updatePersonal": "Update your personal details",
-    "changePhoto": "Change Photo",
-    "fullName": "Full Name",
-    "email": "Email Address",
-    "phone": "Phone Number",
-    "licenseNumber": "License Number",
-    "licenseExpiry": "License Expiry Date",
-    "saveChanges": "Save Changes",
-    "documents": {
-      "title": "Document Uploads",
-      "description": "Upload additional documents related to your real estate license and properties",
-      "noc": "NOC Documents",
-      "deed": "Deed Copies",
-      "uploadText": "Click to upload or drag and drop",
-      "fileTypes": "PDF, DOC or DOCX (MAX. 10MB)",
-      "note": "Note:",
-      "noteText": "Uploaded documents are only visible to administrators for verification purposes. Please ensure all documents are clear and legible."
-    },
-    "licenseStatus": {
-      "expired": "Your license has expired! Please renew immediately.",
-      "warning": "Your license expires in {days} days. Please renew soon."
-    },
-    "descriptions": {
-      "name": "Your name as it appears on your official documents",
-      "email": "Your primary contact email",
-      "phone": "Your primary contact phone number",
-      "licenseNumber": "Your official real estate license number",
-      "licenseExpiry": "The expiration date of your real estate license"
-    }
-  },
-  "userDashboard": {
-    "fullSearchText": "Search by location, property name...",
-    "searchProperties": "Search Properties",
-    "offerPrice": "Offer Price",
-    "viewDetails": "View Details",
-    "back": "Back",
-    "conversations": "Conversations",
-    "selectConversation": "Select a conversation",
-    "selectConversationText": "Choose a conversation from the list to view messages and reply.",
-    "profile": "Profile",
-    "profileInformation": "Profile Information",
-    "profileInformationText": "Update your personal information and contact details",
-    "notifications": "Notifications",
-    "security": "Security",
-    "paymentMethods": "Payment Methods",
-    "preferences": "Preferences",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "phoneNumber": "Phone Number",
-    "bio": "Bio",
-    "profileImage": "Profile Image",
-    "propertyType": "Property Types",
-    "differentPropertyCategories": "Different Property Categories",
-    "averagePrice": "Average Price",
-    "price": "Price",
-    "totalValue": "Total Value",
-    "totalSaved": "Total Saved",
-    "properties": "Properties",
-    "unreadMessages": "Unread Messages",
-    "needAttention": "Need Attention",
-    "engagement": "Engagement",
-    "high": "high",
-    "aboveAverage": "Above Average",
-    "responseRate": "Response Rate",
-    "profileCompletion": "Profile Completion",
-    "newToday": "New Today",
-    "fromLastWeek": "From last week",
-    "fromLastMonth": "From last month",
-    "newSearch": "New Search",
-    "yourSavedProperties": "Your saved properties",
-    "resentSearches": "Recent Searches"
-  },
-  "blogManagement": {
-    "title": "Blog Management",
-    "subtitle": "Manage your published blog posts",
-    "searchPlaceholder": "Search blogs...",
-    "createButton": "+ Create New Blog",
-    "errorMessage": "Failed to fetch blogs. Please try again later.",
-    "loading": "Loading blogs...",
-    "modal": {
-      "editTitle": "Edit Blog",
-      "createTitle": "Create New Blog",
-      "closeButton": "×"
-    },
-    "allBlogs": "All Blogs",
-    "noBlogs": {
-      "message": "No blogs found.",
-      "suggestion": "Try adjusting your search or create a new blog post."
-    },
-    "deleteConfirmation": "Are you sure you want to delete this blog post?",
-    "deleteSuccess": "Blog post deleted successfully!",
-    "deleteFailure": "Failed to delete blog post.",
-    "unexpectedError": "An unexpected error occurred."
-  },
-  "adminNotification": {
-    "searchPlaceholder": "Search...",
-    "notifications": {
-      "title": "Notifications",
-      "items": [
-        {
-          "title": "New property submission",
-          "desc": "A new property has been submitted for review",
-          "time": "2 minutes ago"
-        },
-        {
-          "title": "New user registration",
-          "desc": "A new agent has registered and requires approval",
-          "time": "1 hour ago"
-        },
-        {
-          "title": "System update",
-          "desc": "The system will be updated tonight at 2 AM",
-          "time": "5 hours ago"
-        }
-      ]
-    },
-    "account": {
-      "title": "My Account",
-      "profile": "Profile",
-      "settings": "Settings",
-      "logout": "Log out"
-    }
-  },
-  "SearchFilters": {
-    "title": "Filters",
-    "reset": "Reset",
-    "priceRange": "Price Range",
-    "priceRangeLabel": "${min} - ${max}",
-    "bedrooms": "Bedrooms",
-    "bathrooms": "Bathrooms",
-    "propertyType": "Property Type",
-    "squareFootage": "Square Footage",
-    "sqftRangeLabel": "${min} - ${max} sqft",
-    "feature": "Features",
-    "any": "Any",
-    "applyFilters": "Apply Filters",
-    "priceLabel": "priceLabel",
-    "sqftLabel": "sqftLabel",
-    "resetButton": "Reset Button",
-    "propertyTypes": {
-      "house": "House",
-      "apartment": "Apartment",
-      "condo": "Condo",
-      "townhouse": "Townhouse",
-      "land": "Land"
-    },
-    "features": {
-      "pool": "Pool",
-      "garden": "Garden",
-      "garage": "Garage",
-      "furnished": "Furnished",
-      "fireplace": "Fireplace",
-      "balcony": "Balcony",
-      "gym": "Gym",
-      "elevator": "Elevator",
-      "parking": "parking",
-      "wifi": "wifi",
-      "kitchen": "kitchen",
-      "ac": "AC",
-      "terrace": "terrace"
-    }
-  },
   "SavedProperties": {
     "title": "Saved Properties",
     "backButton": "Back",
     "toastSaved": "Property saved to your favorites!",
     "toastRemoved": "Property removed from your favorites",
-    "sar": "SAR",
+    "sar": "JOD",
     "stats": {
       "totalSaved": "Total Saved",
       "properties": "properties",
@@ -2266,12 +2052,11 @@
     "contactInfo": {
       "title": "Our Contact Information",
       "addressTitle": "Office Address",
-      "address": "123 Real Estate Ave, Suite 100, Saudi Arab, NY 10001",
+      "address": "123 Mecca St, Floor 1, Amman, Jordan 11194",
       "phoneTitle": "Phone Number",
       "emailTitle": "Email",
       "hoursTitle": "Working Hours",
-      "hours": "Monday - Friday: 9:00 AM - 6:00 PM"
+      "hours": "Monday - Friday: 9:00 AM - 6:00 PM"
     }
   }
 }
-

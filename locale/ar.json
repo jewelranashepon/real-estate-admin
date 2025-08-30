@@ -196,17 +196,17 @@
     "properties": {
       "title": "العقارات المميزة",
       "sampleTitle": "فيلا فاخرة",
-      "sampleLocation": "دبي، الإمارات",
-      "samplePrice": "2,500,000 درهم",
+      "sampleLocation": "عمّان، الأردن",
+      "samplePrice": "2,500,000 دينار أردني",
       "viewButton": "عرض التفاصيل"
     }
   },
   "services": {
     "title": "خدماتنا المميزة",
-    "subtitle": "تجربة خدمات عقارية لا مثيل لها مصممة لنخبة دبي",
+    "subtitle": "تجربة خدمات عقارية لا مثيل لها مصممة لنخبة عمّان",
     "urban": {
       "title": "حياة حضرية فاخرة",
-      "description": "عقارات حصرية في أرقى أحياء دبي"
+      "description": "عقارات حصرية في أرقى أحياء عمّان"
     },
     "instant": {
       "title": "وصول فوري",
@@ -226,7 +226,7 @@
     "subtitle": "جرب تجربة عقارية جديدة مع خدماتنا المبتكرة",
     "urban": {
       "title": "حياة حضرية",
-      "description": "اكتشف العقارات في أكثر أحياء دبي حيوية"
+      "description": "اكتشف العقارات في أكثر أحياء عمّان حيوية"
     },
     "instant": {
       "title": "وصول فوري",
@@ -241,7 +241,6 @@
       "description": "عقود موثقة بتقنية البلوك تشين لراحة البال"
     }
   },
-
   "stats": {
     "title": "موثوق من قبل الآلاف",
     "subtitle": "أرقامنا تتحدث عن نفسها - انضم إلى مجتمعنا المتنامي",
@@ -254,7 +253,6 @@
     "awardsWon": "الجوائز المحصولة",
     "awardsWonValue": "٢٠"
   },
-
   "footer": {
     "about": {
       "title": "عن الشركة",
@@ -270,8 +268,8 @@
     },
     "contact": {
       "title": "اتصل بنا",
-      "address": "دبي، الإمارات العربية المتحدة",
-      "phone": "+971 4 123 4567",
+      "address": "عمّان، الأردن",
+      "phone": "+962 6 123 4567",
       "email": "info@realestate.com"
     },
     "newsletter": {
@@ -282,7 +280,6 @@
     },
     "copyright": "جميع الحقوق محفوظة © 2025"
   },
-
   "nav": {
     "logo": "العقار",
     "home": "الرئيسية",
@@ -294,7 +291,6 @@
     "signUp": "حساب جديد",
     "service": "الخدمة"
   },
-
   "properties": {
     "availableProperties": "العقارات المتاحة",
     "falCertified": "معتمد من فال",
@@ -320,23 +316,23 @@
     "sampleProperties": [
       {
         "title": "فيلا فاخرة في المارينا",
-        "location": "دبي مارينا، دبي"
+        "location": "مرسى العقبة، العقبة"
       },
       {
         "title": "شقة عصرية في وسط المدينة",
-        "location": "وسط مدينة دبي"
+        "location": "وسط البلد، عمّان"
       },
       {
         "title": "بنتهاوس تنفيذي",
-        "location": "جزيرة النخلة"
+        "location": "عبدون، عمّان"
       },
       {
         "title": "تاون هاوس عائلي",
-        "location": "المزارع العربية"
+        "location": "دابوق، عمّان"
       },
       {
         "title": "فيلا مطلة على الماء",
-        "location": "خور دبي"
+        "location": "العقبة"
       }
     ]
   },
@@ -652,7 +648,6 @@
     "lastBlog": "آخر ٤ منشورات في المدونة",
     "newListings": "إعلانات جديدة",
     "propertyViews": "مشاهدات العقارات",
-
     "adminPanel": {
       "title": "طيور الجنة",
       "subtitle": "لوحة التحكم",
@@ -666,7 +661,7 @@
         "defaultValues": {
           "siteName": "لوحة تحكم العقارات",
           "siteDescription": "لوحة الإدارة لإدارة العقارات في الشرق الأوسط",
-          "address": "123 شارع الشيخ زايد، دبي، الإمارات"
+          "address": "123 شارع مكة، عمّان، الأردن"
         },
         "siteInformation": {
           "title": "معلومات الموقع",
@@ -692,7 +687,7 @@
           "currencyPlaceholder": "اختر العملة"
         },
         "timezones": {
-          "dubai": "دبي",
+          "amman": "عمّان",
           "riyadh": "الرياض",
           "doha": "الدوحة",
           "kuwait": "الكويت",
@@ -1502,7 +1497,6 @@
     "pendingApprovals": "الموافقات المعلقة",
     "approved": "تمت الموافقة",
     "propertystatus": "حالة العقار",
-
     "sold": "تم البيع",
     "rejected": "مرفوضة",
     "fromLastMonth": "من الشهر الماضي",
@@ -1537,7 +1531,7 @@
     "title": "العنوان",
     "type": "النوع",
     "district": "الحي",
-    "price": "السعر (ريال)",
+    "price": "السعر (دينار)",
     "status": "الحالة",
     "dateAdded": "تاريخ الإضافة",
     "actions": "الإجراءات",
@@ -1546,24 +1540,24 @@
     "delete": "حذف"
   },
   "map": {
-    "viewProperties": "عرض العقارات على خريطة الرياض",
+    "viewProperties": "عرض العقارات على خريطة عمّان",
     "mapView": "عرض الخريطة",
-    "interactiveMap": "خريطة تفاعلية تعرض مواقع العقارات الخاصة بك في الرياض",
+    "interactiveMap": "خريطة تفاعلية تعرض مواقع العقارات الخاصة بك في عمّان",
     "propertyDetails": "تفاصيل العقار",
     "selectProperty": "حدد عقارًا على الخريطة لعرض التفاصيل",
     "coordinates": "الإحداثيات",
     "viewDetails": "عرض التفاصيل",
     "showOnMap": "عرض على الخريطة",
-    "riyadhDistricts": "أحياء الرياض",
-    "al_olaya": "العليا",
-    "al_malaz": "الملز",
-    "al_naseem": "النسيم",
-    "qurtubah": "قرطبة",
-    "al_wurud": "الورود",
-    "hittin": "حطين",
-    "al_nakheel": "النخيل",
-    "al_yasmin": "الياسمين",
-    "al_murabba": "المربع"
+    "riyadhDistricts": "أحياء عمّان",
+    "al_olaya": "عبدون",
+    "al_malaz": "الشميساني",
+    "al_naseem": "الصويفية",
+    "qurtubah": "خلدا",
+    "al_wurud": "تلاع العلي",
+    "hittin": "دابوق",
+    "al_nakheel": "الجبيهة",
+    "al_yasmin": "اللويبدة",
+    "al_murabba": "جبل عمّان"
   },
   "profile": {
     "updateProfile": "تحديث معلومات ملفك الشخصي والإعدادات",
@@ -1620,7 +1614,7 @@
     "myAccount": "حسابي",
     "notificationApproved": {
       "title": "تمت الموافقة على العقار",
-      "description": "تمت الموافقة على عقارك \"فيلا فاخرة في العليا\".",
+      "description": "تمت الموافقة على عقارك \"فيلا فاخرة في عبدون\".",
       "time": "منذ ساعتين"
     },
     "notificationRejected": {
@@ -1659,7 +1653,7 @@
       "description": "أحدث التغييرات والتحسينات على المنصة",
       "map": {
         "title": "تكامل الخريطة",
-        "desc": "تمت إضافة خريطة تفاعلية لعرض مواقع العقارات في الرياض.",
+        "desc": "تمت إضافة خريطة تفاعلية لعرض مواقع العقارات في عمّان.",
         "time": "منذ يومين"
       },
       "docs": {
@@ -1692,7 +1686,7 @@
     "title": "العنوان",
     "type": "النوع",
     "district": "الحي",
-    "price": "السعر (ريال)",
+    "price": "السعر (دينار)",
     "status": "الحالة",
     "dateAdded": "تاريخ الإضافة",
     "actions": "الإجراءات",
@@ -1700,33 +1694,32 @@
     "edit": "تعديل",
     "delete": "حذف",
     "allProperties": {
-      "luxury_villa": "فيلا فاخرة في العليا",
-      "modern_apartment": "شقة عصرية في الملز",
-      "commercial_land": "أرض تجارية في النسيم",
-      "office_space": "مساحة مكتبية في قرطبة",
-      "retail_shop": "متجر تجاري في الورود",
-      "spacious_villa": "فيلا واسعة في حطين",
+      "luxury_villa": "فيلا فاخرة في عبدون",
+      "modern_apartment": "شقة عصرية في الشميساني",
+      "commercial_land": "أرض تجارية في الصويفية",
+      "office_space": "مساحة مكتبية في خلدا",
+      "retail_shop": "متجر تجاري في الرابية",
+      "spacious_villa": "فيلا واسعة في دابوق",
       "villa_type": "فيلا",
       "apartment_type": "شقة",
       "land_type": "أرض",
       "office_type": "مكتب",
       "retail_type": "تجاري",
-      "al_olaya": "العليا",
-      "al_malaz": "الملز",
-      "al_naseem": "النسيم",
-      "qurtubah": "قرطبة",
-      "al_wurud": "الورود",
-      "hittin": "حطين",
+      "al_olaya": "عبدون",
+      "al_malaz": "الشميساني",
+      "al_naseem": "الصويفية",
+      "qurtubah": "خلدا",
+      "al_wurud": "تلاع العلي",
+      "hittin": "دابوق",
       "price1": "٨٥٠٬٠٠٠",
       "price2": "٤٬٢٠٠٬٠٠٠",
       "price3": "٢٬٥٠٠٬٠٠٠",
       "price4": "١٬٣٤٥٬٦٠٠",
       "price5": "٩٥٠٬٠٠٠",
       "price6": "٧٥٠٬٠٠٠",
-      "sar": "ر.س"
+      "sar": "د.أ"
     }
   },
-
   "propertiesAdd": {
     "addProperty": "إضافة عقار",
     "formDescription": "املأ التفاصيل أدناه لإضافة قائمة عقار جديدة.",
@@ -1734,13 +1727,13 @@
     "formInstructions": "أدخل تفاصيل عقارك. جميع الحقول مطلوبة ما لم يُذكر خلاف ذلك.",
     "title": {
       "label": "العنوان",
-      "placeholder": "فيلا فاخرة في العليا",
+      "placeholder": "فيلا فاخرة في عبدون",
       "description": "عنوان وصفي للعقار"
     },
     "price": {
       "label": "السعر",
       "placeholder": "١٬٠٠٠٬٠٠٠",
-      "description": "السعر بالريال السعودي"
+      "description": "السعر بالدينار الأردني"
     },
     "type": {
       "label": "النوع",
@@ -1758,23 +1751,23 @@
     "district": {
       "label": "الحي",
       "placeholder": "اختر الحي",
-      "description": "الحي في الرياض حيث يقع العقار",
+      "description": "الحي في عمّان حيث يقع العقار",
       "options": {
-        "al_olaya": "العليا",
-        "al_malaz": "الملز",
-        "al_murabba": "المربع",
-        "al_naseem": "النسيم",
-        "al_rawdah": "الروضة",
-        "al_wurud": "الورود",
-        "hittin": "حطين",
-        "qurtubah": "قرطبة",
-        "al_nakheel": "النخيل",
-        "al_yasmin": "الياسمين"
+        "al_olaya": "عبدون",
+        "al_malaz": "الشميساني",
+        "al_murabba": "جبل عمّان",
+        "al_naseem": "الصويفية",
+        "al_rawdah": "الرابية",
+        "al_wurud": "تلاع العلي",
+        "hittin": "دابوق",
+        "qurtubah": "خلدا",
+        "al_nakheel": "الجبيهة",
+        "al_yasmin": "اللويبدة"
       }
     },
     "city": {
       "label": "المدينة",
-      "description": "المدينة الافتراضية هي الرياض"
+      "description": "المدينة الافتراضية هي عمّان"
     },
     "description": {
       "label": "الوصف",
@@ -1941,7 +1934,7 @@
     "bathrooms": "الحمامات",
     "propertyType": "نوع العقار",
     "squareFootage": "المساحة بالمتر المربع",
-    "sqftRangeLabel": "${min} - ${max} قدم²",
+    "sqftRangeLabel": "${min} - ${max} م²",
     "feature": "الميزات",
     "any": "أي",
     "applyFilters": "تطبيق الفلاتر",
@@ -1976,7 +1969,7 @@
     "backButton": "رجوع",
     "toastSaved": "تم حفظ العقار في المفضلة!",
     "toastRemoved": "تم إزالة العقار من المفضلة",
-    "sar": "ريال",
+    "sar": "دينار",
     "stats": {
       "totalSaved": "إجمالي المحفوظات",
       "properties": "عقار",
@@ -2016,7 +2009,7 @@
     "features": {
       "beds": "غرف نوم",
       "baths": "حمامات",
-      "sqft": "قدم مربع",
+      "sqft": "متر مربع",
       "available": "متاح من"
     },
     "moreFeatures": "المزيد",
@@ -2028,7 +2021,7 @@
     "featured": "مميز",
     "beds": "غرف نوم",
     "baths": "حمامات",
-    "sqft": "قدم مربع",
+    "sqft": "متر مربع",
     "viewDetails": "عرض التفاصيل",
     "priceButton": "السعر"
   },
@@ -2138,7 +2131,7 @@
       "title": "تفضيلات العقارات",
       "description": "قم بتعيين تفضيلات البحث الافتراضية للعقارات",
       "location": "الموقع المفضل",
-      "locationDefault": "نيويورك، نيويورك",
+      "locationDefault": "عمّان، الأردن",
       "minPrice": "الحد الأدنى للسعر",
       "maxPrice": "الحد الأقصى للسعر",
       "bedrooms": "غرف النوم",
@@ -2264,7 +2257,7 @@
     "contactInfo": {
       "title": "معلومات الاتصال الخاصة بنا",
       "addressTitle": "عنوان المكتب",
-      "address": "١٢٣ شارع العقارات، الطابق ٠٠١، نيويورك، نيويورك  ١٠٠٠١",
+      "address": "١٢٣ شارع مكة، الطابق ١، عمّان، الأردن ١١١٩٤",
       "phoneTitle": "رقم الهاتف",
       "emailTitle": "البريد الإلكتروني",
       "hoursTitle": "ساعات العمل",

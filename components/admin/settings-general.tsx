@@ -35,7 +35,7 @@ export function SettingsGeneral() {
       contactEmail: "admin@example.com",
       contactPhone: "+971 50 123 4567",
       address: t("defaultValues.address"),
-      timezone: "Asia/Dubai",
+      timezone: "Asia/amman",
       dateFormat: "DD/MM/YYYY",
       currency: "AED",
     },
@@ -143,8 +143,8 @@ export function SettingsGeneral() {
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Asia/Dubai">
-                      {t("timezones.dubai")} (GMT+4)
+                    <SelectItem value="Asia/amman">
+                      {t("timezones.amman")} (GMT+4)
                     </SelectItem>
                     <SelectItem value="Asia/Riyadh">
                       {t("timezones.riyadh")} (GMT+3)

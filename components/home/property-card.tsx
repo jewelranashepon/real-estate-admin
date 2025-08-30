@@ -51,7 +51,7 @@ export default function PropertyCard({ property, layout = "list" }: PropertyCard
       </div>
       <CardContent className="p-4">
         <div className="flex flex-col gap-1">
-          <p className="text-xl font-bold">SAR{property.price.toLocaleString()}</p>
+          <p className="text-xl font-bold">JOD{property.price.toLocaleString()}</p>
           <div className="flex gap-2 text-sm">
             <span>
               {property.bedrooms} {t("beds")}

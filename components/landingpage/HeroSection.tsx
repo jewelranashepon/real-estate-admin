@@ -12,8 +12,8 @@ export default function HeroSection() {
     <section className="relative h-screen">
       <div className="absolute inset-0">
         <Image
-          src="/sa5.jpg"
-          alt="Dubai Skyline"
+          src="/herobanner.jpg"
+          alt="Amman Skyline"
           fill
           className="object-cover"
           priority

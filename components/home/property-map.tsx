@@ -7,13 +7,7 @@ import type { PropertyType } from "@/lib/types"
 import { AlertCircle, MapPin } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
-// Declare google variable to avoid Typescript errors
-declare global {
-  interface Window {
-    google?: any
-    gm_authFailure?: () => void
-  }
-}
+// Note: Avoid augmenting Window here to prevent conflicts with other global typings (e.g., Google Identity Services)
 
 export default function PropertyMap() {
   const mapRef = useRef<HTMLDivElement>(null)
@@ -39,7 +33,7 @@ export default function PropertyMap() {
 
       script.onload = () => {
         // Check if the API loaded successfully or with an error
-        if (window.google && window.google.maps) {
+        if ((window as any).google && (window as any).google.maps) {
           setMapLoaded(true)
         } else {
           setMapError("Failed to load Google Maps API")
@@ -54,11 +48,11 @@ export default function PropertyMap() {
     }
 
     // Handle Google Maps API error event
-    window.gm_authFailure = () => {
+    ;(window as any).gm_authFailure = () => {
       setMapError("Google Maps API key is invalid or has expired. Please provide a valid API key.")
     }
 
-    if (!window.google) {
+    if (!(window as any).google) {
       loadGoogleMapsAPI()
     } else {
       setMapLoaded(true)
@@ -66,7 +60,7 @@ export default function PropertyMap() {
 
     // Clean up
     return () => {
-      window.gm_authFailure = null
+      ;(window as any).gm_authFailure = undefined
     }
   }, [])
 
@@ -75,9 +69,9 @@ export default function PropertyMap() {
 
     try {
       // Initialize map
-      const newMap = new window.google.maps.Map(mapRef.current, {
-        center: { lat: 23.8859, lng: 45.0792 }, // Saudi Arabia coordinates
-        zoom: 5, // Zoomed out to show the whole country
+      const newMap = new (window as any).google.maps.Map(mapRef.current, {
+        center: { lat: 31.9539, lng: 35.9106 }, // Amman, Jordan coordinates
+        zoom: 11, // City-level zoom for Amman
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
@@ -108,7 +102,7 @@ export default function PropertyMap() {
     const properties = fetchSaudiProperties()
     try {
       const newMarkers = properties.map((property) => {
-        const marker = new window.google.maps.Marker({
+        const marker = new (window as any).google.maps.Marker({
           position: { lat: property.lat, lng: property.lng },
           map,
           label: {
@@ -116,7 +110,7 @@ export default function PropertyMap() {
             color: "white",
           },
           icon: {
-            path: window.google.maps.SymbolPath.CIRCLE,
+            path: (window as any).google.maps.SymbolPath.CIRCLE,
             scale: 12,
             fillColor: "#ea4335",
             fillOpacity: 1,
@@ -139,12 +133,12 @@ export default function PropertyMap() {
     }
   }, [map, infoWindow])
 
-  const createInfoWindowContent = (property: PropertyType) => {
+  const createInfoWindowContent = (property: any) => {
     return `
       <div style="width: 200px; padding: 5px;">
         <img src="${property.imageUrl}" alt="${property.address}" style="width: 100%; height: 120px; object-fit: cover; margin-bottom: 8px;" />
-        <div style="font-weight: bold; font-size: 16px;">${property.price.toLocaleString()} SAR</div>
-        <div style="font-size: 14px;">${property.bedrooms} bd • ${property.bathrooms} ba • ${property.sqft.toLocaleString()} sqft</div>
+        <div style="font-weight: bold; font-size: 16px;">${property.price.toLocaleString()} JOD</div>
+        <div style="font-size: 14px;">${property.bedrooms} bd • ${property.bathrooms} ba • ${(property.sqft ?? 0).toLocaleString()} sqft</div>
         <div style="font-size: 14px; color: #666;">${property.address}</div>
       </div>
     `
@@ -196,7 +190,7 @@ export default function PropertyMap() {
                   <MapPin className="h-5 w-5 text-red-500" />
                 </div>
                 <div>
-                  <p className="font-medium">${property.price.toLocaleString()} SAR</p>
+                  <p className="font-medium">${property.price.toLocaleString()} JOD</p>
                   <p className="text-sm text-gray-600">{property.address}</p>
                 </div>
               </div>
