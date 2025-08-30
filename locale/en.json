@@ -1526,6 +1526,57 @@
       "time": "3 days ago"
     }
   },
+  "adminNotification": {
+    "searchPlaceholder": "Search...",
+    "notifications": {
+      "title": "Notifications",
+      "items": [
+        {
+          "title": "New Property Added",
+          "desc": "A new property has been added and requires review",
+          "time": "2 minutes ago"
+        },
+        {
+          "title": "New User Registration",
+          "desc": "A new agent has registered and requires approval",
+          "time": "1 hour ago"
+        },
+        {
+          "title": "System Update",
+          "desc": "The system will be updated tonight at 2 AM",
+          "time": "5 hours ago"
+        }
+      ]
+    },
+    "account": {
+      "title": "My Account",
+      "profile": "Profile",
+      "settings": "Settings",
+      "logout": "Logout"
+    }
+  },
+  "blogManagement": {
+    "title": "Blog Management",
+    "subtitle": "Manage published blog posts",
+    "searchPlaceholder": "Search blogs...",
+    "createButton": "+ Create New Blog",
+    "errorMessage": "Failed to fetch blogs. Please try again later.",
+    "loading": "Loading blogs...",
+    "modal": {
+      "editTitle": "Edit Blog",
+      "createTitle": "Create New Blog",
+      "closeButton": "×"
+    },
+    "allBlogs": "All Blogs",
+    "noBlogs": {
+      "message": "No blogs found.",
+      "suggestion": "Try adjusting your search or create a new blog post."
+    },
+    "deleteConfirmation": "Are you sure you want to delete this blog post?",
+    "deleteSuccess": "Blog post deleted successfully!",
+    "deleteFailure": "Failed to delete the blog post.",
+    "unexpectedError": "An unexpected error occurred."
+  },
   "common": {
     "propertyManagement": "Property Management System",
     "agentPortal": "Agent Portal",
