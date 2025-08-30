@@ -25,7 +25,7 @@ import LanguageSwitcher from "../language-switcher";
 
 const languageOptions = [
   { code: "en", label: "English", flag: "https://flagcdn.com/w40/us.png" },
-  { code: "ar", label: "العربية", flag: "https://flagcdn.com/w40/sa.png" },
+  { code: "ar", label: "", flag: "https://flagcdn.com/w40/sa.png" },
 ];
 
 export default function DesktopView() {
