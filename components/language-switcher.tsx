@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Globe } from "lucide-react";
+import { Globe, Check } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
@@ -42,11 +42,37 @@ export default function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => switchLanguage("en")}>
-          <span className={locale === "en" ? "font-bold" : ""}>English</span>
+        <DropdownMenuItem
+          onClick={() => switchLanguage("en")}
+          className={
+            (locale === "en"
+              ? "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400 "
+              : "") +
+            "cursor-pointer focus:bg-green-100 focus:text-green-700"
+          }
+        >
+          {locale === "en" ? (
+            <Check className="mr-2 h-4 w-4" />
+          ) : (
+            <span className="mr-6" />
+          )}
+          <span className={locale === "en" ? "font-semibold" : ""}>English</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => switchLanguage("ar")}>
-          <span className={locale === "ar" ? "font-bold" : ""}>العربية</span>
+        <DropdownMenuItem
+          onClick={() => switchLanguage("ar")}
+          className={
+            (locale === "ar"
+              ? "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400 "
+              : "") +
+            "cursor-pointer focus:bg-green-100 focus:text-green-700"
+          }
+        >
+          {locale === "ar" ? (
+            <Check className="mr-2 h-4 w-4" />
+          ) : (
+            <span className="mr-6" />
+          )}
+          <span className={locale === "ar" ? "font-semibold" : ""}>العربية</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
