@@ -10,21 +10,15 @@ import { Heart, Search, MessageSquare, User, Filter } from "lucide-react";
 import { Button } from "@/components/user/ui/button";
 import { Card } from "@/components/user/ui/card";
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/user/ui/tabs";
-import { PropertyCard } from "@/components/user/property-card";
-import { StatCard } from "@/components/user/stat-card";
-import { OfferModal } from "@/components/user/offer-modal";
-import { SearchModal } from "@/components/user/search-modal";
-import { MessageCard } from "@/components/user/message-card";
-import {
-  properties,
-  type SearchFilters,
-  defaultSearchFilters,
-  savedSearches,
+                            <Badge
+                              variant="outline"
+                              className="bg-emerald-950/20 border-emerald-900/20"
+                            >
+                              <span className="icon-jod"></span>{" "}
+                              {search.priceRange[0]} - {" "}
+                              <span className="icon-jod"></span>
+                              {search.priceRange[1]}
+                            </Badge>
 } from "@/components/user/data/properties";
 import { messages } from "@/components/user/data/messages";
 import { useTranslations } from "next-intl";
@@ -287,15 +281,9 @@ export default function Dashboard() {
                               variant="outline"
                               className="bg-emerald-950/20 border-emerald-900/20"
                             >
-                              <span
-                                style={{ fontFamily: "saudi_riyal" }}
-                                className="icon-saudi_riyal"
-                              ></span>{" "}
+                              <span className="icon-jod"></span>{" "}
                               {search.priceRange[0]} -{" "}
-                              <span
-                                style={{ fontFamily: "saudi_riyal" }}
-                                className="icon-saudi_riyal"
-                              ></span>
+                              <span className="icon-jod"></span>
                               {search.priceRange[1]}
                             </Badge>
                           </div>

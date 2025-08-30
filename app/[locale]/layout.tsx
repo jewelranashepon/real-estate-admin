@@ -18,13 +18,11 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  // Locale layouts should not render <html> or <body> because
+  // the root layout already renders them. Return only the inner tree.
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider>
-          <SearchProvider>{children}</SearchProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider>
+      <SearchProvider>{children}</SearchProvider>
+    </NextIntlClientProvider>
   );
 }

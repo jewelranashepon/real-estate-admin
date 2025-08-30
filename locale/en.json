@@ -1469,6 +1469,63 @@
       "tryAgain": "Please try again."
     }
   },
+  "notifications": {
+    "stayUpdated": "Stay updated on property approvals, system announcements, and more",
+    "markAllRead": "Mark All as Read",
+    "notificationCenter": "Notification Center",
+    "manageNotifications": "Manage notifications and alerts",
+    "all": "All",
+    "unread": "Unread",
+    "system": "System",
+    "noNotifications": "No notifications",
+    "noUnread": "You have no unread notifications",
+    "noCategory": "You have no notifications in this category",
+    "markAsRead": "Mark as Read",
+    "new": "New"
+  },
+  "headerdata": {
+    "propertyManagement": "Property Management System",
+    "toggleMenu": "Toggle Menu",
+    "agentName": "Ahmed Rashid",
+    "agentTitle": "Real Estate Agent",
+    "mainMenu": "Main Menu",
+    "dashboard": "Dashboard",
+    "overview": "Overview",
+    "properties": "Properties",
+    "addProperty": "Add Property",
+    "propertyMap": "Property Map",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "support": "Support",
+    "helpResources": "Help & Resources",
+    "documentation": "Documentation",
+    "settings": "Settings",
+    "logout": "Logout",
+    "searchPlaceholder": "Search properties...",
+    "help": "Help & Support",
+    "userGuide": "User Guide",
+    "faqs": "FAQs",
+    "contactSupport": "Contact Support",
+    "reportIssue": "Report an Issue",
+    "markAllRead": "Mark All as Read",
+    "viewAllNotifications": "View All Notifications",
+    "myAccount": "My Account",
+    "notificationApproved": {
+      "title": "Property Approved",
+      "description": "Your property \"Luxury Villa in Abdoun\" has been approved.",
+      "time": "2 hours ago"
+    },
+    "notificationRejected": {
+      "title": "Property Rejected",
+      "description": "Your property \"Studio Apartment\" was rejected. Please update the information.",
+      "time": "1 day ago"
+    },
+    "notificationSystem": {
+      "title": "System Announcement",
+      "description": "New features have been added to the platform. Check them out now!",
+      "time": "3 days ago"
+    }
+  },
   "common": {
     "propertyManagement": "Property Management System",
     "agentPortal": "Agent Portal",
@@ -1513,8 +1570,8 @@
     "welcome": "Welcome back to your agent dashboard",
     "totalProperties": "Total Properties",
     "pendingApprovals": "Pending Approvals",
-    "propertystatus": "Property Status",
     "approved": "Approved",
+    "propertystatus": "Property Status",
     "sold": "Sold",
     "rejected": "Rejected",
     "fromLastMonth": "from last month",
@@ -1522,7 +1579,7 @@
     "visibleToPublic": "Visible to public",
     "needsRevision": "Needs revision",
     "propertyStatus": "Property Status",
-    "distribution": "Distribution of your property listings by status",
+    "distribution": "Distribution of property listings by status",
     "agentPerformance": "Agent Performance",
     "performanceMetrics": "Your performance metrics and activity summary",
     "listingApprovalRate": "Listing Approval Rate",
@@ -1530,12 +1587,14 @@
     "documentCompletion": "Document Completion",
     "profileCompleteness": "Profile Completeness",
     "static_totalProperties": "23 ",
-    "static_fromLastMonth": "+2 ",
+    "static_fromLastMonth": "+2",
     "static_pendingApprovals": "7 ",
     "static_approved": "12 ",
     "static_rejected": "4 ",
     "static_listingApprovalRate": "75% ",
-    "static_averageResponseTime": "2.3 "
+    "static_averageResponseTime": "2.3 ",
+    "static_documentCompletion": "90% ",
+    "static_profileCompleteness": "85% "
   },
   "property": {
     "manageListings": "Manage your property listings and their status",
@@ -1561,7 +1620,7 @@
   "map": {
     "viewProperties": "View your properties on the map of Amman",
     "mapView": "Map View",
-    "interactiveMap": "Interactive map showing your property locations in Amman",
+    "interactiveMap": "Interactive map showing your property locations in Jordan",
     "propertyDetails": "Property Details",
     "selectProperty": "Select a property on the map to view details",
     "coordinates": "Coordinates",
@@ -1589,6 +1648,40 @@
     "licenseExpiry": "License Expiry Date",
     "changePhoto": "Change Photo",
     "saveChanges": "Save Changes"
+  },
+  "userProfile": {
+    "profile": "Profile",
+    "updateProfile": "Update your profile information",
+    "profileInfo": "Profile Information",
+    "updatePersonal": "Update your personal details",
+    "changePhoto": "Change Photo",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "licenseNumber": "License Number",
+    "licenseExpiry": "License Expiry Date",
+    "saveChanges": "Save Changes",
+    "documents": {
+      "title": "Upload Documents",
+      "description": "Upload additional documents related to your real estate license and properties",
+      "noc": "No Objection Certificate (NOC)",
+      "deed": "Deed Copies",
+      "uploadText": "Click to upload or drag and drop",
+      "fileTypes": "PDF, DOC, or DOCX (max 10 MB)",
+      "note": "Note:",
+      "noteText": "Uploaded documents are visible only to administrators for verification purposes. Please ensure all documents are clear and readable."
+    },
+    "licenseStatus": {
+      "expired": "Your license has expired! Please renew immediately.",
+      "warning": "Your license expires in {days} days. Please renew soon."
+    },
+    "descriptions": {
+      "name": "Your name as it appears on official documents",
+      "email": "Your primary email for contact",
+      "phone": "Your primary phone number for contact",
+      "licenseNumber": "Your official real estate license number",
+      "licenseExpiry": "The expiration date of your real estate license"
+    }
   },
   "overviewpage": {
     "title": "System Overview",

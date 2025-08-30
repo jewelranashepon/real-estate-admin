@@ -191,11 +191,7 @@ export function PaymentsTable() {
       ),
       cell: ({ row }) => (
         <div className="font-medium">
-          {row.getValue("amount")}{" "}
-          <span
-            style={{ fontFamily: "saudi_riyal" }}
-            className="icon-saudi_riyal"
-          ></span>
+          {row.getValue("amount")} <span className="icon-jod"></span>
         </div>
       ),
     },

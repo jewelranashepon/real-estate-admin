@@ -92,3 +92,40 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.icon-jod {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-size: 1em; /* scale the icon by changing the span's font-size */
+  vertical-align: -0.125em; /* baseline alignment like lucide icons */
+  color: currentColor; /* inherit text color */
+  font-family: inherit; /* don't force a non-existing font */
+}
+
+.icon-jod::before {
+  content: "JOD"; /* default label */
+  display: inline-flex; /* ensure proper sizing and centering */
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* keep the pill content on one line */
+  box-sizing: border-box;
+  padding: 0.12em 0.42em; /* pill size */
+  border: 1.5px solid currentColor;
+  border-radius: 9999px; /* pill shape */
+  font-weight: 700;
+  font-size: 0.65em; /* inner text size relative to surrounding text */
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* Arabic/RTL auto-switch */
+html[lang^="ar"] .icon-jod::before,
+[dir="rtl"] .icon-jod::before {
+  content: "د.ا";
+  font-weight: 700;
+  font-size: 0.8em;
+  padding: 0.12em 0.34em;
+}

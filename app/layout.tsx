@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Amiri } from "next/font/google";
 import { Toaster } from "../components/ui/sonner";
-import "@emran-alhaddad/saudi-riyal-font/index.css";
 import "./globals.css";
 import { SearchProvider } from "@/lib/search-context";
 import { cn } from "@/lib/utils";

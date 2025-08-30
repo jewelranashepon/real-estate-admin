@@ -91,11 +91,7 @@ export function PropertyCard({
             </p>
           </div>
           <p className="text-lg font-bold text-emerald-400">
-            {property.formattedPrice}{" "}
-            <span
-              style={{ fontFamily: "saudi_riyal" }}
-              className="icon-saudi_riyal"
-            ></span>
+            {property.formattedPrice} <span className="icon-jod"></span>
             /mo
           </p>
           <div className="grid grid-cols-3 gap-2 mt-4">

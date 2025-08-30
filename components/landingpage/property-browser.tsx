@@ -273,8 +273,8 @@ export default function PropertyBrowser() {
                         <span className="text-teal-400 font-semibold">
                           {property.price}{" "}
                           <span
-                            style={{ fontFamily: "saudi_riyal" }}
-                            className="icon-saudi_riyal"
+                            style={{ fontFamily: "jordanian_dinar" }}
+                            className="icon-jordanian_dinar"
                           ></span>
                         </span>
                         {property.falCertified && (
@@ -434,8 +434,8 @@ export default function PropertyBrowser() {
                       <span className="font-semibold text-teal-400">
                         {selectedProperty.price}{" "}
                         <span
-                          style={{ fontFamily: "saudi_riyal" }}
-                          className="icon-saudi_riyal"
+                          style={{ fontFamily: "jordanian_dinar" }}
+                          className="icon-jordanian_dinar"
                         ></span>
                       </span>
                     </div>

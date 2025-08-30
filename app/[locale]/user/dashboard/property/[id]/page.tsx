@@ -136,10 +136,7 @@ export default function PropertyDetail() {
                   <div>
                     <h2 className="text-2xl font-bold text-emerald-400">
                       {property.formattedPrice}{" "}
-                      <span
-                        style={{ fontFamily: "saudi_riyal" }}
-                        className="icon-saudi_riyal"
-                      ></span>
+                      <span className="icon-jod"></span>
                       /mo
                     </h2>
                     <p className="text-sm text-muted-foreground flex items-center mt-1">

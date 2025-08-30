@@ -156,22 +156,14 @@ export default function SavedPropertiesPage() {
   const Currency = () => {
     return (
       <div>
-        5,200,000{" "}
-        <span
-          style={{ fontFamily: "saudi_riyal" }}
-          className="icon-saudi_riyal"
-        ></span>
+        5,200,000 <span className="icon-jod"></span>
       </div>
     );
   };
   const Currency2 = () => {
     return (
       <div>
-        10,500,000{" "}
-        <span
-          style={{ fontFamily: "saudi_riyal" }}
-          className="icon-saudi_riyal"
-        ></span>
+        10,500,000 <span className="icon-jod"></span>
       </div>
     );
   };
@@ -221,14 +213,14 @@ export default function SavedPropertiesPage() {
           />
           <StatCard
             title={t("stats.totalValue")}
-            Currency={Currency}
+            Currency={<Currency />}
             icon={<DollarSign className="h-5 w-5" />}
             change={t("stats.combinedValue")}
             trend="up"
           />
           <StatCard
             title={t("stats.averagePrice")}
-            Currency={Currency2}
+            Currency={<Currency2 />}
             icon={<BarChart3 className="h-5 w-5" />}
             change={`${t(
               "stats.range"

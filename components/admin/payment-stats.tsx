@@ -1,4 +1,11 @@
-import { DollarSign, CreditCard, TrendingUp, Calendar, Wallet, BanknoteIcon } from "lucide-react";
+import {
+  DollarSign,
+  CreditCard,
+  TrendingUp,
+  Calendar,
+  Wallet,
+  BanknoteIcon,
+} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 
@@ -18,11 +25,7 @@ export function PaymentStats() {
             </p>
             <h3 className="text-2xl font-bold">
               {" "}
-              {t("totalRevenueMoney")}{" "}
-              <span
-                style={{ fontFamily: "saudi_riyal" }}
-                className="icon-saudi_riyal"
-              ></span>
+              {t("totalRevenueMoney")} <span className="icon-jod"></span>
             </h3>
             <p className="text-xs text-muted-foreground">
               <span className="text-emerald-500">
@@ -44,10 +47,7 @@ export function PaymentStats() {
             </p>
             <h3 className="text-2xl font-bold">
               {t("pendingTransactionsAmount")}{" "}
-              <span
-                style={{ fontFamily: "saudi_riyal" }}
-                className="icon-saudi_riyal"
-              ></span>
+              <span className="icon-jod"></span>
             </h3>
             <p className="text-xs text-muted-foreground">
               <span className="text-amber-500">
