@@ -54,7 +54,7 @@ export default function DesktopPropertyDetail({
   };
   const handleCallClick = () => {
     setShowCallPopup(true);
-    console.log('Clicked on call')
+    console.log("Clicked on call");
   };
 
   return (
@@ -219,15 +219,15 @@ export default function DesktopPropertyDetail({
                   <div className="space-y-6">
                     <div className="border-b pb-6">
                       <div className="flex justify-between">
-                      <h2 className="text-2xl font-bold mb-3">
-                        {t("property.Sale")}
-                      </h2>
-                      <div
-                        onClick={() => setShowLicenseInfo(true)}
-                        className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full cursor-pointer hover:bg-green-200 transition"
-                      >
-                        ✅ {t('property.falappro')}
-                      </div>
+                        <h2 className="text-2xl font-bold mb-3">
+                          {t("property.Sale")}
+                        </h2>
+                        <div
+                          onClick={() => setShowLicenseInfo(true)}
+                          className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full cursor-pointer hover:bg-green-200 transition"
+                        >
+                          ✅ {t("property.falappro")}
+                        </div>
                       </div>
                       <p className="text-green-600 font-bold text-2xl mb-6">
                         1,100,000 SAR
@@ -467,14 +467,13 @@ export default function DesktopPropertyDetail({
           <div className="lg:col-span-1">
             {/* Agent Info Card */}
             <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-            <div
-                        onClick={() => setShowLicenseInfo(true)}
-                        className="inline-flex items-center gap-2 mb-2 px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full cursor-pointer hover:bg-green-200 transition"
-                      >
-                        ✅ {t('property.falappro')}
-                      </div>
+              <div
+                onClick={() => setShowLicenseInfo(true)}
+                className="inline-flex items-center gap-2 mb-2 px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full cursor-pointer hover:bg-green-200 transition"
+              >
+                ✅ {t("property.falappro")}
+              </div>
               <div className="flex items-center mb-4">
-              
                 <div className="w-14 h-14 bg-purple-600 rounded-full flex items-center justify-center text-white mr-3">
                   <span className="text-xl font-semibold">م.ع</span>
                 </div>
@@ -489,13 +488,17 @@ export default function DesktopPropertyDetail({
 
               {/* Contact Buttons */}
               <div className="space-y-3">
-              
-                <Button onClick={handleCallClick} className="w-full bg-green-500 hover:bg-green-600 flex items-center justify-center">
-                  
+                <Button
+                  onClick={handleCallClick}
+                  className="w-full bg-green-500 hover:bg-green-600 flex items-center justify-center"
+                >
                   <Phone className="h-4 w-4 mr-2" />
                   {t("property.Call")}
                 </Button>
-                <Button  onClick={() => setShowWhatsappPopup(true)} className="w-full bg-green-400 hover:bg-green-500 flex items-center justify-center">
+                <Button
+                  onClick={() => setShowWhatsappPopup(true)}
+                  className="w-full bg-green-400 hover:bg-green-500 flex items-center justify-center"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -560,7 +563,7 @@ export default function DesktopPropertyDetail({
                 <div>
                   <p className="font-medium">{t("property.Avg")}</p>
                   <p className="text-gray-600">
-                    1710 SAR {t("property.SemiAnnually")}
+                    1710 JOD{t("property.SemiAnnually")}
                   </p>
                 </div>
               </div>
@@ -611,62 +614,68 @@ export default function DesktopPropertyDetail({
         propertyName={propertyName}
       />
       {showLicenseInfo && (
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-xl shadow-lg p-6 w-80 text-center space-y-4">
-      <h2 className="text-lg font-bold text-green-700">{t('property.Fali')}</h2>
-      <p className="text-gray-700">{t('property.LNo')}: <strong>0992023</strong></p>
-      <Button
-        variant="outline"
-        onClick={() => setShowLicenseInfo(false)}
-        className="mt-4"
-      >
-        {t('property.Close')}
-      </Button>
-    </div>
-  </div>
-)}
-{showCallPopup && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="relative bg-white p-6 rounded-xl shadow-xl text-center space-y-4 max-w-sm w-full">
-      {/* Close Badge */}
-      <button
-        onClick={() => setShowCallPopup(false)}
-        className="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-xl font-bold"
-        aria-label="Close"
-      >
-        &times;
-      </button>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-80 text-center space-y-4">
+            <h2 className="text-lg font-bold text-green-700">
+              {t("property.Fali")}
+            </h2>
+            <p className="text-gray-700">
+              {t("property.LNo")}: <strong>0992023</strong>
+            </p>
+            <Button
+              variant="outline"
+              onClick={() => setShowLicenseInfo(false)}
+              className="mt-4"
+            >
+              {t("property.Close")}
+            </Button>
+          </div>
+        </div>
+      )}
+      {showCallPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="relative bg-white p-6 rounded-xl shadow-xl text-center space-y-4 max-w-sm w-full">
+            {/* Close Badge */}
+            <button
+              onClick={() => setShowCallPopup(false)}
+              className="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-xl font-bold"
+              aria-label="Close"
+            >
+              &times;
+            </button>
 
-      <h2 className="text-lg font-semibold">{t("property.ContactSeller")}</h2>
-      <p className="text-green-600 text-xl font-bold">+966 5 5555 5555</p>
-      <Button onClick={() => setShowCallPopup(false)} className="w-full">
-        {t("property.Close")}
-      </Button>
-    </div>
-  </div>
-)}
-{showWhatsappPopup && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-    <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md relative">
-      <button
-        className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-        onClick={() => setShowWhatsappPopup(false)}
-      >
-        ✕
-      </button>
-      <h2 className="text-xl font-semibold mb-4">{t('property.CVW')}</h2>
-      <p className="mb-4">{t('property.SCW')}</p>
-      <a
-        href="https://wa.me/966500000000" // Replace with your WhatsApp number in international format
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
-      >
-        {t('property.OW')}
-      </a>
-    </div>
-  </div>
-)}
+            <h2 className="text-lg font-semibold">
+              {t("property.ContactSeller")}
+            </h2>
+            <p className="text-green-600 text-xl font-bold">+966 5 5555 5555</p>
+            <Button onClick={() => setShowCallPopup(false)} className="w-full">
+              {t("property.Close")}
+            </Button>
+          </div>
+        </div>
+      )}
+      {showWhatsappPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md relative">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              onClick={() => setShowWhatsappPopup(false)}
+            >
+              ✕
+            </button>
+            <h2 className="text-xl font-semibold mb-4">{t("property.CVW")}</h2>
+            <p className="mb-4">{t("property.SCW")}</p>
+            <a
+              href="https://wa.me/966500000000" // Replace with your WhatsApp number in international format
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+            >
+              {t("property.OW")}
+            </a>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

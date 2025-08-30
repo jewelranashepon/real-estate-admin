@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useTranslations } from "next-intl"
-import { useLocale } from "next-intl"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   ChevronLeft,
   Camera,
@@ -19,20 +19,20 @@ import {
   Tag,
   FileText,
   Info,
-} from "lucide-react"
-import { cn } from "@/lib/utils"
-import Link from "next/link"
-import LanguageSelector from "@/components/language-selector"
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import LanguageSelector from "@/components/language-selector";
 
 interface DesktopPropertyViewProps {
-  id: string
+  id: string;
 }
 
 export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
-  const t = useTranslations("app.property")
-  const locale = useLocale()
-  const isRtl = locale === "ar"
-  const [activeTab, setActiveTab] = useState("details")
+  const t = useTranslations("app.property");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
+  const [activeTab, setActiveTab] = useState("details");
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -55,7 +55,10 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
       </header>
 
       <div className="container mx-auto px-4 py-6">
-        <Link href={`/${locale}`} className="flex items-center text-sm mb-4 hover:underline">
+        <Link
+          href={`/${locale}`}
+          className="flex items-center text-sm mb-4 hover:underline"
+        >
           <ChevronLeft className="h-4 w-4 mr-1" />
           Back to listings
         </Link>
@@ -64,14 +67,27 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
           <div className="lg:col-span-2">
             {/* Property Image */}
             <div className="relative h-96 bg-gray-200 rounded-lg overflow-hidden mb-6">
-              <Image src="/images/restaurant.jpg" alt="Property" fill className="object-cover" />
+              <Image
+                src="/images/restaurant.jpg"
+                alt="Property"
+                fill
+                className="object-cover"
+              />
 
               {/* Image Controls */}
               <div className="absolute top-4 right-4 flex gap-2">
-                <Button size="icon" variant="outline" className="bg-white/80 h-10 w-10 rounded-full">
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="bg-white/80 h-10 w-10 rounded-full"
+                >
                   <Share className="h-5 w-5" />
                 </Button>
-                <Button size="icon" variant="outline" className="bg-white/80 h-10 w-10 rounded-full">
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="bg-white/80 h-10 w-10 rounded-full"
+                >
                   <Heart className="h-5 w-5" />
                 </Button>
               </div>
@@ -93,7 +109,9 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                       value="details"
                       className={cn(
                         "rounded-none px-6 py-3 data-[state=active]:bg-transparent",
-                        activeTab === "details" ? "border-b-2 border-green-500 text-green-600 font-medium" : "",
+                        activeTab === "details"
+                          ? "border-b-2 border-green-500 text-green-600 font-medium"
+                          : ""
                       )}
                       onClick={() => setActiveTab("details")}
                     >
@@ -103,7 +121,9 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                       value="additional"
                       className={cn(
                         "rounded-none px-6 py-3 data-[state=active]:bg-transparent",
-                        activeTab === "additional" ? "border-b-2 border-green-500 text-green-600 font-medium" : "",
+                        activeTab === "additional"
+                          ? "border-b-2 border-green-500 text-green-600 font-medium"
+                          : ""
                       )}
                       onClick={() => setActiveTab("additional")}
                     >
@@ -113,7 +133,9 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                       value="location"
                       className={cn(
                         "rounded-none px-6 py-3 data-[state=active]:bg-transparent",
-                        activeTab === "location" ? "border-b-2 border-green-500 text-green-600 font-medium" : "",
+                        activeTab === "location"
+                          ? "border-b-2 border-green-500 text-green-600 font-medium"
+                          : ""
                       )}
                       onClick={() => setActiveTab("location")}
                     >
@@ -127,11 +149,18 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                   <div className="space-y-6">
                     <div className="border-b pb-6">
                       <h2 className="text-2xl font-bold mb-3">Land for sale</h2>
-                      <p className="text-green-600 font-bold text-2xl mb-6">1,100,000 SAR</p>
+                      <p className="text-green-600 font-bold text-2xl mb-6">
+                        1,100,000 SAR
+                      </p>
 
                       <div className="flex justify-between mb-6">
-                        <span className="text-gray-600">Would you like to own the property?</span>
-                        <Button variant="outline" className="text-blue-500 border-blue-500 h-8">
+                        <span className="text-gray-600">
+                          Would you like to own the property?
+                        </span>
+                        <Button
+                          variant="outline"
+                          className="text-blue-500 border-blue-500 h-8"
+                        >
                           Financing options
                         </Button>
                       </div>
@@ -224,13 +253,17 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                     </div>
 
                     <div className="flex items-center justify-between py-3 border-b">
-                      <span className="text-gray-600">License Expiration Date</span>
+                      <span className="text-gray-600">
+                        License Expiration Date
+                      </span>
                       <span className="font-medium">01/02/2026</span>
                     </div>
 
                     <div className="flex items-center justify-between py-3 border-b">
                       <span className="text-gray-600">Source</span>
-                      <span className="font-medium text-right">الهيئة العامة للعقار</span>
+                      <span className="font-medium text-right">
+                        الهيئة العامة للعقار
+                      </span>
                     </div>
 
                     <div className="flex items-center justify-between py-3 border-b">
@@ -239,7 +272,10 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                     </div>
 
                     <div className="flex justify-center mt-6">
-                      <Button variant="outline" className="text-red-500 border-red-500">
+                      <Button
+                        variant="outline"
+                        className="text-red-500 border-red-500"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -268,15 +304,25 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                   <div className="p-6">
                     <h3 className="font-bold mb-3">Extra</h3>
                     <p className="text-gray-600 mb-4 text-right">
-                      للبيع أرض سكنية على ثلاث شوارع حي جوهرة الأحمد داخل النطاق العمراني المدينة المنورة
+                      للبيع أرض سكنية على ثلاث شوارع حي جوهرة الأحمد داخل النطاق
+                      العمراني المدينة المنورة
                     </p>
-                    <Button variant="link" className="text-blue-500 p-0 h-auto mb-6">
+                    <Button
+                      variant="link"
+                      className="text-blue-500 p-0 h-auto mb-6"
+                    >
                       Read more
                     </Button>
 
                     <div className="bg-green-500 text-white p-6 rounded-lg flex items-center mb-6">
                       <div className="mr-6">
-                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg
+                          width="50"
+                          height="50"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <path
                             d="M20 9V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17"
                             stroke="white"
@@ -309,7 +355,12 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
 
                     <h3 className="font-bold mb-3">Location</h3>
                     <div className="h-80 bg-gray-200 rounded-lg overflow-hidden relative">
-                      <Image src="/images/map.png" alt="Map" fill className="object-cover" />
+                      <Image
+                        src="/images/map.png"
+                        alt="Map"
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                   </div>
                 </TabsContent>
@@ -367,8 +418,8 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                 <div className="flex items-start">
                   <AlertTriangle className="h-5 w-5 text-amber-500 mr-2 flex-shrink-0 mt-0.5" />
                   <p className="text-sm text-gray-600">
-                    Advertisement: Dealing with or without payments makes you responsible to the description and
-                    information
+                    Advertisement: Dealing with or without payments makes you
+                    responsible to the description and information
                   </p>
                 </div>
               </div>
@@ -376,11 +427,19 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
 
             {/* District Information */}
             <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-              <h3 className="font-bold text-lg mb-4">District Information for Al Gharra</h3>
+              <h3 className="font-bold text-lg mb-4">
+                District Information for Al Gharra
+              </h3>
 
               <div className="flex items-center mb-4">
                 <div className="mr-3">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       d="M2 12H4M20 12H22M12 2V4M12 20V22M6.34 6.34L4.93 4.93M19.07 4.93L17.66 6.34M17.66 17.66L19.07 19.07M4.93 19.07L6.34 17.66"
                       stroke="#10B981"
@@ -396,11 +455,13 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                 </div>
                 <div>
                   <p className="font-medium">Average meter price</p>
-                  <p className="text-gray-600">1710 SAR Semiannually</p>
+                  <p className="text-gray-600">1710 JODSemiannually</p>
                 </div>
               </div>
 
-              <p className="text-sm text-gray-500">Based on the data of the ads published on Aqar platform</p>
+              <p className="text-sm text-gray-500">
+                Based on the data of the ads published on Aqar platform
+              </p>
             </div>
 
             {/* Similar Listings */}
@@ -430,34 +491,46 @@ export default function DesktopPropertyView({ id }: DesktopPropertyViewProps) {
                 />
               </div>
 
-              <Button className="w-full mt-6 bg-green-500 hover:bg-green-600">Follow</Button>
+              <Button className="w-full mt-6 bg-green-500 hover:bg-green-600">
+                Follow
+              </Button>
             </div>
           </div>
         </div>
       </div>
     </main>
-  )
+  );
 }
 
 interface SimilarListingProps {
-  title: string
-  price: string
-  area: string
-  type: string
-  imageUrl: string
+  title: string;
+  price: string;
+  area: string;
+  type: string;
+  imageUrl: string;
 }
 
-function SimilarListing({ title, price, area, type, imageUrl }: SimilarListingProps) {
+function SimilarListing({
+  title,
+  price,
+  area,
+  type,
+  imageUrl,
+}: SimilarListingProps) {
   return (
     <div className="flex items-center border-b pb-4">
       <div className="flex-1">
         <h4 className="font-medium text-sm text-green-600">{title}</h4>
         <p className="text-green-600 text-sm">{price}</p>
         <div className="flex items-center mt-1">
-          <div className="bg-gray-100 text-xs px-2 py-0.5 rounded-sm">{area}</div>
+          <div className="bg-gray-100 text-xs px-2 py-0.5 rounded-sm">
+            {area}
+          </div>
         </div>
         <div className="text-gray-500 text-xs mt-1">• {type}</div>
-        <div className="text-gray-500 text-xs mt-1 text-right">• شارع الخليج، الخبر، المملكة العربية السعودية</div>
+        <div className="text-gray-500 text-xs mt-1 text-right">
+          • شارع الخليج، الخبر، المملكة العربية السعودية
+        </div>
       </div>
       <div className="w-24 h-24 relative ml-3">
         <Image
@@ -469,6 +542,5 @@ function SimilarListing({ title, price, area, type, imageUrl }: SimilarListingPr
         />
       </div>
     </div>
-  )
+  );
 }
-

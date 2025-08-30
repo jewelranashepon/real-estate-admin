@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useTranslations } from "next-intl"
-import { useLocale } from "next-intl"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   ChevronLeft,
   ChevronRight,
@@ -20,39 +20,56 @@ import {
   Tag,
   FileText,
   Info,
-} from "lucide-react"
-import { cn } from "@/lib/utils"
-import Link from "next/link"
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface MobilePropertyViewProps {
-  id: string
+  id: string;
 }
 
 export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
-  const t = useTranslations("app.property")
-  const locale = useLocale()
-  const isRtl = locale === "ar"
-  const [activeTab, setActiveTab] = useState("details")
+  const t = useTranslations("app.property");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
+  const [activeTab, setActiveTab] = useState("details");
 
   return (
     <main className="flex flex-col h-screen bg-white">
       {/* Property Image Header */}
       <div className="relative h-64 bg-gray-200">
-        <Image src="/images/restaurant.jpg" alt="Property" fill className="object-cover" />
+        <Image
+          src="/images/restaurant.jpg"
+          alt="Property"
+          fill
+          className="object-cover"
+        />
 
         {/* Top Navigation */}
         <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
           <Link href={`/${locale}`}>
-            <Button size="sm" variant="outline" className="bg-white/80 h-8 px-2">
+            <Button
+              size="sm"
+              variant="outline"
+              className="bg-white/80 h-8 px-2"
+            >
               <ChevronLeft className="h-4 w-4 mr-1" />
               Back
             </Button>
           </Link>
           <div className="flex gap-2">
-            <Button size="icon" variant="outline" className="bg-white/80 h-8 w-8 rounded-full">
+            <Button
+              size="icon"
+              variant="outline"
+              className="bg-white/80 h-8 w-8 rounded-full"
+            >
               <Share className="h-4 w-4" />
             </Button>
-            <Button size="icon" variant="outline" className="bg-white/80 h-8 w-8 rounded-full">
+            <Button
+              size="icon"
+              variant="outline"
+              className="bg-white/80 h-8 w-8 rounded-full"
+            >
               <Heart className="h-4 w-4" />
             </Button>
           </div>
@@ -115,15 +132,24 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
             <div className="bg-gray-100 p-3 rounded-md mb-4 flex items-start">
               <AlertTriangle className="h-5 w-5 text-amber-500 mr-2 flex-shrink-0 mt-0.5" />
               <p className="text-xs text-gray-600">
-                Advertisement: Dealing with or without payments makes you responsible to the description and information
+                Advertisement: Dealing with or without payments makes you
+                responsible to the description and information
               </p>
             </div>
 
-            <h3 className="font-bold text-lg mb-2">District Information for Al Gharra</h3>
+            <h3 className="font-bold text-lg mb-2">
+              District Information for Al Gharra
+            </h3>
 
             <div className="flex items-center mb-4">
               <div className="mr-2">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M2 12H4M20 12H22M12 2V4M12 20V22M6.34 6.34L4.93 4.93M19.07 4.93L17.66 6.34M17.66 17.66L19.07 19.07M4.93 19.07L6.34 17.66"
                     stroke="#10B981"
@@ -139,32 +165,43 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
               </div>
               <div>
                 <p className="text-sm font-medium">Average meter price</p>
-                <p className="text-sm text-gray-600">1710 SAR Semiannually</p>
+                <p className="text-sm text-gray-600">1710 JODSemiannually</p>
               </div>
             </div>
 
-            <p className="text-xs text-gray-500 mb-4">Based on the data of the ads published on Aqar platform</p>
+            <p className="text-xs text-gray-500 mb-4">
+              Based on the data of the ads published on Aqar platform
+            </p>
           </div>
 
           {/* Tabs Navigation */}
           <TabsList className="grid grid-cols-3 bg-gray-100 p-1 rounded-none border-y">
             <TabsTrigger
               value="details"
-              className={cn("rounded-md text-sm", activeTab === "details" ? "bg-white shadow-sm" : "")}
+              className={cn(
+                "rounded-md text-sm",
+                activeTab === "details" ? "bg-white shadow-sm" : ""
+              )}
               onClick={() => setActiveTab("details")}
             >
               Listing Main Details
             </TabsTrigger>
             <TabsTrigger
               value="additional"
-              className={cn("rounded-md text-sm", activeTab === "additional" ? "bg-white shadow-sm" : "")}
+              className={cn(
+                "rounded-md text-sm",
+                activeTab === "additional" ? "bg-white shadow-sm" : ""
+              )}
               onClick={() => setActiveTab("additional")}
             >
               Additional Information
             </TabsTrigger>
             <TabsTrigger
               value="location"
-              className={cn("rounded-md text-sm", activeTab === "location" ? "bg-white shadow-sm" : "")}
+              className={cn(
+                "rounded-md text-sm",
+                activeTab === "location" ? "bg-white shadow-sm" : ""
+              )}
               onClick={() => setActiveTab("location")}
             >
               Location
@@ -176,11 +213,18 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
             <div className="space-y-4">
               <div className="border-b pb-4">
                 <h2 className="text-xl font-bold mb-2">Land for sale</h2>
-                <p className="text-green-600 font-bold text-xl mb-4">1,100,000 SAR</p>
+                <p className="text-green-600 font-bold text-xl mb-4">
+                  1,100,000 SAR
+                </p>
 
                 <div className="flex justify-between mb-4">
-                  <span className="text-gray-600">Would you like to own the property?</span>
-                  <Button variant="outline" className="text-blue-500 border-blue-500 h-8">
+                  <span className="text-gray-600">
+                    Would you like to own the property?
+                  </span>
+                  <Button
+                    variant="outline"
+                    className="text-blue-500 border-blue-500 h-8"
+                  >
                     Financing options
                   </Button>
                 </div>
@@ -279,7 +323,9 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
 
               <div className="flex items-center justify-between py-2 border-b">
                 <span className="text-gray-600">Source</span>
-                <span className="font-medium text-right">الهيئة العامة للعقار</span>
+                <span className="font-medium text-right">
+                  الهيئة العامة للعقار
+                </span>
               </div>
 
               <div className="flex items-center justify-between py-2 border-b">
@@ -288,7 +334,10 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
               </div>
 
               <div className="flex justify-center mt-4">
-                <Button variant="outline" className="text-red-500 border-red-500">
+                <Button
+                  variant="outline"
+                  className="text-red-500 border-red-500"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -317,7 +366,8 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
             <div className="p-4">
               <h3 className="font-bold mb-2">Extra</h3>
               <p className="text-gray-600 mb-4 text-right">
-                للبيع أرض سكنية على ثلاث شوارع حي جوهرة الأحمد داخل النطاق العمراني المدينة المنورة
+                للبيع أرض سكنية على ثلاث شوارع حي جوهرة الأحمد داخل النطاق
+                العمراني المدينة المنورة
               </p>
               <Button variant="link" className="text-blue-500 p-0 h-auto mb-4">
                 Read more
@@ -327,7 +377,13 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
             <div className="px-4 pb-4">
               <div className="bg-green-500 text-white p-4 rounded-lg flex items-center mb-4">
                 <div className="mr-4">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       d="M20 9V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17"
                       stroke="white"
@@ -362,7 +418,12 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
             <div className="px-4 pb-4">
               <h3 className="font-bold mb-2">Location</h3>
               <div className="h-48 bg-gray-200 rounded-lg overflow-hidden relative">
-                <Image src="/images/map.png" alt="Map" fill className="object-cover" />
+                <Image
+                  src="/images/map.png"
+                  alt="Map"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </TabsContent>
@@ -401,19 +462,30 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
             />
           </div>
 
-          <Button className="w-full mt-4 bg-green-500 hover:bg-green-600">Follow</Button>
+          <Button className="w-full mt-4 bg-green-500 hover:bg-green-600">
+            Follow
+          </Button>
         </div>
       </div>
 
       {/* Bottom Navigation */}
       <div className="grid grid-cols-5 border-t">
-        <Button variant="ghost" className="flex flex-col items-center justify-center py-2 rounded-none">
+        <Button
+          variant="ghost"
+          className="flex flex-col items-center justify-center py-2 rounded-none"
+        >
           <ChevronLeft className="h-5 w-5" />
         </Button>
-        <Button variant="ghost" className="flex flex-col items-center justify-center py-2 rounded-none">
+        <Button
+          variant="ghost"
+          className="flex flex-col items-center justify-center py-2 rounded-none"
+        >
           <Phone className="h-5 w-5 text-green-500" />
         </Button>
-        <Button variant="ghost" className="flex flex-col items-center justify-center py-2 rounded-none">
+        <Button
+          variant="ghost"
+          className="flex flex-col items-center justify-center py-2 rounded-none"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -429,36 +501,52 @@ export default function MobilePropertyView({ id }: MobilePropertyViewProps) {
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
           </svg>
         </Button>
-        <Button variant="ghost" className="flex flex-col items-center justify-center py-2 rounded-none">
+        <Button
+          variant="ghost"
+          className="flex flex-col items-center justify-center py-2 rounded-none"
+        >
           <MessageSquare className="h-5 w-5 text-blue-500" />
         </Button>
-        <Button variant="ghost" className="flex flex-col items-center justify-center py-2 rounded-none">
+        <Button
+          variant="ghost"
+          className="flex flex-col items-center justify-center py-2 rounded-none"
+        >
           <ChevronRight className="h-5 w-5" />
         </Button>
       </div>
     </main>
-  )
+  );
 }
 
 interface SimilarListingProps {
-  title: string
-  price: string
-  area: string
-  type: string
-  imageUrl: string
+  title: string;
+  price: string;
+  area: string;
+  type: string;
+  imageUrl: string;
 }
 
-function SimilarListing({ title, price, area, type, imageUrl }: SimilarListingProps) {
+function SimilarListing({
+  title,
+  price,
+  area,
+  type,
+  imageUrl,
+}: SimilarListingProps) {
   return (
     <div className="flex items-center border-b pb-3">
       <div className="flex-1">
         <h4 className="font-medium text-sm text-green-600">{title}</h4>
         <p className="text-green-600 text-sm">{price}</p>
         <div className="flex items-center mt-1">
-          <div className="bg-gray-100 text-xs px-2 py-0.5 rounded-sm">{area}</div>
+          <div className="bg-gray-100 text-xs px-2 py-0.5 rounded-sm">
+            {area}
+          </div>
         </div>
         <div className="text-gray-500 text-xs mt-1">• {type}</div>
-        <div className="text-gray-500 text-xs mt-1 text-right">• شارع الخليج، الخبر، المملكة العربية السعودية</div>
+        <div className="text-gray-500 text-xs mt-1 text-right">
+          • شارع الخليج، الخبر، المملكة العربية السعودية
+        </div>
       </div>
       <div className="w-20 h-20 relative ml-3">
         <Image
@@ -470,6 +558,5 @@ function SimilarListing({ title, price, area, type, imageUrl }: SimilarListingPr
         />
       </div>
     </div>
-  )
+  );
 }
-
